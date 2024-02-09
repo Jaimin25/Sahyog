@@ -1,12 +1,38 @@
 import './index.css';
 
+import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import App from './App.jsx';
+import Footer from './components/footer/footer';
+import Navbar from './components/navbar/navbar';
+import Campaign from './pages/campaigns/campaignId/Campaign';
+import Campaigns from './pages/campaigns/Campaigns';
+import Home from './pages/Home';
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Home />,
+        errorElement: <div>404 Not Found</div>,
+    },
+    {
+        path: '/campaigns',
+        element: <Campaigns />,
+    },
+    {
+        path: '/campaigns/:campaignId',
+        element: <Campaign />,
+    },
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <App />
+        <ChakraProvider>
+            <Navbar />
+            <RouterProvider router={router} />
+            <Footer />
+        </ChakraProvider>
     </React.StrictMode>
 );
