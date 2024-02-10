@@ -1,4 +1,4 @@
-import { Button, Divider } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 
 import fundsvg from '../assets/funds.jpg';
 import FundraserCard from '../components/cards/fundrasiersCard';
@@ -56,7 +56,13 @@ const Home = () => {
                     />
                 </div>
                 <div className="w-full text-center">
-                    <Button variant="link" color="white">
+                    <Button
+                        variant="link"
+                        color="white"
+                        _active={{
+                            color: 'teal.100',
+                        }}
+                    >
                         View More ➜
                     </Button>
                 </div>
