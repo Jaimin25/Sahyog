@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <header className="navbar fixed top-0 z-50 w-full bg-white">
             <div>
-                <nav className="flex h-auto w-full items-center p-3 shadow">
+                <nav className="flex h-auto w-full items-center p-3 px-14 shadow">
                     <div className="navbar.container flex w-full items-center">
                         <div className="flex items-center gap-x-1">
                             <HeartHandshake className="h-8 w-8" />
