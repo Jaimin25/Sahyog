@@ -28,10 +28,9 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <Divider />
-            <section className="discover.fundraiser space-y-10 rounded px-4 py-14 sm:px-10 md:px-14">
+            <section className="discover.fundraiser space-y-10 bg-teal-500 px-4 py-14 sm:px-10 md:px-14">
                 <div className="discover.container">
-                    <h1 className="text-center text-3xl font-semibold sm:text-left">Discover Fundraisers</h1>
+                    <h1 className="text-center text-3xl font-bold text-white sm:text-left">Discover Fundraisers</h1>
                 </div>
                 <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                     <FundraserCard
@@ -57,7 +56,7 @@ const Home = () => {
                     />
                 </div>
                 <div className="w-full text-center">
-                    <Button variant="link" colorScheme="teal">
+                    <Button variant="link" color="white">
                         View More ➜
                     </Button>
                 </div>
