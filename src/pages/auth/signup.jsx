@@ -53,7 +53,7 @@ const SignUpPage = () => {
                                         </Field>
                                         <Text>
                                             Already have an account?{' '}
-                                            <NavLink to="/auth/signin" className="text-teal-600">
+                                            <NavLink to="/auth/signin" className="font-semibold text-teal-600 underline hover:no-underline">
                                                 Sign In
                                             </NavLink>
                                         </Text>

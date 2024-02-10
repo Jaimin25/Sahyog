@@ -45,7 +45,7 @@ const SignInPage = () => {
                                         </Field>
                                         <Text>
                                             Don&apos;t have an account?{' '}
-                                            <NavLink to="/auth/signup" className="text-teal-600">
+                                            <NavLink to="/auth/signup" className="font-semibold text-teal-600 underline hover:no-underline">
                                                 Sign Up
                                             </NavLink>
                                         </Text>
