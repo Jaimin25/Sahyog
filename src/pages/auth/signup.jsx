@@ -8,8 +8,8 @@ const SignUpPage = () => {
     }
 
     return (
-        <div className="flex h-full w-full flex-1 items-center justify-center pt-16">
-            <div className="m-10 w-3/4 sm:w-1/2 lg:w-[30%]">
+        <div className="signup.container mt-[76px] flex h-full w-full flex-1 items-center justify-center">
+            <div className="signup.card m-10 w-3/4 sm:w-1/2 lg:w-[30%]">
                 <Card className="h-full w-full" shadow="md" border="1px" borderColor="gray.200">
                     <CardHeader>
                         <Heading>Sign Up</Heading>
