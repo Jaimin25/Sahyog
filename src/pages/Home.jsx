@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <>
             <section className="hero my-16 h-auto">
-                <div className="hero.container mt-[76px] flex w-full flex-col items-center md:flex-row">
+                <div className="hero.container flex w-full flex-col items-center md:flex-row">
                     <div className="hero.caption flex h-full flex-1 flex-col justify-center gap-y-4 md:ml-14">
                         <div className="flex flex-col gap-y-2 text-center md:text-left">
                             <p className="text-5xl font-bold md:text-[56px]">Crowdfunding for India</p>

@@ -2,7 +2,11 @@ import { Button } from '@chakra-ui/react';
 import { HeartHandshake } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
+import { useSession } from '../providers/session-provider';
+
 const Navbar = () => {
+    const { user } = useSession();
+
     return (
         <header className="navbar fixed top-0 z-10 w-full bg-white">
             <div>
@@ -30,11 +34,19 @@ const Navbar = () => {
                                 </Button>
                             </div>
                             <div>
-                                <NavLink to="/auth/signin">
-                                    <Button variant="ghost" colorScheme="teal">
-                                        Sign In
-                                    </Button>
-                                </NavLink>
+                                {user ? (
+                                    <NavLink to="/dashboard">
+                                        <Button variant="ghost" colorScheme="teal">
+                                            Dashboard
+                                        </Button>
+                                    </NavLink>
+                                ) : (
+                                    <NavLink to="/auth/signin">
+                                        <Button variant="ghost" colorScheme="teal">
+                                            Sign In
+                                        </Button>
+                                    </NavLink>
+                                )}
                             </div>
                         </div>
                     </div>

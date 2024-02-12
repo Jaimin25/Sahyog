@@ -1,74 +1,23 @@
-import { Button, Card, CardBody, CardHeader, FormControl, FormLabel, Heading, Input, Stack, Text } from '@chakra-ui/react';
-import { Field, Form, Formik } from 'formik';
-import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import SignUpComponent from '../../components/auth/sign-up';
+import { useSession } from '../../components/providers/session-provider';
 
 const SignUpPage = () => {
-    function validateName(value) {
-        console.log(value);
-    }
+    const navigate = useNavigate();
+    const { session, user } = useSession();
 
-    return (
-        <div className="signup.container mt-[76px] flex h-full w-full flex-1 items-center justify-center">
-            <div className="signup.card m-10 w-3/4 sm:w-1/2 lg:w-[30%]">
-                <Card className="h-full w-full" shadow="md" border="1px" borderColor="gray.200">
-                    <CardHeader>
-                        <Heading>Sign Up</Heading>
-                    </CardHeader>
-                    <CardBody>
-                        <Formik
-                            initialValues={{ fullname: '', email: '', password: '' }}
-                            onSubmit={(values, actions) => {
-                                setTimeout(() => {
-                                    alert(JSON.stringify(values, null, 2));
-                                    actions.setSubmitting(false);
-                                }, 2000);
-                            }}
-                        >
-                            {(props) => (
-                                <Form>
-                                    <Stack spacing="4">
-                                        <Field name="fullname" validate={validateName}>
-                                            {({ field, form }) => (
-                                                <FormControl>
-                                                    <FormLabel>Fullname</FormLabel>
-                                                    <Input {...field} type="text" id="fullname" placeholder="Fullname" required />
-                                                </FormControl>
-                                            )}
-                                        </Field>
-                                        <Field name="email" validate={validateName}>
-                                            {({ field, form }) => (
-                                                <FormControl>
-                                                    <FormLabel>Email</FormLabel>
-                                                    <Input {...field} type="email" id="email" placeholder="Email" required />
-                                                </FormControl>
-                                            )}
-                                        </Field>
-                                        <Field name="password" validate={validateName}>
-                                            {({ field, form }) => (
-                                                <FormControl>
-                                                    <FormLabel>Password</FormLabel>
-                                                    <Input type="password" id="password" placeholder="Password" {...field} required />
-                                                </FormControl>
-                                            )}
-                                        </Field>
-                                        <Text>
-                                            Already have an account?{' '}
-                                            <NavLink to="/auth/signin" className="font-semibold text-teal-600 underline hover:no-underline">
-                                                Sign In
-                                            </NavLink>
-                                        </Text>
-                                        <Button className="w-full" colorScheme="teal" type="submit" isLoading={props.isSubmitting}>
-                                            Sign In
-                                        </Button>
-                                    </Stack>
-                                </Form>
-                            )}
-                        </Formik>
-                    </CardBody>
-                </Card>
+    useEffect(() => {
+        if (session && user) navigate('/dashboard');
+    }, [session, user]);
+
+    if (!session || !user)
+        return (
+            <div className="signup.container flex h-full w-full flex-1 items-center justify-center">
+                <SignUpComponent />
             </div>
-        </div>
-    );
+        );
 };
 
 export default SignUpPage;
