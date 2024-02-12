@@ -4,6 +4,6 @@
     "semi": true,
     "singleQuote": true,
     "endOfLine": "lf",
-    "printWidth": 150,
+    "printWidth": 600,
     "plugins": ["prettier-plugin-tailwindcss"]
 }

@@ -1,11 +1,17 @@
 import { Button, Card, CardBody, CardHeader, FormControl, FormLabel, Heading, Input, Stack, Text } from '@chakra-ui/react';
+import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { supabase } from '../../lib/supabase';
+import { baseapiurl } from '../../lib/utils';
+import { useSession } from '../providers/session-provider';
 
 const SignInComponent = () => {
+    const { saveUserDetails } = useSession();
+    const navigate = useNavigate();
+
     const [error, setError] = useState();
 
     const onSubmit = async (values, actions) => {
@@ -16,7 +22,18 @@ const SignInComponent = () => {
         });
 
         if (data && !error) {
-            window.location.assign('/dashboard');
+            const user = data.session.user;
+
+            const res = await axios.post(`${baseapiurl}/api/auth/sign-in`, { uid: user.id, email: values.email });
+
+            const userCreatedData = res.data;
+            if (userCreatedData.statusCode === 200) {
+                user.fullname = userCreatedData.userDetails.fullname;
+                user.emailVerified = userCreatedData.userDetails.emailVerified;
+                user.profilePicUrl = userCreatedData.userDetails.profilePicUrl;
+                saveUserDetails(user);
+                navigate('/dashboard');
+            }
         }
 
         if (error) {

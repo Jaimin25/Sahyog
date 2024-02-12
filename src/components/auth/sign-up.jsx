@@ -1,22 +1,46 @@
 import { Button, Card, CardBody, CardHeader, FormControl, FormHelperText, FormLabel, Heading, Input, Stack, Text } from '@chakra-ui/react';
+import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { supabase } from '../../lib/supabase';
+import { baseapiurl } from '../../lib/utils';
+import { useSession } from '../providers/session-provider';
 
 const SignUpComponent = () => {
+    const { saveUserDetails } = useSession();
     const [error, setError] = useState();
-    const navigate = useNavigate();
+
     const onSubmit = async (values, actions) => {
         setError(null);
+        const res = await axios.post(`${baseapiurl}/api/auth/checkForName`, {
+            fullname: values.fullname,
+        });
+        const userExists = res.data;
+
+        if (userExists.statusCode === 200) {
+            setError('User already exists with the same name');
+            return;
+        }
+
         const { data, error } = await supabase.auth.signUp({
             email: values.email,
             password: values.password,
         });
 
         if (data && !error) {
-            navigate('/dashboard');
+            const user = data.session.user;
+            const res = await axios.post(`${baseapiurl}/api/auth/sign-up`, { uid: user.id, fullname: values.fullname, email: values.email });
+
+            const userCreatedData = res.data;
+
+            if (userCreatedData.statusCode === 200) {
+                user.fullname = values.fullname;
+                user.emailVerified = userCreatedData.userDetails.emailVerified;
+                user.profilePicUrl = userCreatedData.userDetails.profilePicUrl;
+                saveUserDetails(user);
+            }
         }
 
         if (error) {
@@ -38,7 +62,7 @@ const SignUpComponent = () => {
                                     <Field name="fullname">
                                         {({ field, form }) => (
                                             <FormControl isRequired>
-                                                <FormLabel>Fullname</FormLabel>
+                                                <FormLabel>Full Name</FormLabel>
                                                 <Input {...field} type="text" id="fullname" placeholder="Fullname" required />
                                                 <FormHelperText>Name as mentioned in your Aadhar card</FormHelperText>
                                             </FormControl>

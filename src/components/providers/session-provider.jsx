@@ -16,20 +16,29 @@ export function SessionProvider({ children }) {
         const getSession = async () => {
             const { data } = await supabase.auth.getSession();
             if (!data.session) return null;
-            setUser(data.session.user);
+            const user = JSON.parse(localStorage.getItem('user'));
+            setUser(user);
             setSession(data.session);
         };
         getSession();
 
         supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_IN') {
-                setUser(session.user);
+                const user = JSON.parse(localStorage.getItem('user'));
+                setUser(user);
+                setSession(session);
             } else if (event === 'SIGNED_OUT') {
                 setUser(null);
                 setSession(null);
+                localStorage.removeItem('user');
             }
         });
     }, []);
 
-    return <SessionContext.Provider value={{ user, session }}>{children}</SessionContext.Provider>;
+    const saveUserDetails = (user) => {
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
+    };
+
+    return <SessionContext.Provider value={{ user, session, saveUserDetails }}>{children}</SessionContext.Provider>;
 }
