@@ -150,43 +150,43 @@ const Footer = () => (
                     </Stack>
                     <Stack className="text-center">
                         <Text fontSize="xl" as="b">
-                            Resources
+                            Support
                         </Text>
                         <Button
                             variant="link"
                             colorScheme="teal"
                         >
-                            Help Center
+                            Medical Finance
                         </Button>
                         <Button
                             variant="link"
                             colorScheme="teal"
                         >
-                            Blog
+                            FAQs & Help Center
                         </Button>
                         <Button
                             variant="link"
                             colorScheme="teal"
                         >
-                            Sahyog Stories
+                            Fundraiser video
                         </Button>
                         <Button
                             variant="link"
                             colorScheme="teal"
                         >
-                            Newsroom
+                            Trust & Safety
                         </Button>
                         <Button
                             variant="link"
                             colorScheme="teal"
                         >
-                            Career
+                            Plans & Pricing
                         </Button>
                         <Button
                             variant="link"
                             colorScheme="teal"
                         >
-                            About
+                            Contact Us
                         </Button>
                     </Stack>
                 </div>
