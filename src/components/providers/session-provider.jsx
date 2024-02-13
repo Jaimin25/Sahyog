@@ -1,4 +1,9 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+    createContext,
+    useContext,
+    useEffect,
+    useState,
+} from 'react';
 
 import { supabase } from '../../lib/supabase';
 
@@ -16,7 +21,9 @@ export function SessionProvider({ children }) {
         const getSession = async () => {
             const { data } = await supabase.auth.getSession();
             if (!data.session) return null;
-            const user = JSON.parse(localStorage.getItem('user'));
+            const user = JSON.parse(
+                localStorage.getItem('user')
+            );
             setUser(user);
             setSession(data.session);
         };
@@ -24,7 +31,9 @@ export function SessionProvider({ children }) {
 
         supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_IN') {
-                const user = JSON.parse(localStorage.getItem('user'));
+                const user = JSON.parse(
+                    localStorage.getItem('user')
+                );
                 setUser(user);
                 setSession(session);
             } else if (event === 'SIGNED_OUT') {
@@ -40,5 +49,11 @@ export function SessionProvider({ children }) {
         setUser(user);
     };
 
-    return <SessionContext.Provider value={{ user, session, saveUserDetails }}>{children}</SessionContext.Provider>;
+    return (
+        <SessionContext.Provider
+            value={{ user, session, saveUserDetails }}
+        >
+            {children}
+        </SessionContext.Provider>
+    );
 }

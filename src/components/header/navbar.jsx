@@ -16,33 +16,54 @@ const Navbar = () => {
                             <div className="flex items-center gap-x-1">
                                 <HeartHandshake className="h-8 w-8" />
                                 <div className="flex flex-col">
-                                    <p className="text-3xl">Sahyog</p>
-                                    <p className="text-xs">together we help</p>
+                                    <p className="text-3xl">
+                                        Sahyog
+                                    </p>
+                                    <p className="text-xs">
+                                        together we help
+                                    </p>
                                 </div>
                             </div>
                         </NavLink>
                         <div className="flex-1" />
-                        <div className="navbar.menu hidden md:flex">
+                        <div className="navbar.menu hidden gap-2 md:flex">
                             <div>
-                                <Button variant="ghost" colorScheme="teal">
+                                <Button colorScheme="teal">
+                                    Start a Fundraiser
+                                </Button>
+                            </div>
+                            <div>
+                                <Button
+                                    variant="ghost"
+                                    colorScheme="teal"
+                                >
                                     Fundraisers
                                 </Button>
                             </div>
                             <div>
-                                <Button variant="ghost" colorScheme="teal">
+                                <Button
+                                    variant="ghost"
+                                    colorScheme="teal"
+                                >
                                     How it works
                                 </Button>
                             </div>
                             <div>
                                 {user ? (
                                     <NavLink to="/dashboard">
-                                        <Button variant="ghost" colorScheme="teal">
+                                        <Button
+                                            variant="ghost"
+                                            colorScheme="teal"
+                                        >
                                             Dashboard
                                         </Button>
                                     </NavLink>
                                 ) : (
                                     <NavLink to="/auth/signin">
-                                        <Button variant="ghost" colorScheme="teal">
+                                        <Button
+                                            variant="ghost"
+                                            colorScheme="teal"
+                                        >
                                             Sign In
                                         </Button>
                                     </NavLink>

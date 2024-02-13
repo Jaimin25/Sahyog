@@ -26,8 +26,14 @@ export const App = () => {
                             </Protected>
                         }
                     />
-                    <Route path="/auth/signin" element={<SignInPage />} />
-                    <Route path="/auth/signup" element={<SignUpPage />} />
+                    <Route
+                        path="/auth/signin"
+                        element={<SignInPage />}
+                    />
+                    <Route
+                        path="/auth/signup"
+                        element={<SignUpPage />}
+                    />
                 </Routes>
             </div>
             <Footer />

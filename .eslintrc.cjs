@@ -3,7 +3,12 @@ module.exports = {
         browser: true,
         es2021: true,
     },
-    extends: ['standard', 'plugin:react/recommended', 'plugin:react/jsx-runtime', 'prettier'],
+    extends: [
+        'standard',
+        'plugin:react/recommended',
+        'plugin:react/jsx-runtime',
+        'prettier',
+    ],
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
@@ -45,7 +50,11 @@ module.exports = {
                             // Imports starting with `../`
                             ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
                             // Imports starting with `./`
-                            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+                            [
+                                '^\\./(?=.*/)(?!/?$)',
+                                '^\\.(?!/?$)',
+                                '^\\./?$',
+                            ],
                             // Style imports
                             ['^.+\\.s?css$'],
                             // Side effect imports
