@@ -1,4 +1,5 @@
 import { Button } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 
 import fundsvg from '../assets/funds.jpg';
 import FundraserCard from '../components/cards/fundrasiersCard';
@@ -71,15 +72,17 @@ const Home = () => {
                     />
                 </div>
                 <div className="w-full text-center">
-                    <Button
-                        variant="link"
-                        color="white"
-                        _active={{
-                            color: 'teal.100',
-                        }}
-                    >
-                        View More ➜
-                    </Button>
+                    <NavLink to="/fundraisers/discover">
+                        <Button
+                            variant="link"
+                            color="white"
+                            _active={{
+                                color: 'teal.100',
+                            }}
+                        >
+                            View More ➜
+                        </Button>
+                    </NavLink>
                 </div>
             </section>
         </>

@@ -1,5 +1,5 @@
-const Campaigns = () => {
+const CampaignsPage = () => {
     return <div>Campaigns</div>;
 };
 
-export default Campaigns;
+export default CampaignsPage;

@@ -33,12 +33,14 @@ const Navbar = () => {
                                 </Button>
                             </div>
                             <div>
-                                <Button
-                                    variant="ghost"
-                                    colorScheme="teal"
-                                >
-                                    Fundraisers
-                                </Button>
+                                <NavLink to="/fundraisers/discover">
+                                    <Button
+                                        variant="ghost"
+                                        colorScheme="teal"
+                                    >
+                                        Fundraisers
+                                    </Button>
+                                </NavLink>
                             </div>
                             <div>
                                 <Button

@@ -5,6 +5,8 @@ import Navbar from './components/header/navbar';
 import { useSession } from './components/providers/session-provider';
 import SignInPage from './pages/auth/signin';
 import SignUpPage from './pages/auth/signup';
+import CampaignsPage from './pages/campaigns/Campaigns';
+import FundraiserPage from './pages/campaigns/fundraiserId/Campaign';
 import UserDashboard from './pages/dashboard/userDashboard';
 import Home from './pages/Home';
 import Protected from './Protected';
@@ -33,6 +35,14 @@ export const App = () => {
                     <Route
                         path="/auth/signup"
                         element={<SignUpPage />}
+                    />
+                    <Route
+                        path="/fundraisers/discover"
+                        element={<CampaignsPage />}
+                    />
+                    <Route
+                        path="/fundraiser/:id"
+                        element={<FundraiserPage />}
                     />
                 </Routes>
             </div>

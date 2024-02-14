@@ -58,12 +58,27 @@ const UserPersonalDetails = () => {
                     </Text>
                     <Editable defaultValue={user.email}>
                         <EditablePreview />
-                        <EditableInput />
+                        <EditableInput
+                        // onChange={(e) => {
+                        //     if (!e.target.value.trim()) {
+                        //         setDisabled(true);
+                        //         return setEmail(user.email);
+                        //     }
+                        //     setEmail(e.target.value);
+                        //     if (
+                        //         e.target.value !== user.email
+                        //     ) {
+                        //         setDisabled(false);
+                        //     } else {
+                        //         setDisabled(true);
+                        //     }
+                        // }}
+                        />
                     </Editable>
                 </Stack>
             </CardBody>
             <CardFooter gap="10px">
-                <Button>Save</Button>
+                <Button colorScheme="teal">Save</Button>
                 <Button
                     variant="solid"
                     colorScheme="red"
