@@ -11,7 +11,7 @@ const UserDashboardComponent = () => {
         useState('account');
 
     return (
-        <div className="user-dashboard-container flex h-full gap-4 p-8">
+        <div className="user-dashboard-container flex h-full gap-4 bg-teal-500 p-8">
             <DashboardSidebar
                 setCurrentActive={setCurrentActive}
                 currentActive={currentActive}

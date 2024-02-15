@@ -28,9 +28,11 @@ const Navbar = () => {
                         <div className="flex-1" />
                         <div className="navbar.menu hidden gap-2 md:flex">
                             <div>
-                                <Button colorScheme="teal">
-                                    Start a Fundraiser
-                                </Button>
+                                <NavLink to="/fundraiser/create">
+                                    <Button colorScheme="teal">
+                                        Start a Fundraiser
+                                    </Button>
+                                </NavLink>
                             </div>
                             <div>
                                 <NavLink to="/fundraisers/discover">

@@ -1,7 +1,6 @@
 import {
     Alert,
     AlertIcon,
-    Badge,
     Button,
     Card,
     CardBody,
@@ -12,7 +11,6 @@ import {
     Input,
     Select,
     Stack,
-    Text,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 
