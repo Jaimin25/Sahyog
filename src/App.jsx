@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Footer from './components/footer/footer';
 import Navbar from './components/header/navbar';
@@ -15,13 +14,7 @@ import ProtectedRoutes from './pages/ProtectedRoutes';
 
 export const App = () => {
     const { session } = useSession();
-    const [loggedIn, setLoggedIn] = useState(false);
 
-    useEffect(() => {
-        if (session) {
-            setLoggedIn(true);
-        }
-    }, [session]);
     return (
         <main className="main flex h-full flex-col">
             <Navbar />
@@ -52,23 +45,11 @@ export const App = () => {
                     >
                         <Route
                             path="/dashboard"
-                            element={
-                                loggedIn ? (
-                                    <UserDashboard />
-                                ) : (
-                                    <Navigate to="/auth/signin" />
-                                )
-                            }
+                            element={<UserDashboard />}
                         />
                         <Route
                             path="/fundraiser/create"
-                            element={
-                                loggedIn ? (
-                                    <CreateFundraiserPage />
-                                ) : (
-                                    <Navigate to="/auth/signin" />
-                                )
-                            }
+                            element={<CreateFundraiserPage />}
                         />
                     </Route>
                 </Routes>
