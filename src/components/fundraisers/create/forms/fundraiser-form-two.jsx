@@ -22,6 +22,7 @@ const FundraiserFormTwo = ({
             <Select
                 placeholder="None"
                 defaultValue={fundraiserCause}
+                value={fundraiserCause}
                 onChange={(e) =>
                     setFundraiserCause(e.target.value)
                 }

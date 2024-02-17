@@ -1,5 +1,6 @@
 import {
     AspectRatio,
+    Button,
     Divider,
     Image,
     Stack,
@@ -13,6 +14,7 @@ import {
 } from '../../../../lib/utils';
 
 export const FundraiserFormPublish = ({
+    setActiveStep,
     coverMediaUrl,
     fundraiserCause,
     fundraiserGoal,
@@ -21,9 +23,24 @@ export const FundraiserFormPublish = ({
 }) => {
     return (
         <Stack gap="10px">
-            <Text fontWeight="semibold" fontSize="lg">
-                Cover Media
-            </Text>
+            <div className="flex items-center">
+                <Text
+                    fontWeight="semibold"
+                    fontSize="lg"
+                    className="flex-1"
+                >
+                    Cover Media
+                </Text>
+                <div>
+                    <Button
+                        colorScheme="teal"
+                        variant="outline"
+                        onClick={() => setActiveStep(2)}
+                    >
+                        Edit
+                    </Button>
+                </div>
+            </div>
             {coverMediaUrl && checkForImage(coverMediaUrl) ? (
                 <Image src={coverMediaUrl} />
             ) : coverMediaUrl &&
@@ -36,26 +53,78 @@ export const FundraiserFormPublish = ({
                     />
                 </AspectRatio>
             ) : null}
-            <Text fontWeight="semibold" fontSize="lg">
-                Title
-            </Text>
-            <Text>{fundraiserTitle}</Text>
+            <div className="flex items-center">
+                <div className="flex flex-1 flex-col">
+                    <Text fontWeight="semibold" fontSize="lg">
+                        Title
+                    </Text>
+                    <Text>{fundraiserTitle}</Text>
+                </div>
+                <div>
+                    <Button
+                        colorScheme="teal"
+                        variant="outline"
+                        onClick={() => setActiveStep(3)}
+                    >
+                        Edit
+                    </Button>
+                </div>
+            </div>
             <Divider />
-            <Text fontWeight="semibold" fontSize="lg">
-                Goal
-            </Text>
-            <Text>₹{fundraiserGoal}</Text>
+            <div className="flex items-center">
+                <div className="flex flex-1 flex-col">
+                    <Text fontWeight="semibold" fontSize="lg">
+                        Goal
+                    </Text>
+                    <Text>₹{fundraiserGoal}</Text>
+                </div>
+                <div>
+                    <Button
+                        colorScheme="teal"
+                        variant="outline"
+                        onClick={() => setActiveStep(2)}
+                    >
+                        Edit
+                    </Button>
+                </div>
+            </div>
 
             <Divider />
-            <Text fontWeight="semibold" fontSize="lg">
-                Category
-            </Text>
-            <Text>{fundraiserCause}</Text>
+            <div className="flex items-center">
+                <div className="flex flex-1 flex-col">
+                    <Text fontWeight="semibold" fontSize="lg">
+                        Category
+                    </Text>
+                    <Text>{fundraiserCause}</Text>
+                </div>
+                <div>
+                    <Button
+                        colorScheme="teal"
+                        variant="outline"
+                        onClick={() => setActiveStep(1)}
+                    >
+                        Edit
+                    </Button>
+                </div>
+            </div>
             <Divider />
-            <Text fontWeight="semibold" fontSize="lg">
-                Story
-            </Text>
-            <Text>{fundraiserStory}</Text>
+            <div className="flex items-center">
+                <div className="flex flex-1 flex-col">
+                    <Text fontWeight="semibold" fontSize="lg">
+                        Story
+                    </Text>
+                    <Text>{fundraiserStory}</Text>
+                </div>
+                <div>
+                    <Button
+                        colorScheme="teal"
+                        variant="outline"
+                        onClick={() => setActiveStep(3)}
+                    >
+                        Edit
+                    </Button>
+                </div>
+            </div>
         </Stack>
     );
 };

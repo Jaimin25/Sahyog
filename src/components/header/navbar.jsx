@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useSession } from '../providers/session-provider';
 
 const Navbar = () => {
-    const { user } = useSession();
+    const { user, session } = useSession();
 
     return (
         <header className="navbar fixed top-0 z-10 w-full bg-white">
@@ -28,12 +28,19 @@ const Navbar = () => {
                         <div className="flex-1" />
                         <div className="navbar.menu hidden gap-2 md:flex">
                             <div>
-                                <NavLink to="/fundraiser/create">
+                                <NavLink
+                                    to={
+                                        session
+                                            ? '/fundraiser/create'
+                                            : '/auth/signin'
+                                    }
+                                >
                                     <Button colorScheme="teal">
                                         Start a Fundraiser
                                     </Button>
                                 </NavLink>
                             </div>
+
                             <div>
                                 <NavLink to="/fundraisers/discover">
                                     <Button

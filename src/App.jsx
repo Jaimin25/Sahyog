@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Footer from './components/footer/footer';
 import Navbar from './components/header/navbar';
@@ -7,10 +7,9 @@ import SignInPage from './pages/auth/signin';
 import SignUpPage from './pages/auth/signup';
 import UserDashboard from './pages/dashboard/userDashboard';
 import CreateFundraiserPage from './pages/fundraiser/create/CreateFundraiserPage';
-import FundraiserPage from './pages/fundraiser/fundraiserId/Campaign';
+import FundraiserPage from './pages/fundraiser/fundraiserId/FundraiserPage';
 import FundraisersPage from './pages/fundraiser/FundraisersPage';
 import Home from './pages/Home';
-import ProtectedRoutes from './pages/ProtectedRoutes';
 
 export const App = () => {
     const { session } = useSession();
@@ -23,11 +22,23 @@ export const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route
                         path="/auth/signin"
-                        element={<SignInPage />}
+                        element={
+                            !session ? (
+                                <SignInPage />
+                            ) : (
+                                <Navigate to="/" />
+                            )
+                        }
                     />
                     <Route
                         path="/auth/signup"
-                        element={<SignUpPage />}
+                        element={
+                            !session ? (
+                                <SignUpPage />
+                            ) : (
+                                <Navigate to="/dashboard" />
+                            )
+                        }
                     />
                     <Route
                         path="/fundraisers/discover"
@@ -37,21 +48,30 @@ export const App = () => {
                         path="/fundraiser/:id"
                         element={<FundraiserPage />}
                     />
+
                     {/* PROTECTED ROUTES */}
                     <Route
+                        path="/dashboard"
                         element={
-                            <ProtectedRoutes session={session} />
+                            session &&
+                            (session ? (
+                                <UserDashboard />
+                            ) : (
+                                <SignInPage />
+                            ))
                         }
-                    >
-                        <Route
-                            path="/dashboard"
-                            element={<UserDashboard />}
-                        />
-                        <Route
-                            path="/fundraiser/create"
-                            element={<CreateFundraiserPage />}
-                        />
-                    </Route>
+                    />
+                    <Route
+                        path="/fundraiser/create"
+                        element={
+                            session &&
+                            (session ? (
+                                <CreateFundraiserPage />
+                            ) : (
+                                <SignInPage />
+                            ))
+                        }
+                    />
                 </Routes>
             </div>
             <Footer />

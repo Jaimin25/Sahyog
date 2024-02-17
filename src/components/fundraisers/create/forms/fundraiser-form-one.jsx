@@ -5,6 +5,7 @@ const FundraiserFormOne = ({
     beneficiaryName,
     setFundraiserFor,
     setBeneficiaryName,
+    isFetching,
 }) => {
     return (
         <Stack>
@@ -16,7 +17,9 @@ const FundraiserFormOne = ({
                 onChange={(e) =>
                     setFundraiserFor(e.target.value.trim())
                 }
+                value={fundraiserFor}
                 defaultValue={fundraiserFor && fundraiserFor}
+                isDisabled={isFetching}
             >
                 <option value="myself">Myself</option>
                 <option value="family">Family Member</option>

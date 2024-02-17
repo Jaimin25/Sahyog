@@ -6,18 +6,11 @@ import {
     CardHeader,
     Heading,
     Stack,
-    Step,
-    StepIcon,
-    StepIndicator,
-    StepNumber,
-    Stepper,
-    StepSeparator,
-    StepStatus,
     Text,
     useSteps,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
     baseapiurl,
@@ -30,9 +23,14 @@ import FundraiserFormOne from './forms/fundraiser-form-one';
 import { FundraiserFormPublish } from './forms/fundraiser-form-publish';
 import FundraiserFormThree from './forms/fundraiser-form-three';
 import FundraiserFormTwo from './forms/fundraiser-form-two';
+import FundraiserCardStepper from './fundraiser-card-stepper';
 
 const steps = [{}, {}, {}, {}, {}];
-const CreateFundraiserComponent = () => {
+const CreateFundraiserComponent = ({
+    draftFundraiser,
+    setDraftFundraiser,
+    isFetching,
+}) => {
     const { accessToken, user } = useSession();
 
     const { activeStep, setActiveStep } = useSteps({
@@ -51,12 +49,27 @@ const CreateFundraiserComponent = () => {
     const [fundraiserStory, setFundraiserStory] = useState('');
     const [coverMediaUrl, setCoverMediaUrl] = useState('');
 
-    const handleSaveFundraiser = async () => {
-        setLoading(true);
-        setError(null);
-        const updatedCoverMediaUrl = checkForImage(coverMediaUrl)
-            ? coverMediaUrl
-            : `https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`;
+    useEffect(() => {
+        if (!draftFundraiser) return;
+        setFundraiserFor(draftFundraiser.fundraiserFor);
+        setBeneficiaryName(draftFundraiser.beneficiaryName);
+        setFundraiserCause(draftFundraiser.fundraiserCause);
+        setFundraiserGoal(draftFundraiser.fundraiserGoal);
+        setFundraiserTitle(draftFundraiser.fundraiserTitle);
+        setFundraiserStory(draftFundraiser.fundraiserStory);
+        setCoverMediaUrl(draftFundraiser.coverMediaUrl);
+
+        if (draftFundraiser.status === 'review') {
+            setActiveStep(4);
+        }
+    }, [draftFundraiser]);
+
+    const submitForm = async (status) => {
+        const updatedCoverMediaUrl = coverMediaUrl
+            ? checkForImage(coverMediaUrl)
+                ? coverMediaUrl
+                : `https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`
+            : '';
 
         const res = await axios.post(
             `${baseapiurl}/api/saveFundraiser`,
@@ -70,13 +83,19 @@ const CreateFundraiserComponent = () => {
                 fundraiserCause,
                 fundraiserGoal,
                 coverMediaUrl: updatedCoverMediaUrl,
+                status,
             }
         );
 
-        if (res.data.statusCode === 200) {
+        if (
+            res.data.statusCode === 200 &&
+            res.data.fundraiser.status !== 'active'
+        ) {
             if (activeStep < steps.length - 1) {
                 setActiveStep(activeStep + 1);
             }
+            setLoading(false);
+            setDraftFundraiser(res.data.fundraiser);
         } else {
             setError(res.data.message);
             setLoading(false);
@@ -84,36 +103,93 @@ const CreateFundraiserComponent = () => {
         setLoading(false);
     };
 
+    const handleSubmitFormOne = async () => {
+        if (
+            draftFundraiser &&
+            draftFundraiser.fundraiserFor === fundraiserFor &&
+            draftFundraiser.beneficiaryName === beneficiaryName
+        ) {
+            if (activeStep < steps.length - 1) {
+                setActiveStep(activeStep + 1);
+            }
+            return;
+        }
+        setLoading(true);
+        setError(null);
+        submitForm(
+            draftFundraiser ? draftFundraiser.status : 'draft'
+        );
+    };
+
+    const handleSubmitFormTwo = async () => {
+        if (
+            draftFundraiser &&
+            draftFundraiser.fundraiserCause ===
+                fundraiserCause &&
+            draftFundraiser.fundraiserGoal === fundraiserGoal
+        ) {
+            if (activeStep < steps.length - 1) {
+                setActiveStep(activeStep + 1);
+            }
+            return;
+        }
+        setLoading(true);
+        setError(null);
+        submitForm(
+            draftFundraiser ? draftFundraiser.status : 'draft'
+        );
+    };
+
+    const handleSubmitFormThree = async () => {
+        if (
+            draftFundraiser &&
+            draftFundraiser.coverMediaUrl === coverMediaUrl
+        ) {
+            if (activeStep < steps.length - 1) {
+                setActiveStep(activeStep + 1);
+            }
+            return;
+        }
+        setLoading(true);
+        setError(null);
+        submitForm(
+            draftFundraiser ? draftFundraiser.status : 'draft'
+        );
+    };
+
+    const handleSubmitFormFour = async () => {
+        if (
+            draftFundraiser &&
+            draftFundraiser.fundraiserTitle ===
+                fundraiserTitle &&
+            draftFundraiser.fundraiserStory === fundraiserStory
+        ) {
+            if (activeStep < steps.length - 1) {
+                setActiveStep(activeStep + 1);
+            }
+            return;
+        }
+        setLoading(true);
+        setError(null);
+        submitForm(
+            draftFundraiser ? draftFundraiser.status : 'review'
+        );
+    };
+
+    const publishFundraiser = async () => {
+        setLoading(true);
+        setError(null);
+        submitForm('active');
+    };
+
     return (
         <div className="flex h-full w-auto flex-col items-center justify-center gap-2 bg-teal-500 p-2">
             <div className="hidden w-full justify-center md:flex">
                 <Card className="md:w-1/2">
-                    <CardBody>
-                        <Stepper
-                            index={activeStep}
-                            colorScheme="teal"
-                        >
-                            {steps.map((step, index) => (
-                                <Step key={index}>
-                                    <StepIndicator>
-                                        <StepStatus
-                                            complete={
-                                                <StepIcon />
-                                            }
-                                            incomplete={
-                                                <StepNumber />
-                                            }
-                                            active={
-                                                <StepNumber />
-                                            }
-                                        />
-                                    </StepIndicator>
-
-                                    <StepSeparator />
-                                </Step>
-                            ))}
-                        </Stepper>
-                    </CardBody>
+                    <FundraiserCardStepper
+                        activeStep={activeStep}
+                        steps={steps}
+                    />
                 </Card>
             </div>
             <Card className="w-[99%] sm:w-4/5 md:w-1/2">
@@ -132,6 +208,7 @@ const CreateFundraiserComponent = () => {
                         )}
                         {activeStep === 0 ? (
                             <FundraiserFormOne
+                                isFetching={isFetching}
                                 fundraiserFor={fundraiserFor}
                                 beneficiaryName={beneficiaryName}
                                 setFundraiserFor={
@@ -173,6 +250,7 @@ const CreateFundraiserComponent = () => {
                         ) : (
                             activeStep === 4 && (
                                 <FundraiserFormPublish
+                                    setActiveStep={setActiveStep}
                                     coverMediaUrl={coverMediaUrl}
                                     fundraiserCause={
                                         fundraiserCause
@@ -201,38 +279,70 @@ const CreateFundraiserComponent = () => {
                     >
                         Previous
                     </Button>
-                    {activeStep !== steps.length - 1 ? (
+
+                    {activeStep === 0 && (
                         <Button
                             colorScheme="teal"
                             onClick={() => {
-                                handleSaveFundraiser();
+                                handleSubmitFormOne();
                             }}
                             isLoading={loading}
                             isDisabled={
-                                activeStep === 0
-                                    ? fundraiserFor === 'myself'
-                                        ? !fundraiserFor
-                                        : !beneficiaryName ||
-                                          !fundraiserFor
-                                    : activeStep === 1
-                                      ? !fundraiserCause ||
-                                        !fundraiserGoal
-                                      : activeStep === 2
-                                        ? !coverMediaUrl
-                                        : activeStep === 3
-                                          ? !fundraiserTitle ||
-                                            !fundraiserStory
-                                          : false
+                                fundraiserFor === 'myself'
+                                    ? !fundraiserFor
+                                    : !beneficiaryName ||
+                                      !fundraiserFor ||
+                                      isFetching
                             }
                         >
                             Continue
                         </Button>
-                    ) : (
+                    )}
+                    {activeStep === 1 && (
+                        <Button
+                            colorScheme="teal"
+                            onClick={() => handleSubmitFormTwo()}
+                            isLoading={loading}
+                            isDisabled={
+                                !fundraiserCause ||
+                                !fundraiserGoal
+                            }
+                        >
+                            Continue
+                        </Button>
+                    )}
+                    {activeStep === 2 && (
                         <Button
                             colorScheme="teal"
                             onClick={() =>
-                                console.log('publish')
+                                handleSubmitFormThree()
                             }
+                            isLoading={loading}
+                            isDisabled={!coverMediaUrl}
+                        >
+                            Continue
+                        </Button>
+                    )}
+                    {activeStep === 3 && (
+                        <Button
+                            colorScheme="teal"
+                            onClick={() =>
+                                handleSubmitFormFour()
+                            }
+                            isLoading={loading}
+                            isDisabled={
+                                !fundraiserTitle ||
+                                !fundraiserStory
+                            }
+                        >
+                            Review
+                        </Button>
+                    )}
+                    {activeStep === 4 && (
+                        <Button
+                            colorScheme="teal"
+                            isLoading={loading}
+                            onClick={() => publishFundraiser()}
                         >
                             Publish
                         </Button>

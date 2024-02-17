@@ -1,3 +1,4 @@
+import '@uploadthing/react/styles.css';
 import './index.css';
 
 import { ChakraProvider } from '@chakra-ui/react';

@@ -1,5 +1,3 @@
-import '@uploadthing/react/styles.css';
-
 import {
     AspectRatio,
     Button,
@@ -23,7 +21,7 @@ import {
 } from '../../../../lib/utils';
 
 const UploadButton = generateUploadDropzone({
-    url: ` https://8f575d30c9f3b2.lhr.life/api/uploadthing`,
+    url: `https://37c012594dea46.lhr.life/api/uploadthing`,
 });
 const FundraiserFormThree = ({
     coverMediaUrl,
@@ -38,6 +36,7 @@ const FundraiserFormThree = ({
                     <Image src={coverMediaUrl} />
                     <Stack>
                         <Button
+                            colorScheme="red"
                             onClick={() =>
                                 setCoverMediaUrl(null)
                             }
@@ -101,6 +100,7 @@ const FundraiserFormThree = ({
                         </InputLeftAddon>
                         <Input
                             placeholder="Add a YouTube or Image link"
+                            value={coverMediaUrl}
                             onChange={(e) => {
                                 setCoverMediaUrl(e.target.value);
                             }}

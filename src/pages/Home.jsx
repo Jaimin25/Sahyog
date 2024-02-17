@@ -3,12 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 import fundsvg from '../assets/funds.jpg';
 import FundraserCard from '../components/cards/fundrasiersCard';
+import { useSession } from '../components/providers/session-provider';
 
 const Home = () => {
+    const { session } = useSession();
     return (
         <>
-            <section className="hero my-16 h-auto">
-                <div className="hero.container flex w-full flex-col items-center md:flex-row">
+            <section className="hero my-16 flex h-auto">
+                <div className="hero.container flex w-full flex-col items-center md:flex-row ">
                     <div className="hero.caption flex h-full flex-1 flex-col justify-center gap-y-4 md:ml-14">
                         <div className="flex flex-col gap-y-2 text-center md:text-left">
                             <p className="text-5xl font-bold md:text-[56px]">
@@ -20,12 +22,17 @@ const Home = () => {
                             </p>
                         </div>
                         <div className="flex w-full flex-col items-center gap-x-2 md:flex-row">
-                            <Button
-                                variant={'solid'}
-                                colorScheme="teal"
+                            <NavLink
+                                to={
+                                    session
+                                        ? '/fundraiser/create'
+                                        : '/auth/signin'
+                                }
                             >
-                                Start a Fundraiser
-                            </Button>
+                                <Button colorScheme="teal">
+                                    Start a Fundraiser
+                                </Button>
+                            </NavLink>
                             <span className="font-semibold">
                                 OR
                             </span>
