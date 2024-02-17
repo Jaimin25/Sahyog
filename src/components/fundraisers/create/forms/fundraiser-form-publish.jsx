@@ -82,7 +82,7 @@ export const FundraiserFormPublish = ({
                     <Button
                         colorScheme="teal"
                         variant="outline"
-                        onClick={() => setActiveStep(2)}
+                        onClick={() => setActiveStep(1)}
                     >
                         Edit
                     </Button>

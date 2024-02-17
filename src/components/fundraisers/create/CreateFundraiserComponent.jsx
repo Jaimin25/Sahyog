@@ -1,10 +1,12 @@
 import {
+    Badge,
     Button,
     Card,
     CardBody,
     CardFooter,
     CardHeader,
     Heading,
+    Skeleton,
     Stack,
     Text,
     useSteps,
@@ -39,6 +41,7 @@ const CreateFundraiserComponent = ({
     });
 
     const [loading, setLoading] = useState(false);
+    const [deleting, setDeleting] = useState(false);
     const [error, setError] = useState(null);
 
     const [fundraiserFor, setFundraiserFor] = useState('');
@@ -64,6 +67,35 @@ const CreateFundraiserComponent = ({
         }
     }, [draftFundraiser]);
 
+    const deleteDraft = async () => {
+        setDeleting(true);
+        setError(null);
+        const res = await axios.post(
+            `${baseapiurl}/api/deleteFundraiserDraft`,
+            {
+                uid: user.id,
+                access_token: accessToken,
+                fundraiserId: draftFundraiser._id,
+            }
+        );
+
+        if (res.data.statusCode === 200) {
+            setDraftFundraiser(null);
+            setFundraiserFor('');
+            setBeneficiaryName('');
+            setFundraiserCause('');
+            setFundraiserGoal('');
+            setFundraiserTitle('');
+            setFundraiserStory('');
+            setCoverMediaUrl('');
+            setActiveStep(0);
+            setDeleting(false);
+        } else {
+            setError(res.data.message);
+            setDeleting(false);
+        }
+        setDeleting(false);
+    };
     const submitForm = async (status) => {
         const updatedCoverMediaUrl = coverMediaUrl
             ? checkForImage(coverMediaUrl)
@@ -171,9 +203,7 @@ const CreateFundraiserComponent = ({
         }
         setLoading(true);
         setError(null);
-        submitForm(
-            draftFundraiser ? draftFundraiser.status : 'review'
-        );
+        submitForm('review');
     };
 
     const publishFundraiser = async () => {
@@ -194,8 +224,20 @@ const CreateFundraiserComponent = ({
             </div>
             <Card className="w-[99%] sm:w-4/5 md:w-1/2">
                 <CardHeader>
+                    {draftFundraiser &&
+                        (draftFundraiser.status === 'review' ||
+                            draftFundraiser.status ===
+                                'draft') && (
+                            <div className="flex items-center">
+                                <div className="flex-1">
+                                    <Badge colorScheme="red">
+                                        Draft
+                                    </Badge>
+                                </div>
+                            </div>
+                        )}
                     <Heading size="lg">
-                        Create a Fundraiser
+                        Create a Fundraiser{' '}
                     </Heading>
                     <div className="block md:hidden">
                         {activeStep + 1} of {steps.length}
@@ -269,43 +311,70 @@ const CreateFundraiserComponent = ({
                         )}
                     </Stack>
                 </CardBody>
-                <CardFooter justifyContent="space-between">
-                    <Button
-                        onClick={() =>
-                            activeStep >= 1 &&
-                            setActiveStep(activeStep - 1)
-                        }
-                        isDisabled={activeStep === 0}
-                    >
-                        Previous
-                    </Button>
-
-                    {activeStep === 0 && (
+                <CardFooter gap="4px">
+                    <div className="flex-1">
                         <Button
-                            colorScheme="teal"
-                            onClick={() => {
-                                handleSubmitFormOne();
-                            }}
-                            isLoading={loading}
+                            onClick={() =>
+                                activeStep >= 1 &&
+                                setActiveStep(activeStep - 1)
+                            }
                             isDisabled={
-                                fundraiserFor === 'myself'
-                                    ? !fundraiserFor
-                                    : !beneficiaryName ||
-                                      !fundraiserFor ||
-                                      isFetching
+                                activeStep === 0 || deleting
                             }
                         >
-                            Continue
+                            Previous
                         </Button>
-                    )}
+                    </div>
+                    {draftFundraiser &&
+                        (draftFundraiser.status === 'review' ||
+                            draftFundraiser.status ===
+                                'draft') && (
+                            <Button
+                                colorScheme="red"
+                                variant="ghost"
+                                onClick={() => {
+                                    deleteDraft();
+                                }}
+                                isLoading={deleting}
+                            >
+                                Discard
+                            </Button>
+                        )}
+
+                    {activeStep === 0 &&
+                        (isFetching ? (
+                            <Skeleton>
+                                <Button>Continue</Button>
+                            </Skeleton>
+                        ) : (
+                            <Button
+                                colorScheme="teal"
+                                onClick={() => {
+                                    handleSubmitFormOne();
+                                }}
+                                isLoading={loading}
+                                isDisabled={
+                                    fundraiserFor === 'myself'
+                                        ? !fundraiserFor
+                                        : !beneficiaryName ||
+                                          !fundraiserFor ||
+                                          (isFetching &&
+                                              deleting)
+                                }
+                            >
+                                Continue
+                            </Button>
+                        ))}
+
                     {activeStep === 1 && (
                         <Button
                             colorScheme="teal"
                             onClick={() => handleSubmitFormTwo()}
                             isLoading={loading}
                             isDisabled={
-                                !fundraiserCause ||
-                                !fundraiserGoal
+                                (!fundraiserCause ||
+                                    !fundraiserGoal) &&
+                                deleting
                             }
                         >
                             Continue
@@ -318,7 +387,9 @@ const CreateFundraiserComponent = ({
                                 handleSubmitFormThree()
                             }
                             isLoading={loading}
-                            isDisabled={!coverMediaUrl}
+                            isDisabled={
+                                !coverMediaUrl && deleting
+                            }
                         >
                             Continue
                         </Button>
@@ -331,8 +402,9 @@ const CreateFundraiserComponent = ({
                             }
                             isLoading={loading}
                             isDisabled={
-                                !fundraiserTitle ||
-                                !fundraiserStory
+                                (!fundraiserTitle ||
+                                    !fundraiserStory) &&
+                                deleting
                             }
                         >
                             Review
@@ -343,6 +415,7 @@ const CreateFundraiserComponent = ({
                             colorScheme="teal"
                             isLoading={loading}
                             onClick={() => publishFundraiser()}
+                            isDisabled={loading && deleting}
                         >
                             Publish
                         </Button>
