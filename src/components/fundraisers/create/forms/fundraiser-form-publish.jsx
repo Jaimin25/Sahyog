@@ -13,7 +13,7 @@ import {
     getYtVideoId,
 } from '../../../../lib/utils';
 
-export const FundraiserFormPublish = ({
+const FundraiserFormPublish = ({
     setActiveStep,
     coverMediaUrl,
     fundraiserCause,
@@ -128,3 +128,5 @@ export const FundraiserFormPublish = ({
         </Stack>
     );
 };
+
+export default FundraiserFormPublish;

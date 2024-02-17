@@ -1,14 +1,9 @@
 import {
     Badge,
-    Button,
     Card,
     CardBody,
-    CardFooter,
     CardHeader,
     Heading,
-    Skeleton,
-    Stack,
-    Text,
     useSteps,
 } from '@chakra-ui/react';
 import axios from 'axios';
@@ -20,11 +15,8 @@ import {
     getYtVideoId,
 } from '../../../lib/utils';
 import { useSession } from '../../providers/session-provider';
-import FundraiserFormFour from './forms/fundraiser-form-four';
-import FundraiserFormOne from './forms/fundraiser-form-one';
-import { FundraiserFormPublish } from './forms/fundraiser-form-publish';
-import FundraiserFormThree from './forms/fundraiser-form-three';
-import FundraiserFormTwo from './forms/fundraiser-form-two';
+import CardFundraiserFooter from './forms/card-content/card-fundraiser-footer.jsx';
+import CardFundraiserForms from './forms/card-content/card-fundraisers-forms';
 import FundraiserCardStepper from './fundraiser-card-stepper';
 
 const steps = [{}, {}, {}, {}, {}];
@@ -78,8 +70,8 @@ const CreateFundraiserComponent = ({
                 fundraiserId: draftFundraiser._id,
             }
         );
-
-        if (res.data.statusCode === 200) {
+        const resData = res.data;
+        if (resData.statusCode === 200) {
             setDraftFundraiser(null);
             setFundraiserFor('');
             setBeneficiaryName('');
@@ -91,7 +83,7 @@ const CreateFundraiserComponent = ({
             setActiveStep(0);
             setDeleting(false);
         } else {
-            setError(res.data.message);
+            setError(resData.message);
             setDeleting(false);
         }
         setDeleting(false);
@@ -119,17 +111,19 @@ const CreateFundraiserComponent = ({
             }
         );
 
+        const resData = res.data;
+
         if (
-            res.data.statusCode === 200 &&
-            res.data.fundraiser.status !== 'active'
+            resData.statusCode === 200 &&
+            resData.fundraiser.status !== 'active'
         ) {
             if (activeStep < steps.length - 1) {
                 setActiveStep(activeStep + 1);
             }
             setLoading(false);
-            setDraftFundraiser(res.data.fundraiser);
+            setDraftFundraiser(resData.fundraiser);
         } else {
-            setError(res.data.message);
+            setError(resData.message);
             setLoading(false);
         }
         setLoading(false);
@@ -243,184 +237,49 @@ const CreateFundraiserComponent = ({
                         {activeStep + 1} of {steps.length}
                     </div>
                 </CardHeader>
-                <CardBody overflowY="auto" height="10px">
-                    <Stack>
-                        {error && (
-                            <Text color="red">{error}</Text>
-                        )}
-                        {activeStep === 0 ? (
-                            <FundraiserFormOne
-                                isFetching={isFetching}
-                                fundraiserFor={fundraiserFor}
-                                beneficiaryName={beneficiaryName}
-                                setFundraiserFor={
-                                    setFundraiserFor
-                                }
-                                setBeneficiaryName={
-                                    setBeneficiaryName
-                                }
-                            />
-                        ) : activeStep === 1 ? (
-                            <FundraiserFormTwo
-                                fundraiserCause={fundraiserCause}
-                                fundraiserGoal={fundraiserGoal}
-                                setFundraiserCause={
-                                    setFundraiserCause
-                                }
-                                setFundraiserGoal={
-                                    setFundraiserGoal
-                                }
-                            />
-                        ) : activeStep === 2 ? (
-                            <FundraiserFormThree
-                                coverMediaUrl={coverMediaUrl}
-                                setCoverMediaUrl={
-                                    setCoverMediaUrl
-                                }
-                            />
-                        ) : activeStep === 3 ? (
-                            <FundraiserFormFour
-                                fundraiserTitle={fundraiserTitle}
-                                fundraiserStory={fundraiserStory}
-                                setFundraiserTitle={
-                                    setFundraiserTitle
-                                }
-                                setFundraiserStory={
-                                    setFundraiserStory
-                                }
-                            />
-                        ) : (
-                            activeStep === 4 && (
-                                <FundraiserFormPublish
-                                    setActiveStep={setActiveStep}
-                                    coverMediaUrl={coverMediaUrl}
-                                    fundraiserCause={
-                                        fundraiserCause
-                                    }
-                                    fundraiserGoal={
-                                        fundraiserGoal
-                                    }
-                                    fundraiserTitle={
-                                        fundraiserTitle
-                                    }
-                                    fundraiserStory={
-                                        fundraiserStory
-                                    }
-                                />
-                            )
-                        )}
-                    </Stack>
+                <CardBody>
+                    <CardFundraiserForms
+                        error={error}
+                        activeStep={activeStep}
+                        isFetching={isFetching}
+                        fundraiserFor={fundraiserFor}
+                        beneficiaryName={beneficiaryName}
+                        fundraiserCause={fundraiserCause}
+                        fundraiserGoal={fundraiserGoal}
+                        fundraiserStory={fundraiserStory}
+                        fundraiserTitle={fundraiserTitle}
+                        coverMediaUrl={coverMediaUrl}
+                        setFundraiserFor={setFundraiserFor}
+                        setBeneficiaryName={setBeneficiaryName}
+                        setFundraiserCause={setFundraiserCause}
+                        setFundraiserGoal={setFundraiserGoal}
+                        setFundraiserStory={setFundraiserStory}
+                        setFundraiserTitle={setFundraiserTitle}
+                        setCoverMediaUrl={setCoverMediaUrl}
+                        setActiveStep={setActiveStep}
+                    />
                 </CardBody>
-                <CardFooter gap="4px">
-                    <div className="flex-1">
-                        <Button
-                            onClick={() =>
-                                activeStep >= 1 &&
-                                setActiveStep(activeStep - 1)
-                            }
-                            isDisabled={
-                                activeStep === 0 || deleting
-                            }
-                        >
-                            Previous
-                        </Button>
-                    </div>
-                    {draftFundraiser &&
-                        (draftFundraiser.status === 'review' ||
-                            draftFundraiser.status ===
-                                'draft') && (
-                            <Button
-                                colorScheme="red"
-                                variant="ghost"
-                                onClick={() => {
-                                    deleteDraft();
-                                }}
-                                isLoading={deleting}
-                            >
-                                Discard
-                            </Button>
-                        )}
-
-                    {activeStep === 0 &&
-                        (isFetching ? (
-                            <Skeleton>
-                                <Button>Continue</Button>
-                            </Skeleton>
-                        ) : (
-                            <Button
-                                colorScheme="teal"
-                                onClick={() => {
-                                    handleSubmitFormOne();
-                                }}
-                                isLoading={loading}
-                                isDisabled={
-                                    fundraiserFor === 'myself'
-                                        ? !fundraiserFor
-                                        : !beneficiaryName ||
-                                          !fundraiserFor ||
-                                          (isFetching &&
-                                              deleting)
-                                }
-                            >
-                                Continue
-                            </Button>
-                        ))}
-
-                    {activeStep === 1 && (
-                        <Button
-                            colorScheme="teal"
-                            onClick={() => handleSubmitFormTwo()}
-                            isLoading={loading}
-                            isDisabled={
-                                (!fundraiserCause ||
-                                    !fundraiserGoal) &&
-                                deleting
-                            }
-                        >
-                            Continue
-                        </Button>
-                    )}
-                    {activeStep === 2 && (
-                        <Button
-                            colorScheme="teal"
-                            onClick={() =>
-                                handleSubmitFormThree()
-                            }
-                            isLoading={loading}
-                            isDisabled={
-                                !coverMediaUrl && deleting
-                            }
-                        >
-                            Continue
-                        </Button>
-                    )}
-                    {activeStep === 3 && (
-                        <Button
-                            colorScheme="teal"
-                            onClick={() =>
-                                handleSubmitFormFour()
-                            }
-                            isLoading={loading}
-                            isDisabled={
-                                (!fundraiserTitle ||
-                                    !fundraiserStory) &&
-                                deleting
-                            }
-                        >
-                            Review
-                        </Button>
-                    )}
-                    {activeStep === 4 && (
-                        <Button
-                            colorScheme="teal"
-                            isLoading={loading}
-                            onClick={() => publishFundraiser()}
-                            isDisabled={loading && deleting}
-                        >
-                            Publish
-                        </Button>
-                    )}
-                </CardFooter>
+                <CardFundraiserFooter
+                    activeStep={activeStep}
+                    setActiveStep={setActiveStep}
+                    deleteDraft={deleteDraft}
+                    loading={loading}
+                    deleting={deleting}
+                    isFetching={isFetching}
+                    fundraiserFor={fundraiserFor}
+                    beneficiaryName={beneficiaryName}
+                    fundraiserCause={fundraiserCause}
+                    fundraiserGoal={fundraiserGoal}
+                    coverMediaUrl={coverMediaUrl}
+                    fundraiserTitle={fundraiserTitle}
+                    fundraiserStory={fundraiserStory}
+                    handleSubmitFormOne={handleSubmitFormOne}
+                    handleSubmitFormTwo={handleSubmitFormTwo}
+                    handleSubmitFormThree={handleSubmitFormThree}
+                    handleSubmitFormFour={handleSubmitFormFour}
+                    publishFundraiser={publishFundraiser}
+                    draftFundraiser={draftFundraiser}
+                />
             </Card>
         </div>
     );

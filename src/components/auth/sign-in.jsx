@@ -36,24 +36,26 @@ const SignInComponent = () => {
         if (data && !error) {
             const user = data.session.user;
 
-            const res = await axios.post(
-                `${baseapiurl}/api/auth/sign-in`,
-                { uid: user.id, email: values.email }
-            );
+            try {
+                const res = await axios.post(
+                    `${baseapiurl}/api/auth/sign-in`,
+                    { uid: user.id, email: values.email }
+                );
 
-            const userCreatedData = res.data;
-            if (userCreatedData.statusCode === 200) {
-                user.fullname =
-                    userCreatedData.userDetails.fullname;
-                user.emailVerified =
-                    userCreatedData.userDetails.emailVerified;
-                user.profilePicUrl =
-                    userCreatedData.userDetails.profilePicUrl;
-                saveUserDetails(user);
-                navigate('/dashboard');
+                const resData = res.data;
+                if (resData.statusCode === 200) {
+                    user.fullname = resData.userDetails.fullname;
+                    user.emailVerified =
+                        resData.userDetails.emailVerified;
+                    user.profilePicUrl =
+                        resData.userDetails.profilePicUrl;
+                    saveUserDetails(user);
+                    navigate('/dashboard');
+                }
+            } catch (error) {
+                setError(error.message);
             }
         }
-
         if (error) {
             setError(error.message);
         }

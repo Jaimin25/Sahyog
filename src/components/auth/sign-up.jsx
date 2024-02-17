@@ -32,9 +32,9 @@ const SignUpComponent = () => {
                 fullname: values.fullname,
             }
         );
-        const userExists = res.data;
+        const resData = res.data;
 
-        if (userExists.statusCode === 200) {
+        if (resData.statusCode === 200) {
             setError('User already exists with the same name');
             return;
         }
@@ -55,14 +55,14 @@ const SignUpComponent = () => {
                 }
             );
 
-            const userCreatedData = res.data;
+            const resData = res.data;
 
-            if (userCreatedData.statusCode === 200) {
+            if (resData.statusCode === 200) {
                 user.fullname = values.fullname;
                 user.emailVerified =
-                    userCreatedData.userDetails.emailVerified;
+                    resData.userDetails.emailVerified;
                 user.profilePicUrl =
-                    userCreatedData.userDetails.profilePicUrl;
+                    resData.userDetails.profilePicUrl;
                 saveUserDetails(user);
             }
         }

@@ -20,10 +20,10 @@ const CreateFundraiserPage = () => {
                     access_token: accessToken,
                 }
             );
+            const resData = res.data;
 
-            if (res.data.statusCode === 200) {
-                console.log(res.data);
-                setDraftFundraiser(res.data.fundraiser);
+            if (resData.statusCode === 200) {
+                setDraftFundraiser(resData.fundraiser);
                 setLoading(false);
             } else {
                 setLoading(false);
