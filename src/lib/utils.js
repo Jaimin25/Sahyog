@@ -22,7 +22,7 @@ if (
 ) {
     baseapiurl = 'http://localhost:5172';
 } else {
-    baseapiurl = '';
+    baseapiurl = 'https://sahyog-backend.onrender.com';
 }
 
 const getYtVideoId = (url) => {

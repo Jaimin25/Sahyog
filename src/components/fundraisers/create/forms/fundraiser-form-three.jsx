@@ -15,13 +15,14 @@ import { Link } from 'lucide-react';
 import { useState } from 'react';
 
 import {
+    baseapiurl,
     checkForImage,
     checkYoutubeUrl,
     getYtVideoId,
 } from '../../../../lib/utils';
 
 const UploadButton = generateUploadDropzone({
-    url: `https://37c012594dea46.lhr.life/api/uploadthing`,
+    url: `${baseapiurl}/api/uploadthing`,
 });
 const FundraiserFormThree = ({
     coverMediaUrl,
