@@ -1,4 +1,16 @@
-import { Divider, Image, Stack, Text } from '@chakra-ui/react';
+import {
+    AspectRatio,
+    Divider,
+    Image,
+    Stack,
+    Text,
+} from '@chakra-ui/react';
+
+import {
+    checkForImage,
+    checkYoutubeUrl,
+    getYtVideoId,
+} from '../../../../lib/utils';
 
 export const FundraiserFormPublish = ({
     coverMediaUrl,
@@ -12,7 +24,18 @@ export const FundraiserFormPublish = ({
             <Text fontWeight="semibold" fontSize="lg">
                 Cover Media
             </Text>
-            <Image src={coverMediaUrl} />
+            {coverMediaUrl && checkForImage(coverMediaUrl) ? (
+                <Image src={coverMediaUrl} />
+            ) : coverMediaUrl &&
+              checkYoutubeUrl(coverMediaUrl) ? (
+                <AspectRatio maxW="100%" ratio={16 / 9}>
+                    <iframe
+                        title="naruto"
+                        src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
+                        allowFullScreen
+                    />
+                </AspectRatio>
+            ) : null}
             <Text fontWeight="semibold" fontSize="lg">
                 Title
             </Text>

@@ -1,6 +1,7 @@
 import '@uploadthing/react/styles.css';
 
 import {
+    AspectRatio,
     Button,
     Divider,
     HStack,
@@ -15,6 +16,12 @@ import { generateUploadDropzone } from '@uploadthing/react';
 import { Link } from 'lucide-react';
 import { useState } from 'react';
 
+import {
+    checkForImage,
+    checkYoutubeUrl,
+    getYtVideoId,
+} from '../../../../lib/utils';
+
 const UploadButton = generateUploadDropzone({
     url: ` https://8f575d30c9f3b2.lhr.life/api/uploadthing`,
 });
@@ -23,9 +30,10 @@ const FundraiserFormThree = ({
     setCoverMediaUrl,
 }) => {
     const [error, setError] = useState(null);
+
     return (
         <Stack>
-            {coverMediaUrl && (
+            {coverMediaUrl && checkForImage(coverMediaUrl) ? (
                 <>
                     <Image src={coverMediaUrl} />
                     <Stack>
@@ -38,12 +46,31 @@ const FundraiserFormThree = ({
                         </Button>
                     </Stack>
                 </>
-            )}
+            ) : coverMediaUrl &&
+              checkYoutubeUrl(coverMediaUrl) ? (
+                <>
+                    <AspectRatio maxW="100%" ratio={16 / 9}>
+                        <iframe
+                            title="naruto"
+                            src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
+                            allowFullScreen
+                        />
+                    </AspectRatio>
+                    <Button
+                        onClick={() => setCoverMediaUrl(null)}
+                    >
+                        Remove
+                    </Button>
+                </>
+            ) : null}
 
-            {!coverMediaUrl && (
+            {!(coverMediaUrl
+                ? checkYoutubeUrl(coverMediaUrl) ||
+                  checkForImage(coverMediaUrl)
+                : !!coverMediaUrl) ? (
                 <>
                     <Text fontWeight="semibold">
-                        Add a cover photo
+                        Upload a cover photo
                     </Text>
                     <UploadButton
                         className=""
@@ -52,7 +79,6 @@ const FundraiserFormThree = ({
                             setCoverMediaUrl(res[0].url);
                         }}
                         onUploadError={(error) => {
-                            console.log(error);
                             setError(
                                 error.message.trim() ===
                                     'File limit exceeded'
@@ -61,12 +87,6 @@ const FundraiserFormThree = ({
                                           'Unable to get presigned urls' &&
                                           'Unable to upload image, please check your file size'
                             );
-                        }}
-                        onUploadBegin={(name) => {
-                            console.log('Uploading: ', name);
-                        }}
-                        onBeforeUploadBegin={(files) => {
-                            console.log(files);
                         }}
                     />
                     <Text color="red.500">{error}</Text>
@@ -79,10 +99,15 @@ const FundraiserFormThree = ({
                         <InputLeftAddon>
                             <Link />
                         </InputLeftAddon>
-                        <Input placeholder="Add a YouTube link" />
+                        <Input
+                            placeholder="Add a YouTube or Image link"
+                            onChange={(e) => {
+                                setCoverMediaUrl(e.target.value);
+                            }}
+                        />
                     </InputGroup>
                 </>
-            )}
+            ) : null}
         </Stack>
     );
 };

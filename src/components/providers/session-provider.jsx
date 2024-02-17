@@ -15,6 +15,7 @@ export const useSession = () => {
 
 export function SessionProvider({ children }) {
     const [session, setSession] = useState(null);
+    const [accessToken, setAccessToken] = useState(null);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -26,6 +27,7 @@ export function SessionProvider({ children }) {
             );
             setUser(user);
             setSession(data.session);
+            setAccessToken(data.session.access_token);
         };
         getSession();
 
@@ -36,9 +38,11 @@ export function SessionProvider({ children }) {
                 );
                 setUser(user);
                 setSession(session);
+                setAccessToken(session.access_token);
             } else if (event === 'SIGNED_OUT') {
                 setUser(null);
                 setSession(null);
+                setAccessToken(null);
                 localStorage.removeItem('user');
             }
         });
@@ -51,7 +55,12 @@ export function SessionProvider({ children }) {
 
     return (
         <SessionContext.Provider
-            value={{ user, session, saveUserDetails }}
+            value={{
+                user,
+                session,
+                accessToken,
+                saveUserDetails,
+            }}
         >
             {children}
         </SessionContext.Provider>

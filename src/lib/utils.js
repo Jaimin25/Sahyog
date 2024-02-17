@@ -25,4 +25,38 @@ if (
     baseapiurl = '';
 }
 
-export { baseapiurl, decryptValue, encryptValue };
+const getYtVideoId = (url) => {
+    const p =
+        /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (url.match(p)) {
+        return url.match(p)[1];
+    }
+};
+
+const checkYoutubeUrl = (url) => {
+    const p =
+        /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    if (url.match(p)) {
+        return true;
+    }
+    return false;
+};
+
+const checkForImage = (url) => {
+    const regex = /^https?:\/\/.*\/.*\.(png|jpeg|jpg)\??.*$/gim;
+
+    if (url.match(regex)) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+export {
+    baseapiurl,
+    checkForImage,
+    checkYoutubeUrl,
+    decryptValue,
+    encryptValue,
+    getYtVideoId,
+};
