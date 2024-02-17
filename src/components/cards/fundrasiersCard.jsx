@@ -1,54 +1,94 @@
 import {
+    AspectRatio,
+    Avatar,
     Button,
     ButtonGroup,
     Card,
     CardBody,
     CardFooter,
     Heading,
+    HStack,
     Image,
     Progress,
     Stack,
     Text,
 } from '@chakra-ui/react';
 
-const FundraserCard = ({
-    title,
-    coverImgLink,
-    creator,
-    currentlyRaised,
-    goal,
+import {
+    checkForImage,
+    checkYoutubeUrl,
+    getYtVideoId,
+} from '../../lib/utils';
+
+const FundriaserCard = ({
+    fundraiserTitle,
+    coverMediaUrl,
+    creatorName,
+    profilePicUrl,
+    amountRaised,
+    fundraiserGoal,
 }) => {
     return (
         <Card
             maxW="sm"
-            className="h-full w-auto place-self-center"
+            className="h-full w-full place-self-center"
             boxShadow="md"
         >
             <CardBody>
-                <div className="h-min overflow-hidden rounded-md">
-                    <Image
-                        src={coverImgLink}
-                        alt={title}
+                {coverMediaUrl &&
+                checkForImage(coverMediaUrl) ? (
+                    <div className="overflow-hidden rounded-lg">
+                        <Image
+                            src={coverMediaUrl}
+                            borderRadius="lg"
+                            className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
+                        />
+                    </div>
+                ) : coverMediaUrl &&
+                  checkYoutubeUrl(coverMediaUrl) ? (
+                    <AspectRatio
+                        maxW="100%"
+                        ratio={16 / 9}
                         borderRadius="lg"
-                        className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
-                    />
-                </div>
+                        height="200px"
+                    >
+                        <iframe
+                            title="naruto"
+                            className="rounded-lg"
+                            src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
+                            allowFullScreen
+                        />
+                    </AspectRatio>
+                ) : null}
                 <Stack mt="6" spacing="3">
-                    <Heading size="md">{title}</Heading>
-                    <Text>
-                        By{' '}
-                        <span className="font-semibold">
-                            {creator}
-                        </span>
-                    </Text>
+                    <Heading size="md">
+                        {fundraiserTitle}
+                    </Heading>
+                    <HStack>
+                        <Avatar src={profilePicUrl} size="sm" />
+                        <Text>
+                            By{' '}
+                            <span className="font-semibold">
+                                {creatorName}
+                            </span>
+                        </Text>
+                    </HStack>
                     <Text fontSize={'larger'}>
                         <span className="font-semibold">
-                            ₹{currentlyRaised.toLocaleString()}
+                            ₹
+                            {amountRaised
+                                .toLocaleString('en-IN')
+                                .toString()}
                         </span>{' '}
-                        raised out of ₹{goal.toLocaleString()}
+                        raised out of ₹
+                        {fundraiserGoal
+                            .toLocaleString('en-IN')
+                            .toString()}
                     </Text>
                     <Progress
-                        value={(currentlyRaised / goal) * 100}
+                        value={
+                            (amountRaised / fundraiserGoal) * 100
+                        }
                         size="xs"
                         colorScheme="teal"
                     />
@@ -76,4 +116,4 @@ const FundraserCard = ({
     );
 };
 
-export default FundraserCard;
+export default FundriaserCard;

@@ -100,6 +100,8 @@ const CreateFundraiserComponent = ({
             {
                 access_token: accessToken,
                 uid: user.id,
+                creatorName: user.fullname,
+                profilePicUrl: user.profilePicUrl,
                 fundraiserTitle,
                 fundraiserStory,
                 fundraiserFor,

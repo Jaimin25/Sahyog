@@ -2,7 +2,7 @@ import { Button } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 import fundsvg from '../assets/funds.jpg';
-import FundraserCard from '../components/cards/fundrasiersCard';
+import FundraiserDiscoverSection from '../components/discover-section/fundraiser-discover-section';
 import { useSession } from '../components/providers/session-provider';
 
 const Home = () => {
@@ -55,28 +55,8 @@ const Home = () => {
                         Discover Fundraisers
                     </h1>
                 </div>
-                <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                    <FundraserCard
-                        title="Help children with their education"
-                        coverImgLink="https://media.licdn.com/dms/image/C4E22AQHlV-JmE3xQ3Q/feedshare-shrink_800/0/1677519795726?e=1710374400&v=beta&t=8QqLotHim7s6_o4vVzshu7ZiqC5yLzhxj4aWrjCWVZs"
-                        creator="abc"
-                        currentlyRaised={450}
-                        goal={10000}
-                    />
-                    <FundraserCard
-                        title="Feed a Dog"
-                        coverImgLink="https://www.dhyanfoundation.com/images/fad-logo.jpg"
-                        creator="abc"
-                        currentlyRaised={2500}
-                        goal={10000}
-                    />
-                    <FundraserCard
-                        title="Plant a tree for life"
-                        coverImgLink="https://kettocdn.gumlet.io/media/campaign/145000/145233/image/5de4ae9f75def.jpeg?w=768&dpr=1.5"
-                        creator="abc"
-                        currentlyRaised={25000}
-                        goal={50000}
-                    />
+                <div className="w-full">
+                    <FundraiserDiscoverSection />
                 </div>
                 <div className="w-full text-center">
                     <NavLink to="/fundraisers/discover">
