@@ -51,9 +51,12 @@ const SignInComponent = () => {
                         resData.userDetails.profilePicUrl;
                     saveUserDetails(user);
                     navigate('/dashboard');
+                } else {
+                    await supabase.auth.signOut();
                 }
             } catch (error) {
                 setError(error.message);
+                await supabase.auth.signOut();
             }
         }
         if (error) {

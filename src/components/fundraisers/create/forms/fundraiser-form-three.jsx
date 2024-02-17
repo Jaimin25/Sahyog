@@ -33,7 +33,13 @@ const FundraiserFormThree = ({
         <Stack>
             {coverMediaUrl && checkForImage(coverMediaUrl) ? (
                 <>
-                    <Image src={coverMediaUrl} />
+                    <div className="overflow-hidden rounded-lg">
+                        <Image
+                            src={coverMediaUrl}
+                            borderRadius="lg"
+                            className="aspect-video h-[300px] w-full cursor-pointer transition duration-500 hover:scale-110"
+                        />
+                    </div>
                     <Stack>
                         <Button
                             colorScheme="red"

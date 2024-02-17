@@ -6,6 +6,7 @@ import {
     Stack,
     Text,
 } from '@chakra-ui/react';
+import { Markup } from 'interweave';
 
 import {
     checkForImage,
@@ -26,7 +27,7 @@ const FundraiserFormPublish = ({
             <div className="flex items-center">
                 <Text
                     fontWeight="semibold"
-                    fontSize="lg"
+                    fontSize="xl"
                     className="flex-1"
                 >
                     Cover Media
@@ -42,7 +43,13 @@ const FundraiserFormPublish = ({
                 </div>
             </div>
             {coverMediaUrl && checkForImage(coverMediaUrl) ? (
-                <Image src={coverMediaUrl} />
+                <div className="overflow-hidden rounded-lg">
+                    <Image
+                        src={coverMediaUrl}
+                        borderRadius="lg"
+                        className="aspect-video h-[300px] w-full cursor-pointer transition duration-500 hover:scale-110"
+                    />
+                </div>
             ) : coverMediaUrl &&
               checkYoutubeUrl(coverMediaUrl) ? (
                 <AspectRatio maxW="100%" ratio={16 / 9}>
@@ -55,7 +62,7 @@ const FundraiserFormPublish = ({
             ) : null}
             <div className="flex items-center">
                 <div className="flex flex-1 flex-col">
-                    <Text fontWeight="semibold" fontSize="lg">
+                    <Text fontWeight="semibold" fontSize="xl">
                         Title
                     </Text>
                     <Text>{fundraiserTitle}</Text>
@@ -73,7 +80,7 @@ const FundraiserFormPublish = ({
             <Divider />
             <div className="flex items-center">
                 <div className="flex flex-1 flex-col">
-                    <Text fontWeight="semibold" fontSize="lg">
+                    <Text fontWeight="semibold" fontSize="xl">
                         Goal
                     </Text>
                     <Text>₹{fundraiserGoal}</Text>
@@ -92,7 +99,7 @@ const FundraiserFormPublish = ({
             <Divider />
             <div className="flex items-center">
                 <div className="flex flex-1 flex-col">
-                    <Text fontWeight="semibold" fontSize="lg">
+                    <Text fontWeight="semibold" fontSize="xl">
                         Category
                     </Text>
                     <Text>{fundraiserCause}</Text>
@@ -110,10 +117,13 @@ const FundraiserFormPublish = ({
             <Divider />
             <div className="flex items-center">
                 <div className="flex flex-1 flex-col">
-                    <Text fontWeight="semibold" fontSize="lg">
+                    <Text fontWeight="semibold" fontSize="xl">
                         Story
                     </Text>
-                    <Text>{fundraiserStory}</Text>
+                    <Markup
+                        content={fundraiserStory}
+                        className="h-[100px] overflow-y-auto"
+                    />
                 </div>
                 <div>
                     <Button

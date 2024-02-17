@@ -1,5 +1,11 @@
-import { Button } from '@chakra-ui/react';
-import { HeartHandshake } from 'lucide-react';
+import {
+    Button,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuList,
+} from '@chakra-ui/react';
+import { HeartHandshake, Menu as MenuIcon } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 import { useSession } from '../providers/session-provider';
@@ -80,6 +86,50 @@ const Navbar = () => {
                                     </NavLink>
                                 )}
                             </div>
+                        </div>
+                        <div className="flex md:hidden">
+                            <Menu>
+                                <MenuButton as={Button}>
+                                    <MenuIcon className="h-7 w-7 text-black" />
+                                </MenuButton>
+                                <MenuList>
+                                    <NavLink
+                                        to={
+                                            session
+                                                ? '/fundraiser/create'
+                                                : '/auth/signin'
+                                        }
+                                    >
+                                        <MenuItem color="teal">
+                                            Start a Fundraiser
+                                        </MenuItem>
+                                    </NavLink>
+
+                                    <NavLink to="/fundraisers/discover">
+                                        <MenuItem>
+                                            Fundraisers
+                                        </MenuItem>
+                                    </NavLink>
+
+                                    <MenuItem>
+                                        How it works
+                                    </MenuItem>
+
+                                    {user ? (
+                                        <NavLink to="/dashboard">
+                                            <MenuItem>
+                                                Dashboard
+                                            </MenuItem>
+                                        </NavLink>
+                                    ) : (
+                                        <MenuItem>
+                                            <NavLink to="/auth/signin">
+                                                Sign In
+                                            </NavLink>
+                                        </MenuItem>
+                                    )}
+                                </MenuList>
+                            </Menu>
                         </div>
                     </div>
                 </nav>

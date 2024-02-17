@@ -1,4 +1,5 @@
 import { Input, Stack, Text, Textarea } from '@chakra-ui/react';
+import { Editor } from '@tinymce/tinymce-react';
 
 const FundraiserFormFour = ({
     fundraiserTitle,
@@ -19,15 +20,41 @@ const FundraiserFormFour = ({
                 }
             />
             <Text fontWeight="semibold">Tell your story</Text>
-            <Textarea
-                resize={'none'}
-                placeholder="Hello, myself abc and I'm fundraising for"
-                height={'150px'}
+            <Editor
+                apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
+                onEditorChange={(c) => setFundraiserStory(c)}
                 value={fundraiserStory}
-                isDisabled={!fundraiserTitle}
-                onChange={(e) =>
-                    setFundraiserStory(e.target.value)
-                }
+                disabled={!fundraiserTitle}
+                init={{
+                    height: 400,
+                    menubar: false,
+                    plugins: [
+                        'advlist',
+                        'autolink',
+                        'lists',
+                        'link',
+                        'image',
+                        'charmap',
+                        'preview',
+                        'anchor',
+                        'searchreplace',
+                        'visualblocks',
+                        'code',
+                        'fullscreen',
+                        'insertdatetime',
+                        'media',
+                        'table',
+                        'code',
+                        'help',
+                        'wordcount',
+                    ],
+                    toolbar:
+                        'undo redo | blocks | ' +
+                        'bold italic forecolor | alignleft aligncenter ' +
+                        'alignright alignjustify ',
+                    content_style:
+                        'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                }}
             />
         </Stack>
     );
