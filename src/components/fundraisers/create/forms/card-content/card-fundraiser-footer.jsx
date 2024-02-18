@@ -69,7 +69,8 @@ const CardFundraiserFooter = ({
                                 ? !fundraiserFor
                                 : !beneficiaryName ||
                                   !fundraiserFor ||
-                                  (isFetching && deleting)
+                                  isFetching ||
+                                  deleting
                         }
                     >
                         Continue
@@ -82,7 +83,8 @@ const CardFundraiserFooter = ({
                     onClick={() => handleSubmitFormTwo()}
                     isLoading={loading}
                     isDisabled={
-                        (!fundraiserCause || !fundraiserGoal) &&
+                        !fundraiserCause ||
+                        !fundraiserGoal ||
                         deleting
                     }
                 >
@@ -94,7 +96,7 @@ const CardFundraiserFooter = ({
                     colorScheme="teal"
                     onClick={() => handleSubmitFormThree()}
                     isLoading={loading}
-                    isDisabled={!coverMediaUrl && deleting}
+                    isDisabled={!coverMediaUrl || deleting}
                 >
                     Continue
                 </Button>
@@ -105,7 +107,8 @@ const CardFundraiserFooter = ({
                     onClick={() => handleSubmitFormFour()}
                     isLoading={loading}
                     isDisabled={
-                        (!fundraiserTitle || !fundraiserStory) &&
+                        !fundraiserTitle ||
+                        !fundraiserStory ||
                         deleting
                     }
                 >

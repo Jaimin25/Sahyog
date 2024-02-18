@@ -1,4 +1,4 @@
-import { Input, Stack, Text, Textarea } from '@chakra-ui/react';
+import { Input, Stack, Text } from '@chakra-ui/react';
 import { Editor } from '@tinymce/tinymce-react';
 
 const FundraiserFormFour = ({
