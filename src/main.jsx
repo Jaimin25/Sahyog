@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import { App } from './App';
+import { FundraiserProvider } from './components/providers/fundraisers-provider';
 import { SessionProvider } from './components/providers/session-provider';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <ChakraProvider>
             <BrowserRouter>
                 <SessionProvider>
-                    <App />
+                    <FundraiserProvider>
+                        <App />
+                    </FundraiserProvider>
                 </SessionProvider>
             </BrowserRouter>
         </ChakraProvider>

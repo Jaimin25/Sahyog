@@ -52,10 +52,20 @@ const checkForImage = (url) => {
     }
 };
 
+const capitalizeString = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+const deCapitalizeString = (str) => {
+    return str.charAt(0).toLowerCase() + str.slice(1);
+};
+
 export {
     baseapiurl,
+    capitalizeString,
     checkForImage,
     checkYoutubeUrl,
+    deCapitalizeString,
     decryptValue,
     encryptValue,
     getYtVideoId,

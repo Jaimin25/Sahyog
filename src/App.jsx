@@ -7,7 +7,7 @@ import SignInPage from './pages/auth/signin';
 import SignUpPage from './pages/auth/signup';
 import UserDashboard from './pages/dashboard/userDashboard';
 import CreateFundraiserPage from './pages/fundraiser/create/CreateFundraiserPage';
-import FundraiserPage from './pages/fundraiser/fundraiserId/FundraiserPage';
+import DiscoverFundraisersPage from './pages/fundraiser/fundraiserId/FundraiserPage';
 import FundraisersPage from './pages/fundraiser/FundraisersPage';
 import Home from './pages/Home';
 
@@ -46,7 +46,7 @@ export const App = () => {
                     />
                     <Route
                         path="/fundraiser/:id"
-                        element={<FundraiserPage />}
+                        element={<DiscoverFundraisersPage />}
                     />
 
                     {/* PROTECTED ROUTES */}

@@ -2,11 +2,11 @@ import {
     AspectRatio,
     Button,
     Divider,
-    Image,
     Stack,
     Text,
 } from '@chakra-ui/react';
 import { Markup } from 'interweave';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import {
     checkForImage,
@@ -44,9 +44,8 @@ const FundraiserFormPublish = ({
             </div>
             {coverMediaUrl && checkForImage(coverMediaUrl) ? (
                 <div className="overflow-hidden rounded-lg">
-                    <Image
+                    <LazyLoadImage
                         src={coverMediaUrl}
-                        borderRadius="lg"
                         className="aspect-video h-[300px] w-full cursor-pointer transition duration-500 hover:scale-110"
                     />
                 </div>

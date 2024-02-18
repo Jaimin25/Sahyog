@@ -49,7 +49,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <section className="discover.fundraiser space-y-10 bg-teal-500 px-4 py-14 sm:px-10 md:px-14">
+            <section className="discover.fundraiser.section space-y-10 bg-teal-500 px-4 py-14 sm:px-10 md:px-14">
                 <div className="discover.container">
                     <h1 className="text-center text-3xl font-bold text-white sm:text-left">
                         Discover Fundraisers

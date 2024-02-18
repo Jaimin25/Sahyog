@@ -3,7 +3,6 @@ import {
     Button,
     Divider,
     HStack,
-    Image,
     Input,
     InputGroup,
     InputLeftAddon,
@@ -13,6 +12,7 @@ import {
 import { generateUploadDropzone } from '@uploadthing/react';
 import { Link } from 'lucide-react';
 import { useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import {
     baseapiurl,
@@ -35,9 +35,8 @@ const FundraiserFormThree = ({
             {coverMediaUrl && checkForImage(coverMediaUrl) ? (
                 <>
                     <div className="overflow-hidden rounded-lg">
-                        <Image
+                        <LazyLoadImage
                             src={coverMediaUrl}
-                            borderRadius="lg"
                             className="aspect-video h-[300px] w-full cursor-pointer transition duration-500 hover:scale-110"
                         />
                     </div>

@@ -8,6 +8,27 @@ import {
 } from '@chakra-ui/react';
 import { IndianRupee } from 'lucide-react';
 
+import {
+    capitalizeString,
+    deCapitalizeString,
+} from '../../../../lib/utils';
+
+const categories = [
+    'animals',
+    'business',
+    'community',
+    'creative',
+    'education',
+    'emergency',
+    'environment',
+    'events',
+    'medical',
+    'other',
+    'sports',
+    'volunteer',
+    'wishes',
+];
+
 const FundraiserFormTwo = ({
     fundraiserCause,
     fundraiserGoal,
@@ -22,24 +43,19 @@ const FundraiserFormTwo = ({
             <Select
                 placeholder="None"
                 defaultValue={fundraiserCause}
-                value={fundraiserCause}
+                value={deCapitalizeString(fundraiserCause)}
                 onChange={(e) =>
-                    setFundraiserCause(e.target.value)
+                    setFundraiserCause(
+                        capitalizeString(e.target.value)
+                    )
                 }
             >
-                <option value="animals">Animals</option>
-                <option value="business">Business</option>
-                <option value="community">Community</option>
-                <option value="creative">Creative</option>
-                <option value="education">Education</option>
-                <option value="emergency">Emergency</option>
-                <option value="environment">Environment</option>
-                <option value="events">Events</option>
-                <option value="medical">Medical</option>
-                <option value="other">Other</option>
-                <option value="sports">Sports</option>
-                <option value="volunteer">Volunteer</option>
-                <option value="wishes">Wishes</option>
+                {categories.map((category) => (
+                    <option key={category} value={category}>
+                        {category.charAt(0).toUpperCase() +
+                            category.slice(1)}
+                    </option>
+                ))}
             </Select>
             <Text fontWeight="semibold">
                 How much would you like to raise?

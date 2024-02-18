@@ -8,11 +8,11 @@ import {
     CardFooter,
     Heading,
     HStack,
-    Image,
     Progress,
     Stack,
     Text,
 } from '@chakra-ui/react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import {
     checkForImage,
@@ -38,9 +38,8 @@ const FundriaserCard = ({
                 {coverMediaUrl &&
                 checkForImage(coverMediaUrl) ? (
                     <div className="overflow-hidden rounded-lg">
-                        <Image
+                        <LazyLoadImage
                             src={coverMediaUrl}
-                            borderRadius="lg"
                             className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
                         />
                     </div>

@@ -1,59 +1,35 @@
-import { Skeleton } from '@chakra-ui/react';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-
-import { baseapiurl } from '../../lib/utils';
 import FundriaserCard from '../cards/fundrasiersCard';
+import { useFundraisers } from '../providers/fundraisers-provider';
+import FundriaserCardSkeleton from '../skeleton/fundraiser-card-skeleton';
 
 const FundraiserDiscoverSection = () => {
-    const [fundraisers, setFundraisers] = useState([]);
-
-    const fetchAllFundraisers = async () => {
-        try {
-            const res = await axios.post(
-                `${baseapiurl}/api/getAllFundraisers`
-            );
-            setFundraisers(res.data.allFundraisers);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        fetchAllFundraisers();
-    }, []);
+    const { fundraisers } = useFundraisers();
 
     return (
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             {fundraisers && !fundraisers.length > 0 ? (
                 <>
-                    <Skeleton>
-                        <FundriaserCard
-                            fundraiserTitle="Fundraiser Title"
-                            fundraiserStory="Fundraiser Story"
-                            fundraiserGoal={0}
-                            amountRaised={0}
-                            coverMediaUrl="https://media.freshbooks.com/wp-content/uploads/2021/11/how-does-crowdfunding-work.jpg"
-                        />
-                    </Skeleton>
-                    <Skeleton>
-                        <FundriaserCard
-                            fundraiserTitle="Fundraiser Title"
-                            fundraiserStory="Fundraiser Story"
-                            fundraiserGoal={0}
-                            amountRaised={0}
-                            coverMediaUrl="https://media.freshbooks.com/wp-content/uploads/2021/11/how-does-crowdfunding-work.jpg"
-                        />
-                    </Skeleton>
-                    <Skeleton>
-                        <FundriaserCard
-                            fundraiserTitle="Fundraiser Title"
-                            fundraiserStory="Fundraiser Story"
-                            fundraiserGoal={0}
-                            amountRaised={0}
-                            coverMediaUrl="https://media.freshbooks.com/wp-content/uploads/2021/11/how-does-crowdfunding-work.jpg"
-                        />
-                    </Skeleton>
+                    <FundriaserCardSkeleton
+                        fundraiserTitle="Fundraiser Title"
+                        fundraiserStory="Fundraiser Story"
+                        fundraiserGoal={0}
+                        amountRaised={0}
+                        coverMediaUrl="https://media.freshbooks.com/wp-content/uploads/2021/11/how-does-crowdfunding-work.jpg"
+                    />
+                    <FundriaserCardSkeleton
+                        fundraiserTitle="Fundraiser Title"
+                        fundraiserStory="Fundraiser Story"
+                        fundraiserGoal={0}
+                        amountRaised={0}
+                        coverMediaUrl="https://media.freshbooks.com/wp-content/uploads/2021/11/how-does-crowdfunding-work.jpg"
+                    />
+                    <FundriaserCardSkeleton
+                        fundraiserTitle="Fundraiser Title"
+                        fundraiserStory="Fundraiser Story"
+                        fundraiserGoal={0}
+                        amountRaised={0}
+                        coverMediaUrl="https://media.freshbooks.com/wp-content/uploads/2021/11/how-does-crowdfunding-work.jpg"
+                    />
                 </>
             ) : (
                 fundraisers.length > 0 &&
