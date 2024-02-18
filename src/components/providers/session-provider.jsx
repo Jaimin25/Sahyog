@@ -4,6 +4,7 @@ import {
     useEffect,
     useState,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { supabase } from '../../lib/supabase';
 
@@ -17,6 +18,8 @@ export function SessionProvider({ children }) {
     const [session, setSession] = useState(null);
     const [accessToken, setAccessToken] = useState(null);
     const [user, setUser] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getSession = async () => {
@@ -44,6 +47,9 @@ export function SessionProvider({ children }) {
                 setSession(null);
                 setAccessToken(null);
                 localStorage.removeItem('user');
+                setTimeout(() => {
+                    navigate('/');
+                }, 500);
             }
         });
     }, []);
