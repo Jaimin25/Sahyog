@@ -14,7 +14,7 @@ const CreateFundraiserPage = () => {
         setLoading(true);
         const getDraftFundraiser = async () => {
             const res = await axios.post(
-                `${baseapiurl}/api/getDraftFundraiser`,
+                `${baseapiurl}/api/user/getDraftFundraiser`,
                 {
                     uid: user.id,
                     access_token: accessToken,

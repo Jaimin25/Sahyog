@@ -1,5 +1,4 @@
 import {
-    AspectRatio,
     Avatar,
     Button,
     ButtonGroup,
@@ -16,11 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import {
-    checkForImage,
-    checkYoutubeUrl,
-    getYtVideoId,
-} from '../../lib/utils';
+import { checkForImage } from '../../lib/utils';
 
 const FundriaserCardSkeleton = ({
     fundraiserTitle,
@@ -39,29 +34,14 @@ const FundriaserCardSkeleton = ({
             <CardBody>
                 <Skeleton>
                     {coverMediaUrl &&
-                    checkForImage(coverMediaUrl) ? (
-                        <div className="overflow-hidden rounded-lg">
-                            <LazyLoadImage
-                                src={coverMediaUrl}
-                                className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
-                            />
-                        </div>
-                    ) : coverMediaUrl &&
-                      checkYoutubeUrl(coverMediaUrl) ? (
-                        <AspectRatio
-                            maxW="100%"
-                            ratio={16 / 9}
-                            borderRadius="lg"
-                            height="200px"
-                        >
-                            <iframe
-                                title="naruto"
-                                className="rounded-lg"
-                                src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
-                                allowFullScreen
-                            />
-                        </AspectRatio>
-                    ) : null}
+                        checkForImage(coverMediaUrl) && (
+                            <div className="overflow-hidden rounded-lg">
+                                <LazyLoadImage
+                                    src={coverMediaUrl}
+                                    className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
+                                />
+                            </div>
+                        )}
                 </Skeleton>
                 <Stack mt="6" spacing="3">
                     <Skeleton>

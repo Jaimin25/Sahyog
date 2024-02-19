@@ -63,7 +63,7 @@ const CreateFundraiserComponent = ({
         setDeleting(true);
         setError(null);
         const res = await axios.post(
-            `${baseapiurl}/api/deleteFundraiserDraft`,
+            `${baseapiurl}/api/user/deleteDraftFundraiser`,
             {
                 uid: user.id,
                 access_token: accessToken,
@@ -96,7 +96,7 @@ const CreateFundraiserComponent = ({
             : '';
 
         const res = await axios.post(
-            `${baseapiurl}/api/saveFundraiser`,
+            `${baseapiurl}/api/fundraiser/saveFundraiser`,
             {
                 access_token: accessToken,
                 uid: user.id,

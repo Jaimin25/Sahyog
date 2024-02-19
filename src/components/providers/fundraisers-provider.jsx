@@ -20,7 +20,7 @@ export const FundraiserProvider = ({ children }) => {
     const fetchAllFundraisers = async () => {
         try {
             const res = await axios.post(
-                `${baseapiurl}/api/getAllFundraisers`
+                `${baseapiurl}/api/fundraiser/getAllFundraisers`
             );
             const resData = res.data;
 
