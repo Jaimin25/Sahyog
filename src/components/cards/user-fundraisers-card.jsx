@@ -22,7 +22,7 @@ const UserActiveFundraisersCard = ({
     createdAt,
 }) => {
     const timesince = new Date(createdAt);
-    console.log(checkYoutubeUrl(coverMediaUrl));
+
     return (
         <Card
             className="user-fundraisers-card-container h-full w-full place-self-center"
@@ -31,26 +31,26 @@ const UserActiveFundraisersCard = ({
             boxShadow="sm"
         >
             <CardBody>
-                <Stack direction="row">
+                <div className="flex flex-col items-center gap-3 md:flex-row">
                     {coverMediaUrl &&
                     checkForImage(coverMediaUrl) ? (
                         <div className="overflow-hidden rounded-lg">
                             <LazyLoadImage
                                 src={coverMediaUrl}
-                                className="aspect-video h-auto w-[200px] cursor-pointer transition duration-500 hover:scale-110"
+                                className="aspect-video h-auto w-[250px] cursor-pointer transition duration-500 hover:scale-110"
                             />
                         </div>
                     ) : coverMediaUrl &&
                       checkYoutubeUrl(coverMediaUrl) ? (
                         <AspectRatio
-                            width="200px"
+                            width="250px"
                             ratio={16 / 9}
                             borderRadius="lg"
                             height="auto"
                         >
                             <iframe
-                                title="naruto"
-                                className="rounded-lg"
+                                width="250px"
+                                className="w-[250px] rounded-lg"
                                 src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
                                 allowFullScreen
                             />
@@ -82,7 +82,7 @@ const UserActiveFundraisersCard = ({
                             </Button>
                         </ButtonGroup>
                     </Stack>
-                </Stack>
+                </div>
             </CardBody>
         </Card>
     );

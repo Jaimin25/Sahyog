@@ -28,7 +28,7 @@ const FundriaserCardSkeleton = ({
     return (
         <Card
             maxW="sm"
-            className="h-full w-full place-self-center"
+            className="place-self-center"
             boxShadow="md"
         >
             <CardBody>

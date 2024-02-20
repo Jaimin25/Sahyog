@@ -53,7 +53,6 @@ const FundraiserFormPublish = ({
               checkYoutubeUrl(coverMediaUrl) ? (
                 <AspectRatio maxW="100%" ratio={16 / 9}>
                     <iframe
-                        title="naruto"
                         src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
                         allowFullScreen
                     />

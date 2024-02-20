@@ -10,7 +10,7 @@ import {
 
 import UserActiveFundraisersCard from '../../cards/user-fundraisers-card';
 import UserFundraisersDraftCard from '../../cards/user-fundraisers-draft-card';
-import UserFundraiserCardSkeleton from '../../skeleton/user-fundraiser-card-skeleton';
+import UserFundraiserCardSkeleton from '../../skeletons/user-fundraiser-card-skeleton';
 
 const UserFundraisers = ({ loading, userFundraisers }) => {
     return (

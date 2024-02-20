@@ -18,12 +18,12 @@ const UserFundraiserCardSkeleton = ({
 }) => {
     return (
         <Card
-            className="h-full w-full place-self-center"
+            className="place-self-center"
             border="1px"
             borderColor="gray.200"
         >
             <CardBody>
-                <Stack direction="row">
+                <div className="flex flex-col items-center gap-3 md:flex-row">
                     <Skeleton>
                         {coverMediaUrl &&
                             checkForImage(coverMediaUrl) && (
@@ -35,7 +35,7 @@ const UserFundraiserCardSkeleton = ({
                                 </div>
                             )}
                     </Skeleton>
-                    <Stack width="50%" justifyContent="center">
+                    <Stack width="100%" justifyContent="center">
                         <Skeleton width="75%">
                             <Text fontWeight="semibold">
                                 {fundraiserTitle || 'Untitled'}
@@ -66,7 +66,7 @@ const UserFundraiserCardSkeleton = ({
                             </Skeleton>
                         </ButtonGroup>
                     </Stack>
-                </Stack>
+                </div>
             </CardBody>
         </Card>
     );

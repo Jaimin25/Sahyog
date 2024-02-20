@@ -9,7 +9,7 @@ const DashboardSidebar = ({
     };
 
     return (
-        <Card className="h-full w-1/6" padding="10px">
+        <Card padding="10px" height="100%" width="100%">
             <Stack padding="10px">
                 <Button
                     onClick={() =>

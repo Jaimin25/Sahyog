@@ -52,7 +52,6 @@ const FundriaserCard = ({
                         height="200px"
                     >
                         <iframe
-                            title="naruto"
                             className="rounded-lg"
                             src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
                             allowFullScreen

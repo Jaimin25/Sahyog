@@ -30,7 +30,7 @@ const UserFundraisersDraftCard = ({
             borderColor="gray.200"
         >
             <CardBody>
-                <Stack direction="row">
+                <div className="flex flex-col items-center gap-3 md:flex-row">
                     {!coverMediaUrl && (
                         <div className="flex h-auto w-[200px] items-center justify-center rounded-lg bg-gray-200">
                             <ImageOff />
@@ -41,19 +41,18 @@ const UserFundraisersDraftCard = ({
                         <div className="overflow-hidden rounded-lg">
                             <LazyLoadImage
                                 src={coverMediaUrl}
-                                className="aspect-video h-auto w-[200px] cursor-pointer transition duration-500 hover:scale-110"
+                                className="aspect-video h-auto w-[250px] cursor-pointer transition duration-500 hover:scale-110"
                             />
                         </div>
                     ) : coverMediaUrl &&
                       checkYoutubeUrl(coverMediaUrl) ? (
                         <AspectRatio
-                            maxW="100%"
+                            width="250px"
                             ratio={16 / 9}
                             borderRadius="lg"
-                            height="200px"
+                            height="auto"
                         >
                             <iframe
-                                title="naruto"
                                 className="rounded-lg"
                                 src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
                                 allowFullScreen
@@ -79,7 +78,7 @@ const UserFundraisersDraftCard = ({
                             </NavLink>
                         </ButtonGroup>
                     </Stack>
-                </Stack>
+                </div>
             </CardBody>
         </Card>
     );
