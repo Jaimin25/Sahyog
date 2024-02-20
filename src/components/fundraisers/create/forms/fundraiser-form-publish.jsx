@@ -23,7 +23,7 @@ const FundraiserFormPublish = ({
     fundraiserStory,
 }) => {
     return (
-        <Stack gap="10px">
+        <Stack gap="10px" className="fundraiser-form-publish">
             <div className="flex items-center">
                 <Text
                     fontWeight="semibold"

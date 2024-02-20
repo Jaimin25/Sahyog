@@ -5,10 +5,10 @@ import Navbar from './components/header/navbar';
 import { useSession } from './components/providers/session-provider';
 import SignInPage from './pages/auth/signin';
 import SignUpPage from './pages/auth/signup';
-import UserDashboard from './pages/dashboard/userDashboard';
-import CreateFundraiserPage from './pages/fundraiser/create/CreateFundraiserPage';
-import DiscoverFundraisersPage from './pages/fundraiser/fundraiserId/FundraiserPage';
-import FundraisersPage from './pages/fundraiser/FundraisersPage';
+import UserDashboard from './pages/dashboard/user-dashboard-page';
+import CreateFundraiserPage from './pages/fundraiser/create/create-fundraiser-page';
+import DiscoverFundraisersPage from './pages/fundraiser/fundraiser-page';
+import FundraiserPage from './pages/fundraiser/fundraiserId/fundraiser-details-page';
 import Home from './pages/Home';
 
 export const App = () => {
@@ -42,11 +42,11 @@ export const App = () => {
                     />
                     <Route
                         path="/fundraisers/discover"
-                        element={<FundraisersPage />}
+                        element={<DiscoverFundraisersPage />}
                     />
                     <Route
                         path="/fundraiser/:id"
-                        element={<DiscoverFundraisersPage />}
+                        element={<FundraiserPage />}
                     />
 
                     {/* PROTECTED ROUTES */}

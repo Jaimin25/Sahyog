@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import CreateFundraiserComponent from '../../../components/fundraisers/create/CreateFundraiserComponent';
+import CreateFundraiserComponent from '../../../components/fundraisers/create/create-fundraiser-card';
 import { useSession } from '../../../components/providers/session-provider';
 import { baseapiurl } from '../../../lib/utils';
 

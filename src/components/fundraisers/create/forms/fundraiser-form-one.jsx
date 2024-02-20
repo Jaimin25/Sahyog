@@ -14,7 +14,7 @@ const FundraiserFormOne = ({
     isFetching,
 }) => {
     return (
-        <Stack>
+        <Stack className="fundraiser-form-for">
             <Text fontWeight="semibold">
                 Who you are creating this fundraiser for?
             </Text>

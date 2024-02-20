@@ -31,7 +31,7 @@ const FundriaserCard = ({
     return (
         <Card
             maxW="sm"
-            className="h-full w-full place-self-center"
+            className="fundraiser-card-container h-full w-full place-self-center"
             boxShadow="md"
         >
             <CardBody>
@@ -60,7 +60,10 @@ const FundriaserCard = ({
                     </AspectRatio>
                 ) : null}
                 <Stack mt="6" spacing="3">
-                    <Heading size="md">
+                    <Heading
+                        size="md"
+                        className="fundraiser-card-title"
+                    >
                         {fundraiserTitle}
                     </Heading>
                     <HStack>
@@ -98,14 +101,16 @@ const FundriaserCard = ({
                     <Button
                         variant="outline"
                         colorScheme="teal"
-                        className="flex-1"
+                        className="
+                        fundraiser-card-share-button
+                        flex-1"
                     >
                         Share
                     </Button>
                     <Button
                         variant="solid"
                         colorScheme="teal"
-                        className="flex-1"
+                        className="fundraiser-card-donate-button flex-1"
                     >
                         Donate
                     </Button>

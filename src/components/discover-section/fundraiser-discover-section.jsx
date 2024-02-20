@@ -1,4 +1,4 @@
-import FundriaserCard from '../cards/fundrasiersCard';
+import FundriaserCard from '../cards/fundrasiers-card';
 import { useFundraisers } from '../providers/fundraisers-provider';
 import FundriaserCardSkeleton from '../skeleton/fundraiser-card-skeleton';
 
@@ -6,7 +6,7 @@ const FundraiserDiscoverSection = () => {
     const { fundraisers } = useFundraisers();
 
     return (
-        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div className="discover-fundriaser-contianer grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             {fundraisers && !fundraisers.length > 0 ? (
                 <>
                     <FundriaserCardSkeleton

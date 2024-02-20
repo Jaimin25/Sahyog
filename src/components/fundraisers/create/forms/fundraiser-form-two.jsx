@@ -36,7 +36,7 @@ const FundraiserFormTwo = ({
     setFundraiserGoal,
 }) => {
     return (
-        <Stack>
+        <Stack className="fundraiser-form-category-goal">
             <Text fontWeight="semibold">
                 What best describes why you&apos;re fundraising?
             </Text>

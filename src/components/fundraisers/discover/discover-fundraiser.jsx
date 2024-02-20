@@ -1,11 +1,11 @@
 import { Card, CardBody } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-import FundriaserCard from '../../cards/fundrasiersCard';
+import FundriaserCard from '../../cards/fundrasiers-card';
 import { useFundraisers } from '../../providers/fundraisers-provider';
 import FundriaserCardSkeleton from '../../skeleton/fundraiser-card-skeleton';
 
-const DiscoverFundraiserPage = ({ categoryFilter }) => {
+const DiscoverFundraiser = ({ categoryFilter }) => {
     const { fundraisers, isFetching } = useFundraisers();
 
     const [filteredFundraisers, setFilteredFundraisers] =
@@ -108,4 +108,4 @@ const DiscoverFundraiserPage = ({ categoryFilter }) => {
     );
 };
 
-export default DiscoverFundraiserPage;
+export default DiscoverFundraiser;

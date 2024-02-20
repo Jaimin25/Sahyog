@@ -1,4 +1,4 @@
-import UserDashboardComponent from '../../components/user-dashboard/userDashboard';
+import UserDashboardComponent from '../../components/user-dashboard/user-dashboard-component';
 
 const UserDashboard = () => {
     return (

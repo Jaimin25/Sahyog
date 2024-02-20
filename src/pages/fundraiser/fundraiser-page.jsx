@@ -12,7 +12,7 @@ import {
 import { Search } from 'lucide-react';
 import { useState } from 'react';
 
-import DiscoverFundraiserPage from '../../components/fundraisers/discover/discord-fundraiser-page';
+import DiscoverFundraiser from '../../components/fundraisers/discover/discover-fundraiser';
 import { capitalizeString } from '../../lib/utils';
 
 const categories = [
@@ -75,7 +75,7 @@ const DiscoverFundraisersPage = () => {
                     </VStack>
                 </CardBody>
             </Card>
-            <DiscoverFundraiserPage
+            <DiscoverFundraiser
                 categoryFilter={categoryFilter}
             />
         </div>

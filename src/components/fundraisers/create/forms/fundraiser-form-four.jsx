@@ -8,7 +8,7 @@ const FundraiserFormFour = ({
     setFundraiserStory,
 }) => {
     return (
-        <Stack>
+        <Stack className="fundriaser-form-title-story">
             <Text fontWeight="semibold">
                 Give your fundraiser a title
             </Text>

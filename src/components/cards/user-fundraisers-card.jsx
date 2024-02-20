@@ -24,7 +24,7 @@ const UserActiveFundraisersCard = ({
     const timesince = new Date(createdAt);
     return (
         <Card
-            className="h-full w-full place-self-center"
+            className="user-fundraisers-card-container h-full w-full place-self-center"
             border="1px"
             borderColor="gray.200"
             boxShadow="sm"
@@ -56,7 +56,10 @@ const UserActiveFundraisersCard = ({
                         </AspectRatio>
                     ) : null}
                     <Stack>
-                        <Text fontWeight="semibold">
+                        <Text
+                            fontWeight="semibold"
+                            className="user-fundriaser-card-title"
+                        >
                             {fundraiserTitle}
                         </Text>
                         <Text>

@@ -31,7 +31,7 @@ const FundraiserFormThree = ({
     const [error, setError] = useState(null);
 
     return (
-        <Stack>
+        <Stack className="fundraiser-form-covermedia">
             {coverMediaUrl && checkForImage(coverMediaUrl) ? (
                 <>
                     <div className="overflow-hidden rounded-lg">
@@ -63,6 +63,7 @@ const FundraiserFormThree = ({
                     </AspectRatio>
                     <Button
                         onClick={() => setCoverMediaUrl(null)}
+                        colorScheme="red"
                     >
                         Remove
                     </Button>

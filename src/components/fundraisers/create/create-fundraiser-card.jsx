@@ -13,11 +13,11 @@ import {
     baseapiurl,
     checkForImage,
     getYtVideoId,
-} from '../../../lib/utils';
-import { useSession } from '../../providers/session-provider';
+} from '../../../lib/utils.js';
+import { useSession } from '../../providers/session-provider.jsx';
 import CardFundraiserFooter from './forms/card-content/card-fundraiser-footer.jsx';
-import CardFundraiserForms from './forms/card-content/card-fundraisers-forms';
-import FundraiserCardStepper from './fundraiser-card-stepper';
+import CardFundraiserForms from './forms/card-content/card-fundraisers-forms.jsx';
+import FundraiserCardStepper from './fundraiser-card-stepper.jsx';
 
 const steps = [{}, {}, {}, {}, {}];
 const CreateFundraiserComponent = ({
