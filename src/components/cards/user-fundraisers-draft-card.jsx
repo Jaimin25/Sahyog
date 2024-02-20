@@ -41,16 +41,16 @@ const UserFundraisersDraftCard = ({
                         <div className="overflow-hidden rounded-lg">
                             <LazyLoadImage
                                 src={coverMediaUrl}
-                                className="aspect-video h-auto w-[250px] cursor-pointer transition duration-500 hover:scale-110"
+                                className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
                             />
                         </div>
                     ) : coverMediaUrl &&
                       checkYoutubeUrl(coverMediaUrl) ? (
                         <AspectRatio
-                            width="250px"
+                            maxW="100%"
                             ratio={16 / 9}
                             borderRadius="lg"
-                            height="auto"
+                            height="200px"
                         >
                             <iframe
                                 className="rounded-lg"
