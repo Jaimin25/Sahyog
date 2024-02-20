@@ -1,6 +1,6 @@
 import FundriaserCard from '../cards/fundrasiers-card';
 import { useFundraisers } from '../providers/fundraisers-provider';
-import FundriaserCardSkeleton from '../skeleton/fundraiser-card-skeleton';
+import FundriaserCardSkeleton from '../skeletons/fundraiser-card-skeleton';
 
 const FundraiserDiscoverSection = () => {
     const { fundraisers } = useFundraisers();
@@ -33,24 +33,32 @@ const FundraiserDiscoverSection = () => {
                 </>
             ) : (
                 fundraisers.length > 0 &&
-                fundraisers.map((fundraiser) => (
-                    <FundriaserCard
-                        key={fundraiser.id}
-                        fundraiserTitle={
-                            fundraiser.fundraiserTitle
-                        }
-                        fundraiserStory={
-                            fundraiser.fundraiserStory
-                        }
-                        fundraiserGoal={
-                            fundraiser.fundraiserGoal
-                        }
-                        creatorName={fundraiser.creatorName}
-                        profilePicUrl={fundraiser.profilePicUrl}
-                        amountRaised={fundraiser.amountRaised}
-                        coverMediaUrl={fundraiser.coverMediaUrl}
-                    />
-                ))
+                fundraisers
+                    .slice(0, 6)
+                    .map((fundraiser) => (
+                        <FundriaserCard
+                            key={fundraiser.id}
+                            fundraiserTitle={
+                                fundraiser.fundraiserTitle
+                            }
+                            fundraiserStory={
+                                fundraiser.fundraiserStory
+                            }
+                            fundraiserGoal={
+                                fundraiser.fundraiserGoal
+                            }
+                            creatorName={fundraiser.creatorName}
+                            profilePicUrl={
+                                fundraiser.profilePicUrl
+                            }
+                            amountRaised={
+                                fundraiser.amountRaised
+                            }
+                            coverMediaUrl={
+                                fundraiser.coverMediaUrl
+                            }
+                        />
+                    ))
             )}
         </div>
     );

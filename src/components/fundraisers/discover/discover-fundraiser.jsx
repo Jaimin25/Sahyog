@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import FundriaserCard from '../../cards/fundrasiers-card';
 import { useFundraisers } from '../../providers/fundraisers-provider';
-import FundriaserCardSkeleton from '../../skeleton/fundraiser-card-skeleton';
+import FundriaserCardSkeleton from '../../skeletons/fundraiser-card-skeleton';
 
 const DiscoverFundraiser = ({
     categoryFilter,
