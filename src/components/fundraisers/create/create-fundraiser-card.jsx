@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import {
     baseapiurl,
     checkForImage,
+    deCapitalizeString,
     getYtVideoId,
 } from '../../../lib/utils.js';
 import { useSession } from '../../providers/session-provider.jsx';
@@ -94,7 +95,9 @@ const CreateFundraiserComponent = ({
                 ? coverMediaUrl
                 : `https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`
             : '';
-
+        const nFundraiserCause =
+            deCapitalizeString(fundraiserCause);
+        const nFundraiserFor = deCapitalizeString(fundraiserFor);
         const res = await axios.post(
             `${baseapiurl}/api/fundraiser/saveFundraiser`,
             {
@@ -104,9 +107,9 @@ const CreateFundraiserComponent = ({
                 profilePicUrl: user.profilePicUrl,
                 fundraiserTitle,
                 fundraiserStory,
-                fundraiserFor,
+                fundraiserFor: nFundraiserFor,
                 beneficiaryName,
-                fundraiserCause,
+                fundraiserCause: nFundraiserCause,
                 fundraiserGoal,
                 coverMediaUrl: updatedCoverMediaUrl,
                 status,

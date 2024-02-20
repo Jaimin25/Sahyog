@@ -5,35 +5,132 @@ import FundriaserCard from '../../cards/fundrasiers-card';
 import { useFundraisers } from '../../providers/fundraisers-provider';
 import FundriaserCardSkeleton from '../../skeleton/fundraiser-card-skeleton';
 
-const DiscoverFundraiser = ({ categoryFilter }) => {
+const DiscoverFundraiser = ({
+    categoryFilter,
+    uploadedFilter,
+    searchFilter,
+}) => {
     const { fundraisers, isFetching } = useFundraisers();
 
     const [filteredFundraisers, setFilteredFundraisers] =
-        useState([]);
+        useState(
+            uploadedFilter === 'oldest'
+                ? fundraisers.sort(
+                      (a, b) =>
+                          new Date(a.createdAt) -
+                          new Date(b.createdAt)
+                  )
+                : fundraisers.sort(
+                      (a, b) =>
+                          new Date(b.createdAt) -
+                          new Date(a.createdAt)
+                  )
+        );
 
     useEffect(() => {
         if (!isFetching) {
             if (categoryFilter === 'all' || !categoryFilter) {
                 setFilteredFundraisers(fundraisers);
+                if (searchFilter) {
+                    if (
+                        fundraisers.some((fundraiser) =>
+                            fundraiser.fundraiserTitle
+                                .toLowerCase()
+                                .includes(
+                                    searchFilter.toLowerCase()
+                                )
+                        )
+                    ) {
+                        setFilteredFundraisers(
+                            fundraisers.filter((fundraiser) =>
+                                fundraiser.fundraiserTitle
+                                    .toLowerCase()
+                                    .includes(
+                                        searchFilter.toLowerCase()
+                                    )
+                            )
+                        );
+                    } else {
+                        setFilteredFundraisers(null);
+                    }
+                }
             } else if (
                 fundraisers.some(
                     (fundraiser) =>
-                        fundraiser.fundraiserCause ===
-                        categoryFilter
+                        fundraiser.fundraiserCause.toLowerCase() ===
+                        categoryFilter.toLowerCase()
                 )
             ) {
-                setFilteredFundraisers(
-                    fundraisers.filter(
-                        (fundraiser) =>
-                            fundraiser.fundraiserCause ===
-                            categoryFilter
-                    )
-                );
+                if (searchFilter !== '') {
+                    if (filteredFundraisers) {
+                        if (
+                            filteredFundraisers.some(
+                                (fundraiser) =>
+                                    fundraiser.fundraiserTitle
+                                        .toLowerCase()
+                                        .includes(
+                                            searchFilter.toLowerCase()
+                                        )
+                            )
+                        ) {
+                            setFilteredFundraisers(
+                                filteredFundraisers.filter(
+                                    (fundraiser) =>
+                                        fundraiser.fundraiserCause.toLowerCase() ===
+                                            categoryFilter.toLowerCase() &&
+                                        fundraiser.fundraiserTitle
+                                            .toLowerCase()
+                                            .includes(
+                                                searchFilter.toLowerCase()
+                                            )
+                                )
+                            );
+                        } else {
+                            setFilteredFundraisers(null);
+                        }
+                    } else {
+                        if (
+                            fundraisers.some((fundraiser) =>
+                                fundraiser.fundraiserTitle
+                                    .toLowerCase()
+                                    .includes(
+                                        searchFilter.toLowerCase()
+                                    )
+                            )
+                        ) {
+                            setFilteredFundraisers(
+                                fundraisers.filter(
+                                    (fundraiser) =>
+                                        fundraiser.fundraiserCause.toLowerCase() ===
+                                            categoryFilter.toLowerCase() &&
+                                        fundraiser.fundraiserTitle
+                                            .toLowerCase()
+                                            .includes(
+                                                searchFilter.toLowerCase()
+                                            )
+                                )
+                            );
+                        }
+                    }
+                } else {
+                    setFilteredFundraisers(
+                        fundraisers.filter(
+                            (fundraiser) =>
+                                fundraiser.fundraiserCause.toLowerCase() ===
+                                categoryFilter.toLowerCase()
+                        )
+                    );
+                }
             } else {
                 setFilteredFundraisers(null);
             }
         }
-    }, [categoryFilter, isFetching]);
+    }, [
+        categoryFilter,
+        uploadedFilter,
+        isFetching,
+        searchFilter,
+    ]);
 
     return (
         <>

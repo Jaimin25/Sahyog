@@ -1,7 +1,8 @@
 import {
+    Box,
     Card,
     CardBody,
-    HStack,
+    Flex,
     Input,
     InputGroup,
     InputLeftAddon,
@@ -32,7 +33,9 @@ const categories = [
 ];
 
 const DiscoverFundraisersPage = () => {
+    const [searchFilter, setSearchFilter] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('all');
+    const [uploadedFilter, setUploadedFilter] = useState('all');
     return (
         <div className="space-y-4 bg-teal-500 px-4 py-8 sm:px-10 md:px-14">
             <Card>
@@ -42,41 +45,84 @@ const DiscoverFundraisersPage = () => {
                             <InputLeftAddon>
                                 <Search />
                             </InputLeftAddon>
-                            <Input placeholder="Search for fundraiser" />
+                            <Input
+                                placeholder="Search for fundraiser"
+                                value={searchFilter}
+                                onChange={(e) =>
+                                    setSearchFilter(
+                                        e.target.value
+                                    )
+                                }
+                            />
                         </InputGroup>
-                        <HStack width="100%">
-                            <HStack>
-                                <Text>Filter by category</Text>
-                                Filter by category
-                                <Select
-                                    placeholder="All"
-                                    value={categoryFilter}
-                                    onChange={(e) =>
-                                        setCategoryFilter(
-                                            e.target.value
-                                        )
-                                    }
-                                >
-                                    {categories.map(
-                                        (category) => (
-                                            <option
-                                                key={category}
-                                                value={category}
-                                            >
-                                                {capitalizeString(
-                                                    category
-                                                )}
-                                            </option>
-                                        )
-                                    )}
-                                </Select>
-                            </HStack>
-                        </HStack>
+                        <div className="flex w-full flex-col items-center gap-3 md:flex-row">
+                            <Flex alignItems="center" gap="8px">
+                                <Box>
+                                    <Text>
+                                        Filter by category
+                                    </Text>
+                                </Box>
+                                <Box>
+                                    <Select
+                                        placeholder="All"
+                                        value={categoryFilter}
+                                        onChange={(e) =>
+                                            setCategoryFilter(
+                                                e.target.value
+                                            )
+                                        }
+                                    >
+                                        {categories.map(
+                                            (category) => (
+                                                <option
+                                                    key={
+                                                        category
+                                                    }
+                                                    value={
+                                                        category
+                                                    }
+                                                >
+                                                    {capitalizeString(
+                                                        category
+                                                    )}
+                                                </option>
+                                            )
+                                        )}
+                                    </Select>
+                                </Box>
+                            </Flex>
+                            <Flex alignItems="center" gap="8px">
+                                <Box>
+                                    <Text>
+                                        Filter by uploaded
+                                    </Text>
+                                </Box>
+                                <Box>
+                                    <Select
+                                        value={uploadedFilter}
+                                        onChange={(e) =>
+                                            setUploadedFilter(
+                                                e.target.value
+                                            )
+                                        }
+                                    >
+                                        <option value="newest">
+                                            Newest
+                                        </option>
+                                        <option value="oldest">
+                                            Oldest
+                                        </option>
+                                    </Select>
+                                </Box>
+                            </Flex>
+                        </div>
                     </VStack>
                 </CardBody>
             </Card>
             <DiscoverFundraiser
                 categoryFilter={categoryFilter}
+                uploadedFilter={uploadedFilter}
+                searchFilter={searchFilter}
             />
         </div>
     );

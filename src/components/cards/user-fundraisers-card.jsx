@@ -22,6 +22,7 @@ const UserActiveFundraisersCard = ({
     createdAt,
 }) => {
     const timesince = new Date(createdAt);
+    console.log(checkYoutubeUrl(coverMediaUrl));
     return (
         <Card
             className="user-fundraisers-card-container h-full w-full place-self-center"
@@ -42,10 +43,10 @@ const UserActiveFundraisersCard = ({
                     ) : coverMediaUrl &&
                       checkYoutubeUrl(coverMediaUrl) ? (
                         <AspectRatio
-                            maxW="100%"
+                            width="200px"
                             ratio={16 / 9}
                             borderRadius="lg"
-                            height="200px"
+                            height="auto"
                         >
                             <iframe
                                 title="naruto"
