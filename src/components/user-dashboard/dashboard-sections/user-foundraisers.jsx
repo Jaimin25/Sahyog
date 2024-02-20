@@ -49,7 +49,7 @@ const UserFundraisers = ({ loading, userFundraisers }) => {
                                     )
                                     .map((fundraiser) => (
                                         <UserFundraisersDraftCard
-                                            key={fundraiser.id}
+                                            key={fundraiser._id}
                                             fundraiserTitle={
                                                 fundraiser.fundraiserTitle
                                             }
@@ -75,7 +75,10 @@ const UserFundraisers = ({ loading, userFundraisers }) => {
                                 )
                                 .map((fundraiser) => (
                                     <UserActiveFundraisersCard
-                                        key={fundraiser.id}
+                                        key={fundraiser._id}
+                                        fundraiserId={
+                                            fundraiser._id
+                                        }
                                         fundraiserTitle={
                                             fundraiser.fundraiserTitle
                                         }

@@ -37,7 +37,8 @@ const FundraiserDiscoverSection = () => {
                     .slice(0, 6)
                     .map((fundraiser) => (
                         <FundriaserCard
-                            key={fundraiser.id}
+                            key={fundraiser._id}
+                            fundraiserId={fundraiser._id}
                             fundraiserTitle={
                                 fundraiser.fundraiserTitle
                             }

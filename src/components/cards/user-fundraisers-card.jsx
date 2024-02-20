@@ -8,6 +8,7 @@ import {
     Text,
 } from '@chakra-ui/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { NavLink } from 'react-router-dom';
 
 import {
     checkForImage,
@@ -17,12 +18,13 @@ import {
 } from '../../lib/utils';
 
 const UserActiveFundraisersCard = ({
+    fundraiserId,
     fundraiserTitle,
     coverMediaUrl,
     createdAt,
 }) => {
     const timesince = new Date(createdAt);
-
+    console.log(fundraiserId);
     return (
         <Card
             className="user-fundraisers-card-container h-full w-full place-self-center hover:cursor-pointer"
@@ -72,12 +74,16 @@ const UserActiveFundraisersCard = ({
                         >
                             Manage
                         </Button>
-                        <Button
-                            variant="outline"
-                            colorScheme="teal"
+                        <NavLink
+                            to={`/fundraiser/${fundraiserId}`}
                         >
-                            View
-                        </Button>
+                            <Button
+                                variant="outline"
+                                colorScheme="teal"
+                            >
+                                View
+                            </Button>
+                        </NavLink>
                     </ButtonGroup>
                 </Stack>
             </CardBody>
