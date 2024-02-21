@@ -24,7 +24,7 @@ const UserActiveFundraisersCard = ({
     createdAt,
 }) => {
     const timesince = new Date(createdAt);
-    console.log(fundraiserId);
+
     return (
         <Card
             className="user-fundraisers-card-container h-full w-full place-self-center hover:cursor-pointer"

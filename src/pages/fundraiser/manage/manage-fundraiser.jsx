@@ -21,6 +21,7 @@ import { baseapiurl } from '../../../lib/utils';
 const ManageFundriaserPage = () => {
     const { id } = useParams();
     const { accessToken, user } = useSession();
+    const [error, setError] = useState();
 
     const [isFetchingFundraiser, setIsFetchingFundraiser] =
         useState(true);
@@ -53,6 +54,7 @@ const ManageFundriaserPage = () => {
                 setFundraiserDetails(resData.fundraiserDetails);
                 setIsFetchingFundraiser(false);
             } else {
+                setError(resData.message);
                 setIsFetchingFundraiser(false);
             }
             setIsFetchingFundraiser(false);
@@ -74,12 +76,12 @@ const ManageFundriaserPage = () => {
             <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
                 <Card>
                     <CardBody>
-                        <Alert status="info">
-                            <AlertIcon />
-                            The fundraiser you are trying to
-                            access is either deleted or not
-                            published
-                        </Alert>
+                        {error && (
+                            <Alert status="error">
+                                <AlertIcon />
+                                {error}
+                            </Alert>
+                        )}
                     </CardBody>
                 </Card>
             </div>
@@ -106,6 +108,9 @@ const ManageFundriaserPage = () => {
                                     }
                                     isFetchingFundraiser={
                                         isFetchingFundraiser
+                                    }
+                                    setFundraiser={
+                                        setFundraiserDetails
                                     }
                                 />
                             </TabPanel>

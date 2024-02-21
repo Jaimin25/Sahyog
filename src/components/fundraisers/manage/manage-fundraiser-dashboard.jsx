@@ -4,43 +4,119 @@ import {
     Button,
     ButtonGroup,
     Divider,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
     Stack,
     StackDivider,
     Text,
     useDisclosure,
+    useToast,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { Markup } from 'interweave';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useNavigate } from 'react-router-dom';
 
 import {
     baseapiurl,
-    capitalizeString,
     checkForImage,
     checkYoutubeUrl,
     getYtVideoId,
 } from '../../../lib/utils';
+import DeleteFundraiserModal from '../../modals/delete-fundraiser-modal';
 import { useSession } from '../../providers/session-provider';
 import ManageFundraiserDashboardSkeleton from '../../skeletons/manage-fundraiser-dashboard-skeleton';
+import EditFundraiserCause from './edit-view/edit-fundraiser-cause';
+import EditFundraiserGoal from './edit-view/edit-fundraiser-goal';
+import EditFundraiserLocation from './edit-view/edit-fundraiser-location';
+import EditFundraiserStory from './edit-view/edit-fundraiser-story';
+import EditFundraiserTitle from './edit-view/edit-fundraiser-title';
 
 const ManageFundraiserDashboard = ({
+    setFundraiser,
     fundraiser,
     isFetchingFundraiser,
 }) => {
     const { user, accessToken } = useSession();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [loading, setLoading] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+    const toast = useToast();
+
+    const [fundraiserTitle, setFundraiserTitle] = useState('');
+    const [fundraiserGoal, setFundraiserGoal] = useState('');
+    const [fundraiserCoverMediaUrl, setFundraiserCoverMediaUrl] =
+        useState('');
+    const [fundraiserStory, setFundraiserStory] = useState('');
+    const [fundraiserCause, setFundraiserCause] = useState('');
+    const [fundraiserZipCode, setFundraiserZipCode] =
+        useState('');
+    const [fundraiserCity, setFundraiserCity] = useState('');
+    const [fundraiserState, setFundraiserState] = useState('');
+
+    useEffect(() => {
+        setFundraiserTitle(fundraiser.fundraiserTitle);
+        setFundraiserGoal(fundraiser.fundraiserGoal);
+        setFundraiserCoverMediaUrl(fundraiser.coverMediaUrl);
+        setFundraiserStory(fundraiser.fundraiserStory);
+        setFundraiserCause(fundraiser.fundraiserCause);
+        setFundraiserZipCode(fundraiser.zipCode);
+        setFundraiserCity(fundraiser.fundraiserCity);
+        setFundraiserState(fundraiser.fundraiserState);
+    }, [fundraiser]);
 
     const navigate = useNavigate();
+
+    const handleSaveFundraiser = async () => {
+        setIsSaving(true);
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/fundraiser/updateFundraiser`,
+                {
+                    uid: user.id,
+                    access_token: accessToken,
+                    fundraiserId: fundraiser._id,
+                    fundraiserTitle,
+                    fundraiserGoal,
+                    coverMediaUrl: fundraiserCoverMediaUrl,
+                    fundraiserStory,
+                    fundraiserCause,
+                    zipCode: fundraiserZipCode,
+                    fundraiserCity,
+                    fundraiserState,
+                }
+            );
+
+            const resData = res.data;
+            if (resData.statusCode === 200) {
+                toast({
+                    title: 'Fundraiser Updated',
+                    position: 'top-right',
+                    isClosable: true,
+                    status: 'success',
+                    duration: 1000,
+                });
+                setIsSaving(false);
+                setFundraiser(resData.fundraiser);
+            } else {
+                toast({
+                    title: resData.message,
+                    position: 'top-right',
+                    isClosable: true,
+                    status: 'error',
+                    duration: 1000,
+                });
+                setIsSaving(false);
+            }
+            setIsSaving(false);
+        } catch (e) {
+            toast({
+                title: e.message,
+                position: 'top-right',
+                isClosable: true,
+                status: 'error',
+                duration: 1000,
+            });
+        }
+    };
 
     const handleDeleteFundraiser = async () => {
         setLoading(true);
@@ -81,11 +157,14 @@ const ManageFundraiserDashboard = ({
                             >
                                 Title
                             </Text>
-                            <Text>
-                                {fundraiser.fundraiserTitle}
-                            </Text>
+                            <EditFundraiserTitle
+                                fundraiser={fundraiser}
+                                fundraiserTitle={fundraiserTitle}
+                                setFundraiserTitle={
+                                    setFundraiserTitle
+                                }
+                            />
                         </Box>
-                        <Button variant="outline">Edit</Button>
                     </Box>
                     <StackDivider />
                     <Divider />
@@ -98,15 +177,14 @@ const ManageFundraiserDashboard = ({
                             >
                                 Goal
                             </Text>
-                            <Text>
-                                {' '}
-                                ₹
-                                {fundraiser.fundraiserGoal
-                                    .toLocaleString()
-                                    .toString()}
-                            </Text>
+                            <EditFundraiserGoal
+                                fundraiser={fundraiser}
+                                fundraiserGoal={fundraiserGoal}
+                                setFundraiserGoal={
+                                    setFundraiserGoal
+                                }
+                            />
                         </Box>
-                        <Button variant="outline">Edit</Button>
                     </Box>
                     <StackDivider />
                     <Divider />
@@ -165,13 +243,14 @@ const ManageFundraiserDashboard = ({
                             >
                                 Story
                             </Text>
-                            <Markup
-                                content={
-                                    fundraiser.fundraiserStory
+                            <EditFundraiserStory
+                                fundraiser={fundraiser}
+                                fundraiserStory={fundraiserStory}
+                                setFundraiserStory={
+                                    setFundraiserStory
                                 }
                             />
                         </Box>
-                        <Button variant="outline">Edit</Button>
                     </Box>
                     <StackDivider />
                     <Divider />
@@ -184,13 +263,14 @@ const ManageFundraiserDashboard = ({
                             >
                                 Category
                             </Text>
-                            <Text>
-                                {capitalizeString(
-                                    fundraiser.fundraiserCause
-                                )}
-                            </Text>
+                            <EditFundraiserCause
+                                fundraiser={fundraiser}
+                                fundraiserCause={fundraiserCause}
+                                setFundraiserCause={
+                                    setFundraiserCause
+                                }
+                            />
                         </Box>
-                        <Button variant="outline">Edit</Button>
                     </Box>
                     <StackDivider />
                     <Divider />
@@ -203,13 +283,25 @@ const ManageFundraiserDashboard = ({
                             >
                                 Location
                             </Text>
-                            <Text>
-                                {fundraiser.fundraiserCity},{' '}
-                                {fundraiser.fundraiserState} -{' '}
-                                {fundraiser.zipCode}
-                            </Text>
+
+                            <EditFundraiserLocation
+                                fundraiser={fundraiser}
+                                fundraiserCity={fundraiserCity}
+                                fundraiserState={fundraiserState}
+                                setFundraiserCity={
+                                    setFundraiserCity
+                                }
+                                setFundraiserState={
+                                    setFundraiserState
+                                }
+                                fundraiserZipCode={
+                                    fundraiserZipCode
+                                }
+                                setFundraiserZipCode={
+                                    setFundraiserZipCode
+                                }
+                            />
                         </Box>
-                        <Button variant="outline">Edit</Button>
                     </Box>
                 </Stack>
                 <Box className="flex justify-end">
@@ -218,41 +310,52 @@ const ManageFundraiserDashboard = ({
                         <Button
                             colorScheme="red"
                             onClick={onOpen}
+                            isDisabled={isSaving}
                         >
                             Delete
                         </Button>
-                        <Button colorScheme="teal">Save</Button>
+                        <Button
+                            colorScheme="teal"
+                            isLoading={isSaving}
+                            isDisabled={
+                                !fundraiserTitle ||
+                                !fundraiserCause ||
+                                !fundraiserStory ||
+                                !fundraiserGoal ||
+                                !fundraiserCoverMediaUrl ||
+                                !fundraiserCity ||
+                                !fundraiserState ||
+                                !fundraiserZipCode ||
+                                (fundraiserTitle ===
+                                    fundraiser.fundraiserTitle &&
+                                    fundraiserCause ===
+                                        fundraiser.fundraiserCause &&
+                                    fundraiserStory ===
+                                        fundraiser.fundraiserStory &&
+                                    fundraiserGoal ===
+                                        fundraiser.fundraiserGoal &&
+                                    fundraiserCoverMediaUrl ===
+                                        fundraiser.coverMediaUrl &&
+                                    fundraiserCity ===
+                                        fundraiser.fundraiserCity &&
+                                    fundraiserState ===
+                                        fundraiser.fundraiserState &&
+                                    fundraiserZipCode ===
+                                        fundraiser.zipCode)
+                            }
+                            onClick={handleSaveFundraiser}
+                        >
+                            Save
+                        </Button>
                     </ButtonGroup>
                 </Box>
             </div>
-            <Modal isOpen={isOpen} onClose={onClose} isCentered>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Delete Fundraiser</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <Text>
-                            Are you sure, you want to delete this
-                            fundraiser? This task is
-                            irreversible.
-                        </Text>
-                    </ModalBody>
-
-                    <ModalFooter>
-                        <Button mr={3} onClick={onClose}>
-                            Close
-                        </Button>
-                        <Button
-                            variant="solid"
-                            colorScheme="green"
-                            onClick={handleDeleteFundraiser}
-                            isLoading={loading}
-                        >
-                            Confirm
-                        </Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
+            <DeleteFundraiserModal
+                isOpen={isOpen}
+                onClose={onClose}
+                loading={loading}
+                handleDeleteFundraiser={handleDeleteFundraiser}
+            />
         </>
     );
 };
