@@ -135,7 +135,8 @@ const FundraiserDetailsSection = ({
                                     Organizer
                                 </Text>
                                 <Text fontSize="sm">
-                                    city, state
+                                    {fundraiser.fundraiserCity},{' '}
+                                    {fundraiser.fundraiserState}
                                 </Text>
                             </Box>
                         </Stack>

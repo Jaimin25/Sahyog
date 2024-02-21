@@ -14,6 +14,8 @@ const CardFundraiserFooter = ({
     coverMediaUrl,
     fundraiserTitle,
     fundraiserStory,
+    fundraiserCity,
+    fundraiserState,
     handleSubmitFormOne,
     handleSubmitFormTwo,
     handleSubmitFormThree,
@@ -66,9 +68,13 @@ const CardFundraiserFooter = ({
                         isLoading={loading}
                         isDisabled={
                             fundraiserFor === 'myself'
-                                ? !fundraiserFor
+                                ? !fundraiserFor ||
+                                  !fundraiserCity ||
+                                  !fundraiserState
                                 : !beneficiaryName ||
                                   !fundraiserFor ||
+                                  !fundraiserCity ||
+                                  !fundraiserState ||
                                   isFetching ||
                                   deleting
                         }

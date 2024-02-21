@@ -9,32 +9,46 @@ import FundraiserFormTwo from '../fundraiser-form-two';
 const CardFundraiserForms = ({
     error,
     activeStep,
+    zipCode,
+    setZipCode,
     isFetching,
     fundraiserFor,
     fundraiserCause,
     beneficiaryName,
+    fundraiserCity,
+    fundraiserState,
     fundraiserGoal,
     fundraiserStory,
     fundraiserTitle,
     coverMediaUrl,
     setFundraiserFor,
     setBeneficiaryName,
+    setFundraiserCity,
+    setFundraiserState,
     setFundraiserCause,
     setFundraiserGoal,
     setFundraiserStory,
     setFundraiserTitle,
     setCoverMediaUrl,
     setActiveStep,
+    setError,
 }) => {
     return (
         <Stack>
             {error && <Text color="red">{error}</Text>}
             {activeStep === 0 ? (
                 <FundraiserFormOne
+                    setError={setError}
                     isFetching={isFetching}
+                    zipCode={zipCode}
+                    setZipCode={setZipCode}
                     fundraiserFor={fundraiserFor}
                     beneficiaryName={beneficiaryName}
+                    fundraiserCity={fundraiserCity}
+                    fundraiserState={fundraiserState}
                     setFundraiserFor={setFundraiserFor}
+                    setFundraiserCity={setFundraiserCity}
+                    setFundraiserState={setFundraiserState}
                     setBeneficiaryName={setBeneficiaryName}
                 />
             ) : activeStep === 1 ? (
@@ -63,6 +77,8 @@ const CardFundraiserForms = ({
                         coverMediaUrl={coverMediaUrl}
                         fundraiserCause={fundraiserCause}
                         fundraiserGoal={fundraiserGoal}
+                        fundraiserCity={fundraiserCity}
+                        fundraiserState={fundraiserState}
                         fundraiserTitle={fundraiserTitle}
                         fundraiserStory={fundraiserStory}
                     />

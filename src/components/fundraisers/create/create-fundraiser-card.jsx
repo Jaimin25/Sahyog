@@ -44,6 +44,10 @@ const CreateFundraiserComponent = ({
     const [fundraiserTitle, setFundraiserTitle] = useState('');
     const [fundraiserStory, setFundraiserStory] = useState('');
     const [coverMediaUrl, setCoverMediaUrl] = useState('');
+    const [fundraiserCity, setFundraiserCity] = useState('');
+    const [fundraiserState, setFundraiserState] = useState('');
+
+    const [zipCode, setZipCode] = useState();
 
     useEffect(() => {
         if (!draftFundraiser) return;
@@ -53,6 +57,9 @@ const CreateFundraiserComponent = ({
         setFundraiserGoal(draftFundraiser.fundraiserGoal);
         setFundraiserTitle(draftFundraiser.fundraiserTitle);
         setFundraiserStory(draftFundraiser.fundraiserStory);
+        setFundraiserCity(draftFundraiser.fundraiserCity);
+        setFundraiserState(draftFundraiser.fundraiserState);
+        setZipCode(draftFundraiser.zipCode);
         setCoverMediaUrl(draftFundraiser.coverMediaUrl);
 
         if (draftFundraiser.status === 'review') {
@@ -80,7 +87,10 @@ const CreateFundraiserComponent = ({
             setFundraiserGoal('');
             setFundraiserTitle('');
             setFundraiserStory('');
+            setFundraiserCity('');
+            setFundraiserState('');
             setCoverMediaUrl('');
+            setZipCode('');
             setActiveStep(0);
             setDeleting(false);
         } else {
@@ -111,6 +121,9 @@ const CreateFundraiserComponent = ({
                 beneficiaryName,
                 fundraiserCause: nFundraiserCause,
                 fundraiserGoal,
+                fundraiserCity,
+                fundraiserState,
+                zipCode,
                 coverMediaUrl: updatedCoverMediaUrl,
                 status,
             }
@@ -136,6 +149,11 @@ const CreateFundraiserComponent = ({
 
     const handleSubmitFormOne = async () => {
         if (
+            draftFundraiser &&
+            draftFundraiser.zipCode === zipCode &&
+            draftFundraiser.fundraiserCity === fundraiserCity &&
+            draftFundraiser.fundraiserState ===
+                fundraiserState &&
             draftFundraiser &&
             draftFundraiser.fundraiserFor === fundraiserFor &&
             draftFundraiser.beneficiaryName === beneficiaryName
@@ -245,9 +263,14 @@ const CreateFundraiserComponent = ({
                 <CardBody>
                     <CardFundraiserForms
                         error={error}
+                        setError={setError}
+                        zipCode={zipCode}
+                        setZipCode={setZipCode}
                         activeStep={activeStep}
                         isFetching={isFetching}
                         fundraiserFor={fundraiserFor}
+                        fundraiserCity={fundraiserCity}
+                        fundraiserState={fundraiserState}
                         beneficiaryName={beneficiaryName}
                         fundraiserCause={fundraiserCause}
                         fundraiserGoal={fundraiserGoal}
@@ -256,6 +279,8 @@ const CreateFundraiserComponent = ({
                         coverMediaUrl={coverMediaUrl}
                         setFundraiserFor={setFundraiserFor}
                         setBeneficiaryName={setBeneficiaryName}
+                        setFundraiserCity={setFundraiserCity}
+                        setFundraiserState={setFundraiserState}
                         setFundraiserCause={setFundraiserCause}
                         setFundraiserGoal={setFundraiserGoal}
                         setFundraiserStory={setFundraiserStory}
@@ -278,6 +303,8 @@ const CreateFundraiserComponent = ({
                     coverMediaUrl={coverMediaUrl}
                     fundraiserTitle={fundraiserTitle}
                     fundraiserStory={fundraiserStory}
+                    fundraiserCity={fundraiserCity}
+                    fundraiserState={fundraiserState}
                     handleSubmitFormOne={handleSubmitFormOne}
                     handleSubmitFormTwo={handleSubmitFormTwo}
                     handleSubmitFormThree={handleSubmitFormThree}

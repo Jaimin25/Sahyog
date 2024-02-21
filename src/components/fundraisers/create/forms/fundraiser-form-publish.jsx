@@ -19,6 +19,8 @@ const FundraiserFormPublish = ({
     coverMediaUrl,
     fundraiserCause,
     fundraiserGoal,
+    fundraiserCity,
+    fundraiserState,
     fundraiserTitle,
     fundraiserStory,
 }) => {
@@ -128,6 +130,25 @@ const FundraiserFormPublish = ({
                         colorScheme="teal"
                         variant="outline"
                         onClick={() => setActiveStep(3)}
+                    >
+                        Edit
+                    </Button>
+                </div>
+            </div>
+            <div className="flex items-center">
+                <div className="flex flex-1 flex-col">
+                    <Text fontWeight="semibold" fontSize="xl">
+                        Location
+                    </Text>
+                    <Text>
+                        {fundraiserCity}, {fundraiserState}
+                    </Text>
+                </div>
+                <div>
+                    <Button
+                        colorScheme="teal"
+                        variant="outline"
+                        onClick={() => setActiveStep(0)}
                     >
                         Edit
                     </Button>
