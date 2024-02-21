@@ -9,17 +9,20 @@ import {
     TabPanel,
     TabPanels,
     Tabs,
+    useToast,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import ManageFundraiserDashboard from '../../../components/fundraisers/manage/manage-fundraiser-dashboard';
+import ManageFundraiserUpdates from '../../../components/fundraisers/manage/manage-fundraiser-updates';
 import { useSession } from '../../../components/providers/session-provider';
 import { baseapiurl } from '../../../lib/utils';
 
 const ManageFundriaserPage = () => {
     const { id } = useParams();
+    const toast = useToast();
     const { accessToken, user } = useSession();
     const [error, setError] = useState();
 
@@ -36,6 +39,10 @@ const ManageFundriaserPage = () => {
 
     const [fundraiserDetails, setFundraiserDetails] = useState(
         {}
+    );
+
+    const [fundraiserUpdates, setFundraiserUpdates] = useState(
+        []
     );
 
     const fetchFundraiserDetails = async () => {
@@ -59,13 +66,49 @@ const ManageFundriaserPage = () => {
             }
             setIsFetchingFundraiser(false);
         } catch (e) {
-            // console.log(e);
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                duration: 1000,
+            });
         }
     };
 
+    const fetchFundraiserUpdates = async () => {
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/fundraiser/getFundraiserUpdates`,
+                {
+                    uid: user.id,
+                    access_token: accessToken,
+                    fundraiserId: id,
+                }
+            );
+
+            const resData = res.data;
+
+            if (resData.statusCode === 200) {
+                setFundraiserUpdates(resData.fundraiserUpdates);
+            } else {
+                setError(resData.message);
+                setIsFetchingFundraiserUpdates(false);
+            }
+            setIsFetchingFundraiserUpdates(false);
+        } catch (e) {
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                duration: 1000,
+            });
+        }
+    };
     useEffect(() => {
         setIsFetchingFundraiser(true);
+        setIsFetchingFundraiserUpdates(true);
         fetchFundraiserDetails();
+        fetchFundraiserUpdates();
     }, []);
 
     if (
@@ -115,7 +158,20 @@ const ManageFundriaserPage = () => {
                                 />
                             </TabPanel>
                             <TabPanel>
-                                <p>two!</p>
+                                <ManageFundraiserUpdates
+                                    fundraiser={
+                                        fundraiserDetails
+                                    }
+                                    fundraiserUpdates={
+                                        fundraiserUpdates
+                                    }
+                                    setFundraiserUpdates={
+                                        setFundraiserUpdates
+                                    }
+                                    isFetchingFundraiserUpdates={
+                                        isFetchingFundraiserUpdates
+                                    }
+                                />
                             </TabPanel>
                             <TabPanel>
                                 <p>three!</p>
