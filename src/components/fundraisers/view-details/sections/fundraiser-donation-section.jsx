@@ -48,7 +48,7 @@ const FundraiserDonationSection = ({
                     <Text color="gray.600">0 donations</Text>
                     <Stack>
                         <Button
-                            variant="outline"
+                            variant="solid"
                             colorScheme="teal"
                             className="fundraiser-card-donate-button"
                         >
@@ -64,6 +64,12 @@ const FundraiserDonationSection = ({
                             <ArrowUpRightFromSquare className="h-5 w-5" />
                             Share
                         </Button>
+                        <Text
+                            fontWeight="semibold"
+                            fontSize="20px"
+                        >
+                            Donations
+                        </Text>
                         <Stack gap="18px">
                             <DonationsCard
                                 name="abc"

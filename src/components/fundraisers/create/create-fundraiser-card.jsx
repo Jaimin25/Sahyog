@@ -212,7 +212,7 @@ const CreateFundraiserComponent = ({
     };
 
     return (
-        <div className="flex h-full w-auto flex-col items-center justify-center gap-2 bg-teal-500 p-2">
+        <div className="flex h-full w-auto flex-col items-center justify-center gap-2 bg-black/5 p-2">
             <div className="hidden w-full justify-center md:flex">
                 <Card className="md:w-1/2">
                     <FundraiserCardStepper

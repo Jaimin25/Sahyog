@@ -35,7 +35,7 @@ const UserDashboardComponent = () => {
     }, []);
 
     return (
-        <div className="user-dashboard-container flex h-full flex-col gap-4 bg-teal-500 p-4 md:flex-row">
+        <div className="user-dashboard-container flex h-full flex-col gap-4 bg-black/5 p-8 md:flex-row">
             <div className="h-full w-full md:flex md:w-1/6">
                 <DashboardSidebar
                     setCurrentActive={setCurrentActive}
