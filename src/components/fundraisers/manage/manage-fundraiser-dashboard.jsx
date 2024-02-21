@@ -25,6 +25,7 @@ import DeleteFundraiserModal from '../../modals/delete-fundraiser-modal';
 import { useSession } from '../../providers/session-provider';
 import ManageFundraiserDashboardSkeleton from '../../skeletons/manage-fundraiser-dashboard-skeleton';
 import EditFundraiserCause from './edit-view/edit-fundraiser-cause';
+import EditFundraiserCoverMedia from './edit-view/edit-fundraiser-covermedia';
 import EditFundraiserGoal from './edit-view/edit-fundraiser-goal';
 import EditFundraiserLocation from './edit-view/edit-fundraiser-location';
 import EditFundraiserStory from './edit-view/edit-fundraiser-story';
@@ -198,39 +199,16 @@ const ManageFundraiserDashboard = ({
                             >
                                 Cover Media
                             </Text>
-                            <Button variant="outline">
-                                Change
-                            </Button>
                         </Box>
-                        {fundraiser.coverMediaUrl &&
-                        checkForImage(
-                            fundraiser.coverMediaUrl
-                        ) ? (
-                            <div className="overflow-hidden rounded-lg">
-                                <LazyLoadImage
-                                    src={
-                                        fundraiser.coverMediaUrl
-                                    }
-                                    className="aspect-video h-auto w-auto rounded-lg md:h-[400px]"
-                                />
-                            </div>
-                        ) : fundraiser.coverMediaUrl &&
-                          checkYoutubeUrl(
-                              fundraiser.coverMediaUrl
-                          ) ? (
-                            <AspectRatio
-                                maxW="auto"
-                                ratio={16 / 9}
-                                borderRadius="lg"
-                                height="auto"
-                            >
-                                <iframe
-                                    className="rounded-lg"
-                                    src={`https://www.youtube.com/embed/${getYtVideoId(fundraiser.coverMediaUrl)}`}
-                                    allowFullScreen
-                                />
-                            </AspectRatio>
-                        ) : null}
+                        <EditFundraiserCoverMedia
+                            fundraiser={fundraiser}
+                            fundraiserCoverMediaUrl={
+                                fundraiserCoverMediaUrl
+                            }
+                            setFundraiserCoverMediaUrl={
+                                setFundraiserCoverMediaUrl
+                            }
+                        />
                     </Box>
                     <StackDivider />
                     <Divider />

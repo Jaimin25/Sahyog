@@ -24,6 +24,7 @@ import {
 const UploadButton = generateUploadDropzone({
     url: `${baseapiurl}/api/uploadthing`,
 });
+
 const FundraiserFormThree = ({
     coverMediaUrl,
     setCoverMediaUrl,
