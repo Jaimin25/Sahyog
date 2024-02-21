@@ -66,7 +66,10 @@ const ManageFundriaserPage = () => {
         fetchFundraiserDetails();
     }, []);
 
-    if (fundraiserDetails.status !== 'active') {
+    if (
+        !isFetchingFundraiser &&
+        fundraiserDetails.status !== 'active'
+    ) {
         return (
             <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
                 <Card>

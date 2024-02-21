@@ -30,10 +30,11 @@ import {
     getYtVideoId,
 } from '../../../lib/utils';
 import { useSession } from '../../providers/session-provider';
+import ManageFundraiserDashboardSkeleton from '../../skeletons/manage-fundraiser-dashboard-skeleton';
 
 const ManageFundraiserDashboard = ({
     fundraiser,
-    isFundraiserFetching,
+    isFetchingFundraiser,
 }) => {
     const { user, accessToken } = useSession();
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -63,6 +64,11 @@ const ManageFundraiserDashboard = ({
             setLoading(false);
         } catch (e) {}
     };
+
+    if (isFetchingFundraiser) {
+        return <ManageFundraiserDashboardSkeleton />;
+    }
+
     return (
         <>
             <div className="flex flex-col gap-4">
@@ -83,6 +89,7 @@ const ManageFundraiserDashboard = ({
                     </Box>
                     <StackDivider />
                     <Divider />
+                    <StackDivider />
                     <Box className="flex">
                         <Box className="flex-1">
                             <Text
@@ -103,6 +110,7 @@ const ManageFundraiserDashboard = ({
                     </Box>
                     <StackDivider />
                     <Divider />
+                    <StackDivider />
                     <Box className="w-full">
                         <Box className="flex w-full items-center">
                             <Text
@@ -148,6 +156,7 @@ const ManageFundraiserDashboard = ({
                     </Box>
                     <StackDivider />
                     <Divider />
+                    <StackDivider />
                     <Box className="flex">
                         <Box className="flex-1">
                             <Text
@@ -166,6 +175,7 @@ const ManageFundraiserDashboard = ({
                     </Box>
                     <StackDivider />
                     <Divider />
+                    <StackDivider />
                     <Box className="flex">
                         <Box className="flex-1">
                             <Text
@@ -184,6 +194,7 @@ const ManageFundraiserDashboard = ({
                     </Box>
                     <StackDivider />
                     <Divider />
+                    <StackDivider />
                     <Box className="flex">
                         <Box className="flex-1">
                             <Text
