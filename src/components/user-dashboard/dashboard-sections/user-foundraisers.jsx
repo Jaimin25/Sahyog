@@ -63,34 +63,47 @@ const UserFundraisers = ({ loading, userFundraisers }) => {
                                     ))}
                             </>
                         )}
-                        <Text fontSize="xl" fontWeight="bold">
-                            Published
-                        </Text>
-                        <Grid width="100%" gap="10px">
-                            {userFundraisers
-                                .filter(
-                                    (fundraiser) =>
-                                        fundraiser.status ===
-                                        'active'
-                                )
-                                .map((fundraiser) => (
-                                    <UserActiveFundraisersCard
-                                        key={fundraiser._id}
-                                        fundraiserId={
-                                            fundraiser._id
-                                        }
-                                        fundraiserTitle={
-                                            fundraiser.fundraiserTitle
-                                        }
-                                        coverMediaUrl={
-                                            fundraiser.coverMediaUrl
-                                        }
-                                        createdAt={
-                                            fundraiser.createdAt
-                                        }
-                                    />
-                                ))}
-                        </Grid>
+                        {userFundraisers.some(
+                            (fundraiser) =>
+                                fundraiser.status === 'active'
+                        ) && (
+                            <>
+                                <Text
+                                    fontSize="xl"
+                                    fontWeight="bold"
+                                >
+                                    Published
+                                </Text>
+
+                                <Grid width="100%" gap="10px">
+                                    {userFundraisers
+                                        .filter(
+                                            (fundraiser) =>
+                                                fundraiser.status ===
+                                                'active'
+                                        )
+                                        .map((fundraiser) => (
+                                            <UserActiveFundraisersCard
+                                                key={
+                                                    fundraiser._id
+                                                }
+                                                fundraiserId={
+                                                    fundraiser._id
+                                                }
+                                                fundraiserTitle={
+                                                    fundraiser.fundraiserTitle
+                                                }
+                                                coverMediaUrl={
+                                                    fundraiser.coverMediaUrl
+                                                }
+                                                createdAt={
+                                                    fundraiser.createdAt
+                                                }
+                                            />
+                                        ))}
+                                </Grid>
+                            </>
+                        )}
                     </Stack>
                 )}
             </CardBody>

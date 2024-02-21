@@ -67,13 +67,17 @@ const UserActiveFundraisersCard = ({
                         Fundraiser created {timeSince(timesince)}
                     </Text>
                     <ButtonGroup>
-                        <Button
-                            variant="outline"
-                            colorScheme="teal"
-                            flex="1"
+                        <NavLink
+                            to={`/fundraiser/${fundraiserId}/manage`}
                         >
-                            Manage
-                        </Button>
+                            <Button
+                                variant="outline"
+                                colorScheme="teal"
+                                flex="1"
+                            >
+                                Manage
+                            </Button>
+                        </NavLink>
                         <NavLink
                             to={`/fundraiser/${fundraiserId}`}
                         >

@@ -32,7 +32,7 @@ const UserFundraisersDraftCard = ({
             <CardBody>
                 <div className="flex flex-col items-center gap-3 md:flex-row">
                     {!coverMediaUrl && (
-                        <div className="flex h-auto w-[200px] items-center justify-center rounded-lg bg-gray-200">
+                        <div className="flex h-[150px] w-[266px] items-center justify-center rounded-lg bg-gray-200">
                             <ImageOff />
                         </div>
                     )}

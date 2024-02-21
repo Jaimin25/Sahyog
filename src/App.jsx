@@ -9,6 +9,7 @@ import UserDashboard from './pages/dashboard/user-dashboard-page';
 import CreateFundraiserPage from './pages/fundraiser/create/create-fundraiser-page';
 import DiscoverFundraisersPage from './pages/fundraiser/fundraiser-page';
 import FundraiserPage from './pages/fundraiser/fundraiserId/fundraiser-details-page';
+import ManageFundriaserPage from './pages/fundraiser/manage/manage-funraiser';
 import Home from './pages/Home';
 
 export const App = () => {
@@ -67,6 +68,17 @@ export const App = () => {
                             session &&
                             (session ? (
                                 <CreateFundraiserPage />
+                            ) : (
+                                <SignInPage />
+                            ))
+                        }
+                    />
+                    <Route
+                        path="/fundraiser/:id/manage"
+                        element={
+                            session &&
+                            (session ? (
+                                <ManageFundriaserPage />
                             ) : (
                                 <SignInPage />
                             ))
