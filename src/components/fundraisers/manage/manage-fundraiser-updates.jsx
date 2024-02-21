@@ -45,11 +45,18 @@ const ManageFundraiserUpdates = ({
                         (update) => update._id !== updateId
                     )
                 );
+                toast({
+                    title: 'Update deleted',
+                    status: 'success',
+                    position: 'top-right',
+                    duration: 1000,
+                });
             } else {
                 toast({
                     title: 'Error',
                     description: resData.message,
                     status: 'error',
+                    position: 'top-right',
                     duration: 1000,
                 });
             }
@@ -58,6 +65,7 @@ const ManageFundraiserUpdates = ({
                 title: 'Error',
                 description: e.message,
                 status: 'error',
+                position: 'top-right',
                 duration: 1000,
             });
         }
@@ -84,11 +92,18 @@ const ManageFundraiserUpdates = ({
                     resData.fundraiserUpdate,
                     ...fundraiserUpdates,
                 ]);
+                toast({
+                    title: 'Updated posted',
+                    status: 'success',
+                    position: 'top-right',
+                    duration: 1000,
+                });
             } else {
                 toast({
                     title: 'Error',
                     description: resData.message,
                     status: 'error',
+                    position: 'top-right',
                     duration: 1000,
                 });
                 setIsPosting(false);
@@ -100,6 +115,7 @@ const ManageFundraiserUpdates = ({
                 title: 'Error',
                 description: e.message,
                 status: 'error',
+                position: 'top-right',
                 duration: 1000,
             });
         }
@@ -162,7 +178,7 @@ const ManageFundraiserUpdates = ({
                     </Button>
                 </Box>
             </Box>
-            <Box>
+            <Box className="space-y-4">
                 <Heading size="md">Updates</Heading>
                 {fundraiserUpdates.length === 0 && (
                     <p>No updates yet</p>

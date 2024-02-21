@@ -122,11 +122,11 @@ const Navbar = () => {
                                             </MenuItem>
                                         </NavLink>
                                     ) : (
-                                        <MenuItem>
-                                            <NavLink to="/auth/signin">
+                                        <NavLink to="/auth/signin">
+                                            <MenuItem>
                                                 Sign In
-                                            </NavLink>
-                                        </MenuItem>
+                                            </MenuItem>
+                                        </NavLink>
                                     )}
                                 </MenuList>
                             </Menu>
