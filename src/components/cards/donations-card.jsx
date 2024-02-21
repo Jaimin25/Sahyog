@@ -1,5 +1,5 @@
 import { Box, Stack, Text } from '@chakra-ui/react';
-import { HeartHandshake, HelpingHand } from 'lucide-react';
+import { HeartHandshake } from 'lucide-react';
 
 const DonationsCard = ({
     name,
