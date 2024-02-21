@@ -46,6 +46,7 @@ const EditFundraiserCoverMedia = ({
             getEditButtonProps,
         } = useEditableControls();
         setEditing(isEditing);
+        setCoverMediaUrl(null);
         return isEditing ? (
             <ButtonGroup className="flex items-center" size="sm">
                 <IconButton

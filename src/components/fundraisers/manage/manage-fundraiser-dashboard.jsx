@@ -1,5 +1,4 @@
 import {
-    AspectRatio,
     Box,
     Button,
     ButtonGroup,
@@ -12,15 +11,9 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useNavigate } from 'react-router-dom';
 
-import {
-    baseapiurl,
-    checkForImage,
-    checkYoutubeUrl,
-    getYtVideoId,
-} from '../../../lib/utils';
+import { baseapiurl } from '../../../lib/utils';
 import DeleteFundraiserModal from '../../modals/delete-fundraiser-modal';
 import { useSession } from '../../providers/session-provider';
 import ManageFundraiserDashboardSkeleton from '../../skeletons/manage-fundraiser-dashboard-skeleton';
