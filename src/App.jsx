@@ -7,6 +7,7 @@ import SignInPage from './pages/auth/signin';
 import SignUpPage from './pages/auth/signup';
 import UserDashboard from './pages/dashboard/user-dashboard-page';
 import CreateFundraiserPage from './pages/fundraiser/create/create-fundraiser-page';
+import DonateTo from './pages/fundraiser/donate/donate-to';
 import DiscoverFundraisersPage from './pages/fundraiser/fundraiser-page';
 import FundraiserPage from './pages/fundraiser/fundraiserId/fundraiser-details-page';
 import ManageFundriaserPage from './pages/fundraiser/manage/manage-fundraiser';
@@ -79,6 +80,17 @@ export const App = () => {
                             session &&
                             (session ? (
                                 <ManageFundriaserPage />
+                            ) : (
+                                <SignInPage />
+                            ))
+                        }
+                    />
+                    <Route
+                        path="/fundraiser/:id/donate"
+                        element={
+                            session &&
+                            (session ? (
+                                <DonateTo />
                             ) : (
                                 <SignInPage />
                             ))
