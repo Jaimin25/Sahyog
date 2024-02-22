@@ -1,19 +1,16 @@
 import {
-    Badge,
     Box,
     Button,
-    Card,
-    CardBody,
     Heading,
     Stack,
     useToast,
 } from '@chakra-ui/react';
 import { Editor } from '@tinymce/tinymce-react';
 import axios from 'axios';
-import { Markup } from 'interweave';
 import { useState } from 'react';
 
 import { baseapiurl } from '../../../lib/utils';
+import FundraiserUpdatesCard from '../../cards/fundraiser-updates-card';
 import { useSession } from '../../providers/session-provider';
 
 const ManageFundraiserUpdates = ({
@@ -27,49 +24,6 @@ const ManageFundraiserUpdates = ({
     const [updateDetails, setUpdateDetails] = useState();
     const [isPosting, setIsPosting] = useState();
 
-    const handleDeleteUpdate = async (updateId) => {
-        try {
-            const res = await axios.post(
-                `${baseapiurl}/api/fundraiser/deleteFundraiserUpdate`,
-                {
-                    uid: user.id,
-                    access_token: accessToken,
-                    fundraiserId: fundraiser._id,
-                    updateId,
-                }
-            );
-            const resData = res.data;
-            if (resData.statusCode === 200) {
-                setFundraiserUpdates(
-                    fundraiserUpdates.filter(
-                        (update) => update._id !== updateId
-                    )
-                );
-                toast({
-                    title: 'Update deleted',
-                    status: 'success',
-                    position: 'top-right',
-                    duration: 1000,
-                });
-            } else {
-                toast({
-                    title: 'Error',
-                    description: resData.message,
-                    status: 'error',
-                    position: 'top-right',
-                    duration: 1000,
-                });
-            }
-        } catch (e) {
-            toast({
-                title: 'Error',
-                description: e.message,
-                status: 'error',
-                position: 'top-right',
-                duration: 1000,
-            });
-        }
-    };
     const handlePostUpdates = async () => {
         setIsPosting(true);
         try {
@@ -187,49 +141,17 @@ const ManageFundraiserUpdates = ({
                     <p>Loading updates...</p>
                 ) : (
                     fundraiserUpdates.map((update) => (
-                        <Card
+                        <FundraiserUpdatesCard
                             key={update._id}
-                            boxShadow="none"
-                            border="1px"
-                            borderColor="gray.200"
-                            marginY="8px"
-                        >
-                            <CardBody>
-                                <Box className="flex space-y-4">
-                                    <Box flex="1">
-                                        {!(
-                                            new Date().getDate() -
-                                            new Date(
-                                                update.createdAt
-                                            ).getDate()
-                                        ) >= 1 && (
-                                            <Badge colorScheme="green">
-                                                new
-                                            </Badge>
-                                        )}
-                                        <Markup
-                                            content={
-                                                update.updateDetails
-                                            }
-                                        />
-                                        <p className="text-sm text-gray-500">
-                                            {new Date(
-                                                update.createdAt
-                                            ).toLocaleString()}
-                                        </p>
-                                    </Box>
-                                    <Button
-                                        onClick={() =>
-                                            handleDeleteUpdate(
-                                                update._id
-                                            )
-                                        }
-                                    >
-                                        Delete
-                                    </Button>
-                                </Box>
-                            </CardBody>
-                        </Card>
+                            user={user}
+                            accessToken={accessToken}
+                            update={update}
+                            fundraiser={fundraiser}
+                            fundraiserUpdates={fundraiserUpdates}
+                            setFundraiserUpdates={
+                                setFundraiserUpdates
+                            }
+                        />
                     ))
                 )}
             </Box>

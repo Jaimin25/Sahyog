@@ -2,10 +2,13 @@ import FundraiserDetailsSkeleton from '../../skeletons/fundraiser-details-skelet
 import FundraiserDonationSkeleton from '../../skeletons/fundraiser-donations-skeleton';
 import FundraiserDetailsSection from './sections/fundraiser-details-section';
 import FundraiserDonationSection from './sections/fundraiser-donation-section';
+import FundraiserUpdatesSection from './sections/fundraiser-updates-section';
 
 const FundraiserDetails = ({
     fundraiser,
     isFetchingFundraiser,
+    fundraiserUpdates,
+    isFetchingFundraiserUpdates,
 }) => {
     if (isFetchingFundraiser)
         return (
@@ -15,7 +18,7 @@ const FundraiserDetails = ({
             </div>
         );
     return (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <FundraiserDetailsSection
                 fundraiser={fundraiser}
                 isFetchingFundraiser={isFetchingFundraiser}
@@ -23,6 +26,12 @@ const FundraiserDetails = ({
             <FundraiserDonationSection
                 fundraiser={fundraiser}
                 isFetchingFundraiser={isFetchingFundraiser}
+            />
+            <FundraiserUpdatesSection
+                fundraiserUpdates={fundraiserUpdates}
+                isFetchingFundraiserUpdates={
+                    isFetchingFundraiserUpdates
+                }
             />
         </div>
     );

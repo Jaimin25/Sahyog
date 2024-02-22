@@ -59,13 +59,13 @@ const ManageFundriaserPage = () => {
 
             if (resData.statusCode === 200) {
                 setFundraiserDetails(resData.fundraiserDetails);
-                setIsFetchingFundraiser(false);
             } else {
                 setError(resData.message);
-                setIsFetchingFundraiser(false);
             }
             setIsFetchingFundraiser(false);
         } catch (e) {
+            setIsFetchingFundraiser(false);
+
             toast({
                 title: 'Error',
                 description: e.message,
@@ -80,8 +80,6 @@ const ManageFundriaserPage = () => {
             const res = await axios.post(
                 `${baseapiurl}/api/fundraiser/getFundraiserUpdates`,
                 {
-                    uid: user.id,
-                    access_token: accessToken,
                     fundraiserId: id,
                 }
             );
@@ -104,6 +102,7 @@ const ManageFundriaserPage = () => {
             });
         }
     };
+
     useEffect(() => {
         setIsFetchingFundraiser(true);
         setIsFetchingFundraiserUpdates(true);
