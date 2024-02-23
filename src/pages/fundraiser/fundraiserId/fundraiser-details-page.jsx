@@ -96,7 +96,7 @@ const FundraiserPage = () => {
             );
 
             const resData = res.data;
-            console.log(resData);
+
             if (resData.statusCode === 200) {
                 setFundraiserDonations(resData.donations);
             } else {
