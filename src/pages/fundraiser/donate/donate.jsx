@@ -1,4 +1,6 @@
 import {
+    Alert,
+    AlertIcon,
     Badge,
     Box,
     Button,
@@ -12,6 +14,7 @@ import {
     InputLeftAddon,
     Stack,
     Text,
+    useToast,
 } from '@chakra-ui/react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -31,9 +34,13 @@ const stripe = await loadStripe(
 const DonatePage = () => {
     const { id } = useParams();
     const { user } = useSession();
+    const toast = useToast();
     const [isFormVisible, showForm] = useState(false);
+    const [error, setError] = useState();
 
     const [fundraiserDetails, setFundraiserDetails] = useState();
+    const [fetchingFundraiser, setIsFetchingFundraiser] =
+        useState(true);
 
     const [donationAmount, setDonationAmount] = useState();
     const [anonymousDonation, setAnonymousDonation] =
@@ -55,14 +62,50 @@ const DonatePage = () => {
                         fundraiserId: id,
                     }
                 );
-                setFundraiserDetails(res.data.fundraiserDetails);
+                const resData = res.data;
+                setIsFetchingFundraiser(false);
+                if (resData.statusCode === 200) {
+                    setFundraiserDetails(
+                        resData.fundraiserDetails
+                    );
+                } else {
+                    setError(resData.message);
+                    toast({
+                        title: 'Error',
+                        description: resData.message,
+                        status: 'error',
+                        position: 'top-right',
+                        duration: 1000,
+                    });
+                }
             } catch (e) {
-                //    console.error(e);
+                setError(e.message);
+                toast({
+                    title: 'Error',
+                    description: e.message,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 1000,
+                });
             }
         };
+        setIsFetchingFundraiser(true);
         fetchFundraiserDetails();
     }, []);
 
+    if (!fundraiserDetails && !fetchingFundraiser && error)
+        return (
+            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+                <Card className="w-full">
+                    <CardBody>
+                        <Alert status="error">
+                            <AlertIcon />
+                            {error}
+                        </Alert>
+                    </CardBody>
+                </Card>
+            </div>
+        );
     return (
         <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
             <Card className="w-full sm:w-2/3 md:w-1/2">

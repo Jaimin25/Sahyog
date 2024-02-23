@@ -1,4 +1,10 @@
-import { useToast } from '@chakra-ui/react';
+import {
+    Alert,
+    AlertIcon,
+    Card,
+    CardBody,
+    useToast,
+} from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -21,6 +27,7 @@ const FundraiserPage = () => {
         isFetchingFundraiserDonations,
         setIsFetchingFundraiserDonations,
     ] = useState(true);
+    const [error, setError] = useState();
 
     const [fundraiserDetails, setFundraiserDetails] = useState(
         {}
@@ -45,9 +52,15 @@ const FundraiserPage = () => {
 
             if (resData.statusCode === 200) {
                 setFundraiserDetails(resData.fundraiserDetails);
-                setIsFetchingFundraiser(false);
             } else {
-                setIsFetchingFundraiser(false);
+                toast({
+                    title: 'Error',
+                    description: resData.message,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 1000,
+                });
+                setError(resData.message);
             }
             setIsFetchingFundraiser(false);
         } catch (e) {
@@ -69,12 +82,7 @@ const FundraiserPage = () => {
             if (resData.statusCode === 200) {
                 setFundraiserUpdates(resData.fundraiserUpdates);
             } else {
-                toast({
-                    title: 'Error',
-                    description: resData.message,
-                    status: 'error',
-                    duration: 1000,
-                });
+                setError(resData.message);
             }
             setIsFetchingFundraiserUpdates(false);
         } catch (e) {
@@ -100,12 +108,7 @@ const FundraiserPage = () => {
             if (resData.statusCode === 200) {
                 setFundraiserDonations(resData.donations);
             } else {
-                toast({
-                    title: 'Error',
-                    description: resData.message,
-                    status: 'error',
-                    duration: 1000,
-                });
+                setError(resData.message);
             }
             setIsFetchingFundraiserDonations(false);
         } catch (e) {
@@ -127,6 +130,25 @@ const FundraiserPage = () => {
         fetchFundraiserUpdates();
         fetchFundraiserDonations();
     }, []);
+
+    if (
+        !isFetchingFundraiser &&
+        fundraiserDetails.status !== 'active' &&
+        error
+    ) {
+        return (
+            <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+                <Card>
+                    <CardBody>
+                        <Alert status="error">
+                            <AlertIcon />
+                            {error}
+                        </Alert>
+                    </CardBody>
+                </Card>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">

@@ -12,13 +12,15 @@ const FundraiserDetails = ({
     isFetchingFundraiserDonations,
     fundraiserDonations,
 }) => {
-    if (isFetchingFundraiser)
+    if (isFetchingFundraiser) {
         return (
             <div className="grid grid-cols-3 gap-4">
                 <FundraiserDetailsSkeleton coverMediaUrl="https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_1280.jpg" />
                 <FundraiserDonationSkeleton />
             </div>
         );
+    }
+
     return (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <FundraiserDetailsSection

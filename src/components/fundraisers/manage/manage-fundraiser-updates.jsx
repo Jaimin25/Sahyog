@@ -17,7 +17,7 @@ const ManageFundraiserUpdates = ({
     fundraiser,
     fundraiserUpdates,
     setFundraiserUpdates,
-    isFetchingFundraiserUpdates,
+    isFetchingFundraiser,
 }) => {
     const toast = useToast();
     const { user, accessToken } = useSession();
@@ -88,7 +88,7 @@ const ManageFundraiserUpdates = ({
                             setUpdateDetails(c)
                         }
                         value={updateDetails}
-                        disabled={isFetchingFundraiserUpdates}
+                        disabled={isFetchingFundraiser}
                         init={{
                             height: '100%',
                             menubar: false,
@@ -137,7 +137,7 @@ const ManageFundraiserUpdates = ({
                 {fundraiserUpdates.length === 0 && (
                     <p>No updates yet</p>
                 )}
-                {isFetchingFundraiserUpdates ? (
+                {isFetchingFundraiser ? (
                     <p>Loading updates...</p>
                 ) : (
                     fundraiserUpdates.map((update) => (

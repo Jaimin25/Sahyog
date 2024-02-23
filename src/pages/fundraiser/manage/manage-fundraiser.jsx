@@ -60,20 +60,27 @@ const ManageFundriaserPage = () => {
                 }
             );
             const resData = res.data;
-
             if (resData.statusCode === 200) {
                 setFundraiserDetails(resData.fundraiserDetails);
             } else {
                 setError(resData.message);
+                console.log('this');
+                toast({
+                    title: 'Error',
+                    description: resData.message,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 1000,
+                });
             }
             setIsFetchingFundraiser(false);
         } catch (e) {
             setIsFetchingFundraiser(false);
-
             toast({
                 title: 'Error',
                 description: e.message,
                 status: 'error',
+                position: 'top-right',
                 duration: 1000,
             });
         }
@@ -93,7 +100,6 @@ const ManageFundriaserPage = () => {
             if (resData.statusCode === 200) {
                 setFundraiserUpdates(resData.fundraiserUpdates);
             } else {
-                setError(resData.message);
                 setIsFetchingFundraiserUpdates(false);
             }
             setIsFetchingFundraiserUpdates(false);
@@ -102,6 +108,7 @@ const ManageFundriaserPage = () => {
                 title: 'Error',
                 description: e.message,
                 status: 'error',
+                position: 'top-right',
                 duration: 1000,
             });
         }
@@ -120,21 +127,10 @@ const ManageFundriaserPage = () => {
             if (resData.statusCode === 200) {
                 setFundraiserDonations(resData.donations);
             } else {
-                toast({
-                    title: 'Error',
-                    description: resData.message,
-                    status: 'error',
-                    duration: 1000,
-                });
+                setError(resData.message);
             }
             setIsFetchingFundraiserDonations(false);
         } catch (e) {
-            toast({
-                title: 'Error',
-                description: e.message,
-                status: 'error',
-                duration: 1000,
-            });
             setIsFetchingFundraiserDonations(false);
         }
     };
@@ -187,7 +183,9 @@ const ManageFundriaserPage = () => {
                                         fundraiserDetails
                                     }
                                     isFetchingFundraiser={
-                                        isFetchingFundraiser
+                                        isFetchingFundraiser ||
+                                        isFetchingFundraiserUpdates ||
+                                        isFetchingFundraiserDonations
                                     }
                                     setFundraiser={
                                         setFundraiserDetails
@@ -205,8 +203,10 @@ const ManageFundriaserPage = () => {
                                     setFundraiserUpdates={
                                         setFundraiserUpdates
                                     }
-                                    isFetchingFundraiserUpdates={
-                                        isFetchingFundraiserUpdates
+                                    isFetchingFundraiser={
+                                        isFetchingFundraiser ||
+                                        isFetchingFundraiserUpdates ||
+                                        isFetchingFundraiserDonations
                                     }
                                 />
                             </TabPanel>
@@ -219,6 +219,8 @@ const ManageFundriaserPage = () => {
                                         fundraiserDonations
                                     }
                                     isFetchingFundraiser={
+                                        isFetchingFundraiser ||
+                                        isFetchingFundraiserUpdates ||
                                         isFetchingFundraiserDonations
                                     }
                                 />
