@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
     baseapiurl,
@@ -27,6 +28,7 @@ const CreateFundraiserComponent = ({
     isFetching,
 }) => {
     const { accessToken, user } = useSession();
+    const navigate = useNavigate();
 
     const { activeStep, setActiveStep } = useSteps({
         index: 0,
@@ -99,6 +101,7 @@ const CreateFundraiserComponent = ({
         }
         setDeleting(false);
     };
+
     const submitForm = async (status) => {
         const updatedCoverMediaUrl = coverMediaUrl
             ? checkForImage(coverMediaUrl)
@@ -140,6 +143,11 @@ const CreateFundraiserComponent = ({
             }
             setLoading(false);
             setDraftFundraiser(resData.fundraiser);
+        } else if (resData.fundraiser.status === 'active') {
+            setDraftFundraiser(null);
+            navigate(
+                `/fundraiser/${resData.fundraiser._id}/manage`
+            );
         } else {
             setError(resData.message);
             setLoading(false);

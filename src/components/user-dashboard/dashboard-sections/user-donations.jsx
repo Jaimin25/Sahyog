@@ -12,6 +12,7 @@ import {
     Thead,
     Tr,
 } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 
 const UserDonations = ({ donations }) => {
     return (
@@ -38,14 +39,18 @@ const UserDonations = ({ donations }) => {
                             {donations.map((donation) => (
                                 <Tr key={donation._id}>
                                     <Td>
-                                        <Button
-                                            variant="link"
-                                            colorScheme="teal"
+                                        <NavLink
+                                            to={`/fundraiser/${donation.fundraiserId}`}
                                         >
-                                            {
-                                                donation.fundraiserTitle
-                                            }
-                                        </Button>
+                                            <Button
+                                                variant="link"
+                                                colorScheme="teal"
+                                            >
+                                                {
+                                                    donation.fundraiserTitle
+                                                }
+                                            </Button>
+                                        </NavLink>
                                     </Td>
                                     <Td>{donation.paymentId}</Td>
                                     <Td>

@@ -1,4 +1,10 @@
-import { Button, Stack, Text, useToast } from '@chakra-ui/react';
+import {
+    Badge,
+    Button,
+    Stack,
+    Text,
+    useToast,
+} from '@chakra-ui/react';
 import {
     PaymentElement,
     useElements,
@@ -128,7 +134,7 @@ export default function CheckoutForm({
                             description: 'Payment successful',
                             status: 'success',
                             position: 'top-right',
-                            duration: 10000,
+                            duration: 1000,
                         });
                     } else {
                         toast({
@@ -158,14 +164,22 @@ export default function CheckoutForm({
 
     return (
         <form onSubmit={handleSubmit}>
-            <Stack>
-                <PaymentElement />
-                <Button type="submit" isLoading={loading}>
-                    Pay
-                </Button>
-                {errorMessage && (
-                    <Text color="red">{errorMessage}</Text>
-                )}
+            <Stack gap="14px">
+                <div>
+                    <Badge>
+                        For testing purpose: 4000003560000008
+                        (India only)
+                    </Badge>
+                </div>
+                <Stack>
+                    <PaymentElement />
+                    <Button type="submit" isLoading={loading}>
+                        Pay
+                    </Button>
+                    {errorMessage && (
+                        <Text color="red">{errorMessage}</Text>
+                    )}
+                </Stack>
             </Stack>
         </form>
     );

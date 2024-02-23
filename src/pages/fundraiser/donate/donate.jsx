@@ -1,4 +1,5 @@
 import {
+    Badge,
     Box,
     Button,
     Card,
@@ -27,7 +28,7 @@ import CheckoutForm from './checkout-form';
 const stripe = await loadStripe(
     import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
 );
-const DonateTo = () => {
+const DonatePage = () => {
     const { id } = useParams();
     const { user } = useSession();
     const [isFormVisible, showForm] = useState(false);
@@ -66,6 +67,9 @@ const DonateTo = () => {
         <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
             <Card className="w-full sm:w-2/3 md:w-1/2">
                 <CardHeader>
+                    <Badge colorScheme="red">
+                        Payment happens in test mode
+                    </Badge>
                     <Heading>Donate</Heading>
                 </CardHeader>
                 <CardBody>
@@ -216,4 +220,4 @@ const DonateTo = () => {
     );
 };
 
-export default DonateTo;
+export default DonatePage;

@@ -36,12 +36,14 @@ const Home = () => {
                             <span className="font-semibold">
                                 OR
                             </span>
-                            <Button
-                                variant={'outline'}
-                                colorScheme="teal"
-                            >
-                                Donate to one
-                            </Button>
+                            <NavLink to="/fundraisers/discover">
+                                <Button
+                                    variant={'outline'}
+                                    colorScheme="teal"
+                                >
+                                    Donate to one
+                                </Button>
+                            </NavLink>
                         </div>
                     </div>
                     <div className="hero.img flex-1">
