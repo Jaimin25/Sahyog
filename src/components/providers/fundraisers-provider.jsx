@@ -33,7 +33,7 @@ export const FundraiserProvider = ({ children }) => {
             }
             setIsFetching(false);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     };
 
