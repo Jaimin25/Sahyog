@@ -9,6 +9,8 @@ const FundraiserDetails = ({
     isFetchingFundraiser,
     fundraiserUpdates,
     isFetchingFundraiserUpdates,
+    isFetchingFundraiserDonations,
+    fundraiserDonations,
 }) => {
     if (isFetchingFundraiser)
         return (
@@ -26,6 +28,7 @@ const FundraiserDetails = ({
             <FundraiserDonationSection
                 fundraiser={fundraiser}
                 isFetchingFundraiser={isFetchingFundraiser}
+                fundraiserDonations={fundraiserDonations}
             />
             <FundraiserUpdatesSection
                 fundraiserUpdates={fundraiserUpdates}

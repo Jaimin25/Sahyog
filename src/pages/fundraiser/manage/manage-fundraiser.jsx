@@ -45,6 +45,9 @@ const ManageFundriaserPage = () => {
         []
     );
 
+    const [fundraiserDonations, setFundraiserDonations] =
+        useState([]);
+
     const fetchFundraiserDetails = async () => {
         try {
             const res = await axios.post(
@@ -103,11 +106,36 @@ const ManageFundriaserPage = () => {
         }
     };
 
+    const fetchFundraiserDonations = async () => {
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/donation/getFundraiserDonationsById`,
+                {
+                    fundraiserId: id,
+                }
+            );
+
+            const resData = res.data;
+            console.log(resData);
+            setIsFetchingFundraiserDonations(false);
+        } catch (e) {
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                duration: 1000,
+            });
+            setIsFetchingFundraiserDonations(false);
+        }
+    };
+
     useEffect(() => {
         setIsFetchingFundraiser(true);
         setIsFetchingFundraiserUpdates(true);
+        setIsFetchingFundraiserDonations(true);
         fetchFundraiserDetails();
         fetchFundraiserUpdates();
+        fetchFundraiserDonations();
     }, []);
 
     if (

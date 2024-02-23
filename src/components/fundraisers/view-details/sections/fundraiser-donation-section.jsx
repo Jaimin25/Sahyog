@@ -9,25 +9,29 @@ import {
 import { ArrowUpRightFromSquare } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
+import { timeSince } from '../../../../lib/utils';
 import DonationsCard from '../../../cards/donations-card';
 
 const FundraiserDonationSection = ({
     fundraiser,
     isFetchingFundraiser,
+    fundraiserDonations,
 }) => {
     if (isFetchingFundraiser) return;
 
     return (
-        <Card shadow="md" className="h-screen">
+        <Card
+            shadow="md"
+            className="col-span-2 h-screen md:col-span-1"
+        >
             <CardBody>
                 <Stack height="100%">
                     <Stack direction="row" alignItems="baseline">
                         <Text size="md" fontSize="32px">
                             ₹
-                            {145 +
-                                fundraiser.amountRaised
-                                    .toLocaleString('en-IN')
-                                    .toString()}
+                            {fundraiser.amountRaised
+                                .toLocaleString('en-IN')
+                                .toString()}
                         </Text>
                         <Text fontSize="16px" color="gray.600">
                             INR raised out of{' '}
@@ -39,14 +43,16 @@ const FundraiserDonationSection = ({
                     </Stack>
                     <Progress
                         value={
-                            ((fundraiser.amountRaised + 1450) /
+                            (fundraiser.amountRaised /
                                 fundraiser.fundraiserGoal) *
                             100
                         }
                         size="xs"
                         colorScheme="teal"
                     />
-                    <Text color="gray.600">0 donations</Text>
+                    <Text color="gray.600">
+                        {fundraiserDonations.length} donations
+                    </Text>
                     <Stack>
                         <NavLink
                             to={`/fundraiser/${fundraiser._id}/donate`}
@@ -77,30 +83,30 @@ const FundraiserDonationSection = ({
                             Donations
                         </Text>
                         <Stack gap="18px">
-                            <DonationsCard
-                                name="abc"
-                                amount={100}
-                                anonymous={false}
-                                donatedAt="2 d"
-                            />
-                            <DonationsCard
-                                name="x"
-                                amount={250}
-                                anonymous={false}
-                                donatedAt="2 d"
-                            />
-                            <DonationsCard
-                                name="abc sf"
-                                amount={100}
-                                anonymous={false}
-                                donatedAt="2 d"
-                            />
-                            <DonationsCard
-                                name="test f"
-                                amount={1000}
-                                anonymous={false}
-                                donatedAt="2 d"
-                            />
+                            {fundraiserDonations
+                                .sort(
+                                    (a, b) =>
+                                        b.donationAmount -
+                                        a.donationAmount
+                                )
+                                .slice(0, 5)
+                                .map((donation) => (
+                                    <DonationsCard
+                                        key={donation._id}
+                                        name={donation.fullname}
+                                        amount={
+                                            donation.donationAmount
+                                        }
+                                        anonymous={
+                                            donation.anonymousDonation
+                                        }
+                                        donatedAt={timeSince(
+                                            new Date(
+                                                donation.createdAt
+                                            )
+                                        )}
+                                    />
+                                ))}
                         </Stack>
                     </Stack>
                 </Stack>

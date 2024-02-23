@@ -15,7 +15,11 @@ const DonationsCard = ({
                 </Box>
             </Box>
             <Stack gap="0px">
-                <Text>{name}</Text>
+                {anonymous ? (
+                    <Text>Anonymous</Text>
+                ) : (
+                    <Text>{name}</Text>
+                )}
                 <Box className="flex gap-2">
                     <Text fontWeight="semibold">₹{amount}</Text>•
                     <Text color="gray.600">{donatedAt}</Text>

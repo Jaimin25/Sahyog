@@ -30,6 +30,9 @@ const FundraiserPage = () => {
         []
     );
 
+    const [fundraiserDonations, setFundraiserDonations] =
+        useState([]);
+
     const fetchFundraiserDetails = async () => {
         try {
             const res = await axios.post(
@@ -83,12 +86,46 @@ const FundraiserPage = () => {
             });
         }
     };
+    const fetchFundraiserDonations = async () => {
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/donation/getFundraiserDonationsById`,
+                {
+                    fundraiserId: id,
+                }
+            );
+
+            const resData = res.data;
+            console.log(resData);
+            if (resData.statusCode === 200) {
+                setFundraiserDonations(resData.donations);
+            } else {
+                toast({
+                    title: 'Error',
+                    description: resData.message,
+                    status: 'error',
+                    duration: 1000,
+                });
+            }
+            setIsFetchingFundraiserDonations(false);
+        } catch (e) {
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                duration: 1000,
+            });
+            setIsFetchingFundraiserDonations(false);
+        }
+    };
 
     useEffect(() => {
         setIsFetchingFundraiser(true);
         setFundraiserUpdates(true);
+        setIsFetchingFundraiserDonations(true);
         fetchFundraiserDetails();
         fetchFundraiserUpdates();
+        fetchFundraiserDonations();
     }, []);
 
     return (
@@ -100,6 +137,10 @@ const FundraiserPage = () => {
                     isFetchingFundraiserUpdates
                 }
                 fundraiserUpdates={fundraiserUpdates}
+                isFetchingFundraiserDonations={
+                    isFetchingFundraiserDonations
+                }
+                fundraiserDonations={fundraiserDonations}
             />
         </div>
     );
