@@ -13,8 +13,12 @@ const UserDashboardComponent = () => {
     const [currentActive, setCurrentActive] =
         useState('account');
     const { user, accessToken } = useSession();
+
     const [userFundraisers, setUserFundraisers] = useState([]);
+    const [userDonations, setUserDonations] = useState([]);
+
     const [loading, setLoading] = useState(false);
+
     const fetchUserFundraisers = async () => {
         const res = await axios.post(
             `${baseapiurl}/api/user/getAllFundraisers`,
@@ -29,9 +33,30 @@ const UserDashboardComponent = () => {
         }
     };
 
+    const fetchUserDonations = async () => {
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/donation/getUserDonationsById`,
+                {
+                    uid: user.id,
+                    access_token: accessToken,
+                }
+            );
+
+            const resData = res.data;
+
+            if (resData.statusCode === 200) {
+                setUserDonations(resData.donations);
+            } else {
+                setLoading(false);
+            }
+        } catch (e) {}
+    };
+
     useEffect(() => {
         setLoading(true);
         fetchUserFundraisers();
+        fetchUserDonations();
     }, []);
 
     return (
@@ -52,7 +77,11 @@ const UserDashboardComponent = () => {
                             userFundraisers={userFundraisers}
                         />
                     ),
-                    donations: <UserDonations />,
+                    donations: (
+                        <UserDonations
+                            donations={userDonations}
+                        />
+                    ),
                 }[currentActive]
             }
         </div>
