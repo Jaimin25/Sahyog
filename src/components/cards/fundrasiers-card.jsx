@@ -116,13 +116,18 @@ const FundriaserCard = ({
                         >
                             Share
                         </Button>
-                        <Button
-                            variant="solid"
-                            colorScheme="teal"
-                            className="fundraiser-card-donate-button flex-1"
+                        <NavLink
+                            to={`/fundraiser/${fundraiserId}/donate`}
+                            className="w-full flex-1"
                         >
-                            Donate
-                        </Button>
+                            <Button
+                                variant="solid"
+                                colorScheme="teal"
+                                className="fundraiser-card-donate-button w-full"
+                            >
+                                Donate
+                            </Button>
+                        </NavLink>
                     </ButtonGroup>
                 </CardFooter>
             </NavLink>

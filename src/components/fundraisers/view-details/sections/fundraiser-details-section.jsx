@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { Markup } from 'interweave';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { NavLink } from 'react-router-dom';
 
 import {
     checkForImage,
@@ -104,13 +105,18 @@ const FundraiserDetailsSection = ({
                             >
                                 Share
                             </Button>
-                            <Button
-                                variant="outline"
-                                colorScheme="teal"
-                                className="fundraiser-card-donate-button flex-1"
+                            <NavLink
+                                to={`/fundraiser/${fundraiser._id}/donate`}
+                                className="flex-1"
                             >
-                                Donate
-                            </Button>
+                                <Button
+                                    variant="outline"
+                                    colorScheme="teal"
+                                    className="fundraiser-card-donate-button w-full flex-1"
+                                >
+                                    Donate
+                                </Button>
+                            </NavLink>
                         </ButtonGroup>
                     </Stack>
                     <Divider />

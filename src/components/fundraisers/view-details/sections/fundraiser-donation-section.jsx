@@ -7,6 +7,7 @@ import {
     Text,
 } from '@chakra-ui/react';
 import { ArrowUpRightFromSquare } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 
 import DonationsCard from '../../../cards/donations-card';
 
@@ -47,13 +48,18 @@ const FundraiserDonationSection = ({
                     />
                     <Text color="gray.600">0 donations</Text>
                     <Stack>
-                        <Button
-                            variant="solid"
-                            colorScheme="teal"
-                            className="fundraiser-card-donate-button"
+                        <NavLink
+                            to={`/fundraiser/${fundraiser._id}/donate`}
+                            className="w-full"
                         >
-                            Donate now
-                        </Button>
+                            <Button
+                                variant="solid"
+                                colorScheme="teal"
+                                className="fundraiser-card-donate-button w-full"
+                            >
+                                Donate now
+                            </Button>
+                        </NavLink>
                         <Button
                             variant="outline"
                             colorScheme="teal"
