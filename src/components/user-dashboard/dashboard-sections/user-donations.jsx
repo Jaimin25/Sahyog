@@ -32,38 +32,48 @@ const UserDonations = ({ donations }) => {
                                 <Th>Donated To</Th>
                                 <Th>Transaction Id</Th>
                                 <Th>Amount</Th>
-                                <Th>Details</Th>
+                                <Th>More Details</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {donations.map((donation) => (
-                                <Tr key={donation._id}>
-                                    <Td>
-                                        <NavLink
-                                            to={`/fundraiser/${donation.fundraiserId}`}
-                                        >
-                                            <Button
-                                                variant="link"
-                                                colorScheme="teal"
+                            {donations
+                                .sort(
+                                    (a, b) =>
+                                        new Date(b.createdAt) -
+                                        new Date(a.createdAt)
+                                )
+                                .map((donation) => (
+                                    <Tr key={donation._id}>
+                                        <Td>
+                                            <NavLink
+                                                to={`/fundraiser/${donation.fundraiserId}`}
                                             >
-                                                {
-                                                    donation.fundraiserTitle
-                                                }
+                                                <Button
+                                                    variant="link"
+                                                    colorScheme="teal"
+                                                >
+                                                    {
+                                                        donation.fundraiserTitle
+                                                    }
+                                                </Button>
+                                            </NavLink>
+                                        </Td>
+                                        <Td>
+                                            {donation.paymentId}
+                                        </Td>
+                                        <Td>
+                                            ₹
+                                            {
+                                                donation.donationAmount
+                                            }
+                                        </Td>
+                                        <Td>
+                                            <Button colorScheme="teal">
+                                                View
                                             </Button>
-                                        </NavLink>
-                                    </Td>
-                                    <Td>{donation.paymentId}</Td>
-                                    <Td>
-                                        ₹
-                                        {donation.donationAmount}
-                                    </Td>
-                                    <Td>
-                                        <Button colorScheme="teal">
-                                            View
-                                        </Button>
-                                    </Td>
-                                </Tr>
-                            ))}
+                                        </Td>
+                                    </Tr>
+                                ))}
                         </Tbody>
                     </Table>
                 </TableContainer>

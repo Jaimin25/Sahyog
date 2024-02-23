@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import ManageFundraiserDashboard from '../../../components/fundraisers/manage/manage-fundraiser-dashboard';
+import ManageFundraiserDonation from '../../../components/fundraisers/manage/manage-fundraiser-donation';
 import ManageFundraiserUpdates from '../../../components/fundraisers/manage/manage-fundraiser-updates';
 import { useSession } from '../../../components/providers/session-provider';
 import { baseapiurl } from '../../../lib/utils';
@@ -116,7 +117,16 @@ const ManageFundriaserPage = () => {
             );
 
             const resData = res.data;
-            console.log(resData);
+            if (resData.statusCode === 200) {
+                setFundraiserDonations(resData.donations);
+            } else {
+                toast({
+                    title: 'Error',
+                    description: resData.message,
+                    status: 'error',
+                    duration: 1000,
+                });
+            }
             setIsFetchingFundraiserDonations(false);
         } catch (e) {
             toast({
@@ -201,7 +211,17 @@ const ManageFundriaserPage = () => {
                                 />
                             </TabPanel>
                             <TabPanel>
-                                <p>three!</p>
+                                <ManageFundraiserDonation
+                                    fundraiser={
+                                        fundraiserDetails
+                                    }
+                                    fundraiserDonations={
+                                        fundraiserDonations
+                                    }
+                                    isFetchingFundraiser={
+                                        isFetchingFundraiserDonations
+                                    }
+                                />
                             </TabPanel>
                         </TabPanels>
                     </CardBody>

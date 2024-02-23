@@ -1,4 +1,6 @@
 import {
+    Alert,
+    AlertIcon,
     Card,
     CardBody,
     CardHeader,
@@ -27,6 +29,13 @@ const UserFundraisers = ({ loading, userFundraisers }) => {
                     />
                 ) : (
                     <Stack>
+                        {userFundraisers &&
+                            userFundraisers.length === 0 && (
+                                <Alert>
+                                    <AlertIcon />
+                                    You have no fundraisers yet
+                                </Alert>
+                            )}
                         {userFundraisers.some(
                             (fundraiser) =>
                                 fundraiser.status === 'draft' ||
