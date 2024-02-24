@@ -238,7 +238,8 @@ const DonatePage = () => {
                                             )
                                         }
                                     >
-                                        Donate anonymously
+                                        Don&apos;t show my name
+                                        publicly
                                     </Checkbox>
                                 </Box>
                             </Stack>
