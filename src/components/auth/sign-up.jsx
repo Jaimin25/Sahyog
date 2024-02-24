@@ -67,6 +67,7 @@ const SignUpComponent = () => {
                     user.profilePicUrl =
                         resData.userDetails.profilePicUrl;
                     saveUserDetails(user);
+
                     navigate('/dashboard');
                 } else {
                     await supabase.auth.signOut();
@@ -78,7 +79,14 @@ const SignUpComponent = () => {
         }
 
         if (error) {
-            setError(error.message);
+            if (
+                error.message.toLowerCase() ===
+                'user already registered'
+            ) {
+                setError('User with email already registered');
+            } else {
+                setError(error.message);
+            }
         }
     };
     return (

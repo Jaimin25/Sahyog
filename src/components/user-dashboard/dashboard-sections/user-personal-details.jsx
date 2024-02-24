@@ -72,7 +72,7 @@ const UserPersonalDetails = () => {
             });
         }
     };
-
+    console.log(user);
     return (
         <Card className="flex-1" padding="10px">
             <CardHeader>

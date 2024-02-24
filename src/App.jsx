@@ -38,7 +38,7 @@ export const App = () => {
                             !session ? (
                                 <SignUpPage />
                             ) : (
-                                <Navigate to="/dashboard" />
+                                <Navigate to="/" />
                             )
                         }
                     />
