@@ -16,7 +16,10 @@ import {
 
 const FundraiserDonationSkeleton = () => {
     return (
-        <Card shadow="md" className="h-screen">
+        <Card
+            shadow="md"
+            className="col-span-2 h-screen md:col-span-1"
+        >
             <CardBody>
                 <Stack height="100%">
                     <Skeleton>
