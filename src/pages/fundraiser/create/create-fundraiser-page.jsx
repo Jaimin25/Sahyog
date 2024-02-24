@@ -1,3 +1,9 @@
+import {
+    Alert,
+    AlertIcon,
+    Card,
+    CardBody,
+} from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -11,6 +17,7 @@ const CreateFundraiserPage = () => {
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         if (!user) return;
+        if (!user.emailVerified) return;
         setLoading(true);
         const getDraftFundraiser = async () => {
             const res = await axios.post(
@@ -32,6 +39,21 @@ const CreateFundraiserPage = () => {
         };
         getDraftFundraiser();
     }, []);
+    if (!user.emailVerified) {
+        return (
+            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+                <Card className="w-full">
+                    <CardBody>
+                        <Alert status="error">
+                            <AlertIcon />
+                            Please verify your email to create a
+                            fundraiser
+                        </Alert>
+                    </CardBody>
+                </Card>
+            </div>
+        );
+    }
     return (
         <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
             <CreateFundraiserComponent

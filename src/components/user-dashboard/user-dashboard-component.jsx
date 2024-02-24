@@ -12,7 +12,7 @@ import DashboardSidebar from './dashboard-siderbar';
 const UserDashboardComponent = () => {
     const [currentActive, setCurrentActive] =
         useState('account');
-    const { user, accessToken } = useSession();
+    const { user, accessToken, saveUserDetails } = useSession();
 
     const [userFundraisers, setUserFundraisers] = useState([]);
     const [userDonations, setUserDonations] = useState([]);
@@ -53,8 +53,28 @@ const UserDashboardComponent = () => {
         } catch (e) {}
     };
 
+    const fetchUserDetails = async () => {
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/auth/sign-in`,
+                { uid: user.id, email: user.email }
+            );
+
+            const resData = res.data;
+            if (resData.statusCode === 200) {
+                user.fullname = resData.userDetails.fullname;
+                user.emailVerified =
+                    resData.userDetails.emailVerified;
+                user.profilePicUrl =
+                    resData.userDetails.profilePicUrl;
+                saveUserDetails(user);
+            }
+        } catch (error) {}
+    };
+
     useEffect(() => {
         setLoading(true);
+        fetchUserDetails();
         fetchUserFundraisers();
         fetchUserDonations();
     }, []);

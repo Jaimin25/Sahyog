@@ -106,6 +106,21 @@ const DonatePage = () => {
                 </Card>
             </div>
         );
+
+    if (!user.emailVerified) {
+        return (
+            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+                <Card className="w-full">
+                    <CardBody>
+                        <Alert status="error">
+                            <AlertIcon />
+                            Please verify your email to donate
+                        </Alert>
+                    </CardBody>
+                </Card>
+            </div>
+        );
+    }
     return (
         <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
             <Card className="w-full sm:w-2/3 md:w-1/2">

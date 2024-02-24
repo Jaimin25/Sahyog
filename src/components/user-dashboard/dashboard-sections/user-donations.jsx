@@ -15,6 +15,26 @@ import {
 import { NavLink } from 'react-router-dom';
 
 const UserDonations = ({ donations }) => {
+    // const handleDetailsButtonClick = async (paymentId) => {
+    //     try {
+    //         console.log(paymentId);
+    //         const res = await axios.post(
+    //             `${baseapiurl}/api/stripe/getPaymentDetailsById`,
+    //             {
+    //                 uid: user.id,
+    //                 access_token: accessToken,
+    //                 paymentId,
+    //             }
+    //         );
+    //         console.log(res.data);
+    //         console.log(
+    //             new Date(
+    //                 res.data.paymentIntent.created
+    //             ).toUTCString()
+    //         );
+    //     } catch (e) {}
+    // };
+
     return (
         <Card className="flex-1" padding="10px">
             <CardHeader>
@@ -32,7 +52,7 @@ const UserDonations = ({ donations }) => {
                                 <Th>Donated To</Th>
                                 <Th>Transaction Id</Th>
                                 <Th>Amount</Th>
-                                <Th>More Details</Th>
+                                {/* <Th>More Details</Th> */}
                             </Tr>
                         </Thead>
                         <Tbody>
@@ -67,11 +87,18 @@ const UserDonations = ({ donations }) => {
                                                 donation.donationAmount
                                             }
                                         </Td>
-                                        <Td>
-                                            <Button colorScheme="teal">
+                                        {/* <Td>
+                                            <Button
+                                                colorScheme="teal"
+                                                onClick={() =>
+                                                    handleDetailsButtonClick(
+                                                        donation.paymentId
+                                                    )
+                                                }
+                                            >
                                                 View
                                             </Button>
-                                        </Td>
+                                        </Td> */}
                                     </Tr>
                                 ))}
                         </Tbody>

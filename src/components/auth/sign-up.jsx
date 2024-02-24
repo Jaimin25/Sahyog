@@ -14,7 +14,7 @@ import {
 import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { supabase } from '../../lib/supabase';
 import { baseapiurl } from '../../lib/utils';
@@ -23,7 +23,7 @@ import { useSession } from '../providers/session-provider';
 const SignUpComponent = () => {
     const { saveUserDetails } = useSession();
     const [error, setError] = useState();
-
+    const navigate = useNavigate();
     const onSubmit = async (values, actions) => {
         setError(null);
         const res = await axios.post(
@@ -56,14 +56,16 @@ const SignUpComponent = () => {
             );
 
             const resData = res.data;
-
             if (resData.statusCode === 200) {
-                user.fullname = values.fullname;
+                user.fullname = resData.userDetails.fullname;
                 user.emailVerified =
                     resData.userDetails.emailVerified;
                 user.profilePicUrl =
                     resData.userDetails.profilePicUrl;
                 saveUserDetails(user);
+                navigate('/dashboard');
+            } else {
+                await supabase.auth.signOut();
             }
         }
 
