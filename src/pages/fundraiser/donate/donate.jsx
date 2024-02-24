@@ -29,10 +29,9 @@ import { useSession } from '../../../components/providers/session-provider';
 import { baseapiurl } from '../../../lib/utils';
 import CheckoutForm from './checkout-form';
 
-const DonatePage = async () => {
-    const stripe = await loadStripe(
-        import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
-    );
+const DonatePage = () => {
+    const [stripe, setStripe] = useState();
+
     const { id } = useParams();
     const { user } = useSession();
     const toast = useToast();
@@ -56,6 +55,16 @@ const DonatePage = async () => {
         currency: 'inr',
         paymentMethodCreation: 'manual',
     };
+
+    useEffect(() => {
+        const stripe = async () => {
+            const stripe = await loadStripe(
+                import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
+            );
+            setStripe(stripe);
+        };
+        stripe();
+    }, []);
 
     useEffect(() => {
         const fetchFundraiserDetails = async () => {
@@ -303,7 +312,7 @@ const DonatePage = async () => {
                                 </Box>
                             </Stack>
                         )}
-                        {isFormVisible && (
+                        {isFormVisible && stripe && (
                             <Elements
                                 stripe={stripe}
                                 options={options}
