@@ -22,8 +22,10 @@ import { useSession } from '../providers/session-provider';
 
 const SignUpComponent = () => {
     const { saveUserDetails } = useSession();
-    const [error, setError] = useState();
     const navigate = useNavigate();
+
+    const [error, setError] = useState();
+
     const onSubmit = async (values, actions) => {
         setError(null);
         const res = await axios.post(
@@ -46,25 +48,31 @@ const SignUpComponent = () => {
 
         if (data && !error) {
             const user = data.session.user;
-            const res = await axios.post(
-                `${baseapiurl}/api/auth/sign-up`,
-                {
-                    uid: user.id,
-                    fullname: values.fullname,
-                    email: values.email,
-                }
-            );
+            try {
+                const res = await axios.post(
+                    `${baseapiurl}/api/auth/sign-up`,
+                    {
+                        uid: user.id,
+                        fullname: values.fullname,
+                        email: values.email,
+                    }
+                );
 
-            const resData = res.data;
-            if (resData.statusCode === 200) {
-                user.fullname = resData.userDetails.fullname;
-                user.emailVerified =
-                    resData.userDetails.emailVerified;
-                user.profilePicUrl =
-                    resData.userDetails.profilePicUrl;
-                saveUserDetails(user);
-                navigate('/dashboard');
-            } else {
+                const resData = res.data;
+
+                if (resData.statusCode === 200) {
+                    user.fullname = resData.userDetails.fullname;
+                    user.emailVerified =
+                        resData.userDetails.emailVerified;
+                    user.profilePicUrl =
+                        resData.userDetails.profilePicUrl;
+                    saveUserDetails(user);
+                    navigate('/dashboard');
+                } else {
+                    await supabase.auth.signOut();
+                }
+            } catch (error) {
+                setError(error.message);
                 await supabase.auth.signOut();
             }
         }
@@ -179,7 +187,7 @@ const SignUpComponent = () => {
                                             props.isSubmitting
                                         }
                                     >
-                                        Sign In
+                                        Sign Up
                                     </Button>
                                 </Stack>
                             </Form>

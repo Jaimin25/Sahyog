@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
     createContext,
     useContext,
@@ -7,6 +8,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 import { supabase } from '../../lib/supabase';
+import { baseapiurl } from '../../lib/utils';
 
 const SessionContext = createContext();
 
@@ -21,6 +23,31 @@ export function SessionProvider({ children }) {
 
     const navigate = useNavigate();
 
+    const fetchUserDetails = async (user) => {
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/auth/sign-in`,
+                { uid: user.id, email: user.email }
+            );
+
+            const resData = res.data;
+
+            if (resData.statusCode === 200) {
+                user.fullname = resData.userDetails.fullname;
+                user.emailVerified =
+                    resData.userDetails.emailVerified;
+                user.profilePicUrl =
+                    resData.userDetails.profilePicUrl;
+
+                localStorage.setItem(
+                    'user',
+                    JSON.stringify(user)
+                );
+                setUser(user);
+            }
+        } catch (error) {}
+    };
+
     useEffect(() => {
         const getSession = async () => {
             const { data } = await supabase.auth.getSession();
@@ -31,6 +58,7 @@ export function SessionProvider({ children }) {
             setUser(user);
             setSession(data.session);
             setAccessToken(data.session.access_token);
+            fetchUserDetails(user);
         };
         getSession();
 

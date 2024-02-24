@@ -64,7 +64,7 @@ const ManageFundriaserPage = () => {
                 setFundraiserDetails(resData.fundraiserDetails);
             } else {
                 setError(resData.message);
-                console.log('this');
+
                 toast({
                     title: 'Error',
                     description: resData.message,
