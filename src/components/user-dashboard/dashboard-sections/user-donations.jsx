@@ -4,6 +4,7 @@ import {
     CardBody,
     CardHeader,
     Heading,
+    Stack,
     Table,
     TableContainer,
     Tbody,
@@ -34,6 +35,28 @@ const UserDonations = ({ donations }) => {
     //         );
     //     } catch (e) {}
     // };
+
+    if (!donations || donations.length === 0) {
+        return (
+            <Card className="flex-1" padding="10px">
+                <CardHeader>
+                    <Heading>Donations</Heading>
+                </CardHeader>
+                <CardBody>
+                    <Stack>
+                        <Heading size="sm">
+                            No donations found
+                        </Heading>
+                        <NavLink to="/fundraisers/discover">
+                            <Button colorScheme="teal">
+                                Donate Now to a Fundraiser
+                            </Button>
+                        </NavLink>
+                    </Stack>
+                </CardBody>
+            </Card>
+        );
+    }
 
     return (
         <Card className="flex-1" padding="10px">

@@ -30,24 +30,24 @@ const UserFundraiserCardSkeleton = ({
                                 <div className="overflow-hidden rounded-lg">
                                     <LazyLoadImage
                                         src={coverMediaUrl}
-                                        className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
+                                        className="aspect-video h-[150px] w-[266px] cursor-pointer transition duration-500 hover:scale-110"
                                     />
                                 </div>
                             )}
                     </Skeleton>
-                    <Stack justifyContent="center" width="100%">
+                    <Stack justifyContent="center" width="50%">
                         <Skeleton>
                             <Text fontWeight="semibold">
                                 {fundraiserTitle || 'Untitled'}
                             </Text>
                         </Skeleton>
-                        <Skeleton>
+                        <Skeleton width="75%">
                             <Text>
                                 Fundraiser created{' '}
                                 {timeSince(new Date(createdAt))}
                             </Text>
                         </Skeleton>
-                        <ButtonGroup>
+                        <ButtonGroup width="50%">
                             <Skeleton width="100%">
                                 <Button
                                     variant="outline"
