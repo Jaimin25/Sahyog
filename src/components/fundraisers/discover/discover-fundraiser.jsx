@@ -2,16 +2,15 @@ import { Card, CardBody } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import FundriaserCard from '../../cards/fundrasiers-card';
-import { useFundraisers } from '../../providers/fundraisers-provider';
 import FundriaserCardSkeleton from '../../skeletons/fundraiser-card-skeleton';
 
 const DiscoverFundraiser = ({
     categoryFilter,
     uploadedFilter,
     searchFilter,
+    fundraisers,
+    isFetching,
 }) => {
-    const { fundraisers, isFetching } = useFundraisers();
-
     const [filteredFundraisers, setFilteredFundraisers] =
         useState(
             uploadedFilter === 'oldest'

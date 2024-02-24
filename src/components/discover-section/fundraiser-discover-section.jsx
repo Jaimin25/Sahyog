@@ -1,13 +1,44 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+import { baseapiurl } from '../../lib/utils';
 import FundriaserCard from '../cards/fundrasiers-card';
-import { useFundraisers } from '../providers/fundraisers-provider';
 import FundriaserCardSkeleton from '../skeletons/fundraiser-card-skeleton';
 
 const FundraiserDiscoverSection = () => {
-    const { fundraisers } = useFundraisers();
+    const [isFetching, setIsFetching] = useState(true);
+    const [fundraisers, setFundraisers] = useState([]);
+
+    const fetchAllFundraisers = async () => {
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/fundraiser/getAllFundraisers`
+            );
+            const resData = res.data;
+
+            if (resData.statusCode === 200) {
+                setFundraisers(resData.allFundraisers);
+                setIsFetching(false);
+            } else {
+                setFundraisers([]);
+                setIsFetching(false);
+            }
+            setIsFetching(false);
+        } catch (error) {
+            // console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        setIsFetching(true);
+        fetchAllFundraisers();
+    }, []);
 
     return (
         <div className="discover-fundriaser-contianer grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {fundraisers && !fundraisers.length > 0 ? (
+            {isFetching &&
+            fundraisers &&
+            !fundraisers.length > 0 ? (
                 <>
                     <FundriaserCardSkeleton
                         fundraiserTitle="Fundraiser Title"

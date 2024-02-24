@@ -10,11 +10,12 @@ import {
     Text,
     VStack,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import { Search } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import DiscoverFundraiser from '../../components/fundraisers/discover/discover-fundraiser';
-import { capitalizeString } from '../../lib/utils';
+import { baseapiurl, capitalizeString } from '../../lib/utils';
 
 const categories = [
     'animals',
@@ -36,6 +37,35 @@ const DiscoverFundraisersPage = () => {
     const [searchFilter, setSearchFilter] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('all');
     const [uploadedFilter, setUploadedFilter] = useState('all');
+
+    const [isFetching, setIsFetching] = useState(true);
+    const [fundraisers, setFundraisers] = useState([]);
+
+    const fetchAllFundraisers = async () => {
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/fundraiser/getAllFundraisers`
+            );
+            const resData = res.data;
+
+            if (resData.statusCode === 200) {
+                setFundraisers(resData.allFundraisers);
+                setIsFetching(false);
+            } else {
+                setFundraisers([]);
+                setIsFetching(false);
+            }
+            setIsFetching(false);
+        } catch (error) {
+            // console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        setIsFetching(true);
+        fetchAllFundraisers();
+    }, []);
+
     return (
         <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
             <Card>
@@ -123,6 +153,8 @@ const DiscoverFundraisersPage = () => {
                 categoryFilter={categoryFilter}
                 uploadedFilter={uploadedFilter}
                 searchFilter={searchFilter}
+                fundraisers={fundraisers}
+                isFetching={isFetching}
             />
         </div>
     );
