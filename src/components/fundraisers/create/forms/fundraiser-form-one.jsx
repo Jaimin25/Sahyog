@@ -27,6 +27,7 @@ const FundraiserFormOne = ({
     const [checkingLoc, setCheckingLoc] = useState(false);
     const handleCheckZipCode = async () => {
         setCheckingLoc(true);
+        setError(null);
         try {
             const res = await axios.get(
                 `https://api.postalpincode.in/pincode/${zipCode}`
@@ -48,6 +49,7 @@ const FundraiserFormOne = ({
             }
             setCheckingLoc(false);
         } catch (e) {
+            console.log(e.message);
             setError(e.message);
             setCheckingLoc(false);
         }
