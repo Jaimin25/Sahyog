@@ -173,7 +173,11 @@ export default function CheckoutForm({
                 </div>
                 <Stack>
                     <PaymentElement />
-                    <Button type="submit" isLoading={loading}>
+                    <Button
+                        type="submit"
+                        isLoading={loading}
+                        colorScheme="green"
+                    >
                         Pay
                     </Button>
                     {errorMessage && (
