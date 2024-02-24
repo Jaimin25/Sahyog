@@ -29,10 +29,10 @@ import { useSession } from '../../../components/providers/session-provider';
 import { baseapiurl } from '../../../lib/utils';
 import CheckoutForm from './checkout-form';
 
-const stripe = await loadStripe(
-    import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
-);
-const DonatePage = () => {
+const DonatePage = async () => {
+    const stripe = await loadStripe(
+        import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
+    );
     const { id } = useParams();
     const { user } = useSession();
     const toast = useToast();
