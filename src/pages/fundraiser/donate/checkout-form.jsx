@@ -20,6 +20,7 @@ export default function CheckoutForm({
     amount,
     fundraiserId,
     anonymous,
+    setIsDonationSuccess,
 }) {
     const stripe = useStripe();
     const elements = useElements();
@@ -136,6 +137,7 @@ export default function CheckoutForm({
                             position: 'top-right',
                             duration: 1000,
                         });
+                        setIsDonationSuccess(true);
                     } else {
                         toast({
                             title: 'Error',

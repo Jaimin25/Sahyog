@@ -6,6 +6,7 @@ import {
     Button,
     Card,
     CardBody,
+    CardFooter,
     CardHeader,
     Checkbox,
     Heading,
@@ -22,7 +23,7 @@ import axios from 'axios';
 import { IndianRupee } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 import { useSession } from '../../../components/providers/session-provider';
 import { baseapiurl } from '../../../lib/utils';
@@ -44,6 +45,9 @@ const DonatePage = () => {
 
     const [donationAmount, setDonationAmount] = useState();
     const [anonymousDonation, setAnonymousDonation] =
+        useState(false);
+
+    const [isDonationSuccess, setIsDonationSuccess] =
         useState(false);
 
     const options = {
@@ -121,6 +125,62 @@ const DonatePage = () => {
             </div>
         );
     }
+
+    if (isDonationSuccess) {
+        return (
+            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+                <Card className="flex w-full items-center sm:w-2/3 md:w-1/2">
+                    <CardHeader>
+                        <Heading>
+                            Thank you for donating!
+                        </Heading>
+                    </CardHeader>
+                    <CardBody>
+                        <Box className="flex flex-col items-center gap-3">
+                            <Box>
+                                <LazyLoadImage
+                                    src={
+                                        fundraiserDetails.coverMediaUrl
+                                    }
+                                    className="aspect-video w-[250px] rounded-lg"
+                                />
+                            </Box>
+                            <Box textAlign="center">
+                                <Text fontSize="18px">
+                                    <span className="font-semibold">
+                                        {
+                                            fundraiserDetails.fundraiserTitle
+                                        }
+                                    </span>
+                                </Text>
+                                <Text>
+                                    Your donation of{' '}
+                                    <span className="font-semibold">
+                                        ₹{donationAmount}
+                                    </span>{' '}
+                                    will benefit{' '}
+                                    <span className="font-semibold">
+                                        {
+                                            fundraiserDetails.creatorName
+                                        }
+                                    </span>{' '}
+                                    and their fundraiser
+                                </Text>
+                            </Box>
+                        </Box>
+                    </CardBody>
+                    <CardFooter>
+                        <NavLink to="/fundraisers/discover">
+                            <Button colorScheme="teal">
+                                Keep Donating
+                            </Button>
+                        </NavLink>
+                    </CardFooter>
+                </Card>
+            </div>
+        );
+    }
+
     return (
         <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
             <Card className="w-full sm:w-2/3 md:w-1/2">
@@ -177,7 +237,6 @@ const DonatePage = () => {
                                                 </span>
                                             </Text>
                                         )}
-                                    <Text></Text>
                                 </Box>
                             </Box>
                         )}
@@ -253,6 +312,9 @@ const DonatePage = () => {
                                     amount={donationAmount}
                                     anonymous={anonymousDonation}
                                     fundraiserId={id}
+                                    setIsDonationSuccess={
+                                        setIsDonationSuccess
+                                    }
                                 />
                             </Elements>
                         )}
