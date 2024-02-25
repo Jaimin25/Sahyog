@@ -36,6 +36,8 @@ const DonatePage = () => {
     const { user } = useSession();
     const toast = useToast();
     const [isFormVisible, showForm] = useState(false);
+    const [isProccessingPayment, setIsProccessingPayment] =
+        useState(false);
     const [error, setError] = useState();
 
     const [fundraiserDetails, setFundraiserDetails] = useState();
@@ -189,7 +191,7 @@ const DonatePage = () => {
             </div>
         );
     }
-
+    console.log(isProccessingPayment);
     return (
         <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
             <Card className="w-full sm:w-2/3 md:w-1/2">
@@ -324,6 +326,9 @@ const DonatePage = () => {
                                     setIsDonationSuccess={
                                         setIsDonationSuccess
                                     }
+                                    setIsProccessingPayment={
+                                        setIsProccessingPayment
+                                    }
                                 />
                             </Elements>
                         )}
@@ -333,7 +338,8 @@ const DonatePage = () => {
                             }
                             isDisabled={
                                 !donationAmount ||
-                                !(donationAmount >= 100)
+                                !(donationAmount >= 100) ||
+                                isProccessingPayment
                             }
                             colorScheme={
                                 isFormVisible ? 'red' : 'teal'

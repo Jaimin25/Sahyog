@@ -21,6 +21,7 @@ export default function CheckoutForm({
     fundraiserId,
     anonymous,
     setIsDonationSuccess,
+    setIsProccessingPayment,
 }) {
     const stripe = useStripe();
     const elements = useElements();
@@ -33,6 +34,7 @@ export default function CheckoutForm({
 
     const handleError = (error) => {
         setLoading(false);
+        setIsProccessingPayment(false);
         setErrorMessage(error.message);
     };
 
@@ -44,6 +46,8 @@ export default function CheckoutForm({
         }
 
         setLoading(true);
+        setIsProccessingPayment(true);
+
         setErrorMessage(undefined);
         const { error: submitError } = await elements.submit();
         if (submitError) {
@@ -129,6 +133,8 @@ export default function CheckoutForm({
 
                     const resData = res.data;
                     setLoading(false);
+                    setIsProccessingPayment(false);
+
                     if (resData.statusCode === 200) {
                         toast({
                             title: 'Success',
@@ -139,6 +145,8 @@ export default function CheckoutForm({
                         });
                         setIsDonationSuccess(true);
                     } else {
+                        setIsProccessingPayment(false);
+
                         toast({
                             title: 'Error',
                             description: resData.message,
@@ -148,6 +156,8 @@ export default function CheckoutForm({
                         });
                     }
                 } catch (e) {
+                    setLoading(false);
+                    setIsProccessingPayment(false);
                     toast({
                         title: 'Error',
                         description: e.message,
