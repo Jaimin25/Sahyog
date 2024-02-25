@@ -34,29 +34,32 @@ const SignInComponent = () => {
             });
 
         if (data && !error) {
-            const user = data.session.user;
+            const sessionUser = data.session.user;
 
             try {
                 const res = await axios.post(
                     `${baseapiurl}/api/auth/sign-in`,
-                    { uid: user.id, email: values.email }
+                    { uid: sessionUser.id, email: values.email }
                 );
 
                 const resData = res.data;
+                console.log(resData);
                 if (resData.statusCode === 200) {
-                    user.fullname = resData.userDetails.fullname;
-                    user.emailVerified =
+                    sessionUser.fullname =
+                        resData.userDetails.fullname;
+                    sessionUser.emailVerified =
                         resData.userDetails.emailVerified;
-                    user.profilePicUrl =
+                    sessionUser.profilePicUrl =
                         resData.userDetails.profilePicUrl;
-                    saveUserDetails(user);
+                    saveUserDetails(sessionUser);
                     navigate('/dashboard');
                 } else {
+                    setError(resData.message);
                     await supabase.auth.signOut();
                 }
             } catch (error) {
                 setError(error.message);
-                await supabase.auth.signOut();
+                // await supabase.auth.signOut();
             }
         }
         if (error) {

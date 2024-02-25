@@ -8,28 +8,39 @@ import {
     CardBody,
     CardFooter,
     CardHeader,
-    Editable,
-    EditableInput,
-    EditablePreview,
     Heading,
+    Input,
     Stack,
     Text,
     useToast,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { ImagePlus } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import validator from 'validator';
 
 import { supabase } from '../../../lib/supabase';
 import { baseapiurl } from '../../../lib/utils';
 import { useSession } from '../../providers/session-provider';
 
 const UserPersonalDetails = () => {
-    const { user, accessToken } = useSession();
+    const { user, accessToken, saveUserDetails } = useSession();
     const toast = useToast();
 
     const [loading, setLoading] = useState(false);
+    const [isSavingChanges, setIsSavingChanges] =
+        useState(false);
     const [isSendingMail, setIsSendingMail] = useState(false);
+
+    const [userEmail, setUserEmail] = useState(user.email);
+    const [userFullname, setUserFullname] = useState(
+        user.fullname
+    );
+
+    useEffect(() => {
+        setUserEmail(user.email);
+        setUserFullname(user.fullname);
+    }, []);
 
     const handleResendButton = async () => {
         setIsSendingMail(true);
@@ -73,6 +84,93 @@ const UserPersonalDetails = () => {
         }
     };
 
+    const handleSaveChanges = async () => {
+        setIsSavingChanges(true);
+        try {
+            if (validator.isEmail(userEmail)) {
+                if (userEmail !== user.email) {
+                    const { data, error } =
+                        await supabase.auth.updateUser({
+                            email: userEmail,
+                        });
+                    setIsSavingChanges(false);
+
+                    if (error) {
+                        toast({
+                            title: 'Error',
+                            description: error.message,
+                            status: 'error',
+                            position: 'top-right',
+                            duration: 1500,
+                        });
+                    } else if (data) {
+                        toast({
+                            title: 'Confirm Mail',
+                            description:
+                                'Please check your email to confirm the new email',
+                            status: 'success',
+                            position: 'top-right',
+                            duration: 1500,
+                        });
+                    }
+                }
+            } else {
+                setIsSavingChanges(false);
+
+                toast({
+                    title: 'Error',
+                    description: 'Please enter a valid email',
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 1000,
+                });
+            }
+
+            if (userFullname !== user.fullname) {
+                const res = await axios.post(
+                    `${baseapiurl}/api/user/changeUserFullname`,
+                    {
+                        uid: user.id,
+                        access_token: accessToken,
+                        fullname: userFullname,
+                    }
+                );
+                const resData = res.data;
+                setIsSavingChanges(false);
+                if (resData.statusCode === 200) {
+                    user.fullname = userFullname;
+                    saveUserDetails(user);
+                    toast({
+                        title: 'Fullname updated',
+                        description:
+                            'Your fullname has been updated',
+                        status: 'success',
+                        position: 'top-right',
+                        duration: 1000,
+                    });
+                } else {
+                    setIsSavingChanges(false);
+                    toast({
+                        title: 'Error',
+                        description: resData.message,
+                        status: 'error',
+                        position: 'top-right',
+                        duration: 1000,
+                    });
+                }
+            }
+        } catch (e) {
+            setIsSavingChanges(false);
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                position: 'top-right',
+                duration: 1000,
+            });
+        }
+    };
+
     return (
         <Card className="flex-1" padding="10px">
             <CardHeader>
@@ -104,39 +202,32 @@ const UserPersonalDetails = () => {
                         </Button>
                     </div>
                     <Text fontWeight="semibold">Full Name</Text>
-                    <Editable defaultValue={user.fullname}>
-                        <EditablePreview />
-                        <EditableInput />
-                    </Editable>
+                    <Input
+                        value={userFullname}
+                        type="text"
+                        onChange={(e) => {
+                            setUserFullname(e.target.value);
+                        }}
+                        isRequired
+                    />
+                    <Text className="text-sm text-gray-600">
+                        Name must be same as per your Aadhar Card
+                    </Text>
                     <Text fontWeight="semibold" className="">
                         Email{' '}
                         {!user.emailVerified && (
                             <Badge color="red">unverified</Badge>
                         )}
                     </Text>
-                    <Box className="flex items-center">
-                        <Editable
-                            defaultValue={user.email}
-                            flex="1"
-                        >
-                            <EditablePreview />
-                            <EditableInput
-                            // onChange={(e) => {
-                            //     if (!e.target.value.trim()) {
-                            //         setDisabled(true);
-                            //         return setEmail(user.email);
-                            //     }
-                            //     setEmail(e.target.value);
-                            //     if (
-                            //         e.target.value !== user.email
-                            //     ) {
-                            //         setDisabled(false);
-                            //     } else {
-                            //         setDisabled(true);
-                            //     }
-                            // }}
-                            />
-                        </Editable>
+                    <Box className="flex flex-col items-start gap-2">
+                        <Input
+                            type="email"
+                            isRequired
+                            value={userEmail}
+                            onChange={(e) => {
+                                setUserEmail(e.target.value);
+                            }}
+                        />
                         {!user.emailVerified && (
                             <Button
                                 colorScheme="teal"
@@ -144,14 +235,26 @@ const UserPersonalDetails = () => {
                                 onClick={handleResendButton}
                                 isLoading={isSendingMail}
                             >
-                                Resend
+                                Send Verification Mail
                             </Button>
                         )}
                     </Box>
                 </Stack>
             </CardBody>
             <CardFooter gap="10px">
-                <Button colorScheme="teal">Save</Button>
+                <Button
+                    colorScheme="teal"
+                    isDisabled={
+                        !userEmail ||
+                        !userFullname ||
+                        (userEmail === user.email &&
+                            userFullname === user.fullname)
+                    }
+                    isLoading={isSavingChanges}
+                    onClick={handleSaveChanges}
+                >
+                    Save
+                </Button>
                 <Button
                     variant="solid"
                     colorScheme="red"
@@ -164,6 +267,7 @@ const UserPersonalDetails = () => {
                         }
                     }}
                     isLoading={loading}
+                    isDisabled={isSavingChanges}
                 >
                     Logout
                 </Button>
