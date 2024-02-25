@@ -138,7 +138,8 @@ export default function CheckoutForm({
                     if (resData.statusCode === 200) {
                         toast({
                             title: 'Success',
-                            description: 'Payment successful',
+                            description:
+                                'Payment successful and mail sent!',
                             status: 'success',
                             position: 'top-right',
                             duration: 1000,
