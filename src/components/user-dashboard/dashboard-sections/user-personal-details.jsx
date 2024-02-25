@@ -92,8 +92,6 @@ const UserPersonalDetails = () => {
                     const { data, error } =
                         await supabase.auth.updateUser({
                             email: userEmail,
-                            emailRedirectTo:
-                                'https://sahyogweb.vercel.app',
                         });
                     setIsSavingChanges(false);
 

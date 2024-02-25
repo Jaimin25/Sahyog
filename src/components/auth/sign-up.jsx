@@ -28,18 +28,6 @@ const SignUpComponent = () => {
 
     const onSubmit = async (values, actions) => {
         setError(null);
-        const res = await axios.post(
-            `${baseapiurl}/api/auth/checkForName`,
-            {
-                fullname: values.fullname,
-            }
-        );
-        const resData = res.data;
-
-        if (resData.statusCode === 200) {
-            setError('User already exists with the same name');
-            return;
-        }
 
         const { data, error } = await supabase.auth.signUp({
             email: values.email,
