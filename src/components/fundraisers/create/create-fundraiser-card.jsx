@@ -185,16 +185,28 @@ const CreateFundraiserComponent = ({
                 fundraiserCause &&
             draftFundraiser.fundraiserGoal === fundraiserGoal
         ) {
-            if (activeStep < steps.length - 1) {
-                setActiveStep(activeStep + 1);
+            if (Number(fundraiserGoal) >= 10000) {
+                if (activeStep < steps.length - 1) {
+                    setActiveStep(activeStep + 1);
+                }
+            } else {
+                setError(
+                    'Fundraiser goal should be greater than 10000'
+                );
             }
             return;
         }
-        setLoading(true);
-        setError(null);
-        submitForm(
-            draftFundraiser ? draftFundraiser.status : 'draft'
-        );
+        if (Number(fundraiserGoal) >= 10000) {
+            setLoading(true);
+            setError(null);
+            submitForm(
+                draftFundraiser
+                    ? draftFundraiser.status
+                    : 'draft'
+            );
+        } else {
+            setError('Minimum goal should be ₹10,000');
+        }
     };
 
     const handleSubmitFormThree = async () => {

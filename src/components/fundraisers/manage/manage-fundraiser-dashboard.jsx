@@ -62,6 +62,17 @@ const ManageFundraiserDashboard = ({
     const handleSaveFundraiser = async () => {
         setIsSaving(true);
         try {
+            if (Number(fundraiserGoal) < 10000) {
+                toast({
+                    title: 'Minimum goal should be ₹10,000',
+                    position: 'top-right',
+                    isClosable: true,
+                    status: 'error',
+                    duration: 1000,
+                });
+                setIsSaving(false);
+                return;
+            }
             const res = await axios.post(
                 `${baseapiurl}/api/fundraiser/updateFundraiser`,
                 {
