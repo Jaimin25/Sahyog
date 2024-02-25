@@ -127,7 +127,7 @@ export default function CheckoutForm({
                         }
                     );
 
-                    const resData = await res.data;
+                    const resData = res.data;
                     setLoading(false);
                     if (resData.statusCode === 200) {
                         toast({
@@ -182,6 +182,12 @@ export default function CheckoutForm({
                     >
                         Pay
                     </Button>
+                    {loading && (
+                        <Text>
+                            Please do not close this window, your
+                            payment is beign processed
+                        </Text>
+                    )}
                     {errorMessage && (
                         <Text color="red">{errorMessage}</Text>
                     )}
