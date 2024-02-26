@@ -43,7 +43,7 @@ const SignInComponent = () => {
                 );
 
                 const resData = res.data;
-                console.log(resData);
+
                 if (resData.statusCode === 200) {
                     sessionUser.fullname =
                         resData.userDetails.fullname;

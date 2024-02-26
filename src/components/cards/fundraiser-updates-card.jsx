@@ -35,6 +35,9 @@ const FundraiserUpdatesCard = ({
                 }
             );
             const resData = res.data;
+
+            setIsDeleting(false);
+
             if (resData.statusCode === 200) {
                 setFundraiserUpdates(
                     fundraiserUpdates.filter(
@@ -56,10 +59,8 @@ const FundraiserUpdatesCard = ({
                     duration: 1000,
                 });
             }
-            setIsDeleting(false);
         } catch (e) {
             setIsDeleting(false);
-
             toast({
                 title: 'Error',
                 description: e.message,

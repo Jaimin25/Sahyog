@@ -49,7 +49,6 @@ const FundraiserFormOne = ({
             }
             setCheckingLoc(false);
         } catch (e) {
-            console.log(e.message);
             setError(e.message);
             setCheckingLoc(false);
         }
