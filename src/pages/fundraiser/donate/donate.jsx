@@ -191,7 +191,7 @@ const DonatePage = () => {
             </div>
         );
     }
-    console.log(isProccessingPayment);
+
     return (
         <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
             <Card className="w-full sm:w-2/3 md:w-1/2">
