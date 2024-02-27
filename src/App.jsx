@@ -12,6 +12,7 @@ import DiscoverFundraisersPage from './pages/fundraiser/fundraiser-page';
 import FundraiserPage from './pages/fundraiser/fundraiserId/fundraiser-details-page';
 import ManageFundriaserPage from './pages/fundraiser/manage/manage-fundraiser';
 import Home from './pages/Home';
+import HowItWorksPage from './pages/how-it-works/how-it-works';
 
 export const App = () => {
     const { session } = useSession();
@@ -49,6 +50,16 @@ export const App = () => {
                     <Route
                         path="/fundraiser/:id"
                         element={<FundraiserPage />}
+                    />
+                    <Route
+                        path="/how-it-works"
+                        element={<HowItWorksPage />}
+                    />
+                    <Route
+                        path="*"
+                        element={
+                            <div>The page is not available</div>
+                        }
                     />
 
                     {/* PROTECTED ROUTES */}

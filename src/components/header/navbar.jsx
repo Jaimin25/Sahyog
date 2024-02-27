@@ -58,12 +58,14 @@ const Navbar = () => {
                                 </NavLink>
                             </div>
                             <div>
-                                <Button
-                                    variant="ghost"
-                                    colorScheme="teal"
-                                >
-                                    How it works
-                                </Button>
+                                <NavLink to="/how-it-works">
+                                    <Button
+                                        variant="ghost"
+                                        colorScheme="teal"
+                                    >
+                                        How it works
+                                    </Button>
+                                </NavLink>
                             </div>
                             <div>
                                 {user ? (
@@ -111,9 +113,11 @@ const Navbar = () => {
                                         </MenuItem>
                                     </NavLink>
 
-                                    <MenuItem>
-                                        How it works
-                                    </MenuItem>
+                                    <NavLink to="/how-it-works">
+                                        <MenuItem>
+                                            How it works
+                                        </MenuItem>
+                                    </NavLink>
 
                                     {user ? (
                                         <NavLink to="/dashboard">
