@@ -29,6 +29,8 @@ export default function CheckoutForm({
     const { user, accessToken } = useSession();
     const [errorMessage, setErrorMessage] = useState();
     const [loading, setLoading] = useState(false);
+    const [isPaymentElementLoaded, setIsPaymentElementLoaded] =
+        useState(false);
 
     const toast = useToast();
 
@@ -47,8 +49,8 @@ export default function CheckoutForm({
 
         setLoading(true);
         setIsProccessingPayment(true);
-
         setErrorMessage(undefined);
+
         const { error: submitError } = await elements.submit();
         if (submitError) {
             handleError(submitError);
@@ -170,7 +172,6 @@ export default function CheckoutForm({
             }
         } else {
             setLoading(false);
-
             // No actions needed, show success message
         }
     };
@@ -185,11 +186,16 @@ export default function CheckoutForm({
                     </Badge>
                 </div>
                 <Stack>
-                    <PaymentElement />
+                    <PaymentElement
+                        onReady={() =>
+                            setIsPaymentElementLoaded(true)
+                        }
+                    />
                     <Button
                         type="submit"
                         isLoading={loading}
                         colorScheme="green"
+                        isDisabled={!isPaymentElementLoaded}
                     >
                         Pay
                     </Button>

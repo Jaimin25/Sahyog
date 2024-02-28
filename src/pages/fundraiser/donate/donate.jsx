@@ -122,7 +122,7 @@ const DonatePage = () => {
             </div>
         );
 
-    if (!user.emailVerified) {
+    if (!user?.emailVerified) {
         return (
             <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
                 <Card className="w-full">
@@ -286,7 +286,7 @@ const DonatePage = () => {
                                 </Text>
 
                                 <Input
-                                    value={user.fullname}
+                                    value={user?.fullname}
                                     isDisabled="true"
                                 />
                                 <Text fontWeight="semibold">
@@ -294,7 +294,7 @@ const DonatePage = () => {
                                 </Text>
 
                                 <Input
-                                    value={user.email}
+                                    value={user?.email}
                                     isDisabled="true"
                                 />
                                 <Box className="h-full">
