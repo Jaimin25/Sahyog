@@ -74,6 +74,7 @@ const UserPersonalDetails = () => {
                 });
             }
         } catch (e) {
+            setIsSendingMail(false);
             toast({
                 title: 'Error',
                 description: e.message,

@@ -91,6 +91,8 @@ const ManageFundraiserDashboard = ({
             );
 
             const resData = res.data;
+            setIsSaving(false);
+
             if (resData.statusCode === 200) {
                 toast({
                     title: 'Fundraiser Updated',
@@ -99,7 +101,6 @@ const ManageFundraiserDashboard = ({
                     status: 'success',
                     duration: 1000,
                 });
-                setIsSaving(false);
                 setFundraiser(resData.fundraiser);
             } else {
                 toast({
@@ -109,10 +110,9 @@ const ManageFundraiserDashboard = ({
                     status: 'error',
                     duration: 1000,
                 });
-                setIsSaving(false);
             }
-            setIsSaving(false);
         } catch (e) {
+            setIsSaving(false);
             toast({
                 title: e.message,
                 position: 'top-right',
@@ -135,15 +135,29 @@ const ManageFundraiserDashboard = ({
                 }
             );
             const resData = res.data;
+            setLoading(false);
 
             if (resData.statusCode === 200) {
-                setLoading(false);
                 navigate('/');
             } else {
-                setLoading(false);
+                toast({
+                    title: resData.message,
+                    position: 'top-right',
+                    isClosable: true,
+                    status: 'error',
+                    duration: 1000,
+                });
             }
+        } catch (e) {
+            toast({
+                title: e.message,
+                position: 'top-right',
+                isClosable: true,
+                status: 'error',
+                duration: 1000,
+            });
             setLoading(false);
-        } catch (e) {}
+        }
     };
 
     if (isFetchingFundraiser) {
