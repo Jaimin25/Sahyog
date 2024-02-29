@@ -33,21 +33,18 @@ const FundraiserFormOne = ({
                 `https://api.postalpincode.in/pincode/${zipCode}`
             );
             const resData = res.data;
-
+            setCheckingLoc(false);
             if (resData[0].Status === 'Success') {
                 const city = resData[0].PostOffice[0].District;
                 const state = resData[0].PostOffice[0].State;
 
                 setFundraiserCity(city);
                 setFundraiserState(state);
-                setCheckingLoc(false);
             } else {
                 setFundraiserCity('');
                 setFundraiserState('');
                 setError(resData[0].Message);
-                setCheckingLoc(false);
             }
-            setCheckingLoc(false);
         } catch (e) {
             setError(e.message);
             setCheckingLoc(false);

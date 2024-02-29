@@ -47,16 +47,14 @@ const DiscoverFundraisersPage = () => {
                 `${baseapiurl}/api/fundraiser/getAllFundraisers`
             );
             const resData = res.data;
-
+            setIsFetching(false);
             if (resData.statusCode === 200) {
                 setFundraisers(resData.allFundraisers);
-                setIsFetching(false);
             } else {
                 setFundraisers([]);
-                setIsFetching(false);
             }
-            setIsFetching(false);
         } catch (error) {
+            setIsFetching(false);
             // console.log(error);
         }
     };

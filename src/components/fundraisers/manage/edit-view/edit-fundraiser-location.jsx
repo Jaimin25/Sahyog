@@ -53,7 +53,15 @@ const EditFundraiserLocation = ({
                 });
                 getSubmitButtonProps().onClick();
             }
-        } catch (e) {}
+        } catch (e) {
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                position: 'top-right',
+                duration: 1000,
+            });
+        }
     };
 
     function EditableControls() {

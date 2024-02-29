@@ -38,9 +38,8 @@ const ManageFundraiserUpdates = ({
             );
 
             const resData = res.data;
-
+            setIsPosting(false);
             if (resData.statusCode === 200) {
-                setIsPosting(false);
                 setUpdateDetails('');
                 setFundraiserUpdates([
                     resData.fundraiserUpdate,
@@ -60,9 +59,7 @@ const ManageFundraiserUpdates = ({
                     position: 'top-right',
                     duration: 1000,
                 });
-                setIsPosting(false);
             }
-            setIsPosting(false);
         } catch (e) {
             setIsPosting(false);
             toast({

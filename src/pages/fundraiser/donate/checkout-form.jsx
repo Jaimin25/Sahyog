@@ -148,8 +148,6 @@ export default function CheckoutForm({
                         });
                         setIsDonationSuccess(true);
                     } else {
-                        setIsProccessingPayment(false);
-
                         toast({
                             title: 'Error',
                             description: resData.message,

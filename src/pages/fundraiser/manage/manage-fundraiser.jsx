@@ -60,11 +60,12 @@ const ManageFundriaserPage = () => {
                 }
             );
             const resData = res.data;
+            setIsFetchingFundraiser(false);
+
             if (resData.statusCode === 200) {
                 setFundraiserDetails(resData.fundraiserDetails);
             } else {
                 setError(resData.message);
-
                 toast({
                     title: 'Error',
                     description: resData.message,
@@ -73,7 +74,6 @@ const ManageFundriaserPage = () => {
                     duration: 1000,
                 });
             }
-            setIsFetchingFundraiser(false);
         } catch (e) {
             setIsFetchingFundraiser(false);
             toast({
@@ -97,13 +97,20 @@ const ManageFundriaserPage = () => {
 
             const resData = res.data;
 
+            setIsFetchingFundraiserUpdates(false);
             if (resData.statusCode === 200) {
                 setFundraiserUpdates(resData.fundraiserUpdates);
             } else {
-                setIsFetchingFundraiserUpdates(false);
+                toast({
+                    title: 'Error',
+                    description: resData.message,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 1000,
+                });
             }
-            setIsFetchingFundraiserUpdates(false);
         } catch (e) {
+            setIsFetchingFundraiserUpdates(false);
             toast({
                 title: 'Error',
                 description: e.message,
@@ -124,12 +131,12 @@ const ManageFundriaserPage = () => {
             );
 
             const resData = res.data;
+            setIsFetchingFundraiserDonations(false);
             if (resData.statusCode === 200) {
                 setFundraiserDonations(resData.donations);
             } else {
                 setError(resData.message);
             }
-            setIsFetchingFundraiserDonations(false);
         } catch (e) {
             setIsFetchingFundraiserDonations(false);
         }

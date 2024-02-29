@@ -49,7 +49,7 @@ const FundraiserPage = () => {
                 }
             );
             const resData = res.data;
-
+            setIsFetchingFundraiser(false);
             if (resData.statusCode === 200) {
                 setFundraiserDetails(resData.fundraiserDetails);
             } else {
@@ -62,8 +62,8 @@ const FundraiserPage = () => {
                 });
                 setError(resData.message);
             }
-            setIsFetchingFundraiser(false);
         } catch (e) {
+            setIsFetchingFundraiser(false);
             // console.log(e);
         }
     };
@@ -86,6 +86,7 @@ const FundraiserPage = () => {
             }
             setIsFetchingFundraiserUpdates(false);
         } catch (e) {
+            setIsFetchingFundraiserUpdates(false);
             toast({
                 title: 'Error',
                 description: e.message,
@@ -104,13 +105,12 @@ const FundraiserPage = () => {
             );
 
             const resData = res.data;
-
+            setIsFetchingFundraiserDonations(false);
             if (resData.statusCode === 200) {
                 setFundraiserDonations(resData.donations);
             } else {
                 setError(resData.message);
             }
-            setIsFetchingFundraiserDonations(false);
         } catch (e) {
             toast({
                 title: 'Error',

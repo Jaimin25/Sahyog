@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -13,6 +14,7 @@ const UserDashboardComponent = () => {
     const [currentActive, setCurrentActive] =
         useState('account');
     const { user, accessToken } = useSession();
+    const toast = useToast();
 
     const [userFundraisers, setUserFundraisers] = useState([]);
     const [userDonations, setUserDonations] = useState([]);
@@ -44,13 +46,28 @@ const UserDashboardComponent = () => {
             );
 
             const resData = res.data;
-
+            setLoading(false);
             if (resData.statusCode === 200) {
                 setUserDonations(resData.donations);
             } else {
-                setLoading(false);
+                toast({
+                    title: 'Error',
+                    description: resData.message,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 1000,
+                });
             }
-        } catch (e) {}
+        } catch (e) {
+            setLoading(false);
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                position: 'top-right',
+                duration: 1000,
+            });
+        }
     };
 
     useEffect(() => {

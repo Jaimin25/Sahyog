@@ -150,7 +150,6 @@ const UserPersonalDetails = () => {
                         duration: 1000,
                     });
                 } else {
-                    setIsSavingChanges(false);
                     toast({
                         title: 'Error',
                         description: resData.message,

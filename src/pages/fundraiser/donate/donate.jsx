@@ -94,6 +94,7 @@ const DonatePage = () => {
                     });
                 }
             } catch (e) {
+                setIsFetchingFundraiser(false);
                 setError(e.message);
                 toast({
                     title: 'Error',
