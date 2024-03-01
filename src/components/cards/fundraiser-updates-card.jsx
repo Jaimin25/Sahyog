@@ -10,7 +10,7 @@ import axios from 'axios';
 import { Markup } from 'interweave';
 import { useState } from 'react';
 
-import { baseapiurl } from '../../lib/utils';
+import { baseapiurl, timeSince } from '../../lib/utils';
 
 const FundraiserUpdatesCard = ({
     update,
@@ -70,6 +70,7 @@ const FundraiserUpdatesCard = ({
             });
         }
     };
+    console.log();
     return (
         <Card
             boxShadow="none"
@@ -80,11 +81,9 @@ const FundraiserUpdatesCard = ({
             <CardBody>
                 <Box className="flex space-y-4">
                     <Box flex="1">
-                        {new Date().getDate() -
-                            new Date(
-                                update.createdAt
-                            ).getDate() <=
-                            1 && (
+                        {timeSince(
+                            new Date(update.createdAt)
+                        ) !== '1 day ago' && (
                             <Badge colorScheme="green">
                                 new
                             </Badge>
