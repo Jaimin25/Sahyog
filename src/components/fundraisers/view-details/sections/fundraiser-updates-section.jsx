@@ -7,6 +7,8 @@ import {
 } from '@chakra-ui/react';
 import { Markup } from 'interweave';
 
+import { timeSince } from '../../../../lib/utils';
+
 const FundraiserUpdatesSection = ({
     fundraiserUpdates,
     isFetchingFundraiserUpdates,
@@ -33,11 +35,12 @@ const FundraiserUpdatesSection = ({
                                 <CardBody>
                                     <Box className="flex space-y-4">
                                         <Box flex="1">
-                                            {new Date().getDate() -
+                                            {timeSince(
                                                 new Date(
                                                     update.createdAt
-                                                ).getDate() <=
-                                                1 && (
+                                                )
+                                            ) !==
+                                                '1 day ago' && (
                                                 <Badge colorScheme="green">
                                                     new
                                                 </Badge>
