@@ -96,15 +96,19 @@ const FundraiserDetailsSection = ({
                             spacing="2"
                             className="flex w-full"
                         >
-                            <Button
-                                variant="outline"
-                                colorScheme="teal"
-                                className="
+                            <Box className="w-full flex-1">
+                                {' '}
+                                <Button
+                                    variant="outline"
+                                    colorScheme="teal"
+                                    className="
                         fundraiser-card-share-button
-                        flex-1"
-                            >
-                                Share
-                            </Button>
+                        w-full"
+                                >
+                                    Share
+                                </Button>
+                            </Box>
+
                             <NavLink
                                 to={`/fundraiser/${fundraiser._id}/donate`}
                                 className="flex-1"

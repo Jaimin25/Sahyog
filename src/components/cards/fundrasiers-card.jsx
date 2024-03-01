@@ -1,6 +1,7 @@
 import {
     AspectRatio,
     Avatar,
+    Box,
     Button,
     ButtonGroup,
     Card,
@@ -105,17 +106,20 @@ const FundriaserCard = ({
                 <CardFooter>
                     <ButtonGroup
                         spacing="2"
+                        direction="row"
                         className="flex w-full"
                     >
-                        <Button
-                            variant="outline"
-                            colorScheme="teal"
-                            className="
-                        fundraiser-card-share-button
-                        flex-1"
-                        >
-                            Share
-                        </Button>
+                        <Box className="w-full flex-1">
+                            <Button
+                                variant="outline"
+                                colorScheme="teal"
+                                className="fundraiser-card-share-button
+                        w-full
+                        "
+                            >
+                                Share
+                            </Button>
+                        </Box>
                         <NavLink
                             to={`/fundraiser/${fundraiserId}/donate`}
                             className="w-full flex-1"
