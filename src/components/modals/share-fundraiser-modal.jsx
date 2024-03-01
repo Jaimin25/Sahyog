@@ -113,8 +113,7 @@ const ShareFundraiserModal = ({
                                 </Stack>
                             )}
                             <Button
-                                colorScheme="gray"
-                                variant="solid"
+                                colorScheme="green"
                                 onClick={handleCopyLink}
                             >
                                 Copy
