@@ -82,10 +82,12 @@ const FundraiserDonationSection = ({
                                 colorScheme="teal"
                                 className="
                         fundraiser-card-share-button
-                         items-center gap-2"
+                         items-center"
                                 onClick={onOpen}
+                                leftIcon={
+                                    <ArrowUpRightFromSquare className="h-5 w-5" />
+                                }
                             >
-                                <ArrowUpRightFromSquare className="h-5 w-5" />
                                 Share
                             </Button>
                             <Text
