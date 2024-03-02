@@ -52,6 +52,9 @@ const FundraiserDetailsSection = ({
                                             fundraiser.coverMediaUrl
                                         }
                                         className="aspect-video h-[250px] w-auto md:h-[400px]"
+                                        alt={
+                                            fundraiser.fundraiserTitle
+                                        }
                                     />
                                 </div>
                             ) : fundraiser.coverMediaUrl &&

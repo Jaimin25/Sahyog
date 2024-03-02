@@ -39,6 +39,7 @@ const UserActiveFundraisersCard = ({
                         <LazyLoadImage
                             src={coverMediaUrl}
                             className="aspect-video h-[150px] w-full cursor-pointer transition duration-500 hover:scale-110"
+                            alt={fundraiserTitle}
                         />
                     </div>
                 ) : coverMediaUrl &&

@@ -155,6 +155,9 @@ const DonatePage = () => {
                                         fundraiserDetails.coverMediaUrl
                                     }
                                     className="aspect-video w-[250px] rounded-lg"
+                                    alt={
+                                        fundraiserDetails.fundraiserTitle
+                                    }
                                 />
                             </Box>
                             <Box textAlign="center">
@@ -212,6 +215,9 @@ const DonatePage = () => {
                                             fundraiserDetails.coverMediaUrl
                                         }
                                         className="aspect-video w-[150px] rounded-lg"
+                                        alt={
+                                            fundraiserDetails.fundraiserTitle
+                                        }
                                     />
                                 </Box>
                                 <Box>

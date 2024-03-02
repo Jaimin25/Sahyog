@@ -39,6 +39,7 @@ const FundraiserFormThree = ({
                         <LazyLoadImage
                             src={coverMediaUrl}
                             className="aspect-video h-[300px] w-full cursor-pointer transition duration-500 hover:scale-110"
+                            alt="cover-media"
                         />
                     </div>
                     <Stack>
