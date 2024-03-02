@@ -4,7 +4,6 @@ import {
     Button,
     Card,
     CardBody,
-    CardHeader,
     FormControl,
     FormLabel,
     Heading,
@@ -25,9 +24,6 @@ const UserOtherDetails = () => {
 
     return (
         <Card className="flex-1" padding="10px">
-            <CardHeader>
-                <Heading>Personal and Bank Details</Heading>
-            </CardHeader>
             <CardBody>
                 <Stack spacing="4">
                     {!user.emailVerified && (
@@ -58,7 +54,7 @@ const UserOtherDetails = () => {
                         {(props) => (
                             <Form className="space-y-8">
                                 <Stack>
-                                    <Heading size="lg">
+                                    <Heading>
                                         Personal Details
                                     </Heading>
                                     <Stack>
@@ -122,8 +118,8 @@ const UserOtherDetails = () => {
                                     </Stack>
                                 </Stack>
                                 <Stack>
-                                    <Heading size="lg">
-                                        Proof ID
+                                    <Heading>
+                                        Govt. ID Details
                                     </Heading>
                                     <Stack>
                                         <Field name="validIdType">
@@ -154,7 +150,7 @@ const UserOtherDetails = () => {
                                                         isRequired
                                                     >
                                                         <option>
-                                                            Aadhar
+                                                            Aadhaar
                                                             card
                                                         </option>
                                                         <option>
@@ -187,7 +183,7 @@ const UserOtherDetails = () => {
                                     </Stack>
                                 </Stack>
                                 <Stack>
-                                    <Heading size="lg">
+                                    <Heading>
                                         Bank Details
                                     </Heading>
                                     <Stack>

@@ -23,7 +23,7 @@ import { supabase } from '../../../lib/supabase';
 import { baseapiurl } from '../../../lib/utils';
 import { useSession } from '../../providers/session-provider';
 
-const UserPersonalDetails = () => {
+const UserAccountDetails = () => {
     const { user, accessToken, saveUserDetails } = useSession();
     const toast = useToast();
 
@@ -181,7 +181,7 @@ const UserPersonalDetails = () => {
                         create a fundraiser or to donate
                     </Alert>
                 )}
-                <Heading>Personal Details</Heading>
+                <Heading>Account Details</Heading>
             </CardHeader>
             <CardBody>
                 <Stack>
@@ -276,4 +276,4 @@ const UserPersonalDetails = () => {
     );
 };
 
-export default UserPersonalDetails;
+export default UserAccountDetails;
