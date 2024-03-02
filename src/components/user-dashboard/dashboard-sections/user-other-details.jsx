@@ -12,15 +12,11 @@ import {
     Stack,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
-import { useState } from 'react';
 
 import { useSession } from '../../providers/session-provider';
 
 const UserOtherDetails = () => {
     const { user } = useSession();
-
-    const [dob, setDob] = useState();
-    const [govtIdType, setGovtIdType] = useState();
 
     return (
         <Card className="flex-1" padding="10px">
@@ -46,6 +42,7 @@ const UserOtherDetails = () => {
                             accountType: '',
                         }}
                         onSubmit={(values, actions) => {
+                            console.log(values);
                             setTimeout(() => {
                                 actions.setSubmitting(false);
                             }, 1000);
@@ -97,18 +94,6 @@ const UserOtherDetails = () => {
                                                     </FormLabel>
                                                     <Input
                                                         {...field}
-                                                        value={
-                                                            dob
-                                                        }
-                                                        onChange={(
-                                                            e
-                                                        ) =>
-                                                            setDob(
-                                                                e
-                                                                    .target
-                                                                    .value
-                                                            )
-                                                        }
                                                         type="date"
                                                         isRequired
                                                     />
@@ -134,18 +119,6 @@ const UserOtherDetails = () => {
                                                     </FormLabel>
                                                     <Select
                                                         {...field}
-                                                        value={
-                                                            govtIdType
-                                                        }
-                                                        onChange={(
-                                                            e
-                                                        ) =>
-                                                            setGovtIdType(
-                                                                e
-                                                                    .target
-                                                                    .value
-                                                            )
-                                                        }
                                                         placeholder="Govt. ID"
                                                         isRequired
                                                     >
