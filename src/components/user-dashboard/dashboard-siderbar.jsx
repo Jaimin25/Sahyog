@@ -31,7 +31,7 @@ const DashboardSidebar = ({
                 </Button>
                 <Button
                     onClick={() =>
-                        changeCurrentActive('bankdetails')
+                        changeCurrentActive('otherdetails')
                     }
                     variant="ghost"
                     border="1px"
@@ -45,7 +45,7 @@ const DashboardSidebar = ({
                         'bg-teal-100'
                     }
                 >
-                    Bank Details
+                    Other Details
                 </Button>
                 <Button
                     onClick={() =>

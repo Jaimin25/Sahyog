@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 
 import { baseapiurl } from '../../lib/utils';
 import { useSession } from '../providers/session-provider';
-import UserBankDetails from './dashboard-sections/user-bank-details';
 import UserDonations from './dashboard-sections/user-donations';
 import UserFundraisers from './dashboard-sections/user-foundraisers';
+import UserOtherDetails from './dashboard-sections/user-other-details';
 import UserPersonalDetails from './dashboard-sections/user-personal-details';
 import DashboardSidebar from './dashboard-siderbar';
 
@@ -87,7 +87,7 @@ const UserDashboardComponent = () => {
             {
                 {
                     account: <UserPersonalDetails />,
-                    bankdetails: <UserBankDetails />,
+                    otherdetails: <UserOtherDetails />,
                     fundraisers: (
                         <UserFundraisers
                             loading={loading}
