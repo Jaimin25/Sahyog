@@ -18,6 +18,7 @@ const UserDashboardComponent = () => {
 
     const [userFundraisers, setUserFundraisers] = useState([]);
     const [userDonations, setUserDonations] = useState([]);
+    const [userOtherDetails, setUserOtherDetails] = useState([]);
 
     const [loading, setLoading] = useState(false);
 
@@ -70,8 +71,45 @@ const UserDashboardComponent = () => {
         }
     };
 
+    const fetchUserOtherDetails = async () => {
+        setLoading(true);
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/user/getUserOtherDetails`,
+                {
+                    uid: user.id,
+                    access_token: accessToken,
+                }
+            );
+
+            const resData = res.data;
+            setLoading(false);
+            if (resData.statusCode === 200) {
+                setUserOtherDetails(resData.otherDetails);
+            } else {
+                toast({
+                    title: 'Error',
+                    description: resData.message,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 1000,
+                });
+            }
+        } catch (e) {
+            setLoading(false);
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                position: 'top-right',
+                duration: 1000,
+            });
+        }
+    };
+
     useEffect(() => {
         setLoading(true);
+        fetchUserOtherDetails();
         fetchUserFundraisers();
         fetchUserDonations();
     }, []);
@@ -87,7 +125,14 @@ const UserDashboardComponent = () => {
             {
                 {
                     account: <UserAccountDetails />,
-                    otherdetails: <UserOtherDetails />,
+                    otherdetails: (
+                        <UserOtherDetails
+                            otherDetails={userOtherDetails}
+                            setUserOtherDetails={
+                                setUserOtherDetails
+                            }
+                        />
+                    ),
                     fundraisers: (
                         <UserFundraisers
                             loading={loading}

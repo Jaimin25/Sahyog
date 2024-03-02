@@ -40,7 +40,7 @@ const UserAccountDetails = () => {
     useEffect(() => {
         setUserEmail(user.email);
         setUserFullname(user.fullname);
-    }, []);
+    }, [user]);
 
     const handleResendButton = async () => {
         setIsSendingMail(true);
