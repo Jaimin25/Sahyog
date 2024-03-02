@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
-import fundsvg from '../assets/funds.jpg';
+import fundsvg from '../assets/fundsvg.svg';
 import FundraiserDiscoverSection from '../components/discover-section/fundraiser-discover-section';
 import { useSession } from '../components/providers/session-provider';
 
@@ -47,7 +47,8 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="hero.img flex-1">
-                        <img src={fundsvg} />
+                        <img src={fundsvg} alt="mainimg" />
+                        {/* <Fundssvg /> */}
                     </div>
                 </div>
             </section>

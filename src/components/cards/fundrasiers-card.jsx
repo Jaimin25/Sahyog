@@ -49,6 +49,7 @@ const FundriaserCard = ({
                                 <LazyLoadImage
                                     src={coverMediaUrl}
                                     className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
+                                    alt={fundraiserTitle}
                                 />
                             </div>
                         ) : coverMediaUrl &&
@@ -105,6 +106,7 @@ const FundriaserCard = ({
                                 }
                                 size="xs"
                                 colorScheme="teal"
+                                aria-label="goal_progress"
                             />
                         </Stack>
                     </CardBody>
