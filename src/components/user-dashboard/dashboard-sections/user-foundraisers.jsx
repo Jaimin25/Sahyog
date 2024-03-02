@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 
 import UserActiveFundraisersCard from '../../cards/user-fundraisers-card';
+import UserDeletedFundraisersCard from '../../cards/user-fundraisers-card-deleted';
 import UserFundraisersDraftCard from '../../cards/user-fundraisers-draft-card';
 import UserFundraiserCardSkeleton from '../../skeletons/user-fundraiser-card-skeleton';
 
@@ -111,6 +112,42 @@ const UserFundraisers = ({ loading, userFundraisers }) => {
                                             />
                                         ))}
                                 </Grid>
+                            </>
+                        )}
+                        {userFundraisers.some(
+                            (fundraiser) =>
+                                fundraiser.status === 'deleted'
+                        ) && (
+                            <>
+                                <Text
+                                    fontSize="xl"
+                                    fontWeight="bold"
+                                >
+                                    Deleted
+                                </Text>
+                                {userFundraisers
+                                    .filter(
+                                        (fundraiser) =>
+                                            fundraiser.status ===
+                                            'deleted'
+                                    )
+                                    .map((fundraiser) => (
+                                        <UserDeletedFundraisersCard
+                                            key={fundraiser._id}
+                                            fundraiserId={
+                                                fundraiser._id
+                                            }
+                                            fundraiserTitle={
+                                                fundraiser.fundraiserTitle
+                                            }
+                                            coverMediaUrl={
+                                                fundraiser.coverMediaUrl
+                                            }
+                                            createdAt={
+                                                fundraiser.createdAt
+                                            }
+                                        />
+                                    ))}
                             </>
                         )}
                     </Stack>
