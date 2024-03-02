@@ -68,13 +68,8 @@ const SignInComponent = () => {
     };
 
     return (
-        <div className="signin.card m-10 w-3/4 sm:w-1/2 lg:w-[30%]">
-            <Card
-                className="h-full w-full"
-                shadow="md"
-                border="1px"
-                borderColor="gray.200"
-            >
+        <div className="signin.card m-4 my-8 w-full sm:m-8 sm:w-1/2 lg:w-[30%]">
+            <Card className="h-full w-full" shadow="md">
                 <CardHeader>
                     <Heading>Sign In</Heading>
                 </CardHeader>
