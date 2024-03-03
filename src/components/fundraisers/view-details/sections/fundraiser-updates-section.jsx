@@ -35,19 +35,6 @@ const FundraiserUpdatesSection = ({
                             >
                                 <CardBody>
                                     <Box className="flex space-y-4">
-                                        {timeSince(
-                                            new Date(
-                                                update.createdAt
-                                            )
-                                        )}
-                                        {console.log(
-                                            moment().diff(
-                                                moment(
-                                                    update.createdAt
-                                                ),
-                                                'days'
-                                            )
-                                        )}
                                         <Box flex="1">
                                             {moment().diff(
                                                 moment(
