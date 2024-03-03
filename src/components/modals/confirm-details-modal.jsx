@@ -18,28 +18,34 @@ const ConfirmDetailsModal = ({
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>Modal Title</ModalHeader>
+                <ModalHeader>Confirmation</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                     Once submitted, you cannot edit the details
-                    again until after reviewed and validated.
-                    Please re-check the details and confirm.
+                    again until after they have been reviewed and
+                    validated. Please re-check the details and
+                    confirm.
                 </ModalBody>
 
                 <ModalFooter>
                     <Button
-                        colorScheme="blue"
+                        colorScheme="red"
                         mr={3}
-                        onClick={onClose}
+                        onClick={() => {
+                            setConfirmSubmit(false);
+                            onClose();
+                        }}
                     >
                         Close
                     </Button>
                     <Button
-                        variant="ghost"
                         colorScheme="green"
-                        onClick={() => setConfirmSubmit(true)}
+                        onClick={() => {
+                            setConfirmSubmit(true);
+                            onClose();
+                        }}
                     >
-                        Confirm
+                        Proceed
                     </Button>
                 </ModalFooter>
             </ModalContent>

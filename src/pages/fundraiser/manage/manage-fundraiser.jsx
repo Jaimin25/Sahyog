@@ -28,7 +28,15 @@ const ManageFundriaserPage = () => {
     const { accessToken, user } = useSession();
     const [error, setError] = useState();
 
-    const [isFetching, setIsFetching] = useState(true);
+    const [isFetchingFundraiser, setIsFetchingFundraiser] =
+        useState(true);
+    const [isFetchingUpdates, setIsFetchingUpdates] =
+        useState(true);
+    const [isFetchingDonations, setIsFetchingDonations] =
+        useState(true);
+    const [isFetchingFunds, setIsFetchingFunds] = useState(true);
+    const [isFetchingOtherDetails, setIsFetchingOtherDetails] =
+        useState(true);
 
     const [fundraiserDetails, setFundraiserDetails] = useState(
         {}
@@ -41,44 +49,8 @@ const ManageFundriaserPage = () => {
     const [userOtherDetails, setUserOtherDetails] = useState({});
     const [fundraiserFunds, setFundraiserFunds] = useState({});
 
-    const fetchFundraiserDetails = async () => {
-        try {
-            const res = await axios.post(
-                `${baseapiurl}/api/user/getUserFundraiserById`,
-                {
-                    uid: user.id,
-                    access_token: accessToken,
-                    fundraiserId: id,
-                }
-            );
-            const resData = res.data;
-            setIsFetching(false);
-
-            if (resData.statusCode === 200) {
-                setFundraiserDetails(resData.fundraiserDetails);
-            } else {
-                setError(resData.message);
-                toast({
-                    title: 'Error',
-                    description: resData.message,
-                    status: 'error',
-                    position: 'top-right',
-                    duration: 1000,
-                });
-            }
-        } catch (e) {
-            setIsFetching(false);
-            toast({
-                title: 'Error',
-                description: e.message,
-                status: 'error',
-                position: 'top-right',
-                duration: 1000,
-            });
-        }
-    };
-
     const fetchFundraiserUpdates = async () => {
+        setIsFetchingUpdates(true);
         try {
             const res = await axios.post(
                 `${baseapiurl}/api/fundraiser/getFundraiserUpdates`,
@@ -88,6 +60,7 @@ const ManageFundriaserPage = () => {
             );
 
             const resData = res.data;
+            setIsFetchingUpdates(false);
 
             if (resData.statusCode === 200) {
                 setFundraiserUpdates(resData.fundraiserUpdates);
@@ -101,7 +74,7 @@ const ManageFundriaserPage = () => {
                 });
             }
         } catch (e) {
-            setIsFetching(false);
+            setIsFetchingUpdates(false);
             toast({
                 title: 'Error',
                 description: e.message,
@@ -113,6 +86,7 @@ const ManageFundriaserPage = () => {
     };
 
     const fetchFundraiserDonations = async () => {
+        setIsFetchingDonations(true);
         try {
             const res = await axios.post(
                 `${baseapiurl}/api/donation/getFundraiserDonationsById`,
@@ -122,6 +96,7 @@ const ManageFundriaserPage = () => {
             );
 
             const resData = res.data;
+            setIsFetchingDonations(false);
 
             if (resData.statusCode === 200) {
                 setFundraiserDonations(resData.donations);
@@ -129,11 +104,12 @@ const ManageFundriaserPage = () => {
                 setError(resData.message);
             }
         } catch (e) {
-            setIsFetching(false);
+            setIsFetchingDonations(false);
         }
     };
 
     const fetchUserOtherDetails = async () => {
+        setIsFetchingOtherDetails(true);
         try {
             const res = await axios.post(
                 `${baseapiurl}/api/user/getUserOtherDetails`,
@@ -144,6 +120,7 @@ const ManageFundriaserPage = () => {
             );
 
             const resData = res.data;
+            setIsFetchingOtherDetails(false);
 
             if (resData.statusCode === 200) {
                 setUserOtherDetails(resData.otherDetails);
@@ -157,6 +134,7 @@ const ManageFundriaserPage = () => {
                 });
             }
         } catch (e) {
+            setIsFetchingOtherDetails(false);
             toast({
                 title: 'Error',
                 description: e.message,
@@ -168,6 +146,7 @@ const ManageFundriaserPage = () => {
     };
 
     const fetchFundraiserFunds = async () => {
+        setIsFetchingFunds(true);
         try {
             const res = await axios.post(
                 `${baseapiurl}/api/fundraiser/getFundraiserFunds`,
@@ -179,6 +158,7 @@ const ManageFundriaserPage = () => {
             );
 
             const resData = res.data;
+            setIsFetchingFunds(false);
 
             if (resData.statusCode === 200) {
                 setFundraiserFunds(resData.fundraiserFunds);
@@ -192,6 +172,53 @@ const ManageFundriaserPage = () => {
                 });
             }
         } catch (e) {
+            setIsFetchingFunds(false);
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                position: 'top-right',
+                duration: 1000,
+            });
+        }
+    };
+
+    const fetchFundraiserDetails = async () => {
+        setIsFetchingFundraiser(true);
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/user/getUserFundraiserById`,
+                {
+                    uid: user.id,
+                    access_token: accessToken,
+                    fundraiserId: id,
+                }
+            );
+            const resData = res.data;
+            setIsFetchingFundraiser(false);
+
+            if (resData.statusCode === 200) {
+                setFundraiserDetails(resData.fundraiserDetails);
+                if (
+                    resData.fundraiserDetails.status === 'active'
+                ) {
+                    fetchFundraiserDonations();
+                    fetchFundraiserUpdates();
+                    fetchFundraiserFunds();
+                    fetchUserOtherDetails();
+                }
+            } else {
+                setError(resData.message);
+                toast({
+                    title: 'Error',
+                    description: resData.message,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 1000,
+                });
+            }
+        } catch (e) {
+            setIsFetchingFundraiser(false);
             toast({
                 title: 'Error',
                 description: e.message,
@@ -203,16 +230,13 @@ const ManageFundriaserPage = () => {
     };
 
     useEffect(() => {
-        setIsFetching(true);
-
-        fetchUserOtherDetails();
-        fetchFundraiserFunds();
-        fetchFundraiserDonations();
-        fetchFundraiserUpdates();
         fetchFundraiserDetails();
     }, []);
 
-    if (!isFetching && fundraiserDetails.status !== 'active') {
+    if (
+        !isFetchingFundraiser &&
+        fundraiserDetails.status !== 'active'
+    ) {
         return (
             <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
                 <Card>
@@ -248,7 +272,9 @@ const ManageFundriaserPage = () => {
                                     fundraiser={
                                         fundraiserDetails
                                     }
-                                    isFetching={isFetching}
+                                    isFetching={
+                                        isFetchingFundraiser
+                                    }
                                     setFundraiser={
                                         setFundraiserDetails
                                     }
@@ -265,7 +291,9 @@ const ManageFundriaserPage = () => {
                                     setFundraiserUpdates={
                                         setFundraiserUpdates
                                     }
-                                    isFetching={isFetching}
+                                    isFetching={
+                                        isFetchingUpdates
+                                    }
                                 />
                             </TabPanel>
                             <TabPanel>
@@ -276,7 +304,9 @@ const ManageFundriaserPage = () => {
                                     fundraiserDonations={
                                         fundraiserDonations
                                     }
-                                    isFetching={isFetching}
+                                    isFetching={
+                                        isFetchingDonations
+                                    }
                                 />
                             </TabPanel>
                             <TabPanel>
@@ -287,7 +317,10 @@ const ManageFundriaserPage = () => {
                                     fundraiserFunds={
                                         fundraiserFunds
                                     }
-                                    isFetching={isFetching}
+                                    isFetching={
+                                        isFetchingFunds ||
+                                        isFetchingOtherDetails
+                                    }
                                 />
                             </TabPanel>
                         </TabPanels>
