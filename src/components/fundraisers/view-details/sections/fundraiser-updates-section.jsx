@@ -8,8 +8,6 @@ import {
 import { Markup } from 'interweave';
 import moment from 'moment/moment';
 
-import { timeSince } from '../../../../lib/utils';
-
 const FundraiserUpdatesSection = ({
     fundraiserUpdates,
     isFetchingFundraiserUpdates,
