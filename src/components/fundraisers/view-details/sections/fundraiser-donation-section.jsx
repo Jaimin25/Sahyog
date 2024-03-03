@@ -26,7 +26,7 @@ const FundraiserDonationSection = ({
         <>
             <Card
                 shadow="md"
-                className="col-span-2 h-screen md:col-span-1"
+                className="col-span-2 h-screen lg:col-span-1"
             >
                 <CardBody>
                     <Stack height="100%">

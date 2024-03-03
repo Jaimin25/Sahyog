@@ -41,7 +41,7 @@ const CreateFundraiserPage = () => {
     }, []);
     if (!user.emailVerified) {
         return (
-            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
                 <Card className="w-full">
                     <CardBody>
                         <Alert status="error">
@@ -55,7 +55,7 @@ const CreateFundraiserPage = () => {
         );
     }
     return (
-        <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+        <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
             <CreateFundraiserComponent
                 draftFundraiser={draftFundraiser}
                 setDraftFundraiser={setDraftFundraiser}

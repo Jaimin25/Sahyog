@@ -111,7 +111,7 @@ const DonatePage = () => {
 
     if (!fundraiserDetails && !fetchingFundraiser && error)
         return (
-            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
                 <Card className="w-full">
                     <CardBody>
                         <Alert status="error">
@@ -125,7 +125,7 @@ const DonatePage = () => {
 
     if (!user?.emailVerified) {
         return (
-            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
                 <Card className="w-full">
                     <CardBody>
                         <Alert status="error">
@@ -140,8 +140,8 @@ const DonatePage = () => {
 
     if (isDonationSuccess) {
         return (
-            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
-                <Card className="flex w-full items-center sm:w-2/3 md:w-1/2">
+            <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
+                <Card className="flex w-full items-center sm:w-2/3 lg:w-1/2">
                     <CardHeader>
                         <Heading>
                             Thank you for donating!
@@ -197,8 +197,8 @@ const DonatePage = () => {
     }
 
     return (
-        <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
-            <Card className="w-full sm:w-2/3 md:w-1/2">
+        <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
+            <Card className="w-full sm:w-2/3 lg:w-1/2">
                 <CardHeader>
                     <Badge colorScheme="red">
                         Payment happens in test mode

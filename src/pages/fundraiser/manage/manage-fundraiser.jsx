@@ -238,7 +238,7 @@ const ManageFundriaserPage = () => {
         fundraiserDetails.status !== 'active'
     ) {
         return (
-            <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+            <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
                 <Card>
                     <CardBody>
                         {error && (
@@ -254,7 +254,7 @@ const ManageFundriaserPage = () => {
     }
 
     return (
-        <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+        <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
             <Card boxShadow="md">
                 <Tabs colorScheme="teal">
                     <CardHeader>

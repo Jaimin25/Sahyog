@@ -115,8 +115,8 @@ const UserDashboardComponent = () => {
     }, []);
 
     return (
-        <div className="user-dashboard-container flex h-full flex-col gap-4 bg-black/5 p-8 md:flex-row">
-            <div className="h-full w-full md:flex md:w-1/6">
+        <div className="user-dashboard-container flex h-full flex-col gap-4 bg-black/5 p-8 lg:flex-row">
+            <div className="h-full w-full lg:flex lg:w-1/6">
                 <DashboardSidebar
                     setCurrentActive={setCurrentActive}
                     currentActive={currentActive}

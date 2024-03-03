@@ -32,7 +32,7 @@ const UserActiveFundraisersCard = ({
             borderColor="gray.200"
             boxShadow="sm"
         >
-            <CardBody className="flex flex-col items-center gap-3 md:flex-row">
+            <CardBody className="flex flex-col items-center gap-3 lg:flex-row">
                 {coverMediaUrl &&
                 checkForImage(coverMediaUrl) ? (
                     <div className="overflow-hidden rounded-lg">

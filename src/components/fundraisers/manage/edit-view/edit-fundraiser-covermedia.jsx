@@ -79,7 +79,7 @@ const EditFundraiserCoverMedia = ({
                         <div className="w-full flex-1 overflow-hidden rounded-lg">
                             <LazyLoadImage
                                 src={fundraiserCoverMediaUrl}
-                                className="aspect-video h-auto w-auto rounded-lg md:h-[300px]"
+                                className="aspect-video h-auto w-auto rounded-lg lg:h-[300px]"
                                 alt="cover-media"
                             />
                         </div>

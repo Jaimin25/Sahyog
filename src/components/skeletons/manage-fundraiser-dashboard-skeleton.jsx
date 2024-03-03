@@ -65,7 +65,7 @@ const ManageFundraiserDashboardSkeleton = () => {
                         <div className="overflow-hidden rounded-lg">
                             <LazyLoadImage
                                 src="https://www.trackbee.com/assets/uploads/blogs/1631001708_Blog-Post_April-22.jpg"
-                                className="aspect-video h-auto w-auto rounded-lg md:h-[400px]"
+                                className="aspect-video h-auto w-auto rounded-lg lg:h-[400px]"
                             />
                         </div>
                     </Skeleton>

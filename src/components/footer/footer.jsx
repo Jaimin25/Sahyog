@@ -21,14 +21,14 @@ const Footer = () => (
         <Container
             as="footer"
             role="contentinfo"
-            py={{ base: '12', md: '16' }}
+            py={{ base: '12', lg: '16' }}
             maxWidth={'100%'}
         >
             <Stack
-                spacing={{ base: '4', md: '5' }}
+                spacing={{ base: '4', lg: '5' }}
                 className="sm:px-12"
             >
-                <div className="flex flex-col items-center justify-between gap-y-10 md:flex-row">
+                <div className="flex flex-col items-center justify-between gap-y-10 lg:flex-row">
                     <Stack direction="column">
                         <div className="flex items-center gap-x-1">
                             <HeartHandshake className="h-8 w-8" />
@@ -202,7 +202,7 @@ const Footer = () => (
                 <Text
                     fontSize="sm"
                     color="fg.subtle"
-                    className="text-center md:text-left"
+                    className="text-center lg:text-left"
                 >
                     &copy; {new Date().getFullYear()} Sahyog,
                     Inc. All rights reserved.

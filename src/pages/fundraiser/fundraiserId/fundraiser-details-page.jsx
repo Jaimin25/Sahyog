@@ -137,7 +137,7 @@ const FundraiserPage = () => {
         error
     ) {
         return (
-            <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+            <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
                 <Card>
                     <CardBody>
                         <Alert status="error">
@@ -151,7 +151,7 @@ const FundraiserPage = () => {
     }
 
     return (
-        <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+        <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
             <FundraiserDetails
                 fundraiser={fundraiserDetails}
                 isFetchingFundraiser={isFetchingFundraiser}

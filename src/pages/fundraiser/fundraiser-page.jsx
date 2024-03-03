@@ -65,7 +65,7 @@ const DiscoverFundraisersPage = () => {
     }, []);
 
     return (
-        <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
+        <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
             <Card>
                 <CardBody>
                     <VStack>
@@ -83,7 +83,7 @@ const DiscoverFundraisersPage = () => {
                                 }
                             />
                         </InputGroup>
-                        <div className="flex w-full flex-col items-center gap-3 md:flex-row">
+                        <div className="flex w-full flex-col items-center gap-3 lg:flex-row">
                             <Flex alignItems="center" gap="8px">
                                 <Box>
                                     <Text>

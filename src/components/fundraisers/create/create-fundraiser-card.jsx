@@ -251,15 +251,15 @@ const CreateFundraiserComponent = ({
 
     return (
         <div className="flex h-full w-auto flex-col items-center justify-center gap-2">
-            <div className="hidden w-full justify-center md:flex">
-                <Card className="md:w-1/2">
+            <div className="hidden w-full justify-center lg:flex">
+                <Card className="lg:w-1/2">
                     <FundraiserCardStepper
                         activeStep={activeStep}
                         steps={steps}
                     />
                 </Card>
             </div>
-            <Card className="w-[99%] sm:w-4/5 md:w-1/2">
+            <Card className="w-[99%] sm:w-4/5 lg:w-1/2">
                 <CardHeader>
                     {draftFundraiser &&
                         (draftFundraiser.status === 'review' ||
@@ -276,7 +276,7 @@ const CreateFundraiserComponent = ({
                     <Heading size="lg">
                         Create a Fundraiser{' '}
                     </Heading>
-                    <div className="block md:hidden">
+                    <div className="block lg:hidden">
                         {activeStep + 1} of {steps.length}
                     </div>
                 </CardHeader>

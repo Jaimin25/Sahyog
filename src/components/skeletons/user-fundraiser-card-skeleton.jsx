@@ -23,7 +23,7 @@ const UserFundraiserCardSkeleton = ({
             borderColor="gray.200"
         >
             <CardBody>
-                <div className="flex flex-col items-center gap-3 md:flex-row">
+                <div className="flex flex-col items-center gap-3 lg:flex-row">
                     <Skeleton>
                         {coverMediaUrl &&
                             checkForImage(coverMediaUrl) && (

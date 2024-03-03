@@ -16,7 +16,7 @@ const Navbar = () => {
     return (
         <header className="navbar fixed top-0 z-10 w-full bg-white">
             <div>
-                <nav className="flex h-auto w-full items-center p-3 shadow sm:px-16 md:px-14">
+                <nav className="flex h-auto w-full items-center p-3 shadow sm:px-16 lg:px-14">
                     <div className="navbar.container flex w-full items-center">
                         <NavLink to="/">
                             <div className="flex items-center gap-x-1">
@@ -32,7 +32,7 @@ const Navbar = () => {
                             </div>
                         </NavLink>
                         <div className="flex-1" />
-                        <div className="navbar.menu hidden gap-2 md:flex">
+                        <div className="navbar.menu hidden gap-2 lg:flex">
                             <div>
                                 <NavLink
                                     to={
@@ -89,7 +89,7 @@ const Navbar = () => {
                                 )}
                             </div>
                         </div>
-                        <div className="flex md:hidden">
+                        <div className="flex lg:hidden">
                             <Menu>
                                 <MenuButton as={Button}>
                                     <MenuIcon className="h-7 w-7 text-black" />

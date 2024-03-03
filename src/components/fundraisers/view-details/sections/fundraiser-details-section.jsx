@@ -51,7 +51,7 @@ const FundraiserDetailsSection = ({
                                         src={
                                             fundraiser.coverMediaUrl
                                         }
-                                        className="aspect-video h-[250px] w-auto md:h-[400px]"
+                                        className="aspect-video h-[250px] w-auto lg:h-[400px]"
                                         alt={
                                             fundraiser.fundraiserTitle
                                         }
@@ -65,7 +65,7 @@ const FundraiserDetailsSection = ({
                                     maxW="auto"
                                     ratio={16 / 9}
                                     borderRadius="lg"
-                                    className="h-[250px] md:h-[400px]"
+                                    className="h-[250px] lg:h-[400px]"
                                 >
                                     <iframe
                                         className="rounded-lg"

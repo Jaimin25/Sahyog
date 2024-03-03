@@ -35,7 +35,7 @@ const FundraiserDiscoverSection = () => {
     }, []);
 
     return (
-        <div className="discover-fundriaser-contianer grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div className="discover-fundriaser-contianer grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {isFetching &&
             fundraisers &&
             !fundraisers.length > 0 ? (
