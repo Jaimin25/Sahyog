@@ -6,6 +6,7 @@ import {
     Heading,
 } from '@chakra-ui/react';
 import { Markup } from 'interweave';
+import moment from 'moment/moment';
 
 import { timeSince } from '../../../../lib/utils';
 
@@ -34,13 +35,26 @@ const FundraiserUpdatesSection = ({
                             >
                                 <CardBody>
                                     <Box className="flex space-y-4">
-                                        <Box flex="1">
-                                            {timeSince(
-                                                new Date(
+                                        {timeSince(
+                                            new Date(
+                                                update.createdAt
+                                            )
+                                        )}
+                                        {console.log(
+                                            moment().diff(
+                                                moment(
                                                     update.createdAt
-                                                )
-                                            ) !==
-                                                '1 day ago' && (
+                                                ),
+                                                'days'
+                                            )
+                                        )}
+                                        <Box flex="1">
+                                            {moment().diff(
+                                                moment(
+                                                    update.createdAt
+                                                ),
+                                                'days'
+                                            ) < 1 && (
                                                 <Badge colorScheme="green">
                                                     new
                                                 </Badge>

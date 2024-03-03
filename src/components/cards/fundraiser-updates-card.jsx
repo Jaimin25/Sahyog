@@ -8,9 +8,10 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { Markup } from 'interweave';
+import moment from 'moment/moment';
 import { useState } from 'react';
 
-import { baseapiurl, timeSince } from '../../lib/utils';
+import { baseapiurl } from '../../lib/utils';
 
 const FundraiserUpdatesCard = ({
     update,
@@ -81,9 +82,10 @@ const FundraiserUpdatesCard = ({
             <CardBody>
                 <Box className="flex space-y-4">
                     <Box flex="1">
-                        {timeSince(
-                            new Date(update.createdAt)
-                        ) !== '1 day ago' && (
+                        {moment().diff(
+                            moment(update.createdAt),
+                            'days'
+                        ) < 1 && (
                             <Badge colorScheme="green">
                                 new
                             </Badge>

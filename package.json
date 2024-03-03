@@ -25,6 +25,7 @@
         "framer-motion": "^11.0.3",
         "interweave": "^13.1.0",
         "lucide-react": "^0.323.0",
+        "moment": "^2.30.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-lazy-load-image-component": "^1.6.0",
