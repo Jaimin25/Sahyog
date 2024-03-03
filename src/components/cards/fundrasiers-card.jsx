@@ -50,6 +50,8 @@ const FundriaserCard = ({
                                     src={coverMediaUrl}
                                     className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
                                     alt={fundraiserTitle}
+                                    height="200px"
+                                    width="100%"
                                 />
                             </div>
                         ) : coverMediaUrl &&

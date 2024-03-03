@@ -1,4 +1,5 @@
 import { Button } from '@chakra-ui/react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { NavLink } from 'react-router-dom';
 
 import fundsvg from '../assets/fundsvg.svg';
@@ -47,7 +48,12 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="hero.img flex-1">
-                        <img src={fundsvg} alt="mainimg" />
+                        <LazyLoadImage
+                            src={fundsvg}
+                            alt="mainimg"
+                            width="100%"
+                            height="100%"
+                        />
                         {/* <Fundssvg /> */}
                     </div>
                 </div>
