@@ -15,6 +15,7 @@ import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import validator from 'validator';
 
 import { supabase } from '../../lib/supabase';
 import { baseapiurl } from '../../lib/utils';
@@ -28,6 +29,14 @@ const SignUpComponent = () => {
 
     const onSubmit = async (values, actions) => {
         setError(null);
+
+        if (!validator.isEmail(values.email)) {
+            return setError('Invalid email');
+        }
+
+        if (!(values.fullname.length >= 3)) {
+            return setError('Fullname must be greater than 3');
+        }
 
         const { data, error } = await supabase.auth.signUp({
             email: values.email,

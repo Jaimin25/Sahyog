@@ -17,6 +17,7 @@ import { useParams } from 'react-router-dom';
 
 import ManageFundraiserDashboard from '../../../components/fundraisers/manage/manage-fundraiser-dashboard';
 import ManageFundraiserDonation from '../../../components/fundraisers/manage/manage-fundraiser-donation';
+import ManageFundraiserFundTransfers from '../../../components/fundraisers/manage/manage-fundraiser-fund-transfers';
 import ManageFundraiserUpdates from '../../../components/fundraisers/manage/manage-fundraiser-updates';
 import { useSession } from '../../../components/providers/session-provider';
 import { baseapiurl } from '../../../lib/utils';
@@ -180,6 +181,7 @@ const ManageFundriaserPage = () => {
                             <Tab>Dashboard</Tab>
                             <Tab>Updates</Tab>
                             <Tab>Donations</Tab>
+                            <Tab>Transfers</Tab>
                         </TabList>
                     </CardHeader>
                     <CardBody>
@@ -231,6 +233,9 @@ const ManageFundriaserPage = () => {
                                         isFetchingFundraiserDonations
                                     }
                                 />
+                            </TabPanel>
+                            <TabPanel>
+                                <ManageFundraiserFundTransfers />
                             </TabPanel>
                         </TabPanels>
                     </CardBody>
