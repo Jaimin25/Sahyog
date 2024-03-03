@@ -27,7 +27,7 @@ import EditFundraiserTitle from './edit-view/edit-fundraiser-title';
 const ManageFundraiserDashboard = ({
     setFundraiser,
     fundraiser,
-    isFetchingFundraiser,
+    isFetching,
 }) => {
     const { user, accessToken } = useSession();
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -160,7 +160,7 @@ const ManageFundraiserDashboard = ({
         }
     };
 
-    if (isFetchingFundraiser) {
+    if (isFetching) {
         return <ManageFundraiserDashboardSkeleton />;
     }
 

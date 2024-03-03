@@ -5,10 +5,10 @@ import DonationsCard from '../../cards/donations-card';
 
 const ManageFundraiserDonation = ({
     fundraiser,
-    isFetchingFundraiser,
+    isFetching,
     fundraiserDonations,
 }) => {
-    if (isFetchingFundraiser) return;
+    if (isFetching) return;
 
     return (
         <Stack height="100%">

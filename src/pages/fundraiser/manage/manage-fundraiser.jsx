@@ -28,27 +28,18 @@ const ManageFundriaserPage = () => {
     const { accessToken, user } = useSession();
     const [error, setError] = useState();
 
-    const [isFetchingFundraiser, setIsFetchingFundraiser] =
-        useState(true);
-    const [
-        isFetchingFundraiserUpdates,
-        setIsFetchingFundraiserUpdates,
-    ] = useState(true);
-    const [
-        isFetchingFundraiserDonations,
-        setIsFetchingFundraiserDonations,
-    ] = useState(true);
+    const [isFetching, setIsFetching] = useState(true);
 
     const [fundraiserDetails, setFundraiserDetails] = useState(
         {}
     );
-
     const [fundraiserUpdates, setFundraiserUpdates] = useState(
         []
     );
-
     const [fundraiserDonations, setFundraiserDonations] =
         useState([]);
+    const [userOtherDetails, setUserOtherDetails] = useState({});
+    const [fundraiserFunds, setFundraiserFunds] = useState({});
 
     const fetchFundraiserDetails = async () => {
         try {
@@ -61,7 +52,7 @@ const ManageFundriaserPage = () => {
                 }
             );
             const resData = res.data;
-            setIsFetchingFundraiser(false);
+            setIsFetching(false);
 
             if (resData.statusCode === 200) {
                 setFundraiserDetails(resData.fundraiserDetails);
@@ -76,7 +67,7 @@ const ManageFundriaserPage = () => {
                 });
             }
         } catch (e) {
-            setIsFetchingFundraiser(false);
+            setIsFetching(false);
             toast({
                 title: 'Error',
                 description: e.message,
@@ -98,7 +89,6 @@ const ManageFundriaserPage = () => {
 
             const resData = res.data;
 
-            setIsFetchingFundraiserUpdates(false);
             if (resData.statusCode === 200) {
                 setFundraiserUpdates(resData.fundraiserUpdates);
             } else {
@@ -111,7 +101,7 @@ const ManageFundriaserPage = () => {
                 });
             }
         } catch (e) {
-            setIsFetchingFundraiserUpdates(false);
+            setIsFetching(false);
             toast({
                 title: 'Error',
                 description: e.message,
@@ -132,30 +122,97 @@ const ManageFundriaserPage = () => {
             );
 
             const resData = res.data;
-            setIsFetchingFundraiserDonations(false);
+
             if (resData.statusCode === 200) {
                 setFundraiserDonations(resData.donations);
             } else {
                 setError(resData.message);
             }
         } catch (e) {
-            setIsFetchingFundraiserDonations(false);
+            setIsFetching(false);
+        }
+    };
+
+    const fetchUserOtherDetails = async () => {
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/user/getUserOtherDetails`,
+                {
+                    uid: user.id,
+                    access_token: accessToken,
+                }
+            );
+
+            const resData = res.data;
+
+            if (resData.statusCode === 200) {
+                setUserOtherDetails(resData.otherDetails);
+            } else {
+                toast({
+                    title: 'Error',
+                    description: resData.message,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 1000,
+                });
+            }
+        } catch (e) {
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                position: 'top-right',
+                duration: 1000,
+            });
+        }
+    };
+
+    const fetchFundraiserFunds = async () => {
+        try {
+            const res = await axios.post(
+                `${baseapiurl}/api/fundraiser/getFundraiserFunds`,
+                {
+                    uid: user.id,
+                    access_token: accessToken,
+                    fundraiserId: id,
+                }
+            );
+
+            const resData = res.data;
+
+            if (resData.statusCode === 200) {
+                setFundraiserFunds(resData.fundraiserFunds);
+            } else {
+                toast({
+                    title: 'Error',
+                    description: resData.message,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 1000,
+                });
+            }
+        } catch (e) {
+            toast({
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                position: 'top-right',
+                duration: 1000,
+            });
         }
     };
 
     useEffect(() => {
-        setIsFetchingFundraiser(true);
-        setIsFetchingFundraiserUpdates(true);
-        setIsFetchingFundraiserDonations(true);
-        fetchFundraiserDetails();
-        fetchFundraiserUpdates();
+        setIsFetching(true);
+
+        fetchUserOtherDetails();
+        fetchFundraiserFunds();
         fetchFundraiserDonations();
+        fetchFundraiserUpdates();
+        fetchFundraiserDetails();
     }, []);
 
-    if (
-        !isFetchingFundraiser &&
-        fundraiserDetails.status !== 'active'
-    ) {
+    if (!isFetching && fundraiserDetails.status !== 'active') {
         return (
             <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 md:px-14">
                 <Card>
@@ -191,11 +248,7 @@ const ManageFundriaserPage = () => {
                                     fundraiser={
                                         fundraiserDetails
                                     }
-                                    isFetchingFundraiser={
-                                        isFetchingFundraiser ||
-                                        isFetchingFundraiserUpdates ||
-                                        isFetchingFundraiserDonations
-                                    }
+                                    isFetching={isFetching}
                                     setFundraiser={
                                         setFundraiserDetails
                                     }
@@ -212,11 +265,7 @@ const ManageFundriaserPage = () => {
                                     setFundraiserUpdates={
                                         setFundraiserUpdates
                                     }
-                                    isFetchingFundraiser={
-                                        isFetchingFundraiser ||
-                                        isFetchingFundraiserUpdates ||
-                                        isFetchingFundraiserDonations
-                                    }
+                                    isFetching={isFetching}
                                 />
                             </TabPanel>
                             <TabPanel>
@@ -227,15 +276,19 @@ const ManageFundriaserPage = () => {
                                     fundraiserDonations={
                                         fundraiserDonations
                                     }
-                                    isFetchingFundraiser={
-                                        isFetchingFundraiser ||
-                                        isFetchingFundraiserUpdates ||
-                                        isFetchingFundraiserDonations
-                                    }
+                                    isFetching={isFetching}
                                 />
                             </TabPanel>
                             <TabPanel>
-                                <ManageFundraiserFundTransfers />
+                                <ManageFundraiserFundTransfers
+                                    userOtherDetails={
+                                        userOtherDetails
+                                    }
+                                    fundraiserFunds={
+                                        fundraiserFunds
+                                    }
+                                    isFetching={isFetching}
+                                />
                             </TabPanel>
                         </TabPanels>
                     </CardBody>
