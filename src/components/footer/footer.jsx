@@ -66,7 +66,10 @@ const Footer = () => (
                             />
                         </ButtonGroup>
                     </Stack>
-                    <Stack className="text-center">
+                    <Stack
+                        className="text-center"
+                        spacing="14px"
+                    >
                         <Text fontSize="xl" as="b">
                             Causes
                         </Text>
@@ -107,7 +110,10 @@ const Footer = () => (
                             Crisis Relief
                         </Button>
                     </Stack>
-                    <Stack className="text-center">
+                    <Stack
+                        className="text-center"
+                        spacing="14px"
+                    >
                         <Text fontSize="xl" as="b">
                             Resources
                         </Text>
@@ -148,7 +154,10 @@ const Footer = () => (
                             About
                         </Button>
                     </Stack>
-                    <Stack className="text-center">
+                    <Stack
+                        className="text-center"
+                        spacing="14px"
+                    >
                         <Text fontSize="xl" as="b">
                             Support
                         </Text>
