@@ -145,7 +145,7 @@ export function SessionProvider({ children }) {
                 localStorage.removeItem('user');
                 setTimeout(() => {
                     navigate('/');
-                }, 500);
+                }, 250);
             }
         });
     }, []);
