@@ -8,8 +8,6 @@ import {
 import { Markup } from 'interweave';
 import moment from 'moment/moment';
 
-import FundraiserUpdatesSkeleton from '../../../skeletons/fundraiser-updates-skeleton';
-
 const FundraiserUpdatesSection = ({
     fundraiserUpdates,
     isFetchingFundraiserUpdates,
@@ -23,46 +21,42 @@ const FundraiserUpdatesSection = ({
                         fundraiserUpdates.length === 0 && (
                             <p>No updates yet</p>
                         )}
-                    {isFetchingFundraiserUpdates ? (
-                        <FundraiserUpdatesSkeleton />
-                    ) : (
-                        fundraiserUpdates.map((update) => (
-                            <Card
-                                key={update._id}
-                                boxShadow="none"
-                                border="1px"
-                                borderColor="gray.200"
-                                marginY="8px"
-                            >
-                                <CardBody>
-                                    <Box className="flex space-y-4">
-                                        <Box flex="1">
-                                            {moment().diff(
-                                                moment(
-                                                    update.createdAt
-                                                ),
-                                                'days'
-                                            ) < 1 && (
-                                                <Badge colorScheme="green">
-                                                    new
-                                                </Badge>
-                                            )}
-                                            <Markup
-                                                content={
-                                                    update.updateDetails
-                                                }
-                                            />
-                                            <p className="text-sm text-gray-500">
-                                                {new Date(
-                                                    update.createdAt
-                                                ).toLocaleString()}
-                                            </p>
-                                        </Box>
+                    {fundraiserUpdates.map((update) => (
+                        <Card
+                            key={update._id}
+                            boxShadow="none"
+                            border="1px"
+                            borderColor="gray.200"
+                            marginY="8px"
+                        >
+                            <CardBody>
+                                <Box className="flex space-y-4">
+                                    <Box flex="1">
+                                        {moment().diff(
+                                            moment(
+                                                update.createdAt
+                                            ),
+                                            'days'
+                                        ) < 1 && (
+                                            <Badge colorScheme="green">
+                                                new
+                                            </Badge>
+                                        )}
+                                        <Markup
+                                            content={
+                                                update.updateDetails
+                                            }
+                                        />
+                                        <p className="text-sm text-gray-500">
+                                            {new Date(
+                                                update.createdAt
+                                            ).toLocaleString()}
+                                        </p>
                                     </Box>
-                                </CardBody>
-                            </Card>
-                        ))
-                    )}
+                                </Box>
+                            </CardBody>
+                        </Card>
+                    ))}
                 </Box>
             </CardBody>
         </Card>

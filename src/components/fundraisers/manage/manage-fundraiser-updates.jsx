@@ -137,7 +137,7 @@ const ManageFundraiserUpdates = ({
                         <p>No updates yet</p>
                     )}
                 {isFetching ? (
-                    <FundraiserUpdatesSkeleton />
+                    <FundraiserUpdatesSkeleton type="manage" />
                 ) : (
                     fundraiserUpdates.map((update) => (
                         <FundraiserUpdatesCard

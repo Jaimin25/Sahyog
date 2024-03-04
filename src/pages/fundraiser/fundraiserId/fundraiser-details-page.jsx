@@ -154,7 +154,11 @@ const FundraiserPage = () => {
         <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
             <FundraiserDetails
                 fundraiser={fundraiserDetails}
-                isFetchingFundraiser={isFetchingFundraiser}
+                isFetchingFundraiser={
+                    isFetchingFundraiser ||
+                    isFetchingFundraiserUpdates ||
+                    isFetchingFundraiserDonations
+                }
                 isFetchingFundraiserUpdates={
                     isFetchingFundraiserUpdates
                 }
