@@ -2,13 +2,16 @@ import { Progress, Stack, Text } from '@chakra-ui/react';
 
 import { timeSince } from '../../../lib/utils';
 import DonationsCard from '../../cards/donations-card';
+import ManageFundraiserDonationSkeleton from '../../skeletons/manage-fundraiser-donations-skeleton';
 
 const ManageFundraiserDonation = ({
     fundraiser,
     isFetching,
     fundraiserDonations,
 }) => {
-    if (isFetching) return;
+    if (isFetching) {
+        return <ManageFundraiserDonationSkeleton />;
+    }
 
     return (
         <Stack height="100%">

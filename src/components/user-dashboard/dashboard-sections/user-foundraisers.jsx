@@ -30,7 +30,8 @@ const UserFundraisers = ({ loading, userFundraisers }) => {
                     />
                 ) : (
                     <Stack>
-                        {userFundraisers &&
+                        {!loading &&
+                            userFundraisers &&
                             userFundraisers.length === 0 && (
                                 <Alert>
                                     <AlertIcon />
