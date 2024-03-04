@@ -8,6 +8,8 @@ import {
 import { Markup } from 'interweave';
 import moment from 'moment/moment';
 
+import FundraiserUpdatesSkeleton from '../../../skeletons/fundraiser-updates-skeleton';
+
 const FundraiserUpdatesSection = ({
     fundraiserUpdates,
     isFetchingFundraiserUpdates,
@@ -17,11 +19,12 @@ const FundraiserUpdatesSection = ({
             <CardBody className="w-full space-y-4">
                 <Heading size="md">Updates</Heading>
                 <Box className="w-full space-y-4">
-                    {fundraiserUpdates.length === 0 && (
-                        <p>No updates yet</p>
-                    )}
+                    {!isFetchingFundraiserUpdates &&
+                        fundraiserUpdates.length === 0 && (
+                            <p>No updates yet</p>
+                        )}
                     {isFetchingFundraiserUpdates ? (
-                        <p>Loading updates...</p>
+                        <FundraiserUpdatesSkeleton />
                     ) : (
                         fundraiserUpdates.map((update) => (
                             <Card

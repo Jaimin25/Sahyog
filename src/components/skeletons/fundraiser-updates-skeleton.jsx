@@ -1,7 +1,7 @@
 import { Box, Card, CardBody, Skeleton } from '@chakra-ui/react';
 import { Markup } from 'interweave';
 
-const ManageFundraiserUpdatesSkeleton = () => {
+const FundraiserUpdatesSkeleton = () => {
     return (
         <>
             <Card
@@ -46,4 +46,4 @@ const ManageFundraiserUpdatesSkeleton = () => {
     );
 };
 
-export default ManageFundraiserUpdatesSkeleton;
+export default FundraiserUpdatesSkeleton;

@@ -29,7 +29,9 @@ const FundraiserDetails = ({
             />
             <FundraiserDonationSection
                 fundraiser={fundraiser}
-                isFetchingFundraiser={isFetchingFundraiser}
+                isFetchingFundraiser={
+                    isFetchingFundraiserDonations
+                }
                 fundraiserDonations={fundraiserDonations}
             />
             <FundraiserUpdatesSection

@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { baseapiurl } from '../../../lib/utils';
 import FundraiserUpdatesCard from '../../cards/fundraiser-updates-card';
 import { useSession } from '../../providers/session-provider';
-import ManageFundraiserUpdatesSkeleton from '../../skeletons/manage-fundraiser-updates-skeleton';
+import FundraiserUpdatesSkeleton from '../../skeletons/fundraiser-updates-skeleton';
 
 const ManageFundraiserUpdates = ({
     fundraiser,
@@ -137,7 +137,7 @@ const ManageFundraiserUpdates = ({
                         <p>No updates yet</p>
                     )}
                 {isFetching ? (
-                    <ManageFundraiserUpdatesSkeleton />
+                    <FundraiserUpdatesSkeleton />
                 ) : (
                     fundraiserUpdates.map((update) => (
                         <FundraiserUpdatesCard
