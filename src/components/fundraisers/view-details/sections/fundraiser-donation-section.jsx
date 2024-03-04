@@ -1,4 +1,5 @@
 import {
+    Box,
     Button,
     Card,
     CardBody,
@@ -23,10 +24,10 @@ const FundraiserDonationSection = ({
     if (isFetchingFundraiser) return;
 
     return (
-        <>
+        <Box>
             <Card
                 shadow="md"
-                className="col-span-2 h-screen lg:col-span-1"
+                className="col-span-2 h-auto lg:col-span-1"
             >
                 <CardBody>
                     <Stack height="100%">
@@ -96,33 +97,38 @@ const FundraiserDonationSection = ({
                             >
                                 Donations
                             </Text>
+
                             <Stack gap="18px">
-                                {fundraiserDonations
-                                    .sort(
-                                        (a, b) =>
-                                            b.donationAmount -
-                                            a.donationAmount
-                                    )
-                                    .slice(0, 5)
-                                    .map((donation) => (
-                                        <DonationsCard
-                                            key={donation._id}
-                                            name={
-                                                donation.fullname
-                                            }
-                                            amount={
-                                                donation.donationAmount
-                                            }
-                                            anonymous={
-                                                donation.anonymousDonation
-                                            }
-                                            donatedAt={timeSince(
-                                                new Date(
-                                                    donation.createdAt
-                                                )
-                                            )}
-                                        />
-                                    ))}
+                                <Box className="space-y-4 overflow-y-auto">
+                                    {fundraiserDonations
+                                        .sort(
+                                            (a, b) =>
+                                                b.donationAmount -
+                                                a.donationAmount
+                                        )
+                                        .slice(0, 5)
+                                        .map((donation) => (
+                                            <DonationsCard
+                                                key={
+                                                    donation._id
+                                                }
+                                                name={
+                                                    donation.fullname
+                                                }
+                                                amount={
+                                                    donation.donationAmount
+                                                }
+                                                anonymous={
+                                                    donation.anonymousDonation
+                                                }
+                                                donatedAt={timeSince(
+                                                    new Date(
+                                                        donation.createdAt
+                                                    )
+                                                )}
+                                            />
+                                        ))}
+                                </Box>
                             </Stack>
                         </Stack>
                     </Stack>
@@ -135,7 +141,7 @@ const FundraiserDonationSection = ({
                 onClose={onClose}
                 isOpen={isOpen}
             />
-        </>
+        </Box>
     );
 };
 
