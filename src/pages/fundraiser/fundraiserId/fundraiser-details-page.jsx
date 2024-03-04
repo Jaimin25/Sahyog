@@ -84,7 +84,7 @@ const FundraiserPage = () => {
             } else {
                 setError(resData.message);
             }
-            // setIsFetchingFundraiserUpdates(false);
+            setIsFetchingFundraiserUpdates(false);
         } catch (e) {
             setIsFetchingFundraiserUpdates(false);
             toast({
