@@ -71,7 +71,7 @@ const FundraiserUpdatesCard = ({
             });
         }
     };
-    console.log();
+
     return (
         <Card
             boxShadow="none"
