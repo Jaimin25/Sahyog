@@ -5,8 +5,8 @@ import {
     CardBody,
     Heading,
 } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 import { Markup } from 'interweave';
-import moment from 'moment/moment';
 
 const FundraiserUpdatesSection = ({
     fundraiserUpdates,
@@ -32,8 +32,16 @@ const FundraiserUpdatesSection = ({
                             <CardBody>
                                 <Box className="flex space-y-4">
                                     <Box flex="1">
-                                        {moment().diff(
-                                            moment(
+                                        {console.log(
+                                            dayjs().diff(
+                                                dayjs(
+                                                    update.createdAt
+                                                ),
+                                                'days'
+                                            )
+                                        )}
+                                        {dayjs().diff(
+                                            dayjs(
                                                 update.createdAt
                                             ),
                                             'days'

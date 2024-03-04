@@ -7,8 +7,8 @@ import {
     useToast,
 } from '@chakra-ui/react';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import { Markup } from 'interweave';
-import moment from 'moment/moment';
 import { useState } from 'react';
 
 import { baseapiurl } from '../../lib/utils';
@@ -82,8 +82,8 @@ const FundraiserUpdatesCard = ({
             <CardBody>
                 <Box className="flex space-y-4">
                     <Box flex="1">
-                        {moment().diff(
-                            moment(update.createdAt),
+                        {dayjs().diff(
+                            dayjs(update.createdAt),
                             'days'
                         ) < 1 && (
                             <Badge colorScheme="green">
