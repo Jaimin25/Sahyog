@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { baseapiurl } from '../../../lib/utils';
 import FundraiserUpdatesCard from '../../cards/fundraiser-updates-card';
 import { useSession } from '../../providers/session-provider';
+import ManageFundraiserUpdatesSkeleton from '../../skeletons/manage-fundraiser-updates-skeleton';
 
 const ManageFundraiserUpdates = ({
     fundraiser,
@@ -131,11 +132,12 @@ const ManageFundraiserUpdates = ({
             </Box>
             <Box className="space-y-4">
                 <Heading size="md">Updates</Heading>
-                {fundraiserUpdates.length === 0 && (
-                    <p>No updates yet</p>
-                )}
+                {!isFetching &&
+                    fundraiserUpdates.length === 0 && (
+                        <p>No updates yet</p>
+                    )}
                 {isFetching ? (
-                    <p>Loading updates...</p>
+                    <ManageFundraiserUpdatesSkeleton />
                 ) : (
                     fundraiserUpdates.map((update) => (
                         <FundraiserUpdatesCard
