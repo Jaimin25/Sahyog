@@ -41,7 +41,7 @@ const DashboardSidebar = ({
                     }}
                     color="teal"
                     className={
-                        currentActive === 'bankdetails' &&
+                        currentActive === 'otherdetails' &&
                         'bg-teal-100'
                     }
                 >
