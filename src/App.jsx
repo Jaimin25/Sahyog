@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Footer from './components/footer/footer';
 import Navbar from './components/header/navbar';
+import LoadingScreen from './components/loading-screen';
 import { useSession } from './components/providers/session-provider';
 import SignInPage from './pages/auth/signin';
 import SignUpPage from './pages/auth/signup';
@@ -31,18 +32,21 @@ export const App = () => {
           <Route path="*" element={<div>The page is not available</div>} />
 
           {/* PROTECTED ROUTES */}
-          <Route path="/dashboard" element={loading ? null : session && user ? <UserDashboard /> : <SignInPage />} />
+          <Route
+            path="/dashboard"
+            element={loading ? <LoadingScreen /> : session && user ? <UserDashboard /> : <SignInPage />}
+          />
           <Route
             path="/fundraiser/create"
-            element={loading ? null : session && user ? <CreateFundraiserPage /> : <SignInPage />}
+            element={loading ? <LoadingScreen /> : session && user ? <CreateFundraiserPage /> : <SignInPage />}
           />
           <Route
             path="/fundraiser/:id/manage"
-            element={loading ? null : session && user ? <ManageFundriaserPage /> : <SignInPage />}
+            element={loading ? <LoadingScreen /> : session && user ? <ManageFundriaserPage /> : <SignInPage />}
           />
           <Route
             path="/fundraiser/:id/donate"
-            element={loading ? null : session && user ? <DonatePage /> : <SignInPage />}
+            element={loading ? <LoadingScreen /> : session && user ? <DonatePage /> : <SignInPage />}
           />
         </Routes>
       </div>
