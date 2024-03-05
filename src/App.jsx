@@ -15,101 +15,83 @@ import Home from './pages/Home';
 import HowItWorksPage from './pages/how-it-works/how-it-works';
 
 export const App = () => {
-    const { session } = useSession();
+  const { session } = useSession();
 
-    return (
-        <main className="main flex h-full flex-col">
-            <Navbar />
-            <div className="mt-[76px] flex flex-1 flex-col">
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route
-                        path="/auth/signin"
-                        element={
-                            !session ? (
-                                <SignInPage />
-                            ) : (
-                                <Navigate to="/" />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/auth/signup"
-                        element={
-                            !session ? (
-                                <SignUpPage />
-                            ) : (
-                                <Navigate to="/" />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/fundraisers/discover"
-                        element={<DiscoverFundraisersPage />}
-                    />
-                    <Route
-                        path="/fundraiser/:id"
-                        element={<FundraiserPage />}
-                    />
-                    <Route
-                        path="/how-it-works"
-                        element={<HowItWorksPage />}
-                    />
-                    <Route
-                        path="*"
-                        element={
-                            <div>The page is not available</div>
-                        }
-                    />
+  return (
+    <main className="main flex h-full flex-col">
+      <Navbar />
+      <div className="mt-[76px] flex flex-1 flex-col">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/auth/signin"
+            element={
+              !session ? <SignInPage /> : <Navigate to="/" />
+            }
+          />
+          <Route
+            path="/auth/signup"
+            element={
+              !session ? <SignUpPage /> : <Navigate to="/" />
+            }
+          />
+          <Route
+            path="/fundraisers/discover"
+            element={<DiscoverFundraisersPage />}
+          />
+          <Route
+            path="/fundraiser/:id"
+            element={<FundraiserPage />}
+          />
+          <Route
+            path="/how-it-works"
+            element={<HowItWorksPage />}
+          />
+          <Route
+            path="*"
+            element={<div>The page is not available</div>}
+          />
 
-                    {/* PROTECTED ROUTES */}
-                    <Route
-                        path="/dashboard"
-                        element={
-                            session &&
-                            (session ? (
-                                <UserDashboard />
-                            ) : (
-                                <SignInPage />
-                            ))
-                        }
-                    />
-                    <Route
-                        path="/fundraiser/create"
-                        element={
-                            session &&
-                            (session ? (
-                                <CreateFundraiserPage />
-                            ) : (
-                                <SignInPage />
-                            ))
-                        }
-                    />
-                    <Route
-                        path="/fundraiser/:id/manage"
-                        element={
-                            session &&
-                            (session ? (
-                                <ManageFundriaserPage />
-                            ) : (
-                                <SignInPage />
-                            ))
-                        }
-                    />
-                    <Route
-                        path="/fundraiser/:id/donate"
-                        element={
-                            session &&
-                            (session ? (
-                                <DonatePage />
-                            ) : (
-                                <SignInPage />
-                            ))
-                        }
-                    />
-                </Routes>
-            </div>
-            <Footer />
-        </main>
-    );
+          {/* PROTECTED ROUTES */}
+          <Route
+            path="/dashboard"
+            element={
+              session &&
+              (session ? <UserDashboard /> : <SignInPage />)
+            }
+          />
+          <Route
+            path="/fundraiser/create"
+            element={
+              session &&
+              (session ? (
+                <CreateFundraiserPage />
+              ) : (
+                <SignInPage />
+              ))
+            }
+          />
+          <Route
+            path="/fundraiser/:id/manage"
+            element={
+              session &&
+              (session ? (
+                <ManageFundriaserPage />
+              ) : (
+                <SignInPage />
+              ))
+            }
+          />
+          <Route
+            path="/fundraiser/:id/donate"
+            element={
+              session &&
+              (session ? <DonatePage /> : <SignInPage />)
+            }
+          />
+        </Routes>
+      </div>
+      <Footer />
+    </main>
+  );
 };

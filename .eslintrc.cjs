@@ -1,69 +1,80 @@
 module.exports = {
-    env: {
-        browser: true,
-        es2021: true,
-    },
-    extends: [
-        'standard',
-        'eslint:recommended',
-        'plugin:react/recommended',
-        'plugin:react/jsx-runtime',
-        'plugin:prettier/recommended',
+  env: {
+    es2021: true,
+    browser: true,
+  },
+  extends: [
+    'standard',
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'eslint-config-prettier',
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: [
+    'react',
+    'simple-import-sort',
+    'eslint-plugin-prettier',
+  ],
+  rules: {
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    'react/prop-types': 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        trailingComma: 'es5',
+        tabWidth: 2,
+        semi: true,
+        singleQuote: true,
+        endOfLine: 'lf',
+        printWidth: 65,
+      },
     ],
-    parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
+  },
+  settings: {
+    react: {
+      version: 'detect', // Automatically includes the React version
     },
-    plugins: ['react', 'simple-import-sort'],
-    rules: {
-        'simple-import-sort/imports': 'error',
-        'simple-import-sort/exports': 'error',
-        'react/prop-types': 'off',
+  },
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script',
+      },
     },
-    settings: {
-        react: {
-            version: 'detect', // Automatically includes the React version
-        },
+    {
+      files: ['**/*.js', '**/*.ts', '**/*.tsx'],
+      rules: {
+        'simple-import-sort/imports': [
+          'error',
+          {
+            groups: [
+              // `react` first, `next` second, then packages starting with a character
+              ['^react$', '^next', '^[a-z]'],
+              // Packages starting with `@`
+              ['^@'],
+              // Packages starting with `~`
+              ['^~'],
+              // Imports starting with `../`
+              ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+              // Imports starting with `./`
+              ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+              // Style imports
+              ['^.+\\.s?css$'],
+              // Side effect imports
+              ['^\\u0000'],
+            ],
+          },
+        ],
+      },
     },
-    overrides: [
-        {
-            env: {
-                node: true,
-            },
-            files: ['.eslintrc.{js,cjs}'],
-            parserOptions: {
-                sourceType: 'script',
-            },
-        },
-        {
-            files: ['**/*.js', '**/*.ts', '**/*.tsx'],
-            rules: {
-                'simple-import-sort/imports': [
-                    'error',
-                    {
-                        groups: [
-                            // `react` first, `next` second, then packages starting with a character
-                            ['^react$', '^next', '^[a-z]'],
-                            // Packages starting with `@`
-                            ['^@'],
-                            // Packages starting with `~`
-                            ['^~'],
-                            // Imports starting with `../`
-                            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-                            // Imports starting with `./`
-                            [
-                                '^\\./(?=.*/)(?!/?$)',
-                                '^\\.(?!/?$)',
-                                '^\\./?$',
-                            ],
-                            // Style imports
-                            ['^.+\\.s?css$'],
-                            // Side effect imports
-                            ['^\\u0000'],
-                        ],
-                    },
-                ],
-            },
-        },
-    ],
+  ],
 };
