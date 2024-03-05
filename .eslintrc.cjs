@@ -5,9 +5,10 @@ module.exports = {
     },
     extends: [
         'standard',
+        'eslint:recommended',
         'plugin:react/recommended',
         'plugin:react/jsx-runtime',
-        'prettier',
+        'plugin:prettier/recommended',
     ],
     parserOptions: {
         ecmaVersion: 'latest',
