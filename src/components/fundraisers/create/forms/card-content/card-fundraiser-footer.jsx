@@ -27,29 +27,25 @@ const CardFundraiserFooter = ({
     <CardFooter gap="4px">
       <div className="flex-1">
         <Button
-          onClick={() =>
-            activeStep >= 1 && setActiveStep(activeStep - 1)
-          }
+          onClick={() => activeStep >= 1 && setActiveStep(activeStep - 1)}
           isDisabled={activeStep === 0 || deleting || loading}
         >
           Previous
         </Button>
       </div>
-      {draftFundraiser &&
-        (draftFundraiser.status === 'review' ||
-          draftFundraiser.status === 'draft') && (
-          <Button
-            colorScheme="red"
-            variant="ghost"
-            onClick={() => {
-              deleteDraft();
-            }}
-            isLoading={deleting}
-            isDisabled={loading}
-          >
-            Discard
-          </Button>
-        )}
+      {draftFundraiser && (draftFundraiser.status === 'review' || draftFundraiser.status === 'draft') && (
+        <Button
+          colorScheme="red"
+          variant="ghost"
+          onClick={() => {
+            deleteDraft();
+          }}
+          isLoading={deleting}
+          isDisabled={loading}
+        >
+          Discard
+        </Button>
+      )}
 
       {activeStep === 0 &&
         (isFetching ? (
@@ -65,15 +61,8 @@ const CardFundraiserFooter = ({
             isLoading={loading}
             isDisabled={
               fundraiserFor === 'myself'
-                ? !fundraiserFor ||
-                  !fundraiserCity ||
-                  !fundraiserState
-                : !beneficiaryName ||
-                  !fundraiserFor ||
-                  !fundraiserCity ||
-                  !fundraiserState ||
-                  isFetching ||
-                  deleting
+                ? !fundraiserFor || !fundraiserCity || !fundraiserState
+                : !beneficiaryName || !fundraiserFor || !fundraiserCity || !fundraiserState || isFetching || deleting
             }
           >
             Continue
@@ -85,9 +74,7 @@ const CardFundraiserFooter = ({
           colorScheme="teal"
           onClick={() => handleSubmitFormTwo()}
           isLoading={loading}
-          isDisabled={
-            !fundraiserCause || !fundraiserGoal || deleting
-          }
+          isDisabled={!fundraiserCause || !fundraiserGoal || deleting}
         >
           Continue
         </Button>
@@ -107,9 +94,7 @@ const CardFundraiserFooter = ({
           colorScheme="teal"
           onClick={() => handleSubmitFormFour()}
           isLoading={loading}
-          isDisabled={
-            !fundraiserTitle || !fundraiserStory || deleting
-          }
+          isDisabled={!fundraiserTitle || !fundraiserStory || deleting}
         >
           Review
         </Button>

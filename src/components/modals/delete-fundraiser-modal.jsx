@@ -10,12 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-const DeleteFundraiserModal = ({
-  isOpen,
-  onClose,
-  handleDeleteFundraiser,
-  loading,
-}) => {
+const DeleteFundraiserModal = ({ isOpen, onClose, handleDeleteFundraiser, loading }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
@@ -23,22 +18,14 @@ const DeleteFundraiserModal = ({
         <ModalHeader>Delete Fundraiser</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text>
-            Are you sure, you want to delete this fundraiser?
-            This task is irreversible.
-          </Text>
+          <Text>Are you sure, you want to delete this fundraiser? This task is irreversible.</Text>
         </ModalBody>
 
         <ModalFooter>
           <Button mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button
-            variant="solid"
-            colorScheme="green"
-            onClick={handleDeleteFundraiser}
-            isLoading={loading}
-          >
+          <Button variant="solid" colorScheme="green" onClick={handleDeleteFundraiser} isLoading={loading}>
             Confirm
           </Button>
         </ModalFooter>

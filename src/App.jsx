@@ -23,72 +23,21 @@ export const App = () => {
       <div className="mt-[76px] flex flex-1 flex-col">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/auth/signin"
-            element={
-              !session ? <SignInPage /> : <Navigate to="/" />
-            }
-          />
-          <Route
-            path="/auth/signup"
-            element={
-              !session ? <SignUpPage /> : <Navigate to="/" />
-            }
-          />
-          <Route
-            path="/fundraisers/discover"
-            element={<DiscoverFundraisersPage />}
-          />
-          <Route
-            path="/fundraiser/:id"
-            element={<FundraiserPage />}
-          />
-          <Route
-            path="/how-it-works"
-            element={<HowItWorksPage />}
-          />
-          <Route
-            path="*"
-            element={<div>The page is not available</div>}
-          />
+          <Route path="/auth/signin" element={!session ? <SignInPage /> : <Navigate to="/" />} />
+          <Route path="/auth/signup" element={!session ? <SignUpPage /> : <Navigate to="/" />} />
+          <Route path="/fundraisers/discover" element={<DiscoverFundraisersPage />} />
+          <Route path="/fundraiser/:id" element={<FundraiserPage />} />
+          <Route path="/how-it-works" element={<HowItWorksPage />} />
+          <Route path="*" element={<div>The page is not available</div>} />
 
           {/* PROTECTED ROUTES */}
-          <Route
-            path="/dashboard"
-            element={
-              session &&
-              (session ? <UserDashboard /> : <SignInPage />)
-            }
-          />
-          <Route
-            path="/fundraiser/create"
-            element={
-              session &&
-              (session ? (
-                <CreateFundraiserPage />
-              ) : (
-                <SignInPage />
-              ))
-            }
-          />
+          <Route path="/dashboard" element={session && (session ? <UserDashboard /> : <SignInPage />)} />
+          <Route path="/fundraiser/create" element={session && (session ? <CreateFundraiserPage /> : <SignInPage />)} />
           <Route
             path="/fundraiser/:id/manage"
-            element={
-              session &&
-              (session ? (
-                <ManageFundriaserPage />
-              ) : (
-                <SignInPage />
-              ))
-            }
+            element={session && (session ? <ManageFundriaserPage /> : <SignInPage />)}
           />
-          <Route
-            path="/fundraiser/:id/donate"
-            element={
-              session &&
-              (session ? <DonatePage /> : <SignInPage />)
-            }
-          />
+          <Route path="/fundraiser/:id/donate" element={session && (session ? <DonatePage /> : <SignInPage />)} />
         </Routes>
       </div>
       <Footer />

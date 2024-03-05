@@ -46,14 +46,11 @@ const SignUpComponent = () => {
     if (data && !error) {
       const user = data.session.user;
       try {
-        const res = await axios.post(
-          `${baseapiurl}/api/auth/sign-up`,
-          {
-            uid: user.id,
-            fullname: values.fullname,
-            email: values.email,
-          }
-        );
+        const res = await axios.post(`${baseapiurl}/api/auth/sign-up`, {
+          uid: user.id,
+          fullname: values.fullname,
+          email: values.email,
+        });
 
         const resData = res.data;
 
@@ -74,9 +71,7 @@ const SignUpComponent = () => {
     }
 
     if (error) {
-      if (
-        error.message.toLowerCase() === 'user already registered'
-      ) {
+      if (error.message.toLowerCase() === 'user already registered') {
         setError('User with email already registered');
       } else {
         setError(error.message);
@@ -106,16 +101,8 @@ const SignUpComponent = () => {
                     {({ field, form }) => (
                       <FormControl isRequired>
                         <FormLabel>Full Name</FormLabel>
-                        <Input
-                          {...field}
-                          type="text"
-                          id="fullname"
-                          placeholder="Fullname"
-                          required
-                        />
-                        <FormHelperText>
-                          Name as mentioned in your Aadhar card
-                        </FormHelperText>
+                        <Input {...field} type="text" id="fullname" placeholder="Fullname" required />
+                        <FormHelperText>Name as mentioned in your Aadhar card</FormHelperText>
                       </FormControl>
                     )}
                   </Field>
@@ -123,16 +110,8 @@ const SignUpComponent = () => {
                     {({ field, form }) => (
                       <FormControl isRequired>
                         <FormLabel>Email</FormLabel>
-                        <Input
-                          {...field}
-                          type="email"
-                          id="email"
-                          placeholder="Email"
-                          required
-                        />
-                        <FormHelperText>
-                          Verification will be sent on this email
-                        </FormHelperText>
+                        <Input {...field} type="email" id="email" placeholder="Email" required />
+                        <FormHelperText>Verification will be sent on this email</FormHelperText>
                       </FormControl>
                     )}
                   </Field>
@@ -140,31 +119,17 @@ const SignUpComponent = () => {
                     {({ field, form }) => (
                       <FormControl isRequired>
                         <FormLabel>Password</FormLabel>
-                        <Input
-                          type="password"
-                          id="password"
-                          placeholder="Password"
-                          {...field}
-                          required
-                        />
+                        <Input type="password" id="password" placeholder="Password" {...field} required />
                       </FormControl>
                     )}
                   </Field>
                   <Text>
                     Already have an account?{' '}
-                    <NavLink
-                      to="/auth/signin"
-                      className="font-semibold text-teal-600 underline hover:no-underline"
-                    >
+                    <NavLink to="/auth/signin" className="font-semibold text-teal-600 underline hover:no-underline">
                       Sign In
                     </NavLink>
                   </Text>
-                  <Button
-                    className="w-full"
-                    colorScheme="teal"
-                    type="submit"
-                    isLoading={props.isSubmitting}
-                  >
+                  <Button className="w-full" colorScheme="teal" type="submit" isLoading={props.isSubmitting}>
                     Sign Up
                   </Button>
                 </Stack>

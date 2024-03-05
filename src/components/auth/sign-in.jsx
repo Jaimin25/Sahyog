@@ -27,29 +27,23 @@ const SignInComponent = () => {
 
   const onSubmit = async (values, actions) => {
     setError(null);
-    const { data, error } =
-      await supabase.auth.signInWithPassword({
-        email: values.email,
-        password: values.password,
-      });
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: values.email,
+      password: values.password,
+    });
 
     if (data && !error) {
       const sessionUser = data.session.user;
 
       try {
-        const res = await axios.post(
-          `${baseapiurl}/api/auth/sign-in`,
-          { uid: sessionUser.id, email: values.email }
-        );
+        const res = await axios.post(`${baseapiurl}/api/auth/sign-in`, { uid: sessionUser.id, email: values.email });
 
         const resData = res.data;
 
         if (resData.statusCode === 200) {
           sessionUser.fullname = resData.userDetails.fullname;
-          sessionUser.emailVerified =
-            resData.userDetails.emailVerified;
-          sessionUser.profilePicUrl =
-            resData.userDetails.profilePicUrl;
+          sessionUser.emailVerified = resData.userDetails.emailVerified;
+          sessionUser.profilePicUrl = resData.userDetails.profilePicUrl;
           saveUserDetails(sessionUser);
           navigate('/dashboard');
         } else {
@@ -88,13 +82,7 @@ const SignInComponent = () => {
                     {({ field, form }) => (
                       <FormControl>
                         <FormLabel>Email</FormLabel>
-                        <Input
-                          {...field}
-                          type="email"
-                          id="email"
-                          placeholder="Email"
-                          required
-                        />
+                        <Input {...field} type="email" id="email" placeholder="Email" required />
                       </FormControl>
                     )}
                   </Field>
@@ -102,31 +90,17 @@ const SignInComponent = () => {
                     {({ field, form }) => (
                       <FormControl>
                         <FormLabel>Password</FormLabel>
-                        <Input
-                          type="password"
-                          id="password"
-                          placeholder="Password"
-                          {...field}
-                          required
-                        />
+                        <Input type="password" id="password" placeholder="Password" {...field} required />
                       </FormControl>
                     )}
                   </Field>
                   <Text>
                     Don&apos;t have an account?{' '}
-                    <NavLink
-                      to="/auth/signup"
-                      className="font-semibold text-teal-600 underline hover:no-underline"
-                    >
+                    <NavLink to="/auth/signup" className="font-semibold text-teal-600 underline hover:no-underline">
                       Sign Up
                     </NavLink>
                   </Text>
-                  <Button
-                    className="w-full"
-                    colorScheme="teal"
-                    type="submit"
-                    isLoading={props.isSubmitting}
-                  >
+                  <Button className="w-full" colorScheme="teal" type="submit" isLoading={props.isSubmitting}>
                     Sign In
                   </Button>
                 </Stack>

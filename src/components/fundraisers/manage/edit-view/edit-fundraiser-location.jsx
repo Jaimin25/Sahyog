@@ -28,9 +28,7 @@ const EditFundraiserLocation = ({
 
   const handleCheckZipCode = async (getSubmitButtonProps) => {
     try {
-      const res = await axios.get(
-        `https://api.postalpincode.in/pincode/${zipCode}`
-      );
+      const res = await axios.get(`https://api.postalpincode.in/pincode/${zipCode}`);
       const resData = res.data;
 
       if (resData[0].Status === 'Success') {
@@ -65,21 +63,14 @@ const EditFundraiserLocation = ({
   };
 
   function EditableControls() {
-    const {
-      isEditing,
-      getSubmitButtonProps,
-      getCancelButtonProps,
-      getEditButtonProps,
-    } = useEditableControls();
+    const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } = useEditableControls();
     setEditing(isEditing);
     return isEditing ? (
       <ButtonGroup className="flex items-center" size="sm">
         <IconButton
           icon={<CheckIcon />}
           {...getSubmitButtonProps()}
-          onClick={() =>
-            handleCheckZipCode(getSubmitButtonProps)
-          }
+          onClick={() => handleCheckZipCode(getSubmitButtonProps)}
         />
         <IconButton icon={<X />} {...getCancelButtonProps()} />
       </ButtonGroup>
@@ -100,12 +91,7 @@ const EditFundraiserLocation = ({
         {fundraiserCity}, {fundraiserState} - {fundraiserZipCode}
       </Text>
 
-      <Input
-        as={EditableInput}
-        value={zipCode}
-        type="number"
-        onChange={(e) => setZipCode(e.target.value)}
-      />
+      <Input as={EditableInput} value={zipCode} type="number" onChange={(e) => setZipCode(e.target.value)} />
 
       <EditableControls />
     </Editable>

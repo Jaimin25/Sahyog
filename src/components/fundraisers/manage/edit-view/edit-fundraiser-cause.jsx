@@ -1,12 +1,4 @@
-import {
-  Button,
-  ButtonGroup,
-  Editable,
-  IconButton,
-  Select,
-  Text,
-  useEditableControls,
-} from '@chakra-ui/react';
+import { Button, ButtonGroup, Editable, IconButton, Select, Text, useEditableControls } from '@chakra-ui/react';
 import { CheckIcon, X } from 'lucide-react';
 import { useState } from 'react';
 
@@ -28,26 +20,14 @@ const categories = [
   'wishes',
 ];
 
-const EditFundraiserCause = ({
-  fundraiser,
-  fundraiserCause,
-  setFundraiserCause,
-}) => {
+const EditFundraiserCause = ({ fundraiser, fundraiserCause, setFundraiserCause }) => {
   const [editing, setEditing] = useState(false);
   function EditableControls() {
-    const {
-      isEditing,
-      getSubmitButtonProps,
-      getCancelButtonProps,
-      getEditButtonProps,
-    } = useEditableControls();
+    const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } = useEditableControls();
     setEditing(isEditing);
     return isEditing ? (
       <ButtonGroup className="flex items-center" size="sm">
-        <IconButton
-          icon={<CheckIcon />}
-          {...getSubmitButtonProps()}
-        />
+        <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
         <IconButton icon={<X />} {...getCancelButtonProps()} />
       </ButtonGroup>
     ) : (
@@ -65,9 +45,7 @@ const EditFundraiserCause = ({
       isPreviewFocusable={false}
     >
       <Text flex="1" hidden={editing}>
-        {fundraiserCause
-          ? capitalizeString(fundraiserCause)
-          : capitalizeString(fundraiser.fundraiserCause)}
+        {fundraiserCause ? capitalizeString(fundraiserCause) : capitalizeString(fundraiser.fundraiserCause)}
       </Text>
       {editing && (
         <Select
@@ -78,8 +56,7 @@ const EditFundraiserCause = ({
         >
           {categories.map((category) => (
             <option key={category} value={category}>
-              {category.charAt(0).toUpperCase() +
-                category.slice(1)}
+              {category.charAt(0).toUpperCase() + category.slice(1)}
             </option>
           ))}
         </Select>

@@ -32,9 +32,7 @@ const UserAccountDetails = () => {
   const [isSendingMail, setIsSendingMail] = useState(false);
 
   const [userEmail, setUserEmail] = useState(user.email);
-  const [userFullname, setUserFullname] = useState(
-    user.fullname
-  );
+  const [userFullname, setUserFullname] = useState(user.fullname);
 
   useEffect(() => {
     setUserEmail(user.email);
@@ -44,14 +42,11 @@ const UserAccountDetails = () => {
   const handleResendButton = async () => {
     setIsSendingMail(true);
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/auth/resendVerificationMail`,
-        {
-          uid: user.id,
-          access_token: accessToken,
-          email: user.email,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/auth/resendVerificationMail`, {
+        uid: user.id,
+        access_token: accessToken,
+        email: user.email,
+      });
 
       const resData = res.data;
       setIsSendingMail(false);
@@ -89,11 +84,9 @@ const UserAccountDetails = () => {
     try {
       if (validator.isEmail(userEmail)) {
         if (userEmail !== user.email) {
-          const { data, error } = await supabase.auth.updateUser(
-            {
-              email: userEmail,
-            }
-          );
+          const { data, error } = await supabase.auth.updateUser({
+            email: userEmail,
+          });
           setIsSavingChanges(false);
 
           if (error) {
@@ -107,8 +100,7 @@ const UserAccountDetails = () => {
           } else if (data) {
             toast({
               title: 'Confirm Mail',
-              description:
-                'Please check your email to confirm the new email',
+              description: 'Please check your email to confirm the new email',
               status: 'success',
               position: 'top-right',
               duration: 1500,
@@ -128,14 +120,11 @@ const UserAccountDetails = () => {
       }
 
       if (userFullname !== user.fullname) {
-        const res = await axios.post(
-          `${baseapiurl}/api/user/changeUserFullname`,
-          {
-            uid: user.id,
-            access_token: accessToken,
-            fullname: userFullname,
-          }
-        );
+        const res = await axios.post(`${baseapiurl}/api/user/changeUserFullname`, {
+          uid: user.id,
+          access_token: accessToken,
+          fullname: userFullname,
+        });
         const resData = res.data;
         setIsSavingChanges(false);
         if (resData.statusCode === 200) {
@@ -176,8 +165,7 @@ const UserAccountDetails = () => {
         {!user.emailVerified && (
           <Alert>
             <AlertIcon />
-            Please verify your email in order to create a
-            fundraiser or to donate
+            Please verify your email in order to create a fundraiser or to donate
           </Alert>
         )}
         <Heading>Account Details</Heading>
@@ -186,12 +174,7 @@ const UserAccountDetails = () => {
         <Stack>
           <Text fontWeight="semibold">Profile Photo</Text>
           <div>
-            <Button
-              height="142px"
-              width="142px"
-              rounded="full"
-              variant="outline"
-            >
+            <Button height="142px" width="142px" rounded="full" variant="outline">
               <p className="flex flex-col items-center gap-2">
                 <ImagePlus />
                 Add Photo
@@ -207,14 +190,9 @@ const UserAccountDetails = () => {
             }}
             isRequired
           />
-          <Text className="text-sm text-gray-600">
-            Name must be same as per your Aadhar Card
-          </Text>
+          <Text className="text-sm text-gray-600">Name must be same as per your Aadhar Card</Text>
           <Text fontWeight="semibold" className="">
-            Email{' '}
-            {!user.emailVerified && (
-              <Badge color="red">unverified</Badge>
-            )}
+            Email {!user.emailVerified && <Badge color="red">unverified</Badge>}
           </Text>
           <Box className="flex flex-col items-start gap-2">
             <Input
@@ -226,12 +204,7 @@ const UserAccountDetails = () => {
               }}
             />
             {!user.emailVerified && (
-              <Button
-                colorScheme="teal"
-                variant="link"
-                onClick={handleResendButton}
-                isLoading={isSendingMail}
-              >
+              <Button colorScheme="teal" variant="link" onClick={handleResendButton} isLoading={isSendingMail}>
                 Send Verification Mail
               </Button>
             )}
@@ -241,12 +214,7 @@ const UserAccountDetails = () => {
       <CardFooter gap="10px">
         <Button
           colorScheme="teal"
-          isDisabled={
-            !userEmail ||
-            !userFullname ||
-            (userEmail === user.email &&
-              userFullname === user.fullname)
-          }
+          isDisabled={!userEmail || !userFullname || (userEmail === user.email && userFullname === user.fullname)}
           isLoading={isSavingChanges}
           onClick={handleSaveChanges}
         >

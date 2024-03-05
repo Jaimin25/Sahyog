@@ -11,9 +11,7 @@ const FundraiserDiscoverSection = () => {
 
   const fetchAllFundraisers = async () => {
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/fundraiser/getAllFundraisers`
-      );
+      const res = await axios.post(`${baseapiurl}/api/fundraiser/getAllFundraisers`);
       const resData = res.data;
 
       setIsFetching(false);

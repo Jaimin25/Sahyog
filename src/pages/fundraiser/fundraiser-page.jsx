@@ -1,15 +1,4 @@
-import {
-  Box,
-  Card,
-  CardBody,
-  Flex,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  Select,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Card, CardBody, Flex, Input, InputGroup, InputLeftAddon, Select, Text, VStack } from '@chakra-ui/react';
 import axios from 'axios';
 import { Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -43,9 +32,7 @@ const DiscoverFundraisersPage = () => {
 
   const fetchAllFundraisers = async () => {
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/fundraiser/getAllFundraisers`
-      );
+      const res = await axios.post(`${baseapiurl}/api/fundraiser/getAllFundraisers`);
       const resData = res.data;
       setIsFetching(false);
       if (resData.statusCode === 200) {
@@ -85,13 +72,7 @@ const DiscoverFundraisersPage = () => {
                   <Text>Filter by category</Text>
                 </Box>
                 <Box>
-                  <Select
-                    placeholder="All"
-                    value={categoryFilter}
-                    onChange={(e) =>
-                      setCategoryFilter(e.target.value)
-                    }
-                  >
+                  <Select placeholder="All" value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
                     {categories.map((category) => (
                       <option key={category} value={category}>
                         {capitalizeString(category)}
@@ -105,12 +86,7 @@ const DiscoverFundraisersPage = () => {
                   <Text>Filter by uploaded</Text>
                 </Box>
                 <Box>
-                  <Select
-                    value={uploadedFilter}
-                    onChange={(e) =>
-                      setUploadedFilter(e.target.value)
-                    }
-                  >
+                  <Select value={uploadedFilter} onChange={(e) => setUploadedFilter(e.target.value)}>
                     <option value="newest">Newest</option>
                     <option value="oldest">Oldest</option>
                   </Select>

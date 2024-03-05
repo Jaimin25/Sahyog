@@ -4,21 +4,11 @@ import { useEffect, useState } from 'react';
 import FundriaserCard from '../../cards/fundrasiers-card';
 import FundriaserCardSkeleton from '../../skeletons/fundraiser-card-skeleton';
 
-const DiscoverFundraiser = ({
-  categoryFilter,
-  uploadedFilter,
-  searchFilter,
-  fundraisers,
-  isFetching,
-}) => {
+const DiscoverFundraiser = ({ categoryFilter, uploadedFilter, searchFilter, fundraisers, isFetching }) => {
   const [filteredFundraisers, setFilteredFundraisers] = useState(
     uploadedFilter === 'oldest'
-      ? fundraisers.sort(
-          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-        )
-      : fundraisers.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        )
+      ? fundraisers.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+      : fundraisers.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
   );
 
   useEffect(() => {
@@ -28,16 +18,12 @@ const DiscoverFundraiser = ({
         if (searchFilter) {
           if (
             fundraisers.some((fundraiser) =>
-              fundraiser.fundraiserTitle
-                .toLowerCase()
-                .includes(searchFilter.toLowerCase())
+              fundraiser.fundraiserTitle.toLowerCase().includes(searchFilter.toLowerCase())
             )
           ) {
             setFilteredFundraisers(
               fundraisers.filter((fundraiser) =>
-                fundraiser.fundraiserTitle
-                  .toLowerCase()
-                  .includes(searchFilter.toLowerCase())
+                fundraiser.fundraiserTitle.toLowerCase().includes(searchFilter.toLowerCase())
               )
             );
           } else {
@@ -45,29 +31,20 @@ const DiscoverFundraiser = ({
           }
         }
       } else if (
-        fundraisers.some(
-          (fundraiser) =>
-            fundraiser.fundraiserCause.toLowerCase() ===
-            categoryFilter.toLowerCase()
-        )
+        fundraisers.some((fundraiser) => fundraiser.fundraiserCause.toLowerCase() === categoryFilter.toLowerCase())
       ) {
         if (searchFilter !== '') {
           if (filteredFundraisers) {
             if (
               filteredFundraisers.some((fundraiser) =>
-                fundraiser.fundraiserTitle
-                  .toLowerCase()
-                  .includes(searchFilter.toLowerCase())
+                fundraiser.fundraiserTitle.toLowerCase().includes(searchFilter.toLowerCase())
               )
             ) {
               setFilteredFundraisers(
                 filteredFundraisers.filter(
                   (fundraiser) =>
-                    fundraiser.fundraiserCause.toLowerCase() ===
-                      categoryFilter.toLowerCase() &&
-                    fundraiser.fundraiserTitle
-                      .toLowerCase()
-                      .includes(searchFilter.toLowerCase())
+                    fundraiser.fundraiserCause.toLowerCase() === categoryFilter.toLowerCase() &&
+                    fundraiser.fundraiserTitle.toLowerCase().includes(searchFilter.toLowerCase())
                 )
               );
             } else {
@@ -76,19 +53,14 @@ const DiscoverFundraiser = ({
           } else {
             if (
               fundraisers.some((fundraiser) =>
-                fundraiser.fundraiserTitle
-                  .toLowerCase()
-                  .includes(searchFilter.toLowerCase())
+                fundraiser.fundraiserTitle.toLowerCase().includes(searchFilter.toLowerCase())
               )
             ) {
               setFilteredFundraisers(
                 fundraisers.filter(
                   (fundraiser) =>
-                    fundraiser.fundraiserCause.toLowerCase() ===
-                      categoryFilter.toLowerCase() &&
-                    fundraiser.fundraiserTitle
-                      .toLowerCase()
-                      .includes(searchFilter.toLowerCase())
+                    fundraiser.fundraiserCause.toLowerCase() === categoryFilter.toLowerCase() &&
+                    fundraiser.fundraiserTitle.toLowerCase().includes(searchFilter.toLowerCase())
                 )
               );
             }
@@ -96,9 +68,7 @@ const DiscoverFundraiser = ({
         } else {
           setFilteredFundraisers(
             fundraisers.filter(
-              (fundraiser) =>
-                fundraiser.fundraiserCause.toLowerCase() ===
-                categoryFilter.toLowerCase()
+              (fundraiser) => fundraiser.fundraiserCause.toLowerCase() === categoryFilter.toLowerCase()
             )
           );
         }
@@ -135,8 +105,7 @@ const DiscoverFundraiser = ({
               coverMediaUrl="https://media.freshbooks.com/wp-content/uploads/2021/11/how-does-crowdfunding-work.jpg"
             />
           </div>
-        ) : filteredFundraisers &&
-          filteredFundraisers.length > 0 ? (
+        ) : filteredFundraisers && filteredFundraisers.length > 0 ? (
           <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filteredFundraisers.map((fundraiser) => (
               <FundriaserCard

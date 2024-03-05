@@ -1,14 +1,4 @@
-import {
-  Alert,
-  AlertIcon,
-  Card,
-  CardBody,
-  CardHeader,
-  Grid,
-  Heading,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Alert, AlertIcon, Card, CardBody, CardHeader, Grid, Heading, Stack, Text } from '@chakra-ui/react';
 
 import UserActiveFundraisersCard from '../../cards/user-fundraisers-card';
 import UserDeletedFundraisersCard from '../../cards/user-fundraisers-card-deleted';
@@ -30,44 +20,30 @@ const UserFundraisers = ({ loading, userFundraisers }) => {
           />
         ) : (
           <Stack>
-            {!loading &&
-              userFundraisers &&
-              userFundraisers.length === 0 && (
-                <Alert>
-                  <AlertIcon />
-                  You have no fundraisers yet
-                </Alert>
-              )}
-            {userFundraisers.some(
-              (fundraiser) =>
-                fundraiser.status === 'draft' ||
-                fundraiser.status === 'review'
-            ) && (
+            {!loading && userFundraisers && userFundraisers.length === 0 && (
+              <Alert>
+                <AlertIcon />
+                You have no fundraisers yet
+              </Alert>
+            )}
+            {userFundraisers.some((fundraiser) => fundraiser.status === 'draft' || fundraiser.status === 'review') && (
               <>
                 <Text fontSize="xl" fontWeight="bold">
                   Drafts
                 </Text>
                 {userFundraisers
-                  .filter(
-                    (fundraiser) =>
-                      fundraiser.status === 'draft' ||
-                      fundraiser.status === 'review'
-                  )
+                  .filter((fundraiser) => fundraiser.status === 'draft' || fundraiser.status === 'review')
                   .map((fundraiser) => (
                     <UserFundraisersDraftCard
                       key={fundraiser._id}
-                      fundraiserTitle={
-                        fundraiser.fundraiserTitle
-                      }
+                      fundraiserTitle={fundraiser.fundraiserTitle}
                       coverMediaUrl={fundraiser.coverMediaUrl}
                       createdAt={fundraiser.createdAt}
                     />
                   ))}
               </>
             )}
-            {userFundraisers.some(
-              (fundraiser) => fundraiser.status === 'active'
-            ) && (
+            {userFundraisers.some((fundraiser) => fundraiser.status === 'active') && (
               <>
                 <Text fontSize="xl" fontWeight="bold">
                   Published
@@ -75,17 +51,12 @@ const UserFundraisers = ({ loading, userFundraisers }) => {
 
                 <Grid width="100%" gap="10px">
                   {userFundraisers
-                    .filter(
-                      (fundraiser) =>
-                        fundraiser.status === 'active'
-                    )
+                    .filter((fundraiser) => fundraiser.status === 'active')
                     .map((fundraiser) => (
                       <UserActiveFundraisersCard
                         key={fundraiser._id}
                         fundraiserId={fundraiser._id}
-                        fundraiserTitle={
-                          fundraiser.fundraiserTitle
-                        }
+                        fundraiserTitle={fundraiser.fundraiserTitle}
                         coverMediaUrl={fundraiser.coverMediaUrl}
                         createdAt={fundraiser.createdAt}
                       />
@@ -93,25 +64,18 @@ const UserFundraisers = ({ loading, userFundraisers }) => {
                 </Grid>
               </>
             )}
-            {userFundraisers.some(
-              (fundraiser) => fundraiser.status === 'deleted'
-            ) && (
+            {userFundraisers.some((fundraiser) => fundraiser.status === 'deleted') && (
               <>
                 <Text fontSize="xl" fontWeight="bold">
                   Deleted
                 </Text>
                 {userFundraisers
-                  .filter(
-                    (fundraiser) =>
-                      fundraiser.status === 'deleted'
-                  )
+                  .filter((fundraiser) => fundraiser.status === 'deleted')
                   .map((fundraiser) => (
                     <UserDeletedFundraisersCard
                       key={fundraiser._id}
                       fundraiserId={fundraiser._id}
-                      fundraiserTitle={
-                        fundraiser.fundraiserTitle
-                      }
+                      fundraiserTitle={fundraiser.fundraiserTitle}
                       coverMediaUrl={fundraiser.coverMediaUrl}
                       createdAt={fundraiser.createdAt}
                     />

@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Skeleton,
-  Stack,
-  StackDivider,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Divider, Skeleton, Stack, StackDivider, Text } from '@chakra-ui/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const ManageFundraiserDashboardSkeleton = () => {
@@ -45,11 +37,7 @@ const ManageFundraiserDashboardSkeleton = () => {
         <Box className="w-full space-y-4">
           <Skeleton>
             <Box className="flex w-full items-center">
-              <Text
-                fontWeight="semibold"
-                fontSize="20px"
-                flex="1"
-              >
+              <Text fontWeight="semibold" fontSize="20px" flex="1">
                 Cover Media
               </Text>
               <Button variant="outline">Change</Button>

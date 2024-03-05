@@ -16,11 +16,7 @@ const FundraiserCardStepper = ({ activeStep, steps }) => {
         {steps.map((step, index) => (
           <Step key={index}>
             <StepIndicator>
-              <StepStatus
-                complete={<StepIcon />}
-                incomplete={<StepNumber />}
-                active={<StepNumber />}
-              />
+              <StepStatus complete={<StepIcon />} incomplete={<StepNumber />} active={<StepNumber />} />
             </StepIndicator>
 
             <StepSeparator />

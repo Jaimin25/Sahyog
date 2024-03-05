@@ -1,17 +1,10 @@
 import { Input, Stack, Text } from '@chakra-ui/react';
 import { Editor } from '@tinymce/tinymce-react';
 
-const FundraiserFormFour = ({
-  fundraiserTitle,
-  fundraiserStory,
-  setFundraiserTitle,
-  setFundraiserStory,
-}) => {
+const FundraiserFormFour = ({ fundraiserTitle, fundraiserStory, setFundraiserTitle, setFundraiserStory }) => {
   return (
     <Stack className="fundriaser-form-title-story">
-      <Text fontWeight="semibold">
-        Give your fundraiser a title
-      </Text>
+      <Text fontWeight="semibold">Give your fundraiser a title</Text>
       <Input
         placeholder="Donate to help..."
         value={fundraiserTitle}
@@ -47,11 +40,8 @@ const FundraiserFormFour = ({
             'wordcount',
           ],
           toolbar:
-            'undo redo | blocks | ' +
-            'bold italic forecolor | alignleft aligncenter ' +
-            'alignright alignjustify ',
-          content_style:
-            'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+            'undo redo | blocks | ' + 'bold italic forecolor | alignleft aligncenter ' + 'alignright alignjustify ',
+          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
         }}
       />
     </Stack>

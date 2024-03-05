@@ -1,10 +1,4 @@
-import {
-  Button,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-} from '@chakra-ui/react';
+import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { HeartHandshake, Menu as MenuIcon } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
@@ -30,16 +24,8 @@ const Navbar = () => {
             <div className="flex-1" />
             <div className="navbar.menu hidden gap-2 lg:flex">
               <div>
-                <NavLink
-                  to={
-                    session
-                      ? '/fundraiser/create'
-                      : '/auth/signin'
-                  }
-                >
-                  <Button colorScheme="teal">
-                    Start a Fundraiser
-                  </Button>
+                <NavLink to={session ? '/fundraiser/create' : '/auth/signin'}>
+                  <Button colorScheme="teal">Start a Fundraiser</Button>
                 </NavLink>
               </div>
 
@@ -79,16 +65,8 @@ const Navbar = () => {
                   <MenuIcon className="h-7 w-7 text-black" />
                 </MenuButton>
                 <MenuList>
-                  <NavLink
-                    to={
-                      session
-                        ? '/fundraiser/create'
-                        : '/auth/signin'
-                    }
-                  >
-                    <MenuItem color="teal">
-                      Start a Fundraiser
-                    </MenuItem>
+                  <NavLink to={session ? '/fundraiser/create' : '/auth/signin'}>
+                    <MenuItem color="teal">Start a Fundraiser</MenuItem>
                   </NavLink>
 
                   <NavLink to="/fundraisers/discover">

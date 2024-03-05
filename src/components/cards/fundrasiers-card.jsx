@@ -17,11 +17,7 @@ import {
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { NavLink } from 'react-router-dom';
 
-import {
-  checkForImage,
-  checkYoutubeUrl,
-  getYtVideoId,
-} from '../../lib/utils';
+import { checkForImage, checkYoutubeUrl, getYtVideoId } from '../../lib/utils';
 import ShareFundraiserModal from '../modals/share-fundraiser-modal';
 
 const FundriaserCard = ({
@@ -53,14 +49,8 @@ const FundriaserCard = ({
                   width="100%"
                 />
               </div>
-            ) : coverMediaUrl &&
-              checkYoutubeUrl(coverMediaUrl) ? (
-              <AspectRatio
-                maxW="100%"
-                ratio={16 / 9}
-                borderRadius="lg"
-                height="200px"
-              >
+            ) : coverMediaUrl && checkYoutubeUrl(coverMediaUrl) ? (
+              <AspectRatio maxW="100%" ratio={16 / 9} borderRadius="lg" height="200px">
                 <iframe
                   className="rounded-lg"
                   src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
@@ -69,32 +59,18 @@ const FundriaserCard = ({
               </AspectRatio>
             ) : null}
             <Stack mt="6" spacing="3">
-              <Heading
-                size="md"
-                className="fundraiser-card-title"
-              >
+              <Heading size="md" className="fundraiser-card-title">
                 {fundraiserTitle}
               </Heading>
               <HStack>
                 <Avatar src={profilePicUrl} size="sm" />
                 <Text>
-                  By{' '}
-                  <span className="font-semibold">
-                    {creatorName}
-                  </span>
+                  By <span className="font-semibold">{creatorName}</span>
                 </Text>
               </HStack>
               <Text fontSize={'larger'}>
-                <span className="font-semibold">
-                  ₹
-                  {amountRaised
-                    .toLocaleString('en-IN')
-                    .toString()}
-                </span>{' '}
-                raised out of ₹
-                {fundraiserGoal
-                  .toLocaleString('en-IN')
-                  .toString()}
+                <span className="font-semibold">₹{amountRaised.toLocaleString('en-IN').toString()}</span> raised out of
+                ₹{fundraiserGoal.toLocaleString('en-IN').toString()}
               </Text>
               <Progress
                 value={(amountRaised / fundraiserGoal) * 100}
@@ -106,11 +82,7 @@ const FundriaserCard = ({
           </CardBody>
         </NavLink>
         <CardFooter>
-          <ButtonGroup
-            spacing="2"
-            direction="row"
-            className="flex w-full"
-          >
+          <ButtonGroup spacing="2" direction="row" className="flex w-full">
             <Box className="w-full flex-1">
               <Button
                 variant="outline"
@@ -123,15 +95,8 @@ const FundriaserCard = ({
                 Share
               </Button>
             </Box>
-            <NavLink
-              to={`/fundraiser/${fundraiserId}/donate`}
-              className="w-full flex-1"
-            >
-              <Button
-                variant="solid"
-                colorScheme="teal"
-                className="fundraiser-card-donate-button w-full"
-              >
+            <NavLink to={`/fundraiser/${fundraiserId}/donate`} className="w-full flex-1">
+              <Button variant="solid" colorScheme="teal" className="fundraiser-card-donate-button w-full">
                 Donate
               </Button>
             </NavLink>

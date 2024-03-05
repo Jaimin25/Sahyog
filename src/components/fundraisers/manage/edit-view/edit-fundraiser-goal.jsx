@@ -12,25 +12,13 @@ import {
 } from '@chakra-ui/react';
 import { CheckIcon, X } from 'lucide-react';
 
-const EditFundraiserGoal = ({
-  fundraiser,
-  fundraiserGoal,
-  setFundraiserGoal,
-}) => {
+const EditFundraiserGoal = ({ fundraiser, fundraiserGoal, setFundraiserGoal }) => {
   function EditableControls() {
-    const {
-      isEditing,
-      getSubmitButtonProps,
-      getCancelButtonProps,
-      getEditButtonProps,
-    } = useEditableControls();
+    const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } = useEditableControls();
 
     return isEditing ? (
       <ButtonGroup className="flex items-center" size="sm">
-        <IconButton
-          icon={<CheckIcon />}
-          {...getSubmitButtonProps()}
-        />
+        <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
         <IconButton icon={<X />} {...getCancelButtonProps()} />
       </ButtonGroup>
     ) : (

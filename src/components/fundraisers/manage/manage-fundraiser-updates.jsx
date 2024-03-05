@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  Heading,
-  Stack,
-  useToast,
-} from '@chakra-ui/react';
+import { Box, Button, Heading, Stack, useToast } from '@chakra-ui/react';
 import { Editor } from '@tinymce/tinymce-react';
 import axios from 'axios';
 import { useState } from 'react';
@@ -14,12 +8,7 @@ import FundraiserUpdatesCard from '../../cards/fundraiser-updates-card';
 import { useSession } from '../../providers/session-provider';
 import FundraiserUpdatesSkeleton from '../../skeletons/fundraiser-updates-skeleton';
 
-const ManageFundraiserUpdates = ({
-  fundraiser,
-  fundraiserUpdates,
-  setFundraiserUpdates,
-  isFetching,
-}) => {
+const ManageFundraiserUpdates = ({ fundraiser, fundraiserUpdates, setFundraiserUpdates, isFetching }) => {
   const toast = useToast();
   const { user, accessToken } = useSession();
   const [updateDetails, setUpdateDetails] = useState();
@@ -28,24 +17,18 @@ const ManageFundraiserUpdates = ({
   const handlePostUpdates = async () => {
     setIsPosting(true);
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/fundraiser/postFundraiserUpdate`,
-        {
-          uid: user.id,
-          access_token: accessToken,
-          fundraiserId: fundraiser._id,
-          updateDetails,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/fundraiser/postFundraiserUpdate`, {
+        uid: user.id,
+        access_token: accessToken,
+        fundraiserId: fundraiser._id,
+        updateDetails,
+      });
 
       const resData = res.data;
       setIsPosting(false);
       if (resData.statusCode === 200) {
         setUpdateDetails('');
-        setFundraiserUpdates([
-          resData.fundraiserUpdate,
-          ...fundraiserUpdates,
-        ]);
+        setFundraiserUpdates([resData.fundraiserUpdate, ...fundraiserUpdates]);
         toast({
           title: 'Updated posted',
           status: 'success',
@@ -107,30 +90,20 @@ const ManageFundraiserUpdates = ({
                 'wordcount',
               ],
               toolbar:
-                'undo redo | blocks | ' +
-                'bold italic forecolor | alignleft aligncenter ' +
-                'alignright alignjustify ',
-              content_style:
-                'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                'undo redo | blocks | ' + 'bold italic forecolor | alignleft aligncenter ' + 'alignright alignjustify ',
+              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
             }}
           />
         </Box>
         <Box textAlign="end">
-          <Button
-            colorScheme="teal"
-            isDisabled={!updateDetails}
-            isLoading={isPosting}
-            onClick={handlePostUpdates}
-          >
+          <Button colorScheme="teal" isDisabled={!updateDetails} isLoading={isPosting} onClick={handlePostUpdates}>
             Post
           </Button>
         </Box>
       </Box>
       <Box className="space-y-4">
         <Heading size="md">Updates</Heading>
-        {!isFetching && fundraiserUpdates.length === 0 && (
-          <p>No updates yet</p>
-        )}
+        {!isFetching && fundraiserUpdates.length === 0 && <p>No updates yet</p>}
         {isFetching ? (
           <FundraiserUpdatesSkeleton type="manage" />
         ) : (

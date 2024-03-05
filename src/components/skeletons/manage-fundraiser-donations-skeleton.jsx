@@ -1,16 +1,5 @@
-import {
-  Box,
-  Button,
-  Progress,
-  Skeleton,
-  SkeletonCircle,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
-import {
-  ArrowUpRightFromSquare,
-  HeartHandshake,
-} from 'lucide-react';
+import { Box, Button, Progress, Skeleton, SkeletonCircle, Stack, Text } from '@chakra-ui/react';
+import { ArrowUpRightFromSquare, HeartHandshake } from 'lucide-react';
 
 const ManageFundraiserDonationSkeleton = () => {
   return (
@@ -31,11 +20,7 @@ const ManageFundraiserDonationSkeleton = () => {
       </Skeleton>
       <Stack>
         <Skeleton>
-          <Button
-            variant="outline"
-            colorScheme="teal"
-            className="fundraiser-card-donate-button"
-          >
+          <Button variant="outline" colorScheme="teal" className="fundraiser-card-donate-button">
             Donate now
           </Button>
           <Button
@@ -53,11 +38,7 @@ const ManageFundraiserDonationSkeleton = () => {
           .fill()
           .map((_, index) => (
             <Stack gap="18px" key={index}>
-              <Stack
-                direction="row"
-                alignItems="center"
-                gap="16px"
-              >
+              <Stack direction="row" alignItems="center" gap="16px">
                 <SkeletonCircle>
                   <Box>
                     <Box className="flex items-center rounded-full bg-gray-200 p-2">
@@ -71,8 +52,7 @@ const ManageFundraiserDonationSkeleton = () => {
                   </Skeleton>
                   <Skeleton width="50%">
                     <Box className="flex gap-2">
-                      <Text fontWeight="semibold">₹{1000}</Text>•
-                      <Text color="gray.600">{1000}</Text>
+                      <Text fontWeight="semibold">₹{1000}</Text>•<Text color="gray.600">{1000}</Text>
                     </Box>
                   </Skeleton>
                 </Stack>

@@ -28,33 +28,24 @@ const ManageFundriaserPage = () => {
   const { accessToken, user } = useSession();
   const [error, setError] = useState();
 
-  const [isFetchingFundraiser, setIsFetchingFundraiser] =
-    useState(true);
-  const [isFetchingUpdates, setIsFetchingUpdates] =
-    useState(true);
-  const [isFetchingDonations, setIsFetchingDonations] =
-    useState(true);
+  const [isFetchingFundraiser, setIsFetchingFundraiser] = useState(true);
+  const [isFetchingUpdates, setIsFetchingUpdates] = useState(true);
+  const [isFetchingDonations, setIsFetchingDonations] = useState(true);
   const [isFetchingFunds, setIsFetchingFunds] = useState(true);
-  const [isFetchingOtherDetails, setIsFetchingOtherDetails] =
-    useState(true);
+  const [isFetchingOtherDetails, setIsFetchingOtherDetails] = useState(true);
 
   const [fundraiserDetails, setFundraiserDetails] = useState({});
   const [fundraiserUpdates, setFundraiserUpdates] = useState([]);
-  const [fundraiserDonations, setFundraiserDonations] = useState(
-    []
-  );
+  const [fundraiserDonations, setFundraiserDonations] = useState([]);
   const [userOtherDetails, setUserOtherDetails] = useState({});
   const [fundraiserFunds, setFundraiserFunds] = useState({});
 
   const fetchFundraiserUpdates = async () => {
     setIsFetchingUpdates(true);
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/fundraiser/getFundraiserUpdates`,
-        {
-          fundraiserId: id,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/fundraiser/getFundraiserUpdates`, {
+        fundraiserId: id,
+      });
 
       const resData = res.data;
       setIsFetchingUpdates(false);
@@ -85,12 +76,9 @@ const ManageFundriaserPage = () => {
   const fetchFundraiserDonations = async () => {
     setIsFetchingDonations(true);
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/donation/getFundraiserDonationsById`,
-        {
-          fundraiserId: id,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/donation/getFundraiserDonationsById`, {
+        fundraiserId: id,
+      });
 
       const resData = res.data;
       setIsFetchingDonations(false);
@@ -108,13 +96,10 @@ const ManageFundriaserPage = () => {
   const fetchUserOtherDetails = async () => {
     setIsFetchingOtherDetails(true);
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/user/getUserOtherDetails`,
-        {
-          uid: user.id,
-          access_token: accessToken,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/user/getUserOtherDetails`, {
+        uid: user.id,
+        access_token: accessToken,
+      });
 
       const resData = res.data;
       setIsFetchingOtherDetails(false);
@@ -145,14 +130,11 @@ const ManageFundriaserPage = () => {
   const fetchFundraiserFunds = async () => {
     setIsFetchingFunds(true);
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/fundraiser/getFundraiserFunds`,
-        {
-          uid: user.id,
-          access_token: accessToken,
-          fundraiserId: id,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/fundraiser/getFundraiserFunds`, {
+        uid: user.id,
+        access_token: accessToken,
+        fundraiserId: id,
+      });
 
       const resData = res.data;
       setIsFetchingFunds(false);
@@ -183,14 +165,11 @@ const ManageFundriaserPage = () => {
   const fetchFundraiserDetails = async () => {
     setIsFetchingFundraiser(true);
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/user/getUserFundraiserById`,
-        {
-          uid: user.id,
-          access_token: accessToken,
-          fundraiserId: id,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/user/getUserFundraiserById`, {
+        uid: user.id,
+        access_token: accessToken,
+        fundraiserId: id,
+      });
       const resData = res.data;
       setIsFetchingFundraiser(false);
 
@@ -228,10 +207,7 @@ const ManageFundriaserPage = () => {
     fetchFundraiserDetails();
   }, []);
 
-  if (
-    !isFetchingFundraiser &&
-    fundraiserDetails.status !== 'active'
-  ) {
+  if (!isFetchingFundraiser && fundraiserDetails.status !== 'active') {
     return (
       <div className="h-full space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
         <Card>
@@ -288,9 +264,7 @@ const ManageFundriaserPage = () => {
                 <ManageFundraiserFundTransfers
                   userOtherDetails={userOtherDetails}
                   fundraiserFunds={fundraiserFunds}
-                  isFetching={
-                    isFetchingFunds || isFetchingOtherDetails
-                  }
+                  isFetching={isFetchingFunds || isFetchingOtherDetails}
                 />
               </TabPanel>
             </TabPanels>

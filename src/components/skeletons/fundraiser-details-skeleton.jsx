@@ -32,10 +32,7 @@ const FundraiserDetailsSkeleton = ({ coverMediaUrl }) => {
             <Stack alignItems="center">
               {coverMediaUrl && checkForImage(coverMediaUrl) && (
                 <div className="overflow-hidden rounded-lg">
-                  <LazyLoadImage
-                    src={coverMediaUrl}
-                    className="aspect-video h-[400px] w-auto"
-                  />
+                  <LazyLoadImage src={coverMediaUrl} className="aspect-video h-[400px] w-auto" />
                 </div>
               )}
             </Stack>
@@ -70,11 +67,7 @@ const FundraiserDetailsSkeleton = ({ coverMediaUrl }) => {
                 >
                   Share
                 </Button>
-                <Button
-                  variant="outline"
-                  colorScheme="teal"
-                  className="fundraiser-card-donate-button flex-1"
-                >
+                <Button variant="outline" colorScheme="teal" className="fundraiser-card-donate-button flex-1">
                   Donate
                 </Button>
               </ButtonGroup>
@@ -84,12 +77,7 @@ const FundraiserDetailsSkeleton = ({ coverMediaUrl }) => {
               <Heading size="md">Organizer</Heading>
               <Stack direction="row">
                 <Box>
-                  <Avatar
-                    src={coverMediaUrl}
-                    size="sm"
-                    marginY="8px"
-                    marginX="4px"
-                  />
+                  <Avatar src={coverMediaUrl} size="sm" marginY="8px" marginX="4px" />
                 </Box>
                 <Box>
                   <Text fontWeight="semibold">Name</Text>

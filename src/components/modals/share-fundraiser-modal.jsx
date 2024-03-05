@@ -13,25 +13,14 @@ import {
 } from '@chakra-ui/react';
 import { Check } from 'lucide-react';
 import { useState } from 'react';
-import {
-  FacebookShareButton,
-  TelegramShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-} from 'react-share';
+import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 
 import { FacebookLogo } from '../../assets/socials/facebook-logo.jsx';
 import { TelegramLogo } from '../../assets/socials/telegram-logo.jsx';
 import { TwitterLogo } from '../../assets/socials/twitter-logo.jsx';
 import { WhatsappLogo } from '../../assets/socials/whatsapp-logo.jsx';
 
-const ShareFundraiserModal = ({
-  fundraiserTitle,
-  fundraiserCreatorName,
-  fundraiserId,
-  isOpen,
-  onClose,
-}) => {
+const ShareFundraiserModal = ({ fundraiserTitle, fundraiserCreatorName, fundraiserId, isOpen, onClose }) => {
   const [isCopied, setIsCopied] = useState();
   const shareLink = `https://sahyogweb.vercel.app/fundraiser/${fundraiserId}
     `;
@@ -56,38 +45,26 @@ const ShareFundraiserModal = ({
           <Stack>
             <Stack>
               <Text size="2xl">Share link via</Text>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                padding="14px"
-              >
-                <FacebookShareButton
-                  url={`Fundraiser by ${fundraiserCreatorName} - ${fundraiserTitle}\n${shareLink}`}
-                >
+              <Stack direction="row" justifyContent="space-between" padding="14px">
+                <FacebookShareButton url={`Fundraiser by ${fundraiserCreatorName} - ${fundraiserTitle}\n${shareLink}`}>
                   {' '}
                   <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-blue-200 fill-[#1877f2] shadow-md duration-100 hover:bg-[#1877f2] hover:fill-white hover:shadow-blue-500/50">
                     <FacebookLogo />
                   </div>
                 </FacebookShareButton>
 
-                <TwitterShareButton
-                  url={`Fundraiser by ${fundraiserCreatorName} - ${fundraiserTitle}\n${shareLink}`}
-                >
+                <TwitterShareButton url={`Fundraiser by ${fundraiserCreatorName} - ${fundraiserTitle}\n${shareLink}`}>
                   <div className="fill-white-800 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-black/50 shadow-md duration-100 hover:bg-black hover:fill-white hover:shadow-gray-500/50">
                     <TwitterLogo />
                   </div>
                 </TwitterShareButton>
 
-                <WhatsappShareButton
-                  url={`Fundraiser by ${fundraiserCreatorName} - ${fundraiserTitle}\n${shareLink}`}
-                >
+                <WhatsappShareButton url={`Fundraiser by ${fundraiserCreatorName} - ${fundraiserTitle}\n${shareLink}`}>
                   <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-green-200 fill-[#25D366] shadow-md duration-100 hover:bg-[#25D366] hover:fill-white hover:shadow-green-500/50">
                     <WhatsappLogo />
                   </div>
                 </WhatsappShareButton>
-                <TelegramShareButton
-                  url={`Fundraiser by ${fundraiserCreatorName} - ${fundraiserTitle}\n${shareLink}`}
-                >
+                <TelegramShareButton url={`Fundraiser by ${fundraiserCreatorName} - ${fundraiserTitle}\n${shareLink}`}>
                   {' '}
                   <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-sky-200 fill-[#229ED9] shadow-md duration-100 hover:bg-[#229ED9] hover:fill-white hover:shadow-sky-500/50">
                     <TelegramLogo />
@@ -106,10 +83,7 @@ const ShareFundraiserModal = ({
                   <Text className="text-green-500">Copied!</Text>
                 </Stack>
               )}
-              <Button
-                colorScheme="green"
-                onClick={handleCopyLink}
-              >
+              <Button colorScheme="green" onClick={handleCopyLink}>
                 Copy
               </Button>
             </Stack>

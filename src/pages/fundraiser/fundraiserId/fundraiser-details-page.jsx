@@ -1,10 +1,4 @@
-import {
-  Alert,
-  AlertIcon,
-  Card,
-  CardBody,
-  useToast,
-} from '@chakra-ui/react';
+import { Alert, AlertIcon, Card, CardBody, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -17,34 +11,22 @@ const FundraiserPage = () => {
 
   const toast = useToast();
 
-  const [isFetchingFundraiser, setIsFetchingFundraiser] =
-    useState(true);
-  const [
-    isFetchingFundraiserUpdates,
-    setIsFetchingFundraiserUpdates,
-  ] = useState(true);
-  const [
-    isFetchingFundraiserDonations,
-    setIsFetchingFundraiserDonations,
-  ] = useState(true);
+  const [isFetchingFundraiser, setIsFetchingFundraiser] = useState(true);
+  const [isFetchingFundraiserUpdates, setIsFetchingFundraiserUpdates] = useState(true);
+  const [isFetchingFundraiserDonations, setIsFetchingFundraiserDonations] = useState(true);
   const [error, setError] = useState();
 
   const [fundraiserDetails, setFundraiserDetails] = useState({});
 
   const [fundraiserUpdates, setFundraiserUpdates] = useState([]);
 
-  const [fundraiserDonations, setFundraiserDonations] = useState(
-    []
-  );
+  const [fundraiserDonations, setFundraiserDonations] = useState([]);
 
   const fetchFundraiserDetails = async () => {
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/fundraiser/getFundraiserById`,
-        {
-          fundraiserId: id,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/fundraiser/getFundraiserById`, {
+        fundraiserId: id,
+      });
       const resData = res.data;
       setIsFetchingFundraiser(false);
       if (resData.statusCode === 200) {
@@ -67,12 +49,9 @@ const FundraiserPage = () => {
 
   const fetchFundraiserUpdates = async () => {
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/fundraiser/getFundraiserUpdates`,
-        {
-          fundraiserId: id,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/fundraiser/getFundraiserUpdates`, {
+        fundraiserId: id,
+      });
 
       const resData = res.data;
 
@@ -94,12 +73,9 @@ const FundraiserPage = () => {
   };
   const fetchFundraiserDonations = async () => {
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/donation/getFundraiserDonationsById`,
-        {
-          fundraiserId: id,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/donation/getFundraiserDonationsById`, {
+        fundraiserId: id,
+      });
 
       const resData = res.data;
       setIsFetchingFundraiserDonations(false);
@@ -128,11 +104,7 @@ const FundraiserPage = () => {
     fetchFundraiserDonations();
   }, []);
 
-  if (
-    !isFetchingFundraiser &&
-    fundraiserDetails.status !== 'active' &&
-    error
-  ) {
+  if (!isFetchingFundraiser && fundraiserDetails.status !== 'active' && error) {
     return (
       <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
         <Card>
@@ -151,16 +123,10 @@ const FundraiserPage = () => {
     <div className="space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
       <FundraiserDetails
         fundraiser={fundraiserDetails}
-        isFetchingFundraiser={
-          isFetchingFundraiser ||
-          isFetchingFundraiserUpdates ||
-          isFetchingFundraiserDonations
-        }
+        isFetchingFundraiser={isFetchingFundraiser || isFetchingFundraiserUpdates || isFetchingFundraiserDonations}
         isFetchingFundraiserUpdates={isFetchingFundraiserUpdates}
         fundraiserUpdates={fundraiserUpdates}
-        isFetchingFundraiserDonations={
-          isFetchingFundraiserDonations
-        }
+        isFetchingFundraiserDonations={isFetchingFundraiserDonations}
         fundraiserDonations={fundraiserDonations}
       />
     </div>

@@ -21,10 +21,7 @@ import { baseapiurl } from '../../../lib/utils';
 import ConfirmDetailsModal from '../../modals/confirm-details-modal';
 import { useSession } from '../../providers/session-provider';
 
-const UserOtherDetails = ({
-  otherDetails,
-  setUserOtherDetails,
-}) => {
+const UserOtherDetails = ({ otherDetails, setUserOtherDetails }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [confirmSubmit, setConfirmSubmit] = useState(false);
@@ -37,14 +34,11 @@ const UserOtherDetails = ({
   const handleSubmitForm = async (values, actions) => {
     actions.setSubmitting(true);
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/user/saveUserOtherDetails`,
-        {
-          access_token: accessToken,
-          uid: user.id,
-          values,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/user/saveUserOtherDetails`, {
+        access_token: accessToken,
+        uid: user.id,
+        values,
+      });
       const resData = res.data;
 
       actions.setSubmitting(false);
@@ -82,13 +76,12 @@ const UserOtherDetails = ({
       <Card className="flex-1" padding="10px">
         <CardBody>
           <Stack spacing="4">
-            {otherDetails &&
-              otherDetails.status === 'review' && (
-                <Alert>
-                  <AlertIcon />
-                  Under review
-                </Alert>
-              )}
+            {otherDetails && otherDetails.status === 'review' && (
+              <Alert>
+                <AlertIcon />
+                Under review
+              </Alert>
+            )}
             {!user.emailVerified && (
               <Alert>
                 <AlertIcon />
@@ -125,15 +118,8 @@ const UserOtherDetails = ({
                             <FormLabel>Gender</FormLabel>
                             <Select
                               {...field}
-                              value={
-                                otherDetails &&
-                                otherDetails.gender
-                              }
-                              isDisabled={
-                                !user.emailVerified ||
-                                (otherDetails &&
-                                  otherDetails.gender)
-                              }
+                              value={otherDetails && otherDetails.gender}
+                              isDisabled={!user.emailVerified || (otherDetails && otherDetails.gender)}
                               placeholder="Gender"
                               isRequired
                             >
@@ -150,14 +136,8 @@ const UserOtherDetails = ({
                             <FormLabel>Date of birth</FormLabel>
                             <Input
                               {...field}
-                              value={
-                                otherDetails && otherDetails.dob
-                              }
-                              isDisabled={
-                                !user.emailVerified ||
-                                (otherDetails &&
-                                  otherDetails.dob)
-                              }
+                              value={otherDetails && otherDetails.dob}
+                              isDisabled={!user.emailVerified || (otherDetails && otherDetails.dob)}
                               type="date"
                               isRequired
                             />
@@ -175,15 +155,8 @@ const UserOtherDetails = ({
                             <FormLabel>Govt. ID Type</FormLabel>
                             <Select
                               {...field}
-                              value={
-                                otherDetails &&
-                                otherDetails.govtIDType
-                              }
-                              isDisabled={
-                                !user.emailVerified ||
-                                (otherDetails &&
-                                  otherDetails.govtIDType)
-                              }
+                              value={otherDetails && otherDetails.govtIDType}
+                              isDisabled={!user.emailVerified || (otherDetails && otherDetails.govtIDType)}
                               placeholder="Govt. ID"
                               isRequired
                             >
@@ -196,20 +169,11 @@ const UserOtherDetails = ({
                       <Field name="govtIdNumber">
                         {({ field, form }) => (
                           <FormControl>
-                            <FormLabel>
-                              Govt. ID Number
-                            </FormLabel>
+                            <FormLabel>Govt. ID Number</FormLabel>
                             <Input
                               {...field}
-                              value={
-                                otherDetails &&
-                                otherDetails.govtIDNumber
-                              }
-                              isDisabled={
-                                !user.emailVerified ||
-                                (otherDetails &&
-                                  otherDetails.govtIDNumber)
-                              }
+                              value={otherDetails && otherDetails.govtIDNumber}
+                              isDisabled={!user.emailVerified || (otherDetails && otherDetails.govtIDNumber)}
                               type="text"
                               placeholder="ID number"
                               isRequired
@@ -225,21 +189,12 @@ const UserOtherDetails = ({
                       <Field name="accountHolderName">
                         {({ field, form }) => (
                           <FormControl>
-                            <FormLabel>
-                              Account Holder Name
-                            </FormLabel>
+                            <FormLabel>Account Holder Name</FormLabel>
                             <Input
                               {...field}
                               placeholder="Account holder name"
-                              value={
-                                otherDetails &&
-                                otherDetails.accountHolderName
-                              }
-                              isDisabled={
-                                !user.emailVerified ||
-                                (otherDetails &&
-                                  otherDetails.accountHolderName)
-                              }
+                              value={otherDetails && otherDetails.accountHolderName}
+                              isDisabled={!user.emailVerified || (otherDetails && otherDetails.accountHolderName)}
                               isRequired
                             />
                           </FormControl>
@@ -252,15 +207,8 @@ const UserOtherDetails = ({
                             <Input
                               {...field}
                               placeholder="Account number"
-                              value={
-                                otherDetails &&
-                                otherDetails.accountNumber
-                              }
-                              isDisabled={
-                                !user.emailVerified ||
-                                (otherDetails &&
-                                  otherDetails.accountNumber)
-                              }
+                              value={otherDetails && otherDetails.accountNumber}
+                              isDisabled={!user.emailVerified || (otherDetails && otherDetails.accountNumber)}
                               isRequired
                             />
                           </FormControl>
@@ -273,15 +221,8 @@ const UserOtherDetails = ({
                             <Input
                               {...field}
                               placeholder="IFSC code"
-                              value={
-                                otherDetails &&
-                                otherDetails.ifscCode
-                              }
-                              isDisabled={
-                                !user.emailVerified ||
-                                (otherDetails &&
-                                  otherDetails.ifscCode)
-                              }
+                              value={otherDetails && otherDetails.ifscCode}
+                              isDisabled={!user.emailVerified || (otherDetails && otherDetails.ifscCode)}
                               isRequired
                             />
                           </FormControl>
@@ -294,15 +235,8 @@ const UserOtherDetails = ({
                             <Input
                               {...field}
                               placeholder="Bank name"
-                              value={
-                                otherDetails &&
-                                otherDetails.bankName
-                              }
-                              isDisabled={
-                                !user.emailVerified ||
-                                (otherDetails &&
-                                  otherDetails.bankName)
-                              }
+                              value={otherDetails && otherDetails.bankName}
+                              isDisabled={!user.emailVerified || (otherDetails && otherDetails.bankName)}
                               isRequired
                             />
                           </FormControl>
@@ -315,23 +249,12 @@ const UserOtherDetails = ({
                             <Select
                               {...field}
                               placeholder="Account type"
-                              value={
-                                otherDetails &&
-                                otherDetails.accountType
-                              }
-                              isDisabled={
-                                !user.emailVerified ||
-                                (otherDetails &&
-                                  otherDetails.accountType)
-                              }
+                              value={otherDetails && otherDetails.accountType}
+                              isDisabled={!user.emailVerified || (otherDetails && otherDetails.accountType)}
                               isRequired
                             >
-                              <option value="savings">
-                                Savings
-                              </option>
-                              <option value="current">
-                                Current
-                              </option>
+                              <option value="savings">Savings</option>
+                              <option value="current">Current</option>
                             </Select>
                           </FormControl>
                         )}
@@ -343,11 +266,7 @@ const UserOtherDetails = ({
                     colorScheme="teal"
                     isLoading={props.isSubmitting}
                     type="submit"
-                    isDisabled={
-                      !user.emailVerified ||
-                      (otherDetails &&
-                        otherDetails.status === 'review')
-                    }
+                    isDisabled={!user.emailVerified || (otherDetails && otherDetails.status === 'review')}
                   >
                     Submit
                   </Button>
@@ -357,11 +276,7 @@ const UserOtherDetails = ({
           </Stack>
         </CardBody>
       </Card>
-      <ConfirmDetailsModal
-        isOpen={isOpen}
-        onClose={onClose}
-        setConfirmSubmit={setConfirmSubmit}
-      />
+      <ConfirmDetailsModal isOpen={isOpen} onClose={onClose} setConfirmSubmit={setConfirmSubmit} />
     </>
   );
 };

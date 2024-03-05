@@ -1,25 +1,16 @@
 import CryptoJS from 'crypto-js';
 
 function encryptValue(val) {
-  return CryptoJS.AES.encrypt(
-    val,
-    import.meta.env.VITE_CRYPTOJS_SECRET_KEY
-  ).toString();
+  return CryptoJS.AES.encrypt(val, import.meta.env.VITE_CRYPTOJS_SECRET_KEY).toString();
 }
 
 function decryptValue(val) {
-  return CryptoJS.AES.decrypt(
-    val,
-    import.meta.env.VITE_CRYPTOJS_SECRET_KEY
-  ).toString(CryptoJS.enc.Utf8);
+  return CryptoJS.AES.decrypt(val, import.meta.env.VITE_CRYPTOJS_SECRET_KEY).toString(CryptoJS.enc.Utf8);
 }
 
 let baseapiurl = '';
 
-if (
-  !process.env.NODE_ENV ||
-  process.env.NODE_ENV === 'development'
-) {
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   baseapiurl = 'http://localhost:5172';
 } else {
   baseapiurl = 'https://sahyog-backend.vercel.app';
@@ -65,33 +56,23 @@ function timeSince(date) {
   let interval = Math.floor(seconds / 31536000);
 
   if (interval >= 1) {
-    return (
-      interval + ' year' + (interval === 1 ? '' : 's') + ' ago'
-    );
+    return interval + ' year' + (interval === 1 ? '' : 's') + ' ago';
   }
   interval = Math.floor(seconds / 2592000);
   if (interval >= 1) {
-    return (
-      interval + ' month' + (interval === 1 ? '' : 's') + ' ago'
-    );
+    return interval + ' month' + (interval === 1 ? '' : 's') + ' ago';
   }
   interval = Math.floor(seconds / 86400);
   if (interval >= 1) {
-    return (
-      interval + ' day' + (interval === 1 ? '' : 's') + ' ago'
-    );
+    return interval + ' day' + (interval === 1 ? '' : 's') + ' ago';
   }
   interval = Math.floor(seconds / 3600);
   if (interval >= 1) {
-    return (
-      interval + ' hour' + (interval === 1 ? '' : 's') + ' ago'
-    );
+    return interval + ' hour' + (interval === 1 ? '' : 's') + ' ago';
   }
   interval = Math.floor(seconds / 60);
   if (interval >= 1) {
-    return (
-      interval + ' minute' + (interval === 1 ? '' : 's') + ' ago'
-    );
+    return interval + ' minute' + (interval === 1 ? '' : 's') + ' ago';
   }
   return 'just now';
 }

@@ -1,11 +1,6 @@
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { supabase } from '../../lib/supabase';
@@ -28,10 +23,7 @@ export function SessionProvider({ children }) {
 
   const fetchUserDetails = async (user) => {
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/auth/sign-in`,
-        { uid: user.id, email: user.email }
-      );
+      const res = await axios.post(`${baseapiurl}/api/auth/sign-in`, { uid: user.id, email: user.email });
 
       const resData = res.data;
 
@@ -54,21 +46,13 @@ export function SessionProvider({ children }) {
     }
   };
 
-  const updateUserEmail = async (
-    user,
-    accessToken,
-    uid,
-    email
-  ) => {
+  const updateUserEmail = async (user, accessToken, uid, email) => {
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/user/changeUserEmail`,
-        {
-          uid,
-          email,
-          access_token: accessToken,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/user/changeUserEmail`, {
+        uid,
+        email,
+        access_token: accessToken,
+      });
       const resData = res.data;
       if (resData.statusCode === 200) {
         user.email = resData.userDetails.email;
@@ -107,12 +91,7 @@ export function SessionProvider({ children }) {
       const changedEmail = data.session.user.email;
 
       if (changedEmail !== user.email) {
-        updateUserEmail(
-          user,
-          data.session.access_token,
-          data.session.user.id,
-          changedEmail
-        );
+        updateUserEmail(user, data.session.access_token, data.session.user.id, changedEmail);
       } else {
         fetchUserDetails(data.session.user);
       }

@@ -1,9 +1,4 @@
-import {
-  Alert,
-  AlertIcon,
-  Card,
-  CardBody,
-} from '@chakra-ui/react';
+import { Alert, AlertIcon, Card, CardBody } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -20,13 +15,10 @@ const CreateFundraiserPage = () => {
     if (!user.emailVerified) return;
     setLoading(true);
     const getDraftFundraiser = async () => {
-      const res = await axios.post(
-        `${baseapiurl}/api/user/getDraftFundraiser`,
-        {
-          uid: user.id,
-          access_token: accessToken,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/user/getDraftFundraiser`, {
+        uid: user.id,
+        access_token: accessToken,
+      });
       const resData = res.data;
 
       if (resData.statusCode === 200) {

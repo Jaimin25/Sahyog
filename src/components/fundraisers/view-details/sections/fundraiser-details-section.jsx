@@ -17,18 +17,10 @@ import { Markup } from 'interweave';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { NavLink } from 'react-router-dom';
 
-import {
-  checkForImage,
-  checkYoutubeUrl,
-  getYtVideoId,
-  timeSince,
-} from '../../../../lib/utils';
+import { checkForImage, checkYoutubeUrl, getYtVideoId, timeSince } from '../../../../lib/utils';
 import ShareFundraiserModal from '../../../modals/share-fundraiser-modal';
 
-const FundraiserDetailsSection = ({
-  fundraiser,
-  isFetchingFundraiser,
-}) => {
+const FundraiserDetailsSection = ({ fundraiser, isFetchingFundraiser }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
@@ -40,8 +32,7 @@ const FundraiserDetailsSection = ({
         <CardBody>
           <Stack spacing="20px">
             <Stack alignItems="center">
-              {fundraiser.coverMediaUrl &&
-              checkForImage(fundraiser.coverMediaUrl) ? (
+              {fundraiser.coverMediaUrl && checkForImage(fundraiser.coverMediaUrl) ? (
                 <div className="overflow-hidden rounded-lg">
                   <LazyLoadImage
                     src={fundraiser.coverMediaUrl}
@@ -49,14 +40,8 @@ const FundraiserDetailsSection = ({
                     alt={fundraiser.fundraiserTitle}
                   />
                 </div>
-              ) : fundraiser.coverMediaUrl &&
-                checkYoutubeUrl(fundraiser.coverMediaUrl) ? (
-                <AspectRatio
-                  maxW="auto"
-                  ratio={16 / 9}
-                  borderRadius="lg"
-                  className="h-[250px] lg:h-[400px]"
-                >
+              ) : fundraiser.coverMediaUrl && checkYoutubeUrl(fundraiser.coverMediaUrl) ? (
+                <AspectRatio maxW="auto" ratio={16 / 9} borderRadius="lg" className="h-[250px] lg:h-[400px]">
                   <iframe
                     className="rounded-lg"
                     src={`https://www.youtube.com/embed/${getYtVideoId(fundraiser.coverMediaUrl)}`}
@@ -67,17 +52,11 @@ const FundraiserDetailsSection = ({
             </Stack>
             <Stack direction="row" alignItems="center">
               <Avatar src={fundraiser.profilePicUrl} />
-              <Text>
-                {fundraiser.creatorName} is organizing this
-                fundraiser.
-              </Text>
+              <Text>{fundraiser.creatorName} is organizing this fundraiser.</Text>
             </Stack>
             <Divider />
             <Stack>
-              <Text>
-                Created{' '}
-                {timeSince(new Date(fundraiser.createdAt))}
-              </Text>
+              <Text>Created {timeSince(new Date(fundraiser.createdAt))}</Text>
             </Stack>
             <Divider />
             <Stack>
@@ -101,15 +80,8 @@ const FundraiserDetailsSection = ({
                   </Button>
                 </Box>
 
-                <NavLink
-                  to={`/fundraiser/${fundraiser._id}/donate`}
-                  className="flex-1"
-                >
-                  <Button
-                    variant="outline"
-                    colorScheme="teal"
-                    className="fundraiser-card-donate-button w-full flex-1"
-                  >
+                <NavLink to={`/fundraiser/${fundraiser._id}/donate`} className="flex-1">
+                  <Button variant="outline" colorScheme="teal" className="fundraiser-card-donate-button w-full flex-1">
                     Donate
                   </Button>
                 </NavLink>
@@ -120,21 +92,13 @@ const FundraiserDetailsSection = ({
               <Heading size="md">Organizer</Heading>
               <Stack direction="row">
                 <Box>
-                  <Avatar
-                    src={fundraiser.profilePicUrl}
-                    size="sm"
-                    marginY="8px"
-                    marginX="4px"
-                  />
+                  <Avatar src={fundraiser.profilePicUrl} size="sm" marginY="8px" marginX="4px" />
                 </Box>
                 <Box>
-                  <Text fontWeight="semibold">
-                    {fundraiser.creatorName}
-                  </Text>
+                  <Text fontWeight="semibold">{fundraiser.creatorName}</Text>
                   <Text fontSize="sm">Organizer</Text>
                   <Text fontSize="sm">
-                    {fundraiser.fundraiserCity},{' '}
-                    {fundraiser.fundraiserState}
+                    {fundraiser.fundraiserCity}, {fundraiser.fundraiserState}
                   </Text>
                 </Box>
               </Stack>

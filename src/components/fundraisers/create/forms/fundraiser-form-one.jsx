@@ -1,12 +1,4 @@
-import {
-  Button,
-  Input,
-  InputGroup,
-  Select,
-  Skeleton,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Input, InputGroup, Select, Skeleton, Stack, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import { useState } from 'react';
 
@@ -29,9 +21,7 @@ const FundraiserFormOne = ({
     setCheckingLoc(true);
     setError(null);
     try {
-      const res = await axios.get(
-        `https://api.postalpincode.in/pincode/${zipCode}`
-      );
+      const res = await axios.get(`https://api.postalpincode.in/pincode/${zipCode}`);
       const resData = res.data;
       setCheckingLoc(false);
       if (resData[0].Status === 'Success') {
@@ -65,19 +55,12 @@ const FundraiserFormOne = ({
             value={zipCode}
             onChange={(e) => setZipCode(e.target.value)}
           />
-          <Button
-            colorScheme="teal"
-            variant="ghost"
-            onClick={handleCheckZipCode}
-            isLoading={checkingLoc}
-          >
+          <Button colorScheme="teal" variant="ghost" onClick={handleCheckZipCode} isLoading={checkingLoc}>
             Save
           </Button>
         </InputGroup>
       )}
-      <Text fontWeight="semibold">
-        Who you are creating this fundraiser for?
-      </Text>
+      <Text fontWeight="semibold">Who you are creating this fundraiser for?</Text>
       {isFetching ? (
         <Skeleton>
           <Select />
@@ -85,14 +68,10 @@ const FundraiserFormOne = ({
       ) : (
         <Select
           placeholder="None"
-          onChange={(e) =>
-            setFundraiserFor(e.target.value.trim())
-          }
+          onChange={(e) => setFundraiserFor(e.target.value.trim())}
           value={fundraiserFor}
           defaultValue={fundraiserFor && fundraiserFor}
-          isDisabled={
-            isFetching || !fundraiserCity || !fundraiserState
-          }
+          isDisabled={isFetching || !fundraiserCity || !fundraiserState}
         >
           <option value="myself">Myself</option>
           <option value="family">Family Member</option>

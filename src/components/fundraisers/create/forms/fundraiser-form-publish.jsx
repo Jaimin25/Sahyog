@@ -1,18 +1,8 @@
-import {
-  AspectRatio,
-  Button,
-  Divider,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { AspectRatio, Button, Divider, Stack, Text } from '@chakra-ui/react';
 import { Markup } from 'interweave';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import {
-  checkForImage,
-  checkYoutubeUrl,
-  getYtVideoId,
-} from '../../../../lib/utils';
+import { checkForImage, checkYoutubeUrl, getYtVideoId } from '../../../../lib/utils';
 
 const FundraiserFormPublish = ({
   setActiveStep,
@@ -27,19 +17,11 @@ const FundraiserFormPublish = ({
   return (
     <Stack gap="10px" className="fundraiser-form-publish">
       <div className="flex items-center">
-        <Text
-          fontWeight="semibold"
-          fontSize="xl"
-          className="flex-1"
-        >
+        <Text fontWeight="semibold" fontSize="xl" className="flex-1">
           Cover Media
         </Text>
         <div>
-          <Button
-            colorScheme="teal"
-            variant="outline"
-            onClick={() => setActiveStep(2)}
-          >
+          <Button colorScheme="teal" variant="outline" onClick={() => setActiveStep(2)}>
             Edit
           </Button>
         </div>
@@ -54,10 +36,7 @@ const FundraiserFormPublish = ({
         </div>
       ) : coverMediaUrl && checkYoutubeUrl(coverMediaUrl) ? (
         <AspectRatio maxW="100%" ratio={16 / 9}>
-          <iframe
-            src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
-            allowFullScreen
-          />
+          <iframe src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`} allowFullScreen />
         </AspectRatio>
       ) : null}
       <div className="flex items-center">
@@ -68,11 +47,7 @@ const FundraiserFormPublish = ({
           <Text>{fundraiserTitle}</Text>
         </div>
         <div>
-          <Button
-            colorScheme="teal"
-            variant="outline"
-            onClick={() => setActiveStep(3)}
-          >
+          <Button colorScheme="teal" variant="outline" onClick={() => setActiveStep(3)}>
             Edit
           </Button>
         </div>
@@ -86,11 +61,7 @@ const FundraiserFormPublish = ({
           <Text>₹{fundraiserGoal}</Text>
         </div>
         <div>
-          <Button
-            colorScheme="teal"
-            variant="outline"
-            onClick={() => setActiveStep(1)}
-          >
+          <Button colorScheme="teal" variant="outline" onClick={() => setActiveStep(1)}>
             Edit
           </Button>
         </div>
@@ -105,11 +76,7 @@ const FundraiserFormPublish = ({
           <Text>{fundraiserCause}</Text>
         </div>
         <div>
-          <Button
-            colorScheme="teal"
-            variant="outline"
-            onClick={() => setActiveStep(1)}
-          >
+          <Button colorScheme="teal" variant="outline" onClick={() => setActiveStep(1)}>
             Edit
           </Button>
         </div>
@@ -120,17 +87,10 @@ const FundraiserFormPublish = ({
           <Text fontWeight="semibold" fontSize="xl">
             Story
           </Text>
-          <Markup
-            content={fundraiserStory}
-            className="h-[100px] overflow-y-auto"
-          />
+          <Markup content={fundraiserStory} className="h-[100px] overflow-y-auto" />
         </div>
         <div>
-          <Button
-            colorScheme="teal"
-            variant="outline"
-            onClick={() => setActiveStep(3)}
-          >
+          <Button colorScheme="teal" variant="outline" onClick={() => setActiveStep(3)}>
             Edit
           </Button>
         </div>
@@ -145,11 +105,7 @@ const FundraiserFormPublish = ({
           </Text>
         </div>
         <div>
-          <Button
-            colorScheme="teal"
-            variant="outline"
-            onClick={() => setActiveStep(0)}
-          >
+          <Button colorScheme="teal" variant="outline" onClick={() => setActiveStep(0)}>
             Edit
           </Button>
         </div>

@@ -1,25 +1,9 @@
-import {
-  AspectRatio,
-  Card,
-  CardBody,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { AspectRatio, Card, CardBody, Stack, Text } from '@chakra-ui/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import {
-  checkForImage,
-  checkYoutubeUrl,
-  getYtVideoId,
-  timeSince,
-} from '../../lib/utils';
+import { checkForImage, checkYoutubeUrl, getYtVideoId, timeSince } from '../../lib/utils';
 
-const UserDeletedFundraisersCard = ({
-  fundraiserId,
-  fundraiserTitle,
-  coverMediaUrl,
-  createdAt,
-}) => {
+const UserDeletedFundraisersCard = ({ fundraiserId, fundraiserTitle, coverMediaUrl, createdAt }) => {
   const timesince = new Date(createdAt);
 
   return (
@@ -39,12 +23,7 @@ const UserDeletedFundraisersCard = ({
             />
           </div>
         ) : coverMediaUrl && checkYoutubeUrl(coverMediaUrl) ? (
-          <AspectRatio
-            ratio={16 / 9}
-            borderRadius="lg"
-            height="150px"
-            className="w-[266px]"
-          >
+          <AspectRatio ratio={16 / 9} borderRadius="lg" height="150px" className="w-[266px]">
             <iframe
               className="rounded-lg"
               src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
@@ -53,10 +32,7 @@ const UserDeletedFundraisersCard = ({
           </AspectRatio>
         ) : null}
         <Stack>
-          <Text
-            fontWeight="semibold"
-            className="user-fundriaser-card-title"
-          >
+          <Text fontWeight="semibold" className="user-fundriaser-card-title">
             {fundraiserTitle} (deleted)
           </Text>
           <Text>Fundraiser created {timeSince(timesince)}</Text>

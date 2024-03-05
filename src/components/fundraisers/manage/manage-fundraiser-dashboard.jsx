@@ -24,11 +24,7 @@ import EditFundraiserLocation from './edit-view/edit-fundraiser-location';
 import EditFundraiserStory from './edit-view/edit-fundraiser-story';
 import EditFundraiserTitle from './edit-view/edit-fundraiser-title';
 
-const ManageFundraiserDashboard = ({
-  setFundraiser,
-  fundraiser,
-  isFetching,
-}) => {
+const ManageFundraiserDashboard = ({ setFundraiser, fundraiser, isFetching }) => {
   const { user, accessToken } = useSession();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState(false);
@@ -37,8 +33,7 @@ const ManageFundraiserDashboard = ({
 
   const [fundraiserTitle, setFundraiserTitle] = useState('');
   const [fundraiserGoal, setFundraiserGoal] = useState('');
-  const [fundraiserCoverMediaUrl, setFundraiserCoverMediaUrl] =
-    useState('');
+  const [fundraiserCoverMediaUrl, setFundraiserCoverMediaUrl] = useState('');
   const [fundraiserStory, setFundraiserStory] = useState('');
   const [fundraiserCause, setFundraiserCause] = useState('');
   const [fundraiserZipCode, setFundraiserZipCode] = useState('');
@@ -72,22 +67,19 @@ const ManageFundraiserDashboard = ({
         setIsSaving(false);
         return;
       }
-      const res = await axios.post(
-        `${baseapiurl}/api/fundraiser/updateFundraiser`,
-        {
-          uid: user.id,
-          access_token: accessToken,
-          fundraiserId: fundraiser._id,
-          fundraiserTitle,
-          fundraiserGoal,
-          coverMediaUrl: fundraiserCoverMediaUrl,
-          fundraiserStory,
-          fundraiserCause,
-          zipCode: fundraiserZipCode,
-          fundraiserCity,
-          fundraiserState,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/fundraiser/updateFundraiser`, {
+        uid: user.id,
+        access_token: accessToken,
+        fundraiserId: fundraiser._id,
+        fundraiserTitle,
+        fundraiserGoal,
+        coverMediaUrl: fundraiserCoverMediaUrl,
+        fundraiserStory,
+        fundraiserCause,
+        zipCode: fundraiserZipCode,
+        fundraiserCity,
+        fundraiserState,
+      });
 
       const resData = res.data;
       setIsSaving(false);
@@ -125,14 +117,11 @@ const ManageFundraiserDashboard = ({
   const handleDeleteFundraiser = async () => {
     setLoading(true);
     try {
-      const res = await axios.post(
-        `${baseapiurl}/api/user/deleteFundraiser`,
-        {
-          uid: user.id,
-          access_token: accessToken,
-          fundraiserId: fundraiser._id,
-        }
-      );
+      const res = await axios.post(`${baseapiurl}/api/user/deleteFundraiser`, {
+        uid: user.id,
+        access_token: accessToken,
+        fundraiserId: fundraiser._id,
+      });
       const resData = res.data;
       setLoading(false);
 
@@ -199,20 +188,14 @@ const ManageFundraiserDashboard = ({
           <StackDivider />
           <Box className="w-full">
             <Box className="flex w-full items-center">
-              <Text
-                fontWeight="semibold"
-                fontSize="20px"
-                flex="1"
-              >
+              <Text fontWeight="semibold" fontSize="20px" flex="1">
                 Cover Media
               </Text>
             </Box>
             <EditFundraiserCoverMedia
               fundraiser={fundraiser}
               fundraiserCoverMediaUrl={fundraiserCoverMediaUrl}
-              setFundraiserCoverMediaUrl={
-                setFundraiserCoverMediaUrl
-              }
+              setFundraiserCoverMediaUrl={setFundraiserCoverMediaUrl}
             />
           </Box>
           <StackDivider />
@@ -269,11 +252,7 @@ const ManageFundraiserDashboard = ({
         <Box className="flex justify-end">
           {' '}
           <ButtonGroup>
-            <Button
-              colorScheme="red"
-              onClick={onOpen}
-              isDisabled={isSaving}
-            >
+            <Button colorScheme="red" onClick={onOpen} isDisabled={isSaving}>
               Delete
             </Button>
             <Button
@@ -288,18 +267,13 @@ const ManageFundraiserDashboard = ({
                 !fundraiserCity ||
                 !fundraiserState ||
                 !fundraiserZipCode ||
-                (fundraiserTitle ===
-                  fundraiser.fundraiserTitle &&
-                  fundraiserCause ===
-                    fundraiser.fundraiserCause &&
-                  fundraiserStory ===
-                    fundraiser.fundraiserStory &&
+                (fundraiserTitle === fundraiser.fundraiserTitle &&
+                  fundraiserCause === fundraiser.fundraiserCause &&
+                  fundraiserStory === fundraiser.fundraiserStory &&
                   fundraiserGoal === fundraiser.fundraiserGoal &&
-                  fundraiserCoverMediaUrl ===
-                    fundraiser.coverMediaUrl &&
+                  fundraiserCoverMediaUrl === fundraiser.coverMediaUrl &&
                   fundraiserCity === fundraiser.fundraiserCity &&
-                  fundraiserState ===
-                    fundraiser.fundraiserState &&
+                  fundraiserState === fundraiser.fundraiserState &&
                   fundraiserZipCode === fundraiser.zipCode)
               }
               onClick={handleSaveFundraiser}

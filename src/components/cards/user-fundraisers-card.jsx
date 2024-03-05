@@ -1,28 +1,10 @@
-import {
-  AspectRatio,
-  Button,
-  ButtonGroup,
-  Card,
-  CardBody,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { AspectRatio, Button, ButtonGroup, Card, CardBody, Stack, Text } from '@chakra-ui/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { NavLink } from 'react-router-dom';
 
-import {
-  checkForImage,
-  checkYoutubeUrl,
-  getYtVideoId,
-  timeSince,
-} from '../../lib/utils';
+import { checkForImage, checkYoutubeUrl, getYtVideoId, timeSince } from '../../lib/utils';
 
-const UserActiveFundraisersCard = ({
-  fundraiserId,
-  fundraiserTitle,
-  coverMediaUrl,
-  createdAt,
-}) => {
+const UserActiveFundraisersCard = ({ fundraiserId, fundraiserTitle, coverMediaUrl, createdAt }) => {
   const timesince = new Date(createdAt);
 
   return (
@@ -42,12 +24,7 @@ const UserActiveFundraisersCard = ({
             />
           </div>
         ) : coverMediaUrl && checkYoutubeUrl(coverMediaUrl) ? (
-          <AspectRatio
-            ratio={16 / 9}
-            borderRadius="lg"
-            height="150px"
-            className="w-[266px]"
-          >
+          <AspectRatio ratio={16 / 9} borderRadius="lg" height="150px" className="w-[266px]">
             <iframe
               className="rounded-lg"
               src={`https://www.youtube.com/embed/${getYtVideoId(coverMediaUrl)}`}
@@ -56,20 +33,13 @@ const UserActiveFundraisersCard = ({
           </AspectRatio>
         ) : null}
         <Stack>
-          <Text
-            fontWeight="semibold"
-            className="user-fundriaser-card-title"
-          >
+          <Text fontWeight="semibold" className="user-fundriaser-card-title">
             {fundraiserTitle}
           </Text>
           <Text>Fundraiser created {timeSince(timesince)}</Text>
           <ButtonGroup>
             <NavLink to={`/fundraiser/${fundraiserId}/manage`}>
-              <Button
-                variant="outline"
-                colorScheme="teal"
-                flex="1"
-              >
+              <Button variant="outline" colorScheme="teal" flex="1">
                 Manage
               </Button>
             </NavLink>

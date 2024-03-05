@@ -18,41 +18,24 @@ import { CheckIcon, Link, X } from 'lucide-react';
 import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import {
-  baseapiurl,
-  checkForImage,
-  checkYoutubeUrl,
-  getYtVideoId,
-} from '../../../../lib/utils';
+import { baseapiurl, checkForImage, checkYoutubeUrl, getYtVideoId } from '../../../../lib/utils';
 
 const UploadButton = generateUploadDropzone({
   url: `${baseapiurl}/api/uploadthing`,
 });
 
-const EditFundraiserCoverMedia = ({
-  fundraiser,
-  fundraiserCoverMediaUrl,
-  setFundraiserCoverMediaUrl,
-}) => {
+const EditFundraiserCoverMedia = ({ fundraiser, fundraiserCoverMediaUrl, setFundraiserCoverMediaUrl }) => {
   const [editing, setEditing] = useState();
   const [error, setError] = useState(null);
   const [coverMediaUrl, setCoverMediaUrl] = useState(null);
 
   function EditableControls() {
-    const {
-      isEditing,
-      getSubmitButtonProps,
-      getCancelButtonProps,
-      getEditButtonProps,
-    } = useEditableControls();
+    const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } = useEditableControls();
     setEditing(isEditing);
     setCoverMediaUrl(null);
     return isEditing ? (
       <ButtonGroup className="flex items-center" size="sm">
-        <IconButton
-          icon={<CheckIcon />}
-          {...getSubmitButtonProps()}
-        />
+        <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
         <IconButton icon={<X />} {...getCancelButtonProps()} />
       </ButtonGroup>
     ) : (
@@ -71,8 +54,7 @@ const EditFundraiserCoverMedia = ({
     >
       <div>
         {!editing &&
-          (fundraiserCoverMediaUrl &&
-          checkForImage(fundraiserCoverMediaUrl) ? (
+          (fundraiserCoverMediaUrl && checkForImage(fundraiserCoverMediaUrl) ? (
             <div className="w-full flex-1 overflow-hidden rounded-lg">
               <LazyLoadImage
                 src={fundraiserCoverMediaUrl}
@@ -80,15 +62,8 @@ const EditFundraiserCoverMedia = ({
                 alt="cover-media"
               />
             </div>
-          ) : fundraiserCoverMediaUrl &&
-            checkYoutubeUrl(fundraiser.coverMediaUrl) ? (
-            <AspectRatio
-              maxW="auto"
-              ratio={16 / 9}
-              borderRadius="lg"
-              height="300px"
-              className="flex-1"
-            >
+          ) : fundraiserCoverMediaUrl && checkYoutubeUrl(fundraiser.coverMediaUrl) ? (
+            <AspectRatio maxW="auto" ratio={16 / 9} borderRadius="lg" height="300px" className="flex-1">
               <iframe
                 className="rounded-lg"
                 src={`https://www.youtube.com/embed/${getYtVideoId(fundraiser.coverMediaUrl)}`}
@@ -99,14 +74,9 @@ const EditFundraiserCoverMedia = ({
       </div>
       <div className="flex w-full items-center justify-center">
         {editing &&
-        !(coverMediaUrl
-          ? checkYoutubeUrl(coverMediaUrl) ||
-            checkForImage(coverMediaUrl)
-          : !!coverMediaUrl) ? (
+        !(coverMediaUrl ? checkYoutubeUrl(coverMediaUrl) || checkForImage(coverMediaUrl) : !!coverMediaUrl) ? (
           <Stack direction="column" width="50%">
-            <Text fontWeight="semibold">
-              Upload a cover photo
-            </Text>
+            <Text fontWeight="semibold">Upload a cover photo</Text>
             <UploadButton
               className=""
               endpoint="imageUploader"
@@ -117,8 +87,7 @@ const EditFundraiserCoverMedia = ({
                 setError(
                   error.message.trim() === 'File limit exceeded'
                     ? 'Please select 1 file only'
-                    : error.message.trim() ===
-                        'Unable to get presigned urls' &&
+                    : error.message.trim() === 'Unable to get presigned urls' &&
                         'Unable to upload image, please check your file size'
                 );
               }}

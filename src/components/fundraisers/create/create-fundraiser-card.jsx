@@ -1,32 +1,16 @@
-import {
-  Badge,
-  Card,
-  CardBody,
-  CardHeader,
-  Heading,
-  useSteps,
-} from '@chakra-ui/react';
+import { Badge, Card, CardBody, CardHeader, Heading, useSteps } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  baseapiurl,
-  checkForImage,
-  deCapitalizeString,
-  getYtVideoId,
-} from '../../../lib/utils.js';
+import { baseapiurl, checkForImage, deCapitalizeString, getYtVideoId } from '../../../lib/utils.js';
 import { useSession } from '../../providers/session-provider.jsx';
 import CardFundraiserFooter from './forms/card-content/card-fundraiser-footer.jsx';
 import CardFundraiserForms from './forms/card-content/card-fundraisers-forms.jsx';
 import FundraiserCardStepper from './fundraiser-card-stepper.jsx';
 
 const steps = [{}, {}, {}, {}, {}];
-const CreateFundraiserComponent = ({
-  draftFundraiser,
-  setDraftFundraiser,
-  isFetching,
-}) => {
+const CreateFundraiserComponent = ({ draftFundraiser, setDraftFundraiser, isFetching }) => {
   const { accessToken, user } = useSession();
   const navigate = useNavigate();
 
@@ -72,14 +56,11 @@ const CreateFundraiserComponent = ({
   const deleteDraft = async () => {
     setDeleting(true);
     setError(null);
-    const res = await axios.post(
-      `${baseapiurl}/api/user/deleteDraftFundraiser`,
-      {
-        uid: user.id,
-        access_token: accessToken,
-        fundraiserId: draftFundraiser._id,
-      }
-    );
+    const res = await axios.post(`${baseapiurl}/api/user/deleteDraftFundraiser`, {
+      uid: user.id,
+      access_token: accessToken,
+      fundraiserId: draftFundraiser._id,
+    });
     const resData = res.data;
     if (resData.statusCode === 200) {
       setDraftFundraiser(null);
@@ -110,33 +91,27 @@ const CreateFundraiserComponent = ({
       : '';
     const nFundraiserCause = deCapitalizeString(fundraiserCause);
     const nFundraiserFor = deCapitalizeString(fundraiserFor);
-    const res = await axios.post(
-      `${baseapiurl}/api/fundraiser/saveFundraiser`,
-      {
-        access_token: accessToken,
-        uid: user.id,
-        creatorName: user.fullname,
-        profilePicUrl: user.profilePicUrl,
-        fundraiserTitle,
-        fundraiserStory,
-        fundraiserFor: nFundraiserFor,
-        beneficiaryName,
-        fundraiserCause: nFundraiserCause,
-        fundraiserGoal,
-        fundraiserCity,
-        fundraiserState,
-        zipCode,
-        coverMediaUrl: updatedCoverMediaUrl,
-        status,
-      }
-    );
+    const res = await axios.post(`${baseapiurl}/api/fundraiser/saveFundraiser`, {
+      access_token: accessToken,
+      uid: user.id,
+      creatorName: user.fullname,
+      profilePicUrl: user.profilePicUrl,
+      fundraiserTitle,
+      fundraiserStory,
+      fundraiserFor: nFundraiserFor,
+      beneficiaryName,
+      fundraiserCause: nFundraiserCause,
+      fundraiserGoal,
+      fundraiserCity,
+      fundraiserState,
+      zipCode,
+      coverMediaUrl: updatedCoverMediaUrl,
+      status,
+    });
 
     const resData = res.data;
 
-    if (
-      resData.statusCode === 200 &&
-      resData.fundraiser.status !== 'active'
-    ) {
+    if (resData.statusCode === 200 && resData.fundraiser.status !== 'active') {
       if (activeStep < steps.length - 1) {
         setActiveStep(activeStep + 1);
       }
@@ -169,9 +144,7 @@ const CreateFundraiserComponent = ({
     }
     setLoading(true);
     setError(null);
-    submitForm(
-      draftFundraiser ? draftFundraiser.status : 'draft'
-    );
+    submitForm(draftFundraiser ? draftFundraiser.status : 'draft');
   };
 
   const handleSubmitFormTwo = async () => {
@@ -192,19 +165,14 @@ const CreateFundraiserComponent = ({
     if (Number(fundraiserGoal) >= 10000) {
       setLoading(true);
       setError(null);
-      submitForm(
-        draftFundraiser ? draftFundraiser.status : 'draft'
-      );
+      submitForm(draftFundraiser ? draftFundraiser.status : 'draft');
     } else {
       setError('Minimum goal should be ₹10,000');
     }
   };
 
   const handleSubmitFormThree = async () => {
-    if (
-      draftFundraiser &&
-      draftFundraiser.coverMediaUrl === coverMediaUrl
-    ) {
+    if (draftFundraiser && draftFundraiser.coverMediaUrl === coverMediaUrl) {
       if (activeStep < steps.length - 1) {
         setActiveStep(activeStep + 1);
       }
@@ -212,9 +180,7 @@ const CreateFundraiserComponent = ({
     }
     setLoading(true);
     setError(null);
-    submitForm(
-      draftFundraiser ? draftFundraiser.status : 'draft'
-    );
+    submitForm(draftFundraiser ? draftFundraiser.status : 'draft');
   };
 
   const handleSubmitFormFour = async () => {
@@ -243,23 +209,18 @@ const CreateFundraiserComponent = ({
     <div className="flex h-full w-auto flex-col items-center justify-center gap-2">
       <div className="hidden w-full justify-center lg:flex">
         <Card className="lg:w-1/2">
-          <FundraiserCardStepper
-            activeStep={activeStep}
-            steps={steps}
-          />
+          <FundraiserCardStepper activeStep={activeStep} steps={steps} />
         </Card>
       </div>
       <Card className="w-[99%] sm:w-4/5 lg:w-1/2">
         <CardHeader>
-          {draftFundraiser &&
-            (draftFundraiser.status === 'review' ||
-              draftFundraiser.status === 'draft') && (
-              <div className="flex items-center">
-                <div className="flex-1">
-                  <Badge colorScheme="red">Draft</Badge>
-                </div>
+          {draftFundraiser && (draftFundraiser.status === 'review' || draftFundraiser.status === 'draft') && (
+            <div className="flex items-center">
+              <div className="flex-1">
+                <Badge colorScheme="red">Draft</Badge>
               </div>
-            )}
+            </div>
+          )}
           <Heading size="lg">Create a Fundraiser </Heading>
           <div className="block lg:hidden">
             {activeStep + 1} of {steps.length}

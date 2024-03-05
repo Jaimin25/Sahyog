@@ -14,11 +14,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    'simple-import-sort',
-    'eslint-plugin-prettier',
-  ],
+  plugins: ['react', 'simple-import-sort', 'eslint-plugin-prettier'],
   rules: {
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
@@ -28,6 +24,7 @@ module.exports = {
       {
         trailingComma: 'es5',
         tabWidth: 2,
+        printWidth: 120,
       },
     ],
   },

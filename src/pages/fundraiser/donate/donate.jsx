@@ -36,20 +36,16 @@ const DonatePage = () => {
   const { user } = useSession();
   const toast = useToast();
   const [isFormVisible, showForm] = useState(false);
-  const [isProccessingPayment, setIsProccessingPayment] =
-    useState(false);
+  const [isProccessingPayment, setIsProccessingPayment] = useState(false);
   const [error, setError] = useState();
 
   const [fundraiserDetails, setFundraiserDetails] = useState();
-  const [fetchingFundraiser, setIsFetchingFundraiser] =
-    useState(true);
+  const [fetchingFundraiser, setIsFetchingFundraiser] = useState(true);
 
   const [donationAmount, setDonationAmount] = useState();
-  const [anonymousDonation, setAnonymousDonation] =
-    useState(false);
+  const [anonymousDonation, setAnonymousDonation] = useState(false);
 
-  const [isDonationSuccess, setIsDonationSuccess] =
-    useState(false);
+  const [isDonationSuccess, setIsDonationSuccess] = useState(false);
 
   const options = {
     mode: 'payment',
@@ -60,9 +56,7 @@ const DonatePage = () => {
 
   useEffect(() => {
     const stripe = async () => {
-      const stripe = await loadStripe(
-        import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
-      );
+      const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
       setStripe(stripe);
     };
     stripe();
@@ -71,12 +65,9 @@ const DonatePage = () => {
   useEffect(() => {
     const fetchFundraiserDetails = async () => {
       try {
-        const res = await axios.post(
-          `${baseapiurl}/api/fundraiser/getFundraiserById`,
-          {
-            fundraiserId: id,
-          }
-        );
+        const res = await axios.post(`${baseapiurl}/api/fundraiser/getFundraiserById`, {
+          fundraiserId: id,
+        });
         const resData = res.data;
         setIsFetchingFundraiser(false);
         if (resData.statusCode === 200) {
@@ -154,20 +145,11 @@ const DonatePage = () => {
               </Box>
               <Box textAlign="center">
                 <Text fontSize="18px">
-                  <span className="font-semibold">
-                    {fundraiserDetails.fundraiserTitle}
-                  </span>
+                  <span className="font-semibold">{fundraiserDetails.fundraiserTitle}</span>
                 </Text>
                 <Text>
-                  Your donation of{' '}
-                  <span className="font-semibold">
-                    ₹{donationAmount}
-                  </span>{' '}
-                  will benefit{' '}
-                  <span className="font-semibold">
-                    {fundraiserDetails.creatorName}
-                  </span>{' '}
-                  and their fundraiser
+                  Your donation of <span className="font-semibold">₹{donationAmount}</span> will benefit{' '}
+                  <span className="font-semibold">{fundraiserDetails.creatorName}</span> and their fundraiser
                 </Text>
               </Box>
             </Box>
@@ -186,9 +168,7 @@ const DonatePage = () => {
     <div className="flex h-full items-center justify-center space-y-4 bg-black/5 px-4 py-8 sm:px-10 lg:px-14">
       <Card className="w-full sm:w-2/3 lg:w-1/2">
         <CardHeader>
-          <Badge colorScheme="red">
-            Payment happens in test mode
-          </Badge>
+          <Badge colorScheme="red">Payment happens in test mode</Badge>
           <Heading>Donate</Heading>
         </CardHeader>
         <CardBody>
@@ -204,27 +184,16 @@ const DonatePage = () => {
                 </Box>
                 <Box>
                   <Text fontSize="18px">
-                    You&apos;re supporting{' '}
-                    <span className="font-semibold">
-                      {fundraiserDetails.fundraiserTitle}
-                    </span>
+                    You&apos;re supporting <span className="font-semibold">{fundraiserDetails.fundraiserTitle}</span>
                   </Text>
                   <Text color="gray.500" fontSize="14px">
-                    Your donation will benefit{' '}
-                    <span className="font-semibold">
-                      {fundraiserDetails.creatorName}
-                    </span>
+                    Your donation will benefit <span className="font-semibold">{fundraiserDetails.creatorName}</span>
                   </Text>
-                  {isFormVisible &&
-                    donationAmount &&
-                    donationAmount >= 100 && (
-                      <Text className="w-full text-center text-xl">
-                        Donating{' '}
-                        <span className="font-semibold">
-                          ₹{donationAmount}
-                        </span>
-                      </Text>
-                    )}
+                  {isFormVisible && donationAmount && donationAmount >= 100 && (
+                    <Text className="w-full text-center text-xl">
+                      Donating <span className="font-semibold">₹{donationAmount}</span>
+                    </Text>
+                  )}
                 </Box>
               </Box>
             )}
@@ -237,35 +206,19 @@ const DonatePage = () => {
                       <InputLeftAddon>
                         <IndianRupee className="h-5 w-5" />
                       </InputLeftAddon>
-                      <Input
-                        type="number"
-                        value={donationAmount}
-                        onChange={(e) =>
-                          setDonationAmount(e.target.value)
-                        }
-                      />
+                      <Input type="number" value={donationAmount} onChange={(e) => setDonationAmount(e.target.value)} />
                     </Box>
-                    <Text className="text-sm text-gray-500">
-                      Donation amount must be at least ₹100
-                    </Text>
+                    <Text className="text-sm text-gray-500">Donation amount must be at least ₹100</Text>
                   </Box>
                 </InputGroup>
                 <Text fontWeight="semibold">Full Name</Text>
 
-                <Input
-                  value={user?.fullname}
-                  isDisabled="true"
-                />
+                <Input value={user?.fullname} isDisabled="true" />
                 <Text fontWeight="semibold">Email</Text>
 
                 <Input value={user?.email} isDisabled="true" />
                 <Box className="h-full">
-                  <Checkbox
-                    isChecked={anonymousDonation}
-                    onChange={(e) =>
-                      setAnonymousDonation(e.target.checked)
-                    }
-                  >
+                  <Checkbox isChecked={anonymousDonation} onChange={(e) => setAnonymousDonation(e.target.checked)}>
                     Don&apos;t show my name publicly
                   </Checkbox>
                 </Box>
@@ -278,19 +231,13 @@ const DonatePage = () => {
                   anonymous={anonymousDonation}
                   fundraiserId={id}
                   setIsDonationSuccess={setIsDonationSuccess}
-                  setIsProccessingPayment={
-                    setIsProccessingPayment
-                  }
+                  setIsProccessingPayment={setIsProccessingPayment}
                 />
               </Elements>
             )}
             <Button
               onClick={() => showForm(!isFormVisible)}
-              isDisabled={
-                !donationAmount ||
-                !(donationAmount >= 100) ||
-                isProccessingPayment
-              }
+              isDisabled={!donationAmount || !(donationAmount >= 100) || isProccessingPayment}
               colorScheme={isFormVisible ? 'red' : 'teal'}
             >
               {isFormVisible ? 'Cancel' : 'Procees to pay'}

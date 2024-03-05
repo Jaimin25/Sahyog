@@ -25,10 +25,7 @@ const FundraiserDetails = ({
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-      <FundraiserDetailsSection
-        fundraiser={fundraiser}
-        isFetchingFundraiser={isFetchingFundraiser}
-      />
+      <FundraiserDetailsSection fundraiser={fundraiser} isFetchingFundraiser={isFetchingFundraiser} />
       <FundraiserDonationSection
         fundraiser={fundraiser}
         isFetchingFundraiser={isFetchingFundraiserDonations}

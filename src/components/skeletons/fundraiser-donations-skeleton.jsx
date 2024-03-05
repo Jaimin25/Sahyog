@@ -1,25 +1,9 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardBody,
-  Progress,
-  Skeleton,
-  SkeletonCircle,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
-import {
-  ArrowUpRightFromSquare,
-  HeartHandshake,
-} from 'lucide-react';
+import { Box, Button, Card, CardBody, Progress, Skeleton, SkeletonCircle, Stack, Text } from '@chakra-ui/react';
+import { ArrowUpRightFromSquare, HeartHandshake } from 'lucide-react';
 
 const FundraiserDonationSkeleton = () => {
   return (
-    <Card
-      shadow="md"
-      className="col-span-2 h-screen lg:col-span-1"
-    >
+    <Card shadow="md" className="col-span-2 h-screen lg:col-span-1">
       <CardBody>
         <Stack height="100%">
           <Skeleton>
@@ -38,11 +22,7 @@ const FundraiserDonationSkeleton = () => {
           </Skeleton>
           <Stack>
             <Skeleton>
-              <Button
-                variant="outline"
-                colorScheme="teal"
-                className="fundraiser-card-donate-button"
-              >
+              <Button variant="outline" colorScheme="teal" className="fundraiser-card-donate-button">
                 Donate now
               </Button>
               <Button
@@ -60,11 +40,7 @@ const FundraiserDonationSkeleton = () => {
               .fill()
               .map((_, index) => (
                 <Stack gap="18px" key={index}>
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    gap="16px"
-                  >
+                  <Stack direction="row" alignItems="center" gap="16px">
                     <SkeletonCircle>
                       <Box>
                         <Box className="flex items-center rounded-full bg-gray-200 p-2">
@@ -78,10 +54,7 @@ const FundraiserDonationSkeleton = () => {
                       </Skeleton>
                       <Skeleton width="50%">
                         <Box className="flex gap-2">
-                          <Text fontWeight="semibold">
-                            ₹{1000}
-                          </Text>
-                          •<Text color="gray.600">{1000}</Text>
+                          <Text fontWeight="semibold">₹{1000}</Text>•<Text color="gray.600">{1000}</Text>
                         </Box>
                       </Skeleton>
                     </Stack>

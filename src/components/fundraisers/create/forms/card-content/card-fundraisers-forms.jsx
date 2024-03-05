@@ -59,10 +59,7 @@ const CardFundraiserForms = ({
           setFundraiserGoal={setFundraiserGoal}
         />
       ) : activeStep === 2 ? (
-        <FundraiserFormThree
-          coverMediaUrl={coverMediaUrl}
-          setCoverMediaUrl={setCoverMediaUrl}
-        />
+        <FundraiserFormThree coverMediaUrl={coverMediaUrl} setCoverMediaUrl={setCoverMediaUrl} />
       ) : activeStep === 3 ? (
         <FundraiserFormFour
           fundraiserTitle={fundraiserTitle}

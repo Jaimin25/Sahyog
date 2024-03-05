@@ -1,9 +1,6 @@
 import { Button, Card, Stack } from '@chakra-ui/react';
 
-const DashboardSidebar = ({
-  setCurrentActive,
-  currentActive,
-}) => {
+const DashboardSidebar = ({ setCurrentActive, currentActive }) => {
   const changeCurrentActive = (active) => {
     setCurrentActive(active);
   };
@@ -20,9 +17,7 @@ const DashboardSidebar = ({
             background: 'teal.100',
           }}
           color="teal"
-          className={
-            currentActive === 'account' && 'bg-teal-100'
-          }
+          className={currentActive === 'account' && 'bg-teal-100'}
         >
           Account
         </Button>
@@ -35,9 +30,7 @@ const DashboardSidebar = ({
             background: 'teal.100',
           }}
           color="teal"
-          className={
-            currentActive === 'otherdetails' && 'bg-teal-100'
-          }
+          className={currentActive === 'otherdetails' && 'bg-teal-100'}
         >
           Other Details
         </Button>
@@ -50,9 +43,7 @@ const DashboardSidebar = ({
             background: 'teal.100',
           }}
           color="teal"
-          className={
-            currentActive === 'fundraisers' && 'bg-teal-100'
-          }
+          className={currentActive === 'fundraisers' && 'bg-teal-100'}
         >
           Fundraisers
         </Button>
@@ -65,9 +56,7 @@ const DashboardSidebar = ({
             background: 'teal.100',
           }}
           color="teal"
-          className={
-            currentActive === 'donations' && 'bg-teal-100'
-          }
+          className={currentActive === 'donations' && 'bg-teal-100'}
         >
           Donations
         </Button>

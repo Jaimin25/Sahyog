@@ -1,35 +1,17 @@
-import {
-  Button,
-  ButtonGroup,
-  Editable,
-  IconButton,
-  useEditableControls,
-} from '@chakra-ui/react';
+import { Button, ButtonGroup, Editable, IconButton, useEditableControls } from '@chakra-ui/react';
 import { Editor } from '@tinymce/tinymce-react';
 import { Markup } from 'interweave';
 import { CheckIcon, X } from 'lucide-react';
 import { useState } from 'react';
 
-const EditFundraiserStory = ({
-  fundraiser,
-  fundraiserStory,
-  setFundraiserStory,
-}) => {
+const EditFundraiserStory = ({ fundraiser, fundraiserStory, setFundraiserStory }) => {
   const [editing, setEditing] = useState();
   function EditableControls() {
-    const {
-      isEditing,
-      getSubmitButtonProps,
-      getCancelButtonProps,
-      getEditButtonProps,
-    } = useEditableControls();
+    const { isEditing, getSubmitButtonProps, getCancelButtonProps, getEditButtonProps } = useEditableControls();
     setEditing(isEditing);
     return isEditing ? (
       <ButtonGroup className="flex items-center" size="sm">
-        <IconButton
-          icon={<CheckIcon />}
-          {...getSubmitButtonProps()}
-        />
+        <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
         <IconButton icon={<X />} {...getCancelButtonProps()} />
       </ButtonGroup>
     ) : (
@@ -46,9 +28,7 @@ const EditFundraiserStory = ({
       className="flex items-center"
       isPreviewFocusable={false}
     >
-      {!editing && (
-        <Markup content={fundraiserStory} className="flex-1" />
-      )}
+      {!editing && <Markup content={fundraiserStory} className="flex-1" />}
       {editing && (
         <Editor
           apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
@@ -79,11 +59,8 @@ const EditFundraiserStory = ({
               'wordcount',
             ],
             toolbar:
-              'undo redo | blocks | ' +
-              'bold italic forecolor | alignleft aligncenter ' +
-              'alignright alignjustify ',
-            content_style:
-              'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+              'undo redo | blocks | ' + 'bold italic forecolor | alignleft aligncenter ' + 'alignright alignjustify ',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
           }}
         />
       )}

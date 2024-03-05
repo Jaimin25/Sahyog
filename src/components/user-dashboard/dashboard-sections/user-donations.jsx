@@ -46,9 +46,7 @@ const UserDonations = ({ donations }) => {
           <Stack>
             <Heading size="sm">No donations found</Heading>
             <NavLink to="/fundraisers/discover">
-              <Button colorScheme="teal">
-                Donate Now to a Fundraiser
-              </Button>
+              <Button colorScheme="teal">Donate Now to a Fundraiser</Button>
             </NavLink>
           </Stack>
         </CardBody>
@@ -78,20 +76,12 @@ const UserDonations = ({ donations }) => {
             </Thead>
             <Tbody>
               {donations
-                .sort(
-                  (a, b) =>
-                    new Date(b.createdAt) - new Date(a.createdAt)
-                )
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                 .map((donation) => (
                   <Tr key={donation._id}>
                     <Td>
-                      <NavLink
-                        to={`/fundraiser/${donation.fundraiserId}`}
-                      >
-                        <Button
-                          variant="link"
-                          colorScheme="teal"
-                        >
+                      <NavLink to={`/fundraiser/${donation.fundraiserId}`}>
+                        <Button variant="link" colorScheme="teal">
                           {donation.fundraiserTitle}
                         </Button>
                       </NavLink>

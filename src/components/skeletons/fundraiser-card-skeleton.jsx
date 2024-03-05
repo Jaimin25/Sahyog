@@ -48,47 +48,28 @@ const FundriaserCardSkeleton = ({
             </SkeletonCircle>
             <Skeleton width="50%">
               <Text width="100%">
-                By{' '}
-                <span className="w-full font-semibold">
-                  {creatorName}
-                </span>
+                By <span className="w-full font-semibold">{creatorName}</span>
               </Text>
             </Skeleton>
           </HStack>
           <Skeleton>
             <Text fontSize={'larger'}>
-              <span className="font-semibold">
-                ₹
-                {amountRaised.toLocaleString('en-IN').toString()}
-              </span>{' '}
-              raised out of ₹
+              <span className="font-semibold">₹{amountRaised.toLocaleString('en-IN').toString()}</span> raised out of ₹
               {fundraiserGoal.toLocaleString('en-IN').toString()}
             </Text>
-            <Progress
-              value={(amountRaised / fundraiserGoal) * 100}
-              size="xs"
-              colorScheme="teal"
-            />
+            <Progress value={(amountRaised / fundraiserGoal) * 100} size="xs" colorScheme="teal" />
           </Skeleton>
         </Stack>
       </CardBody>
       <CardFooter>
         <ButtonGroup spacing="2" className="flex w-full">
           <Skeleton width="50%">
-            <Button
-              variant="outline"
-              colorScheme="teal"
-              className="flex-1"
-            >
+            <Button variant="outline" colorScheme="teal" className="flex-1">
               Share
             </Button>
           </Skeleton>
           <Skeleton width="50%">
-            <Button
-              variant="solid"
-              colorScheme="teal"
-              className="flex-1"
-            >
+            <Button variant="solid" colorScheme="teal" className="flex-1">
               Donate
             </Button>
           </Skeleton>

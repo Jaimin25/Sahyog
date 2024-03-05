@@ -9,11 +9,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 
-const ConfirmDetailsModal = ({
-  isOpen,
-  onClose,
-  setConfirmSubmit,
-}) => {
+const ConfirmDetailsModal = ({ isOpen, onClose, setConfirmSubmit }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
@@ -21,8 +17,7 @@ const ConfirmDetailsModal = ({
         <ModalHeader>Confirmation</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          Once submitted, you cannot edit the details again until
-          after they have been reviewed and validated. Please
+          Once submitted, you cannot edit the details again until after they have been reviewed and validated. Please
           re-check the details and confirm.
         </ModalBody>
 
