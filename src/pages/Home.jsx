@@ -17,7 +17,7 @@ const Home = () => {
               <p className="text-5xl font-bold lg:text-[56px]">Crowdfunding for India</p>
               <p className="text-base lg:text-lg">Help others and one day it will return to you</p>
             </div>
-            <div className="flex w-full flex-col items-center gap-x-2 lg:flex-row">
+            <div className="flex w-full flex-col items-center gap-y-2 lg:flex-row lg:gap-x-3">
               <NavLink to={session ? '/fundraiser/create' : '/auth/signin'}>
                 <Button colorScheme="teal">Start a Fundraiser</Button>
               </NavLink>
