@@ -1,12 +1,12 @@
-import CryptoJS from 'crypto-js';
+// import CryptoJS from 'crypto-js';
 
-function encryptValue(val) {
-  return CryptoJS.AES.encrypt(val, import.meta.env.VITE_CRYPTOJS_SECRET_KEY).toString();
-}
+// function encryptValue(val) {
+//   return CryptoJS.AES.encrypt(val, import.meta.env.VITE_CRYPTOJS_SECRET_KEY).toString();
+// }
 
-function decryptValue(val) {
-  return CryptoJS.AES.decrypt(val, import.meta.env.VITE_CRYPTOJS_SECRET_KEY).toString(CryptoJS.enc.Utf8);
-}
+// function decryptValue(val) {
+//   return CryptoJS.AES.decrypt(val, import.meta.env.VITE_CRYPTOJS_SECRET_KEY).toString(CryptoJS.enc.Utf8);
+// }
 
 let baseapiurl = '';
 
@@ -83,8 +83,8 @@ export {
   checkForImage,
   checkYoutubeUrl,
   deCapitalizeString,
-  decryptValue,
-  encryptValue,
+  // decryptValue,
+  // encryptValue,
   getYtVideoId,
   timeSince,
 };
