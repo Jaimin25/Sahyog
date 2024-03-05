@@ -14,7 +14,6 @@ const FundraiserUpdatesSection = ({ fundraiserUpdates, isFetchingFundraiserUpdat
               <CardBody>
                 <Box className="flex space-y-4">
                   <Box flex="1">
-                    {console.log(dayjs().diff(dayjs(update.createdAt), 'days'))}
                     {dayjs().diff(dayjs(update.createdAt), 'days') < 1 && <Badge colorScheme="green">new</Badge>}
                     <Markup content={update.updateDetails} />
                     <p className="text-sm text-gray-500">{new Date(update.createdAt).toLocaleString()}</p>
