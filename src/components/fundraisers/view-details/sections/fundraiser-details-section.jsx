@@ -14,6 +14,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { Markup } from 'interweave';
+import { Flag } from 'lucide-react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { NavLink } from 'react-router-dom';
 
@@ -102,6 +103,13 @@ const FundraiserDetailsSection = ({ fundraiser, isFetchingFundraiser }) => {
                   </Text>
                 </Box>
               </Stack>
+            </Stack>
+            <Stack>
+              <Box>
+                <Button leftIcon={<Flag className="h-5 w-5" />} variant="link">
+                  Report Fundraiser
+                </Button>
+              </Box>
             </Stack>
           </Stack>
         </CardBody>
