@@ -15,7 +15,7 @@ import Home from './pages/Home';
 import HowItWorksPage from './pages/how-it-works/how-it-works';
 
 export const App = () => {
-  const { session } = useSession();
+  const { session, loading, user } = useSession();
 
   return (
     <main className="main flex h-full flex-col">
@@ -31,13 +31,19 @@ export const App = () => {
           <Route path="*" element={<div>The page is not available</div>} />
 
           {/* PROTECTED ROUTES */}
-          <Route path="/dashboard" element={session && (session ? <UserDashboard /> : <SignInPage />)} />
-          <Route path="/fundraiser/create" element={session && (session ? <CreateFundraiserPage /> : <SignInPage />)} />
+          <Route path="/dashboard" element={loading ? null : session && user ? <UserDashboard /> : <SignInPage />} />
+          <Route
+            path="/fundraiser/create"
+            element={loading ? null : session && user ? <CreateFundraiserPage /> : <SignInPage />}
+          />
           <Route
             path="/fundraiser/:id/manage"
-            element={session && (session ? <ManageFundriaserPage /> : <SignInPage />)}
+            element={loading ? null : session && user ? <ManageFundriaserPage /> : <SignInPage />}
           />
-          <Route path="/fundraiser/:id/donate" element={session && (session ? <DonatePage /> : <SignInPage />)} />
+          <Route
+            path="/fundraiser/:id/donate"
+            element={loading ? null : session && user ? <DonatePage /> : <SignInPage />}
+          />
         </Routes>
       </div>
       <Footer />

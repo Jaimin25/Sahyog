@@ -13,6 +13,7 @@ export const useSession = () => {
 };
 
 export function SessionProvider({ children }) {
+  const [loading, setLoading] = useState(true);
   const [session, setSession] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -82,7 +83,10 @@ export function SessionProvider({ children }) {
   useEffect(() => {
     const getSession = async () => {
       const { data } = await supabase.auth.getSession();
-      if (!data.session) return null;
+      if (!data.session) {
+        setLoading(false);
+        return null;
+      }
       const user = JSON.parse(localStorage.getItem('user'));
 
       setSession(data.session);
@@ -92,8 +96,10 @@ export function SessionProvider({ children }) {
 
       if (changedEmail !== user.email) {
         updateUserEmail(user, data.session.access_token, data.session.user.id, changedEmail);
+        setLoading(false);
       } else {
         fetchUserDetails(data.session.user);
+        setLoading(false);
       }
     };
     getSession();
@@ -120,7 +126,7 @@ export function SessionProvider({ children }) {
     localStorage.setItem('user', JSON.stringify(user));
     setUser(user);
   };
-
+  console.log(!!session);
   return (
     <SessionContext.Provider
       value={{
@@ -128,6 +134,7 @@ export function SessionProvider({ children }) {
         session,
         accessToken,
         saveUserDetails,
+        loading,
       }}
     >
       {children}
