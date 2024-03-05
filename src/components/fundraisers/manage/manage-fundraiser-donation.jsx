@@ -28,7 +28,6 @@ const ManageFundraiserDonation = ({ fundraiser, isFetching, fundraiserDonations 
         <Stack gap="18px">
           {fundraiserDonations
             .sort((a, b) => b.donationAmount - a.donationAmount)
-            .slice(0, 5)
             .map((donation) => (
               <DonationsCard
                 key={donation._id}
