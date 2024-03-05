@@ -4,13 +4,13 @@ import { Markup } from 'interweave';
 
 const FundraiserUpdatesSection = ({ fundraiserUpdates, isFetchingFundraiserUpdates }) => {
   return (
-    <Card className="col-span-2">
+    <Card className="col-span-2" shadow="md">
       <CardBody className="w-full space-y-4">
         <Heading size="md">Updates</Heading>
         <Box className="w-full space-y-4">
           {!isFetchingFundraiserUpdates && fundraiserUpdates.length === 0 && <p>No updates yet</p>}
           {fundraiserUpdates.map((update) => (
-            <Card key={update._id} boxShadow="none" border="1px" borderColor="gray.200" marginY="8px">
+            <Card key={update._id} shadow="none" border="1px" borderColor="gray.200" marginY="8px">
               <CardBody>
                 <Box className="flex space-y-4">
                   <Box flex="1">

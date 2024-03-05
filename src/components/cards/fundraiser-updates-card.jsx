@@ -52,7 +52,7 @@ const FundraiserUpdatesCard = ({ update, user, accessToken, fundraiser, fundrais
   };
 
   return (
-    <Card boxShadow="none" border="1px" borderColor="gray.200" marginY="8px">
+    <Card shadow="none" border="1px" borderColor="gray.200" marginY="8px">
       <CardBody>
         <Box className="flex space-y-4">
           <Box flex="1">

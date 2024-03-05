@@ -20,7 +20,7 @@ import { checkForImage } from '../../lib/utils';
 
 const FundraiserDetailsSkeleton = ({ coverMediaUrl }) => {
   return (
-    <Card boxShadow="md" className="col-span-2">
+    <Card shadow="md" className="col-span-2">
       <CardHeader>
         <Skeleton>
           <Heading>Heading</Heading>

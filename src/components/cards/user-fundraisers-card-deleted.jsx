@@ -11,7 +11,7 @@ const UserDeletedFundraisersCard = ({ fundraiserId, fundraiserTitle, coverMediaU
       className="user-fundraisers-card-container h-full w-full place-self-center hover:cursor-pointer"
       border="1px"
       borderColor="gray.200"
-      boxShadow="sm"
+      shadow="sm"
     >
       <CardBody className="flex flex-col items-center gap-3 lg:flex-row">
         {coverMediaUrl && checkForImage(coverMediaUrl) ? (

@@ -26,7 +26,7 @@ const FundriaserCardSkeleton = ({
   fundraiserGoal,
 }) => {
   return (
-    <Card maxW="sm" className="place-self-center" boxShadow="md">
+    <Card maxW="sm" className="place-self-center" shadow="md">
       <CardBody>
         <Skeleton>
           {coverMediaUrl && checkForImage(coverMediaUrl) && (

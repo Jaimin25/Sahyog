@@ -25,7 +25,7 @@ const FundraiserDetailsSection = ({ fundraiser, isFetchingFundraiser }) => {
 
   return (
     <>
-      <Card boxShadow="md" className="col-span-2">
+      <Card shadow="md" className="col-span-2">
         <CardHeader>
           <Heading>{fundraiser.fundraiserTitle}</Heading>
         </CardHeader>

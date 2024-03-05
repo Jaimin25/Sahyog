@@ -5,7 +5,7 @@ const FundraiserUpdatesSkeleton = ({ type }) => {
   if (type === 'manage') {
     return (
       <>
-        <Card boxShadow="none" border="1px" borderColor="gray.200" marginY="8px">
+        <Card shadow="none" border="1px" borderColor="gray.200" marginY="8px">
           <CardBody>
             <Box flex="1" className="space-y-2">
               <Skeleton className="w-full md:w-1/2">
@@ -17,7 +17,7 @@ const FundraiserUpdatesSkeleton = ({ type }) => {
             </Box>
           </CardBody>
         </Card>
-        <Card boxShadow="none" border="1px" borderColor="gray.200" marginY="8px">
+        <Card shadow="none" border="1px" borderColor="gray.200" marginY="8px">
           <CardBody>
             <Box flex="1" className="space-y-2">
               <Skeleton className="w-full md:w-1/2">
@@ -36,7 +36,7 @@ const FundraiserUpdatesSkeleton = ({ type }) => {
   return (
     <Card shadow="md" className="col-span-2">
       <CardBody>
-        <Card boxShadow="none" border="1px" borderColor="gray.200" marginY="8px">
+        <Card shadow="none" border="1px" borderColor="gray.200" marginY="8px">
           <CardBody>
             <Box flex="1" className="space-y-2">
               <Skeleton className="w-full md:w-1/2">
@@ -48,7 +48,7 @@ const FundraiserUpdatesSkeleton = ({ type }) => {
             </Box>
           </CardBody>
         </Card>
-        <Card boxShadow="none" border="1px" borderColor="gray.200" marginY="8px">
+        <Card shadow="none" border="1px" borderColor="gray.200" marginY="8px">
           <CardBody>
             <Box flex="1" className="space-y-2">
               <Skeleton className="w-full md:w-1/2">

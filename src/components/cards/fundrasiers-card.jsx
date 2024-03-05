@@ -35,7 +35,7 @@ const FundriaserCard = ({
       <Card
         maxW="sm"
         className="fundraiser-card-container h-full w-full place-self-center hover:cursor-pointer"
-        boxShadow="md"
+        shadow="md"
       >
         <NavLink to={`/fundraiser/${fundraiserId}`}>
           <CardBody>
