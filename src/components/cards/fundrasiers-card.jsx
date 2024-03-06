@@ -32,11 +32,7 @@ const FundriaserCard = ({
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
-      <Card
-        maxW="sm"
-        className="fundraiser-card-container h-full w-full place-self-center hover:cursor-pointer"
-        shadow="md"
-      >
+      <Card maxW="sm" className="fundraiser-card-container h-full place-self-center hover:cursor-pointer" shadow="md">
         <NavLink to={`/fundraiser/${fundraiserId}`}>
           <CardBody>
             {coverMediaUrl && checkForImage(coverMediaUrl) ? (
