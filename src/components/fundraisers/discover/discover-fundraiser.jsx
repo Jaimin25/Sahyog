@@ -1,7 +1,7 @@
 import { Card, CardBody } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-import FundriaserCard from '../../cards/fundrasiers-card';
+import FundriaserCard from '../../cards/fundraisers-card';
 import FundriaserCardSkeleton from '../../skeletons/fundraiser-card-skeleton';
 
 const DiscoverFundraiser = ({ categoryFilter, uploadedFilter, searchFilter, fundraisers, isFetching }) => {

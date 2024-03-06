@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import { baseapiurl } from '../../lib/utils';
-import FundriaserCard from '../cards/fundrasiers-card';
+import FundriaserCard from '../cards/fundraisers-card';
 import FundriaserCardSkeleton from '../skeletons/fundraiser-card-skeleton';
 
 const FundraiserDiscoverSection = () => {
