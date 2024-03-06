@@ -31,13 +31,13 @@ const UserAccountDetails = () => {
   const [isSavingChanges, setIsSavingChanges] = useState(false);
   const [isSendingMail, setIsSendingMail] = useState(false);
 
-  const [userEmail, setUserEmail] = useState(user.email);
-  const [userFullname, setUserFullname] = useState(user.fullname);
+  const [userEmail, setUserEmail] = useState();
+  const [userFullname, setUserFullname] = useState();
 
   useEffect(() => {
     setUserEmail(user.email);
     setUserFullname(user.fullname);
-  }, [user]);
+  }, []);
 
   const handleResendButton = async () => {
     setIsSendingMail(true);
