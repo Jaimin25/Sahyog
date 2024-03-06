@@ -126,7 +126,7 @@ export function SessionProvider({ children }) {
     localStorage.setItem('user', JSON.stringify(user));
     setUser(user);
   };
-  console.log(!!session);
+
   return (
     <SessionContext.Provider
       value={{
