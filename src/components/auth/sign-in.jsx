@@ -52,7 +52,7 @@ const SignInComponent = () => {
         }
       } catch (error) {
         setError(error.message);
-        // await supabase.auth.signOut();
+        await supabase.auth.signOut();
       }
     }
     if (error) {
