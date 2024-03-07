@@ -37,7 +37,7 @@ Check it out live [here](https://sahyogweb.vercel.app).
 
 ## Local Development
 
-### [Click here](https://github.com/Jaimin25/ConvoNest/blob/main/DEVELOPERS.md) and follow the steps to setup the project on your device.
+### [Click here](https://github.com/Jaimin25/sahyog/blob/main/DEVELOPERS.md) and follow the steps to setup the project on your device.
 
 ## Demo Videos
 
