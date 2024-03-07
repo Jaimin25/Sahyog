@@ -8,11 +8,14 @@ import {
   FormLabel,
   Heading,
   Input,
+  InputGroup,
+  InputRightAddon,
   Stack,
   Text,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
+import { EyeIcon, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import validator from 'validator';
@@ -26,6 +29,8 @@ const SignUpComponent = () => {
   const navigate = useNavigate();
 
   const [error, setError] = useState();
+
+  const [isPassVisible, setIsPassVisible] = useState(false);
 
   const onSubmit = async (values, actions) => {
     setError(null);
@@ -119,7 +124,21 @@ const SignUpComponent = () => {
                     {({ field, form }) => (
                       <FormControl isRequired>
                         <FormLabel>Password</FormLabel>
-                        <Input type="password" id="password" placeholder="Password" {...field} required />
+                        <InputGroup>
+                          <Input
+                            type={!isPassVisible ? 'password' : 'text'}
+                            id="password"
+                            placeholder="Password"
+                            {...field}
+                            required
+                          />
+                          <InputRightAddon
+                            onClick={() => setIsPassVisible(!isPassVisible)}
+                            className="hover:cursor-pointer"
+                          >
+                            {isPassVisible ? <EyeOff className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+                          </InputRightAddon>
+                        </InputGroup>
                       </FormControl>
                     )}
                   </Field>
