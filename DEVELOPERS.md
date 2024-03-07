@@ -5,7 +5,7 @@
 2. Clone your GitHub forked repo:
 
    ```sh
-   git clone https://github.com/<github_username>/sahyog.git
+   git clone https://github.com/<github_username>/Sahyog.git
    ```
 
 3. Go to the ConvoNest directory:
