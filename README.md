@@ -35,6 +35,8 @@ Check it out live [here](https://sahyogweb.vercel.app).
 - Payment confirmation email notification
 - Submit identity proofs and Bank details for review before transferring funds
 
+## Local Development
+
 ### [Click here](https://github.com/Jaimin25/ConvoNest/blob/main/DEVELOPERS.md) and follow the steps to setup the project on your device.
 
 ## Demo Videos
