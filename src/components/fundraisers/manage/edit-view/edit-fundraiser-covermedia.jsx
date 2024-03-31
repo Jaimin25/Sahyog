@@ -63,7 +63,7 @@ const EditFundraiserCoverMedia = ({ fundraiser, fundraiserCoverMediaUrl, setFund
               />
             </div>
           ) : fundraiserCoverMediaUrl && checkYoutubeUrl(fundraiser.coverMediaUrl) ? (
-            <AspectRatio maxW="auto" ratio={16 / 9} borderRadius="lg" height="300px" className="flex-1">
+            <AspectRatio maxW="100%" ratio={16 / 9} borderRadius="lg" height="300px" className="flex-1">
               <iframe
                 className="rounded-lg"
                 src={`https://www.youtube.com/embed/${getYtVideoId(fundraiser.coverMediaUrl)}`}
