@@ -37,8 +37,8 @@ const FundriaserCard = ({
         className="fundraiser-card-container h-full w-full place-self-center hover:cursor-pointer"
         shadow="md"
       >
-        <NavLink to={`/fundraiser/${fundraiserId}`}>
-          <CardBody>
+        <NavLink to={`/fundraiser/${fundraiserId}`} className="h-full">
+          <CardBody className="flex h-full flex-col">
             {coverMediaUrl && checkForImage(coverMediaUrl) ? (
               <div className="overflow-hidden rounded-lg">
                 <LazyLoadImage
@@ -58,8 +58,8 @@ const FundriaserCard = ({
                 />
               </AspectRatio>
             ) : null}
-            <Stack mt="6" spacing="3">
-              <Heading size="md" className="fundraiser-card-title">
+            <Stack mt="6" spacing="3" className="flex flex-1">
+              <Heading size="md" className="fundraiser-card-title flex-1">
                 {fundraiserTitle}
               </Heading>
               <HStack>
