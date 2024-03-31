@@ -1,6 +1,7 @@
 import {
   Alert,
   AlertIcon,
+  AspectRatio,
   Badge,
   Box,
   Button,
@@ -26,7 +27,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { NavLink, useParams } from 'react-router-dom';
 
 import { useSession } from '../../../components/providers/session-provider';
-import { baseapiurl } from '../../../lib/utils';
+import { baseapiurl, checkForImage, checkYoutubeUrl, getYtVideoId } from '../../../lib/utils';
 import CheckoutForm from './checkout-form';
 
 const DonatePage = () => {
@@ -136,12 +137,26 @@ const DonatePage = () => {
           </CardHeader>
           <CardBody>
             <Box className="flex flex-col items-center gap-3">
-              <Box>
-                <LazyLoadImage
-                  src={fundraiserDetails.coverMediaUrl}
-                  className="aspect-video w-[250px] rounded-lg"
-                  alt={fundraiserDetails.fundraiserTitle}
-                />
+              <Box className="w-full">
+                {fundraiserDetails.coverMediaUrl && checkForImage(fundraiserDetails.coverMediaUrl) ? (
+                  <div className="overflow-hidden rounded-lg">
+                    <LazyLoadImage
+                      src={fundraiserDetails.coverMediaUrl}
+                      className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
+                      alt={fundraiserDetails.fundraiserTitle}
+                      height="200px"
+                      width="100%"
+                    />
+                  </div>
+                ) : fundraiserDetails.coverMediaUrl && checkYoutubeUrl(fundraiserDetails.coverMediaUrl) ? (
+                  <AspectRatio maxW="100%" ratio={16 / 9} borderRadius="lg" height="200px">
+                    <iframe
+                      className="rounded-lg"
+                      src={`https://www.youtube.com/embed/${getYtVideoId(fundraiserDetails.coverMediaUrl)}`}
+                      allowFullScreen
+                    />
+                  </AspectRatio>
+                ) : null}
               </Box>
               <Box textAlign="center">
                 <Text fontSize="18px">
@@ -175,12 +190,26 @@ const DonatePage = () => {
           <Stack gap="18px">
             {fundraiserDetails && (
               <Box className="flex gap-3">
-                <Box>
-                  <LazyLoadImage
-                    src={fundraiserDetails.coverMediaUrl}
-                    className="aspect-video w-[150px] rounded-lg"
-                    alt={fundraiserDetails.fundraiserTitle}
-                  />
+                <Box className="w-full">
+                  {fundraiserDetails.coverMediaUrl && checkForImage(fundraiserDetails.coverMediaUrl) ? (
+                    <div className="overflow-hidden rounded-lg">
+                      <LazyLoadImage
+                        src={fundraiserDetails.coverMediaUrl}
+                        className="aspect-video h-[200px] w-full cursor-pointer transition duration-500 hover:scale-110"
+                        alt={fundraiserDetails.fundraiserTitle}
+                        height="200px"
+                        width="100%"
+                      />
+                    </div>
+                  ) : fundraiserDetails.coverMediaUrl && checkYoutubeUrl(fundraiserDetails.coverMediaUrl) ? (
+                    <AspectRatio maxW="100%" ratio={16 / 9} borderRadius="lg" height="200px">
+                      <iframe
+                        className="rounded-lg"
+                        src={`https://www.youtube.com/embed/${getYtVideoId(fundraiserDetails.coverMediaUrl)}`}
+                        allowFullScreen
+                      />
+                    </AspectRatio>
+                  ) : null}
                 </Box>
                 <Box>
                   <Text fontSize="18px">
