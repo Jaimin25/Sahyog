@@ -52,7 +52,7 @@ const EditFundraiserCoverMedia = ({ fundraiser, fundraiserCoverMediaUrl, setFund
       className="flex flex-col items-center gap-2"
       isPreviewFocusable={false}
     >
-      <div>
+      <div className="w-11/12">
         {!editing &&
           (fundraiserCoverMediaUrl && checkForImage(fundraiserCoverMediaUrl) ? (
             <div className="w-full flex-1 overflow-hidden rounded-lg">
