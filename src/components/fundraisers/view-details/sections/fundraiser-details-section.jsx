@@ -27,7 +27,7 @@ const FundraiserDetailsSection = ({ fundraiser, isFetchingFundraiser }) => {
   return (
     <>
       <Card shadow="md" className="col-span-2">
-        <CardHeader>
+        <CardHeader paddingBottom="0px">
           <Heading>{fundraiser.fundraiserTitle}</Heading>
         </CardHeader>
         <CardBody>
@@ -42,7 +42,7 @@ const FundraiserDetailsSection = ({ fundraiser, isFetchingFundraiser }) => {
                   />
                 </div>
               ) : fundraiser.coverMediaUrl && checkYoutubeUrl(fundraiser.coverMediaUrl) ? (
-                <AspectRatio maxW="auto" ratio={16 / 9} borderRadius="lg" className="h-[250px] lg:h-[400px]">
+                <AspectRatio maxW="100%" ratio={16 / 9} borderRadius="lg" className="h-[250px] w-full lg:h-[400px]">
                   <iframe
                     className="rounded-lg"
                     src={`https://www.youtube.com/embed/${getYtVideoId(fundraiser.coverMediaUrl)}`}
